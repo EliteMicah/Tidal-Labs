@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8C8715E92F8B2F9F0029F8A9 /* WristCutWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8C8715C92F8B2F9E0029F8A9 /* WristCutWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8C8715A92F8B2E6A0029F8A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,12 +25,50 @@
 			remoteGlobalIDString = 8C87159A2F8B2E690029F8A9;
 			remoteInfo = WristCut;
 		};
+		8C8715D62F8B2F9F0029F8A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C8715932F8B2E690029F8A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C8715C82F8B2F9E0029F8A9;
+			remoteInfo = "WristCutWatch Watch App";
+		};
+		8C8715E02F8B2F9F0029F8A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C8715932F8B2E690029F8A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C8715C82F8B2F9E0029F8A9;
+			remoteInfo = "WristCutWatch Watch App";
+		};
+		8C8715E72F8B2F9F0029F8A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C8715932F8B2E690029F8A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C8715C82F8B2F9E0029F8A9;
+			remoteInfo = "WristCutWatch Watch App";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8C8715ED2F8B2F9F0029F8A9 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				8C8715E92F8B2F9F0029F8A9 /* WristCutWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8C87159B2F8B2E690029F8A9 /* WristCut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WristCut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8715A82F8B2E6A0029F8A9 /* WristCutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WristCutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8715B22F8B2E6A0029F8A9 /* WristCutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WristCutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C8715C92F8B2F9E0029F8A9 /* WristCutWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WristCutWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C8715D52F8B2F9F0029F8A9 /* WristCutWatch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WristCutWatch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C8715DF2F8B2F9F0029F8A9 /* WristCutWatch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WristCutWatch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -43,6 +85,21 @@
 		8C8715B52F8B2E6A0029F8A9 /* WristCutUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = WristCutUITests;
+			sourceTree = "<group>";
+		};
+		8C8715CA2F8B2F9E0029F8A9 /* WristCutWatch Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "WristCutWatch Watch App";
+			sourceTree = "<group>";
+		};
+		8C8715D82F8B2F9F0029F8A9 /* WristCutWatch Watch AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "WristCutWatch Watch AppTests";
+			sourceTree = "<group>";
+		};
+		8C8715E22F8B2F9F0029F8A9 /* WristCutWatch Watch AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "WristCutWatch Watch AppUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +126,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8C8715C62F8B2F9E0029F8A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C8715D22F8B2F9F0029F8A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C8715DC2F8B2F9F0029F8A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +156,9 @@
 				8C87159D2F8B2E690029F8A9 /* WristCut */,
 				8C8715AB2F8B2E6A0029F8A9 /* WristCutTests */,
 				8C8715B52F8B2E6A0029F8A9 /* WristCutUITests */,
+				8C8715CA2F8B2F9E0029F8A9 /* WristCutWatch Watch App */,
+				8C8715D82F8B2F9F0029F8A9 /* WristCutWatch Watch AppTests */,
+				8C8715E22F8B2F9F0029F8A9 /* WristCutWatch Watch AppUITests */,
 				8C87159C2F8B2E690029F8A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,6 +169,9 @@
 				8C87159B2F8B2E690029F8A9 /* WristCut.app */,
 				8C8715A82F8B2E6A0029F8A9 /* WristCutTests.xctest */,
 				8C8715B22F8B2E6A0029F8A9 /* WristCutUITests.xctest */,
+				8C8715C92F8B2F9E0029F8A9 /* WristCutWatch Watch App.app */,
+				8C8715D52F8B2F9F0029F8A9 /* WristCutWatch Watch AppTests.xctest */,
+				8C8715DF2F8B2F9F0029F8A9 /* WristCutWatch Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,10 +186,12 @@
 				8C8715972F8B2E690029F8A9 /* Sources */,
 				8C8715982F8B2E690029F8A9 /* Frameworks */,
 				8C8715992F8B2E690029F8A9 /* Resources */,
+				8C8715ED2F8B2F9F0029F8A9 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8C8715E82F8B2F9F0029F8A9 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8C87159D2F8B2E690029F8A9 /* WristCut */,
@@ -163,6 +249,74 @@
 			productReference = 8C8715B22F8B2E6A0029F8A9 /* WristCutUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		8C8715C82F8B2F9E0029F8A9 /* WristCutWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C8715EA2F8B2F9F0029F8A9 /* Build configuration list for PBXNativeTarget "WristCutWatch Watch App" */;
+			buildPhases = (
+				8C8715C52F8B2F9E0029F8A9 /* Sources */,
+				8C8715C62F8B2F9E0029F8A9 /* Frameworks */,
+				8C8715C72F8B2F9E0029F8A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8C8715CA2F8B2F9E0029F8A9 /* WristCutWatch Watch App */,
+			);
+			name = "WristCutWatch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "WristCutWatch Watch App";
+			productReference = 8C8715C92F8B2F9E0029F8A9 /* WristCutWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8C8715D42F8B2F9F0029F8A9 /* WristCutWatch Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C8715EE2F8B2F9F0029F8A9 /* Build configuration list for PBXNativeTarget "WristCutWatch Watch AppTests" */;
+			buildPhases = (
+				8C8715D12F8B2F9F0029F8A9 /* Sources */,
+				8C8715D22F8B2F9F0029F8A9 /* Frameworks */,
+				8C8715D32F8B2F9F0029F8A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C8715D72F8B2F9F0029F8A9 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				8C8715D82F8B2F9F0029F8A9 /* WristCutWatch Watch AppTests */,
+			);
+			name = "WristCutWatch Watch AppTests";
+			packageProductDependencies = (
+			);
+			productName = "WristCutWatch Watch AppTests";
+			productReference = 8C8715D52F8B2F9F0029F8A9 /* WristCutWatch Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8C8715DE2F8B2F9F0029F8A9 /* WristCutWatch Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C8715F12F8B2F9F0029F8A9 /* Build configuration list for PBXNativeTarget "WristCutWatch Watch AppUITests" */;
+			buildPhases = (
+				8C8715DB2F8B2F9F0029F8A9 /* Sources */,
+				8C8715DC2F8B2F9F0029F8A9 /* Frameworks */,
+				8C8715DD2F8B2F9F0029F8A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C8715E12F8B2F9F0029F8A9 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				8C8715E22F8B2F9F0029F8A9 /* WristCutWatch Watch AppUITests */,
+			);
+			name = "WristCutWatch Watch AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "WristCutWatch Watch AppUITests";
+			productReference = 8C8715DF2F8B2F9F0029F8A9 /* WristCutWatch Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +338,17 @@
 						CreatedOnToolsVersion = 26.2;
 						TestTargetID = 8C87159A2F8B2E690029F8A9;
 					};
+					8C8715C82F8B2F9E0029F8A9 = {
+						CreatedOnToolsVersion = 26.2;
+					};
+					8C8715D42F8B2F9F0029F8A9 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 8C8715C82F8B2F9E0029F8A9;
+					};
+					8C8715DE2F8B2F9F0029F8A9 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 8C8715C82F8B2F9E0029F8A9;
+					};
 				};
 			};
 			buildConfigurationList = 8C8715962F8B2E690029F8A9 /* Build configuration list for PBXProject "WristCut" */;
@@ -203,6 +368,9 @@
 				8C87159A2F8B2E690029F8A9 /* WristCut */,
 				8C8715A72F8B2E6A0029F8A9 /* WristCutTests */,
 				8C8715B12F8B2E6A0029F8A9 /* WristCutUITests */,
+				8C8715C82F8B2F9E0029F8A9 /* WristCutWatch Watch App */,
+				8C8715D42F8B2F9F0029F8A9 /* WristCutWatch Watch AppTests */,
+				8C8715DE2F8B2F9F0029F8A9 /* WristCutWatch Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +391,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8C8715B02F8B2E6A0029F8A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C8715C72F8B2F9E0029F8A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C8715D32F8B2F9F0029F8A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C8715DD2F8B2F9F0029F8A9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +442,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8C8715C52F8B2F9E0029F8A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C8715D12F8B2F9F0029F8A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C8715DB2F8B2F9F0029F8A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +475,21 @@
 			isa = PBXTargetDependency;
 			target = 8C87159A2F8B2E690029F8A9 /* WristCut */;
 			targetProxy = 8C8715B32F8B2E6A0029F8A9 /* PBXContainerItemProxy */;
+		};
+		8C8715D72F8B2F9F0029F8A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C8715C82F8B2F9E0029F8A9 /* WristCutWatch Watch App */;
+			targetProxy = 8C8715D62F8B2F9F0029F8A9 /* PBXContainerItemProxy */;
+		};
+		8C8715E12F8B2F9F0029F8A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C8715C82F8B2F9E0029F8A9 /* WristCutWatch Watch App */;
+			targetProxy = 8C8715E02F8B2F9F0029F8A9 /* PBXContainerItemProxy */;
+		};
+		8C8715E82F8B2F9F0029F8A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C8715C82F8B2F9E0029F8A9 /* WristCutWatch Watch App */;
+			targetProxy = 8C8715E72F8B2F9F0029F8A9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -390,6 +615,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WristCut/WristCut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 475T56N7DY;
@@ -398,6 +624,9 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "WristCut records surf sessions via your watch. Your camera stays on while you're in the water.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "WristCut records audio with your surf session videos.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "WristCut saves your surf session recordings to your photo library.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -408,7 +637,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
@@ -418,13 +647,14 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 1;
 				XROS_DEPLOYMENT_TARGET = 26.2;
 			};
 			name = Debug;
@@ -434,6 +664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WristCut/WristCut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 475T56N7DY;
@@ -442,6 +673,9 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "WristCut records surf sessions via your watch. Your camera stays on while you're in the water.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "WristCut records audio with your surf session videos.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "WristCut saves your surf session recordings to your photo library.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -452,7 +686,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
@@ -462,13 +696,14 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 1;
 				XROS_DEPLOYMENT_TARGET = 26.2;
 			};
 			name = Release;
@@ -575,6 +810,167 @@
 			};
 			name = Release;
 		};
+		8C8715EB2F8B2F9F0029F8A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WristCutWatch Watch App/WristCutWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 475T56N7DY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WristCutWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "Micah-Woodring.WristCut";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Micah-Woodring.WristCut.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Debug;
+		};
+		8C8715EC2F8B2F9F0029F8A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WristCutWatch Watch App/WristCutWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 475T56N7DY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WristCutWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "Micah-Woodring.WristCut";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Micah-Woodring.WristCut.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
+		8C8715EF2F8B2F9F0029F8A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 475T56N7DY;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Micah-Woodring.WristCutWatch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WristCutWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WristCutWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Debug;
+		};
+		8C8715F02F8B2F9F0029F8A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 475T56N7DY;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Micah-Woodring.WristCutWatch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WristCutWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WristCutWatch Watch App";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
+		8C8715F22F8B2F9F0029F8A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 475T56N7DY;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Micah-Woodring.WristCutWatch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "WristCutWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Debug;
+		};
+		8C8715F32F8B2F9F0029F8A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 475T56N7DY;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Micah-Woodring.WristCutWatch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "WristCutWatch Watch App";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -610,6 +1006,33 @@
 			buildConfigurations = (
 				8C8715C32F8B2E6A0029F8A9 /* Debug */,
 				8C8715C42F8B2E6A0029F8A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C8715EA2F8B2F9F0029F8A9 /* Build configuration list for PBXNativeTarget "WristCutWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C8715EB2F8B2F9F0029F8A9 /* Debug */,
+				8C8715EC2F8B2F9F0029F8A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C8715EE2F8B2F9F0029F8A9 /* Build configuration list for PBXNativeTarget "WristCutWatch Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C8715EF2F8B2F9F0029F8A9 /* Debug */,
+				8C8715F02F8B2F9F0029F8A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C8715F12F8B2F9F0029F8A9 /* Build configuration list for PBXNativeTarget "WristCutWatch Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C8715F22F8B2F9F0029F8A9 /* Debug */,
+				8C8715F32F8B2F9F0029F8A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

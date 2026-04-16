@@ -221,6 +221,28 @@ class CameraManager: NSObject, ObservableObject {
     func stopRecording() {
         movieOutput.stopRecording()
     }
+
+    func startSession() async {
+        let record = CKRecord(recordType: "SessionEvent")
+        record["event"] = "session_started" as CKRecordValue
+        record["issuedAt"] = Date() as CKRecordValue
+        do {
+            try await container.privateCloudDatabase.save(record)
+            print("✅ session_started written to CloudKit")
+        } catch {
+            print("❌ CloudKit write failed: \(error)")
+        }
+    }
+
+    func endSession() async {
+        if isRecording {
+            stopRecording()
+        }
+        let record = CKRecord(recordType: "SessionEvent")
+        record["event"] = "session_ended" as CKRecordValue
+        record["issuedAt"] = Date() as CKRecordValue
+        try? await container.privateCloudDatabase.save(record)
+    }
 }
 
 // MARK: - AVCaptureFileOutputRecordingDelegate
@@ -486,6 +508,7 @@ struct ContentView: View {
     var body: some View {
         if sessionActive {
             RecordingView(camera: camera) {
+                Task { await camera.endSession() }
                 sessionActive = false
                 UIApplication.shared.isIdleTimerDisabled = false
             }
@@ -493,6 +516,7 @@ struct ContentView: View {
             HomeView {
                 sessionActive = true
                 UIApplication.shared.isIdleTimerDisabled = true
+                Task { await camera.startSession() }
             }
         }
     }

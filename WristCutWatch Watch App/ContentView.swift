@@ -9,26 +9,69 @@ import SwiftUI
 import CloudKit
 import Combine
 import WatchKit
+import WatchConnectivity
+
+// MARK: - Wave Timestamp
+
+struct WaveTimestamp: Codable {
+    let id: String
+    let start: Double
+    let end: Double
+
+    init(start: Date, end: Date) {
+        self.id = UUID().uuidString
+        self.start = start.timeIntervalSince1970
+        self.end = end.timeIntervalSince1970
+    }
+}
 
 // MARK: - Command Sender
 
 @MainActor
-class CommandSender: ObservableObject {
+class CommandSender: NSObject, ObservableObject {
     @Published var isRecording = false
     @Published var statusMessage = "WristCut is waiting for iPhone..."
     @Published var isSending = false
     @Published var sessionActive = false
+    @Published var sessionStartTime: Date?
+    private var maxRecordingMinutes: Double = 60.0
 
     private let container = CKContainer(identifier: "iCloud.Micah-Woodring.WristCut")
     private var pollingTask: Task<Void, Never>?
     private var lastPolledDate = Date()
+    private var currentWaveStart: Date?
 
-    init() {
+    private var storedTimestamps: [WaveTimestamp] {
+        get {
+            guard let data = UserDefaults.standard.data(forKey: "waveTimestamps"),
+                  let ts = try? JSONDecoder().decode([WaveTimestamp].self, from: data) else { return [] }
+            return ts
+        }
+        set {
+            if let data = try? JSONEncoder().encode(newValue) {
+                UserDefaults.standard.set(data, forKey: "waveTimestamps")
+            }
+        }
+    }
+
+    var isCellularMode: Bool {
+        WCSession.default.receivedApplicationContext["cellularWatch"] as? Bool ?? false
+    }
+
+    override init() {
+        super.init()
+        setupConnectivity()
         startPolling()
     }
 
     deinit {
         pollingTask?.cancel()
+    }
+
+    private func setupConnectivity() {
+        guard WCSession.isSupported() else { return }
+        WCSession.default.delegate = self
+        WCSession.default.activate()
     }
 
     private func startPolling() {
@@ -56,11 +99,8 @@ class CommandSender: ObservableObject {
                   let issuedAt = latest["issuedAt"] as? Date else { return }
 
             lastPolledDate = issuedAt
-            print("📨 Watch received event: \(event)")
             handleEvent(event)
-        } catch {
-            print("❌ Watch CloudKit poll failed: \(error)")
-        }
+        } catch {}
     }
 
     private func playHaptics(count: Int) async {
@@ -76,10 +116,13 @@ class CommandSender: ObservableObject {
         switch event {
         case "session_started":
             sessionActive = true
+            sessionStartTime = Date()
             statusMessage = "Ready"
+            WKInterfaceDevice.current().enableWaterLock()
             Task { await playHaptics(count: 1) }
         case "session_ended":
             sessionActive = false
+            sessionStartTime = nil
             isRecording = false
             isSending = false
             statusMessage = "WristCut is waiting for iPhone..."
@@ -90,6 +133,14 @@ class CommandSender: ObservableObject {
     }
 
     func toggleRecording() {
+        if isCellularMode {
+            toggleCellularRecording()
+        } else {
+            toggleNonCellularRecording()
+        }
+    }
+
+    private func toggleCellularRecording() {
         guard !isSending else { return }
         let command = isRecording ? "stop" : "start"
         isSending = true
@@ -111,6 +162,83 @@ class CommandSender: ObservableObject {
             isSending = false
         }
     }
+
+    private func toggleNonCellularRecording() {
+        if !isRecording {
+            currentWaveStart = Date()
+            isRecording = true
+            statusMessage = "Recording"
+            Task { await playHaptics(count: 2) }
+        } else {
+            guard let start = currentWaveStart else { return }
+            let ts = WaveTimestamp(start: start, end: Date())
+            var stored = storedTimestamps
+            stored.append(ts)
+            storedTimestamps = stored
+            currentWaveStart = nil
+            isRecording = false
+            statusMessage = "Stopped"
+            Task { await playHaptics(count: 3) }
+            sendPendingTimestamps()
+        }
+    }
+
+    private func sendPendingTimestamps() {
+        let timestamps = storedTimestamps
+        guard !timestamps.isEmpty,
+              WCSession.default.activationState == .activated else { return }
+        let payload = timestamps.map { ["id": $0.id, "start": $0.start, "end": $0.end] as [String: Any] }
+        WCSession.default.transferUserInfo(["waveTimestamps": payload])
+    }
+
+    var pendingWaveCount: Int { storedTimestamps.count }
+
+    var estimatedEndTime: Date? {
+        guard let start = sessionStartTime else { return nil }
+        return start.addingTimeInterval(maxRecordingMinutes * 60.0)
+    }
+
+    func syncToPhone() {
+        guard !storedTimestamps.isEmpty,
+              WCSession.default.activationState == .activated else {
+            statusMessage = "Nothing to sync"
+            return
+        }
+        statusMessage = "Syncing \(storedTimestamps.count) waves..."
+        sendPendingTimestamps()
+        statusMessage = "Sync sent!"
+    }
+
+    fileprivate func clearConfirmedTimestamps(ids: [String]) {
+        var stored = storedTimestamps
+        stored.removeAll { ids.contains($0.id) }
+        storedTimestamps = stored
+    }
+}
+
+// MARK: - WCSessionDelegate
+
+extension CommandSender: WCSessionDelegate {
+    nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if activationState == .activated {
+            Task { @MainActor in self.sendPendingTimestamps() }
+        }
+    }
+
+    nonisolated func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        if let confirmedIDs = applicationContext["confirmedTimestampIDs"] as? [String] {
+            Task { @MainActor in self.clearConfirmedTimestamps(ids: confirmedIDs) }
+        }
+        if let maxMins = applicationContext["maxRecordingMinutes"] as? Double {
+            Task { @MainActor in self.maxRecordingMinutes = maxMins }
+        }
+    }
+
+    nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        if let event = message["event"] as? String {
+            Task { @MainActor in self.handleEvent(event) }
+        }
+    }
 }
 
 // MARK: - ContentView
@@ -118,7 +246,14 @@ class CommandSender: ObservableObject {
 struct ContentView: View {
     @StateObject private var sender = CommandSender()
     @State private var crownValue: Double = 0.0
-    private let threshold: Double = 2.0
+    @State private var lastCrownValue: Double = 0.0
+    @State private var barProgress: Double = 0.0
+    @State private var idleTask: Task<Void, Never>? = nil
+    @State private var isTriggering: Bool = false
+    @FocusState private var crownFocused: Bool
+
+    private let deadZone: Double = 1
+    private let crownStep: Double = 0.03
 
     var body: some View {
         VStack(spacing: 14) {
@@ -133,6 +268,12 @@ struct ContentView: View {
                         .multilineTextAlignment(.center)
                 }
             } else {
+                if let endTime = sender.estimatedEndTime {
+                    Text("Ends \(endTime.formatted(date: .omitted, time: .shortened))")
+                        .font(.system(.caption2, design: .rounded))
+                        .foregroundStyle(.secondary)
+                }
+
                 HStack(spacing: 6) {
                     if sender.isRecording {
                         Circle()
@@ -144,6 +285,19 @@ struct ContentView: View {
                         .foregroundStyle(.secondary)
                 }
                 .animation(.easeInOut(duration: 0.2), value: sender.isRecording)
+
+                if !sender.isCellularMode && sender.pendingWaveCount > 0 && !sender.isRecording && !sender.sessionActive {
+                    Button(action: { sender.syncToPhone() }) {
+                        Text("Sync \(sender.pendingWaveCount) Wave\(sender.pendingWaveCount == 1 ? "" : "s")")
+                            .font(.system(.caption, design: .rounded, weight: .semibold))
+                            .foregroundStyle(.black)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 8)
+                            .background(.white)
+                            .clipShape(Capsule())
+                    }
+                    .buttonStyle(.plain)
+                }
 
                 if sender.isSending {
                     ProgressView()
@@ -159,7 +313,6 @@ struct ContentView: View {
                             .foregroundStyle(.tertiary)
                             .multilineTextAlignment(.center)
 
-                        let progress = min(abs(crownValue) / threshold, 1.0)
                         let barColor: Color = sender.isRecording ? .red : .green
 
                         GeometryReader { geo in
@@ -168,8 +321,8 @@ struct ContentView: View {
                                     .fill(.white.opacity(0.15))
                                 Capsule()
                                     .fill(barColor)
-                                    .frame(width: geo.size.width * progress)
-                                    .animation(.linear(duration: 0.05), value: progress)
+                                    .frame(width: geo.size.width * barProgress)
+                                    .animation(.linear(duration: 0.05), value: barProgress)
                             }
                         }
                         .frame(height: 6)
@@ -180,18 +333,50 @@ struct ContentView: View {
         }
         .padding()
         .focusable()
+        .focused($crownFocused)
         .digitalCrownRotation($crownValue)
+        .onAppear { crownFocused = true }
         .onChange(of: crownValue) { _, value in
-            if !sender.sessionActive {
+            let rawDelta = value - lastCrownValue
+            lastCrownValue = value
+
+            guard sender.sessionActive else {
                 crownValue = 0
+                lastCrownValue = 0
                 return
             }
-            if !sender.isRecording && !sender.isSending && value >= threshold {
+
+            guard !sender.isSending, !isTriggering else { return }
+
+            // Flip delta so "correct direction" is always positive
+            let effectiveDelta = sender.isRecording ? -rawDelta : rawDelta
+
+            guard effectiveDelta > deadZone else { return }
+
+            barProgress = min(1.0, barProgress + crownStep)
+
+            // Schedule idle decay after 2s of no scrolling
+            idleTask?.cancel()
+            idleTask = Task {
+                try? await Task.sleep(nanoseconds: 2_000_000_000)
+                guard !Task.isCancelled else { return }
+                withAnimation(.easeOut(duration: 0.5)) {
+                    barProgress = 0.0
+                }
+            }
+
+            if barProgress >= 1.0 {
+                isTriggering = true
+                barProgress = 0.0
                 crownValue = 0
+                lastCrownValue = 0
+                idleTask?.cancel()
                 sender.toggleRecording()
-            } else if sender.isRecording && !sender.isSending && value <= -threshold {
-                crownValue = 0
-                sender.toggleRecording()
+                // Lockout period so rapid crown events can't re-trigger before state flips
+                Task {
+                    try? await Task.sleep(nanoseconds: 1_000_000_000)
+                    isTriggering = false
+                }
             }
         }
     }

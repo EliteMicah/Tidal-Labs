@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C208BEE2F935F77004DC581 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C208BED2F935F77004DC581 /* WatchConnectivity.framework */; };
+		8C208BF02F935FD5004DC581 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C208BEF2F935FD5004DC581 /* WatchConnectivity.framework */; };
 		8C8715E92F8B2F9F0029F8A9 /* WristCutWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8C8715C92F8B2F9E0029F8A9 /* WristCutWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -63,6 +65,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C208BED2F935F77004DC581 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.2.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
+		8C208BEF2F935FD5004DC581 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS26.2.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		8C87159B2F8B2E690029F8A9 /* WristCut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WristCut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8715A82F8B2E6A0029F8A9 /* WristCutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WristCutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8715B22F8B2E6A0029F8A9 /* WristCutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WristCutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C208BEE2F935F77004DC581 /* WatchConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C208BF02F935FD5004DC581 /* WatchConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +156,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C208BEC2F935F76004DC581 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C208BEF2F935FD5004DC581 /* WatchConnectivity.framework */,
+				8C208BED2F935F77004DC581 /* WatchConnectivity.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8C8715922F8B2E690029F8A9 = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +174,7 @@
 				8C8715CA2F8B2F9E0029F8A9 /* WristCutWatch Watch App */,
 				8C8715D82F8B2F9F0029F8A9 /* WristCutWatch Watch AppTests */,
 				8C8715E22F8B2F9F0029F8A9 /* WristCutWatch Watch AppUITests */,
+				8C208BEC2F935F76004DC581 /* Frameworks */,
 				8C87159C2F8B2E690029F8A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -351,7 +367,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8C8715962F8B2E690029F8A9 /* Build configuration list for PBXProject "WristCut" */;
+			buildConfigurationList = 8C8715962F8B2E690029F8A9 /* Build configuration list for PBXProject "Tidal Labs" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -821,7 +837,7 @@
 				DEVELOPMENT_TEAM = 475T56N7DY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = WristCutWatch;
+				INFOPLIST_KEY_CFBundleDisplayName = WristCut;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "Micah-Woodring.WristCut";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -855,7 +871,7 @@
 				DEVELOPMENT_TEAM = 475T56N7DY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = WristCutWatch;
+				INFOPLIST_KEY_CFBundleDisplayName = WristCut;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "Micah-Woodring.WristCut";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -974,7 +990,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8C8715962F8B2E690029F8A9 /* Build configuration list for PBXProject "WristCut" */ = {
+		8C8715962F8B2E690029F8A9 /* Build configuration list for PBXProject "Tidal Labs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8C8715BA2F8B2E6A0029F8A9 /* Debug */,

@@ -16,8 +16,6 @@ struct ContentView: View {
         NavigationStack(path: $navPath) {
             HomeView(onStart: {
                 sessionActive = true
-                UIApplication.shared.isIdleTimerDisabled = true
-                Task { await camera.startSession() }
             }, onSessions: {
                 navPath.append(.sessions)
             }, onSettings: {
@@ -31,18 +29,7 @@ struct ContentView: View {
             }
         }
         .fullScreenCover(isPresented: $sessionActive) {
-            RecordingView(camera: camera) {
-                Task { await camera.endSession() }
-                sessionActive = false
-                UIApplication.shared.isIdleTimerDisabled = false
-            }
-        }
-        .onChange(of: camera.watchRequestedSessionStart) { _, requested in
-            guard requested else { return }
-            camera.watchRequestedSessionStart = false
-            sessionActive = true
-            UIApplication.shared.isIdleTimerDisabled = true
-            Task { await camera.startSession() }
+            SessionStartView(camera: camera, onDismiss: { sessionActive = false })
         }
         .task { await camera.setup() }
     }

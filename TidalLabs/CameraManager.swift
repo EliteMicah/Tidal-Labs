@@ -1,33 +1,19 @@
 import Foundation
 import AVFoundation
-import CloudKit
 import WatchConnectivity
 internal import Combine
 
 @MainActor
 class CameraManager: NSObject, ObservableObject {
-    @Published var isRecording = false
-    @Published var statusMessage = "Waiting for watch command..."
-    @Published var cameraAuthorized = false
-    @Published var availableLenses: [CameraLens] = []
-    @Published var selectedLens: CameraLens?
-    @Published var showCustomZoom = false
-    @Published var customZoom: CGFloat = 1.0
-    @Published var maxZoom: CGFloat = 6.0
     @Published var recordings: [SessionRecording] = []
     @Published var waveSessions: [WaveSession] = []
-    @Published var watchRequestedSessionStart = false
+    @Published var pendingWatchSessions: [PendingWatchSession] = []
+    @Published var pendingImportVideo: PendingImportVideo? = nil
+    @Published var isProcessingImport = false
+    @Published var isLoadingVideo = false
+    @Published var clipGenerationCompleted: Int = 0
 
-    private var recordingStartDate: Date?
-    private var receivedTimestamps: [(id: String, start: Date, end: Date)] = []
-
-    let session = AVCaptureSession()
-    private let movieOutput = AVCaptureMovieFileOutput()
-    private var pollingTask: Task<Void, Never>?
-    private var countdownTask: Task<Void, Never>?
-    private var lastProcessedDate = Date()
-    private let container = CKContainer(identifier: "iCloud.Micah-Woodring.TidalLabs")
-    private var currentVideoInput: AVCaptureDeviceInput?
+    private let pendingWatchSessionsKey = "pendingWatchSessions"
 
     override init() {
         super.init()
@@ -35,9 +21,21 @@ class CameraManager: NSObject, ObservableObject {
 
     func setup() async {
         setupWatchConnectivity()
-        await requestPermissionsAndSetup()
         loadRecordings()
         loadSessions()
+        loadPendingWatchSessions()
+    }
+
+    private func loadPendingWatchSessions() {
+        guard let data = UserDefaults.standard.data(forKey: pendingWatchSessionsKey),
+              let sessions = try? JSONDecoder().decode([PendingWatchSession].self, from: data) else { return }
+        pendingWatchSessions = sessions
+    }
+
+    private func savePendingWatchSessions() {
+        if let data = try? JSONEncoder().encode(pendingWatchSessions) {
+            UserDefaults.standard.set(data, forKey: pendingWatchSessionsKey)
+        }
     }
 
     private var sessionsFileURL: URL {
@@ -53,6 +51,18 @@ class CameraManager: NSObject, ObservableObject {
 
     private func saveSession(_ waveSession: WaveSession) {
         waveSessions.insert(waveSession, at: 0)
+        if let data = try? JSONEncoder().encode(waveSessions) {
+            try? data.write(to: sessionsFileURL)
+        }
+    }
+
+    func deleteSession(_ sessionID: UUID) {
+        guard let si = waveSessions.firstIndex(where: { $0.id == sessionID }) else { return }
+        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        for clip in waveSessions[si].clips {
+            try? FileManager.default.removeItem(at: docs.appendingPathComponent(clip.filename))
+        }
+        waveSessions.remove(at: si)
         if let data = try? JSONEncoder().encode(waveSessions) {
             try? data.write(to: sessionsFileURL)
         }
@@ -103,362 +113,173 @@ class CameraManager: NSObject, ObservableObject {
             .sorted { $0.date > $1.date }
     }
 
-    deinit {
-        pollingTask?.cancel()
-    }
+    // MARK: - Video Import
 
-    private func requestPermissionsAndSetup() async {
-        let videoStatus = AVCaptureDevice.authorizationStatus(for: .video)
-        if videoStatus == .notDetermined {
-            await AVCaptureDevice.requestAccess(for: .video)
+    func storeImportedVideo(from url: URL) async -> Bool {
+        let asset = AVURLAsset(url: url)
+
+        guard let videoStart = await getVideoCreationDate(from: asset) else {
+            try? FileManager.default.removeItem(at: url)
+            return false
         }
-        guard AVCaptureDevice.authorizationStatus(for: .video) == .authorized else {
-            statusMessage = "Camera permission required."
-            return
-        }
-        await setupSession()
-    }
 
-    private var savedResolution: AVCaptureSession.Preset {
-        switch UserDefaults.standard.string(forKey: "resolution") {
-        case VideoResolution.p720.rawValue:  return .hd1280x720
-        case VideoResolution.p1080.rawValue: return .hd1920x1080
-        case VideoResolution.k2.rawValue:    return .hd1920x1080
-        case VideoResolution.k4.rawValue:    return .hd4K3840x2160
-        default:                             return .hd1280x720
-        }
-    }
-
-    private var savedFPS: Int {
-        let v = UserDefaults.standard.integer(forKey: "fps")
-        return v > 0 ? v : 30
-    }
-
-    private var savedMaxSeconds: Double {
-        let v = UserDefaults.standard.double(forKey: "maxRecordingMinutes")
-        return (v > 0 ? v : 60.0) * 60.0
-    }
-
-    private var savedStartDelayNanos: UInt64 {
-        let v = UserDefaults.standard.double(forKey: "startDelay")
-        return UInt64(v * 60.0 * 1_000_000_000)
-    }
-
-    private var savedCellularWatch: Bool {
-        UserDefaults.standard.bool(forKey: "cellularWatch")
-    }
-
-    private func applyFPS(_ fps: Int, to device: AVCaptureDevice) {
-        let supported = device.activeFormat.videoSupportedFrameRateRanges
-        let maxSupported = supported.map { $0.maxFrameRate }.max() ?? 30
-        let target = min(Double(fps), maxSupported)
-        let dur = CMTime(value: 1, timescale: CMTimeScale(target))
+        let durationTime: CMTime
         do {
-            try device.lockForConfiguration()
-            device.activeVideoMinFrameDuration = dur
-            device.activeVideoMaxFrameDuration = dur
-            device.unlockForConfiguration()
-        } catch {}
-    }
-
-    private func setupSession() async {
-        session.beginConfiguration()
-        session.sessionPreset = savedResolution
-
-        let candidates: [(AVCaptureDevice.DeviceType, String)] = [
-            (.builtInUltraWideCamera, "0.5x"),
-            (.builtInWideAngleCamera, "1x"),
-            (.builtInTelephotoCamera, "2x")
-        ]
-        var lenses: [CameraLens] = []
-        for (type, label) in candidates {
-            if AVCaptureDevice.default(type, for: .video, position: .back) != nil {
-                lenses.append(CameraLens(id: label, label: label, deviceType: type))
-            }
-        }
-        availableLenses = lenses
-
-        let initialLens = lenses.first(where: { $0.deviceType == .builtInWideAngleCamera }) ?? lenses.first
-        if let lens = initialLens,
-           let device = AVCaptureDevice.default(lens.deviceType, for: .video, position: .back),
-           let input = try? AVCaptureDeviceInput(device: device) {
-            session.addInput(input)
-            currentVideoInput = input
-            selectedLens = lens
-            maxZoom = min(device.activeFormat.videoMaxZoomFactor, 10)
-            applyFPS(savedFPS, to: device)
-        }
-
-        if let audioDevice = AVCaptureDevice.default(for: .audio),
-           let audioInput = try? AVCaptureDeviceInput(device: audioDevice),
-           session.canAddInput(audioInput) {
-            session.addInput(audioInput)
-        }
-
-        if session.canAddOutput(movieOutput) {
-            session.addOutput(movieOutput)
-        }
-
-        session.commitConfiguration()
-        movieOutput.connections.first { !$0.audioChannels.isEmpty }?.isEnabled = false
-        cameraAuthorized = true
-
-        startPolling()
-    }
-
-    func switchToLens(_ lens: CameraLens) {
-        guard !isRecording,
-              lens != selectedLens,
-              let device = AVCaptureDevice.default(lens.deviceType, for: .video, position: .back),
-              let newInput = try? AVCaptureDeviceInput(device: device) else { return }
-
-        session.beginConfiguration()
-        if let old = currentVideoInput {
-            session.removeInput(old)
-        }
-        if session.canAddInput(newInput) {
-            session.addInput(newInput)
-            currentVideoInput = newInput
-            selectedLens = lens
-            showCustomZoom = false
-            customZoom = 1.0
-            maxZoom = min(device.activeFormat.videoMaxZoomFactor, 10)
-            applyFPS(savedFPS, to: device)
-        }
-        session.commitConfiguration()
-    }
-
-    func applyCustomZoom(_ factor: CGFloat) {
-        guard let device = currentVideoInput?.device else { return }
-        do {
-            try device.lockForConfiguration()
-            device.videoZoomFactor = max(1.0, min(factor, device.activeFormat.videoMaxZoomFactor))
-            device.unlockForConfiguration()
-        } catch {}
-    }
-
-    private func startPolling() {
-        pollingTask = Task {
-            while !Task.isCancelled {
-                await pollCloudKit()
-                try? await Task.sleep(nanoseconds: 2_000_000_000)
-            }
-        }
-    }
-
-    private func pollCloudKit() async {
-        guard savedCellularWatch else { return }
-        let predicate = NSPredicate(format: "issuedAt > %@", lastProcessedDate as CVarArg)
-        let query = CKQuery(recordType: "RecordingCommand", predicate: predicate)
-        query.sortDescriptors = [NSSortDescriptor(key: "issuedAt", ascending: true)]
-
-        do {
-            let (matchResults, _) = try await container.privateCloudDatabase.records(matching: query)
-            let records = matchResults
-                .compactMap { try? $1.get() }
-                .sorted { ($0["issuedAt"] as? Date ?? .distantPast) < ($1["issuedAt"] as? Date ?? .distantPast) }
-
-            guard let latest = records.last,
-                  let command = latest["command"] as? String,
-                  let issuedAt = latest["issuedAt"] as? Date else { return }
-
-            lastProcessedDate = issuedAt
-            handleCommand(command)
+            durationTime = try await asset.load(.duration)
         } catch {
-            // Silently ignore transient network errors during polling
+            try? FileManager.default.removeItem(at: url)
+            return false
         }
+
+        if let existing = pendingImportVideo {
+            try? FileManager.default.removeItem(at: existing.url)
+        }
+
+        pendingImportVideo = PendingImportVideo(
+            url: url,
+            creationDate: videoStart,
+            durationSeconds: durationTime.seconds
+        )
+
+        await tryMatchPendingImport()
+        return true
     }
 
-    private func handleCommand(_ command: String) {
-        guard savedCellularWatch else { return }
-        switch command {
-        case "start" where !isRecording:
-            startRecording()
-        case "stop" where isRecording:
-            stopRecording()
-        default:
-            break
-        }
+    func pushWaveDurationToWatch(_ seconds: Int) {
+        guard WCSession.default.activationState == .activated else { return }
+        try? WCSession.default.updateApplicationContext(["waveDurationSeconds": Double(seconds)])
     }
 
-    private func startRecording() {
-        recordingStartDate = Date()
-        movieOutput.maxRecordedDuration = CMTime(seconds: savedMaxSeconds, preferredTimescale: 600)
-        movieOutput.connections.first { !$0.audioChannels.isEmpty }?.isEnabled = true
-        let url = FileManager.default.temporaryDirectory
-            .appendingPathComponent(UUID().uuidString)
-            .appendingPathExtension("mov")
-        movieOutput.startRecording(to: url, recordingDelegate: self)
-        isRecording = true
-        statusMessage = "Recording..."
+    func cancelPendingImport() {
+        if let pending = pendingImportVideo {
+            try? FileManager.default.removeItem(at: pending.url)
+        }
+        pendingImportVideo = nil
     }
 
-    func stopRecording() {
-        movieOutput.stopRecording()
+    func tryMatchPendingImport() async {
+        guard let pending = pendingImportVideo, !isProcessingImport else { return }
+
+        let videoEnd = pending.creationDate.addingTimeInterval(pending.durationSeconds)
+
+        guard let matchedSession = pendingWatchSessions.first(where: { s in
+            let overlapStart = max(s.startDate, pending.creationDate)
+            let overlapEnd = min(s.endDate, videoEnd)
+            return overlapEnd > overlapStart
+        }) else { return }
+
+        let validTimestamps = matchedSession.timestamps.filter { ts in
+            ts.start >= pending.creationDate && ts.end <= videoEnd
+        }
+        guard !validTimestamps.isEmpty else { return }
+
+        isProcessingImport = true
+        let tuples = validTimestamps.map { (id: $0.id, start: $0.start, end: $0.end) }
+        let clipsGenerated = await processWaveClips(from: pending.url, sessionStart: pending.creationDate, sessionEnd: videoEnd, timestamps: tuples)
+
+        pendingWatchSessions.removeAll { $0.id == matchedSession.id }
+        savePendingWatchSessions()
+
+        if WCSession.default.activationState == .activated {
+            try? WCSession.default.updateApplicationContext(["confirmedSessionIDs": [matchedSession.id]])
+        }
+
+        pendingImportVideo = nil
+        isProcessingImport = false
+        if clipsGenerated { clipGenerationCompleted += 1 }
     }
 
-    func startSession() async {
-        session.beginConfiguration()
-        session.sessionPreset = savedResolution
-        if let device = currentVideoInput?.device {
-            applyFPS(savedFPS, to: device)
-        }
-        session.commitConfiguration()
-
-        let isCellular = savedCellularWatch
-        let totalSeconds = Int(Double(savedStartDelayNanos) / 1_000_000_000)
-
-        sendSettingsToWatch()
-        if WCSession.default.activationState == .activated && WCSession.default.isReachable {
-            WCSession.default.sendMessage(["event": "session_started", "delaySeconds": totalSeconds], replyHandler: nil)
-        }
-        if savedCellularWatch {
-            let record = CKRecord(recordType: "SessionEvent")
-            record["event"] = "session_started" as CKRecordValue
-            record["issuedAt"] = Date() as CKRecordValue
-            do {
-                try await container.privateCloudDatabase.save(record)
-            } catch {
-                print("❌ CloudKit write failed: \(error)")
+    private func getVideoCreationDate(from asset: AVURLAsset) async -> Date? {
+        if let metadata = try? await asset.load(.metadata) {
+            let commonItems = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierCreationDate)
+            if let item = commonItems.first {
+                if let date = try? await item.load(.dateValue) { return date }
+                if let str = try? await item.load(.stringValue) {
+                    let f1 = ISO8601DateFormatter()
+                    f1.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                    if let d = f1.date(from: str) { return d }
+                    if let d = ISO8601DateFormatter().date(from: str) { return d }
+                }
             }
-        }
-
-        Task.detached(priority: .userInitiated) { [weak self] in
-            self?.session.startRunning()
-            guard !isCellular else { return }
-            await MainActor.run { [weak self] in
-                guard let self else { return }
-                if totalSeconds <= 0 {
-                    if !self.isRecording { self.startRecording() }
-                } else {
-                    self.countdownTask = Task { @MainActor [weak self] in
-                        guard let self else { return }
-                        for remaining in stride(from: totalSeconds, through: 1, by: -1) {
-                            guard !Task.isCancelled else { return }
-                            self.statusMessage = remaining > 60
-                                ? "Starting in \(remaining / 60) min..."
-                                : "Starting in \(remaining)s..."
-                            try? await Task.sleep(nanoseconds: 1_000_000_000)
-                        }
-                        guard !Task.isCancelled else { return }
-                        if !self.isRecording { self.startRecording() }
-                    }
+            let qtItems = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .quickTimeMetadataCreationDate)
+            if let item = qtItems.first {
+                if let date = try? await item.load(.dateValue) { return date }
+                if let str = try? await item.load(.stringValue) {
+                    let f = ISO8601DateFormatter()
+                    f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                    if let d = f.date(from: str) { return d }
+                    if let d = ISO8601DateFormatter().date(from: str) { return d }
                 }
             }
         }
-    }
-
-    private func sendSettingsToWatch() {
-        guard WCSession.default.activationState == .activated else { return }
-        let maxMins = UserDefaults.standard.double(forKey: "maxRecordingMinutes")
-        try? WCSession.default.updateApplicationContext([
-            "cellularWatch": savedCellularWatch,
-            "maxRecordingMinutes": maxMins > 0 ? maxMins : 60.0
-        ])
-    }
-
-    func endSession() async {
-        countdownTask?.cancel()
-        countdownTask = nil
-        statusMessage = "Waiting for watch command..."
-        if isRecording {
-            stopRecording()
-        }
-        Task.detached(priority: .userInitiated) { [weak self] in
-            await self?.session.stopRunning()
-        }
-        if WCSession.default.activationState == .activated && WCSession.default.isReachable {
-            WCSession.default.sendMessage(["event": "session_ended"], replyHandler: nil)
-        }
-        if savedCellularWatch {
-            let record = CKRecord(recordType: "SessionEvent")
-            record["event"] = "session_ended" as CKRecordValue
-            record["issuedAt"] = Date() as CKRecordValue
-            try? await container.privateCloudDatabase.save(record)
-        }
+        let attrs = try? FileManager.default.attributesOfItem(atPath: asset.url.path)
+        return attrs?[.creationDate] as? Date
     }
 }
 
-// MARK: - AVCaptureFileOutputRecordingDelegate
+// MARK: - Clip Processing
 
-extension CameraManager: AVCaptureFileOutputRecordingDelegate {
-    nonisolated func fileOutput(
-        _ output: AVCaptureFileOutput,
-        didFinishRecordingTo outputFileURL: URL,
-        from connections: [AVCaptureConnection],
-        error: Error?
-    ) {
-        let endDate = Date()
-        Task { @MainActor in
-            self.isRecording = false
-            self.movieOutput.connections.first { !$0.audioChannels.isEmpty }?.isEnabled = false
+extension CameraManager {
+    nonisolated private func exportClip(
+        asset: AVURLAsset,
+        timeRange: CMTimeRange,
+        destURL: URL
+    ) async -> Bool {
+        for preset in [AVAssetExportPresetPassthrough, AVAssetExportPresetHighestQuality] {
+            guard let exporter = AVAssetExportSession(asset: asset, presetName: preset) else { continue }
+            exporter.outputURL = destURL
+            exporter.outputFileType = .mov
+            exporter.timeRange = timeRange
+            await exporter.export()
+            if exporter.status == .completed { return true }
+            try? FileManager.default.removeItem(at: destURL)
         }
-
-        Task {
-            let isCellular = UserDefaults.standard.bool(forKey: "cellularWatch")
-            let timestamps = await MainActor.run { self.receivedTimestamps }
-            let startDate = await MainActor.run { self.recordingStartDate }
-
-            if !isCellular, !timestamps.isEmpty, let startDate {
-                await MainActor.run { self.statusMessage = "Processing \(timestamps.count) wave clips..." }
-                await self.processWaveClips(from: outputFileURL, sessionStart: startDate, sessionEnd: endDate, timestamps: timestamps)
-            } else if isCellular, let startDate {
-                let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                let filename = UUID().uuidString + ".mov"
-                let destURL = docs.appendingPathComponent(filename)
-                do {
-                    try FileManager.default.moveItem(at: outputFileURL, to: destURL)
-                    let clip = WaveClip(id: UUID(), filename: filename, date: startDate)
-                    let waveSession = WaveSession(id: UUID(), startDate: startDate, endDate: endDate, clips: [clip])
-                    await MainActor.run {
-                        self.saveSession(waveSession)
-                        self.loadRecordings()
-                        self.statusMessage = "Session saved. Waiting for watch command..."
-                    }
-                } catch {
-                    await MainActor.run {
-                        self.statusMessage = "Save failed: \(error.localizedDescription)"
-                    }
-                }
-            } else {
-                try? FileManager.default.removeItem(at: outputFileURL)
-                await MainActor.run {
-                    self.recordingStartDate = nil
-                    self.statusMessage = "No waves synced. Waiting for watch command..."
-                }
-            }
-        }
+        return false
     }
 
+    @discardableResult
     private func processWaveClips(
         from url: URL,
         sessionStart: Date,
         sessionEnd: Date,
         timestamps: [(id: String, start: Date, end: Date)]
-    ) async {
+    ) async -> Bool {
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let asset = AVURLAsset(url: url)
         let confirmedIDs = timestamps.map { $0.id }
-        var savedClips: [WaveClip] = []
 
-        for ts in timestamps {
+        struct ClipJob {
+            let timeRange: CMTimeRange
+            let filename: String
+            let destURL: URL
+            let date: Date
+        }
+
+        let jobs: [ClipJob] = timestamps.compactMap { ts in
             let startOffset = ts.start.timeIntervalSince(sessionStart)
             let endOffset = ts.end.timeIntervalSince(sessionStart)
-            guard startOffset >= 0, endOffset > startOffset else { continue }
+            guard startOffset >= 0, endOffset > startOffset else { return nil }
             let timeRange = CMTimeRange(
                 start: CMTime(seconds: startOffset, preferredTimescale: 600),
                 duration: CMTime(seconds: endOffset - startOffset, preferredTimescale: 600)
             )
-            guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality) else { continue }
             let filename = UUID().uuidString + ".mov"
-            let destURL = docs.appendingPathComponent(filename)
-            exporter.outputURL = destURL
-            exporter.outputFileType = .mov
-            exporter.timeRange = timeRange
-            await exporter.export()
-            if exporter.status == .completed {
-                savedClips.append(WaveClip(id: UUID(), filename: filename, date: ts.start))
+            return ClipJob(timeRange: timeRange, filename: filename, destURL: docs.appendingPathComponent(filename), date: ts.start)
+        }
+
+        let savedClips: [WaveClip] = await withTaskGroup(of: WaveClip?.self) { group in
+            for job in jobs {
+                group.addTask { [weak self] in
+                    guard let self else { return nil }
+                    let success = await self.exportClip(asset: asset, timeRange: job.timeRange, destURL: job.destURL)
+                    return success ? WaveClip(id: UUID(), filename: job.filename, date: job.date) : nil
+                }
             }
+            var results: [WaveClip] = []
+            for await clip in group {
+                if let clip { results.append(clip) }
+            }
+            return results.sorted { $0.date < $1.date }
         }
 
         try? FileManager.default.removeItem(at: url)
@@ -467,44 +288,75 @@ extension CameraManager: AVCaptureFileOutputRecordingDelegate {
             try? WCSession.default.updateApplicationContext(["confirmedTimestampIDs": confirmedIDs])
         }
 
+        guard !savedClips.isEmpty else {
+            await MainActor.run { self.loadRecordings() }
+            return false
+        }
+
         let waveSession = WaveSession(id: UUID(), startDate: sessionStart, endDate: sessionEnd, clips: savedClips)
 
         await MainActor.run {
             self.saveSession(waveSession)
-            self.receivedTimestamps.removeAll { confirmedIDs.contains($0.id) }
-            self.recordingStartDate = nil
             self.loadRecordings()
-            self.statusMessage = "Waves saved. Waiting for watch command..."
         }
+        return true
     }
 }
 
 // MARK: - WCSessionDelegate
 
 extension CameraManager: WCSessionDelegate {
-    nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {}
+    nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        guard activationState == .activated else { return }
+        let saved = UserDefaults.standard.integer(forKey: "waveDurationSeconds")
+        let dur = saved == 0 ? 60.0 : Double(saved)
+        try? WCSession.default.updateApplicationContext(["waveDurationSeconds": dur])
+    }
     nonisolated func sessionDidBecomeInactive(_ session: WCSession) {}
     nonisolated func sessionDidDeactivate(_ session: WCSession) {
         WCSession.default.activate()
     }
     nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        guard let event = message["event"] as? String, event == "watch_started_session" else { return }
-        Task { @MainActor in self.watchRequestedSessionStart = true }
+        if let payload = message["watchSessions"] as? [[String: Any]] {
+            handleIncomingWatchSessions(payload)
+        }
     }
-    nonisolated func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
-        guard let payload = userInfo["waveTimestamps"] as? [[String: Any]] else { return }
-        let timestamps = payload.compactMap { dict -> (id: String, start: Date, end: Date)? in
+
+    nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+        if let payload = message["watchSessions"] as? [[String: Any]] {
+            handleIncomingWatchSessions(payload)
+            replyHandler(["status": "received"])
+        } else {
+            replyHandler(["status": "unknown"])
+        }
+    }
+
+    nonisolated private func handleIncomingWatchSessions(_ sessionsPayload: [[String: Any]]) {
+        let sessions: [PendingWatchSession] = sessionsPayload.compactMap { dict in
             guard let id = dict["id"] as? String,
-                  let startInterval = dict["start"] as? Double,
-                  let endInterval = dict["end"] as? Double else { return nil }
-            return (id: id, start: Date(timeIntervalSince1970: startInterval), end: Date(timeIntervalSince1970: endInterval))
+                  let startI = dict["startDate"] as? Double,
+                  let endI = dict["endDate"] as? Double,
+                  let tsPayload = dict["timestamps"] as? [[String: Any]] else { return nil }
+            let timestamps: [PendingWatchTimestamp] = tsPayload.compactMap { ts in
+                guard let tsID = ts["id"] as? String,
+                      let s = ts["start"] as? Double,
+                      let e = ts["end"] as? Double else { return nil }
+                return PendingWatchTimestamp(id: tsID, start: Date(timeIntervalSince1970: s), end: Date(timeIntervalSince1970: e))
+            }
+            return PendingWatchSession(id: id, startDate: Date(timeIntervalSince1970: startI), endDate: Date(timeIntervalSince1970: endI), timestamps: timestamps)
         }
         Task { @MainActor in
-            let existingIDs = Set(self.receivedTimestamps.map { $0.id })
-            let newOnly = timestamps.filter { !existingIDs.contains($0.id) }
-            self.receivedTimestamps.append(contentsOf: newOnly)
-            let count = self.receivedTimestamps.count
-            self.statusMessage = "\(count) wave\(count == 1 ? "" : "s") synced. End session to generate clips."
+            let existingIDs = Set(self.pendingWatchSessions.map { $0.id })
+            let newOnly = sessions.filter { !existingIDs.contains($0.id) }
+            self.pendingWatchSessions.append(contentsOf: newOnly)
+            self.savePendingWatchSessions()
+            await self.tryMatchPendingImport()
+        }
+    }
+
+    nonisolated func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
+        if let sessionsPayload = userInfo["watchSessions"] as? [[String: Any]] {
+            handleIncomingWatchSessions(sessionsPayload)
         }
     }
 }

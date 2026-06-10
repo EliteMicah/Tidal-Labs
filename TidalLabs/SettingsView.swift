@@ -4,15 +4,10 @@ import StoreKit
 
 struct SettingsView: View {
     @ObservedObject var camera: CameraManager
-    @AppStorage("cellularWatch") private var cellularWatch = false
-    @AppStorage("startDelay") private var startDelay = 1.0
-    @AppStorage("maxRecordingMinutes") private var maxRecordingMinutes = 60.0
     @AppStorage("resolution") private var resolution = VideoResolution.p720.rawValue
     @AppStorage("fps") private var fps = 30
+    @AppStorage("waveDurationSeconds") private var waveDurationSeconds = 60
 
-    @State private var cellularLocal = false
-    @State private var startDelayLocal = 1.0
-    @State private var maxRecordingLocal = 60.0
     @State private var resolutionLocal = VideoResolution.p720.rawValue
     @State private var fpsLocal = 30
     @State private var supportedResolutions: [VideoResolution] = [.p720, .p1080]
@@ -37,73 +32,15 @@ struct SettingsView: View {
         ScrollView {
             VStack(spacing: 16) {
                 settingCard {
-                    HStack {
+                    VStack(alignment: .leading, spacing: 12) {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Cellular Apple Watch")
+                            Text("Resolution")
                                 .font(.system(.body, design: .rounded, weight: .semibold))
                                 .foregroundStyle(.white)
-                            Text("Communicate outside Bluetooth range")
+                            Text("Used to estimate storage and battery when recording with the native Camera app.")
                                 .font(.system(.caption, design: .rounded))
-                                .foregroundStyle(.white.opacity(0.6))
+                                .foregroundStyle(.white.opacity(0.5))
                         }
-                        Spacer()
-                        Toggle("", isOn: $cellularLocal)
-                            .tint(.white)
-                            .labelsHidden()
-                            .onChange(of: cellularLocal) { _, val in cellularWatch = val }
-                    }
-                }
-
-                if !cellularLocal {
-                    settingCard {
-                        VStack(alignment: .leading, spacing: 12) {
-                            Text("Delay Before Recording")
-                                .font(.system(.body, design: .rounded, weight: .semibold))
-                                .foregroundStyle(.white)
-                            Text("Wait before starting (non-cellular watch)")
-                                .font(.system(.caption, design: .rounded))
-                                .foregroundStyle(.white.opacity(0.6))
-                            Picker("Delay", selection: $startDelayLocal) {
-                                ForEach([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], id: \.self) { min in
-                                    Text(min == 0 ? "None" : "\(Int(min)) min").tag(min)
-                                }
-                            }
-                            .pickerStyle(.segmented)
-                            .onChange(of: startDelayLocal) { _, val in startDelay = val }
-                        }
-                    }
-                }
-
-                settingCard {
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Text("Max Recording Time")
-                                .font(.system(.body, design: .rounded, weight: .semibold))
-                                .foregroundStyle(.white)
-                            Spacer()
-                            Text(maxRecordingLabel)
-                                .font(.system(.body, design: .rounded, weight: .semibold))
-                                .foregroundStyle(.white)
-                        }
-                        Slider(value: $maxRecordingLocal, in: 30...120, step: 5) { editing in
-                            if !editing { maxRecordingMinutes = maxRecordingLocal }
-                        }
-                        .tint(.white)
-                        HStack {
-                            Text("30 min")
-                            Spacer()
-                            Text("2 hr")
-                        }
-                        .font(.system(.caption2, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.4))
-                    }
-                }
-
-                settingCard {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Resolution")
-                            .font(.system(.body, design: .rounded, weight: .semibold))
-                            .foregroundStyle(.white)
                         Picker("Resolution", selection: $resolutionLocal) {
                             ForEach(supportedResolutions, id: \.rawValue) { res in
                                 Text(res.rawValue).tag(res.rawValue)
@@ -124,9 +61,14 @@ struct SettingsView: View {
 
                 settingCard {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Frame Rate")
-                            .font(.system(.body, design: .rounded, weight: .semibold))
-                            .foregroundStyle(.white)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Frame Rate")
+                                .font(.system(.body, design: .rounded, weight: .semibold))
+                                .foregroundStyle(.white)
+                            Text("Used to estimate storage and battery when recording with the native Camera app.")
+                                .font(.system(.caption, design: .rounded))
+                                .foregroundStyle(.white.opacity(0.5))
+                        }
                         Picker("FPS", selection: $fpsLocal) {
                             ForEach(supportedFPSOptions, id: \.self) { rate in
                                 Text("\(rate) fps").tag(rate)
@@ -137,32 +79,28 @@ struct SettingsView: View {
                     }
                 }
 
-                if !cellularLocal {
-                    settingCard {
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("Estimated Storage per Session")
+                settingCard {
+                    VStack(alignment: .leading, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Wave Recording Duration")
                                 .font(.system(.body, design: .rounded, weight: .semibold))
                                 .foregroundStyle(.white)
-                            Text("Recording \(maxRecordingLabel) at \(resolutionLocal) / \(fpsLocal) fps uses approximately \(formatBytes(estimatedStorageBytes))")
+                            Text("How far back the watch timestamps when you log a wave. Synced to Apple Watch.")
                                 .font(.system(.caption, design: .rounded))
-                                .foregroundStyle(.white.opacity(0.6))
-                            Text("Once your wave clips are generated, the full session recording is deleted and storage is freed up.")
-                                .font(.system(.caption, design: .rounded))
-                                .foregroundStyle(.white.opacity(0.4))
+                                .foregroundStyle(.white.opacity(0.5))
                         }
-                    }
-
-                    settingCard {
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("Estimated Battery Drain per Session")
-                                .font(.system(.body, design: .rounded, weight: .semibold))
+                        HStack {
+                            Text(formatWaveDuration(waveDurationSeconds))
+                                .font(.system(.subheadline, design: .rounded, weight: .medium))
                                 .foregroundStyle(.white)
-                            Text("~\(estimatedBatteryDrain)% for this session (varies by device).")
-                                .font(.system(.caption, design: .rounded))
-                                .foregroundStyle(.white.opacity(0.6))
-                            Text("Leaving your iPhone in direct sunlight will cause thermal throttling and drain battery significantly faster.")
-                                .font(.system(.caption, design: .rounded))
-                                .foregroundStyle(.white.opacity(0.4))
+                        }
+                        Slider(value: Binding(
+                            get: { Double(waveDurationSeconds) },
+                            set: { waveDurationSeconds = Int($0) }
+                        ), in: 30...180, step: 5)
+                        .tint(.white)
+                        .onChange(of: waveDurationSeconds) { _, val in
+                            camera.pushWaveDurationToWatch(val)
                         }
                     }
                 }
@@ -217,7 +155,7 @@ struct SettingsView: View {
                         }
 
                         Button(action: { showDeleteAllAlert = true }) {
-                            Text("Delete All Clips")
+                            Text("Delete All Clips & Sessions")
                                 .font(.system(.subheadline, design: .rounded, weight: .semibold))
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity)
@@ -228,7 +166,7 @@ struct SettingsView: View {
                         .disabled(appStorageUsed == 0)
                     }
                 }
-                .alert("Delete All Clips?", isPresented: $showDeleteAllAlert) {
+                .alert("Delete All Clips & Sessions?", isPresented: $showDeleteAllAlert) {
                     Button("Delete All", role: .destructive) {
                         camera.deleteAllSessions()
                         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -257,9 +195,6 @@ struct SettingsView: View {
             tipLoading = false
         }
         .onAppear {
-            cellularLocal = cellularWatch
-            startDelayLocal = startDelay
-            maxRecordingLocal = max(30, maxRecordingMinutes)
             resolutionLocal = resolution
             fpsLocal = fps
             supportedResolutions = querySupportedResolutions()
@@ -274,15 +209,22 @@ struct SettingsView: View {
         .navigationTitle("Settings")
     }
 
+    private func formatWaveDuration(_ seconds: Int) -> String {
+        if seconds < 60 { return "\(seconds) sec" }
+        let m = seconds / 60
+        let s = seconds % 60
+        return s == 0 ? "\(m) min" : "\(m) min \(s) sec"
+    }
+
     private func querySupportedResolutions() -> [VideoResolution] {
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
             return [.p720, .p1080]
         }
         let dims = device.formats.map { CMVideoFormatDescriptionGetDimensions($0.formatDescription) }
         var result: [VideoResolution] = []
-        if dims.contains(where: { $0.width >= 1280 && $0.height >= 720 })   { result.append(.p720) }
-        if dims.contains(where: { $0.width >= 1920 && $0.height >= 1080 })  { result.append(.p1080) }
-        if dims.contains(where: { $0.width >= 3840 && $0.height >= 2160 })  { result.append(.k4) }
+        if dims.contains(where: { $0.width >= 1280 && $0.height >= 720 })  { result.append(.p720) }
+        if dims.contains(where: { $0.width >= 1920 && $0.height >= 1080 }) { result.append(.p1080) }
+        if dims.contains(where: { $0.width >= 3840 && $0.height >= 2160 }) { result.append(.k4) }
         return result
     }
 
@@ -293,7 +235,6 @@ struct SettingsView: View {
         let (tw, th): (Int32, Int32) = switch resolution {
         case .p720:  (1280, 720)
         case .p1080: (1920, 1080)
-        case .k2:    (1920, 1080)
         case .k4:    (3840, 2160)
         }
         let maxFPS = device.formats
@@ -304,46 +245,9 @@ struct SettingsView: View {
             .flatMap { $0.videoSupportedFrameRateRanges }
             .map { $0.maxFrameRate }
             .max() ?? 30
-        // 120/240 fps intentionally excluded — app does not support slo-mo
         var result = [30]
         if maxFPS >= 59 { result.append(60) }
         return result
-    }
-
-    private var estimatedBatteryDrain: Int {
-        let drainPerHour: Double = switch (resolutionLocal, fpsLocal) {
-        case ("720p",  60): 15
-        case ("720p",  _):  12
-        case ("1080p", 60): 20
-        case ("1080p", _):  15
-        case ("4K",    60): 35
-        case ("4K",    _):  25
-        default:            15
-        }
-        return Int((drainPerHour / 60.0) * maxRecordingLocal)
-    }
-
-    private var estimatedStorageBytes: Int64 {
-        let kbps: Double = switch (resolutionLocal, fpsLocal) {
-        case ("720p",  60): 8_000
-        case ("720p",  _):  5_000
-        case ("1080p", 60): 20_000
-        case ("1080p", _):  12_000
-        case ("4K",    60): 85_000
-        case ("4K",    _):  50_000
-        default:            10_000
-        }
-        return Int64(kbps * 125.0 * maxRecordingLocal * 60.0)
-    }
-
-    private var maxRecordingLabel: String {
-        let mins = Int(maxRecordingLocal)
-        if mins >= 60 {
-            let hrs = mins / 60
-            let rem = mins % 60
-            return rem == 0 ? "\(hrs) hr" : "\(hrs) hr \(rem) min"
-        }
-        return "\(mins) min"
     }
 
     private func refreshStorage() {

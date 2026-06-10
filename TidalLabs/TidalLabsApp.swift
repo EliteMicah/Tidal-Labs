@@ -9,8 +9,6 @@ import SwiftUI
 
 @main
 struct TidalLabsApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
     var body: some Scene {
         WindowGroup {
             ContentView()

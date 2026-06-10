@@ -26,17 +26,30 @@ struct WaveTimestamp: Codable {
     }
 }
 
+// MARK: - Watch Surf Session
+
+struct WatchSurfSession: Codable {
+    let id: String
+    let startDate: Date
+    let endDate: Date
+    var timestamps: [WaveTimestamp]
+}
+
 // MARK: - Command Sender
 
 @MainActor
 class CommandSender: NSObject, ObservableObject {
-    @Published var isRecording = false
     @Published var statusMessage = "Tidal Labs is waiting for iPhone..."
     @Published var isSending = false
+    @Published var heartRate: Double? = nil
     @Published var sessionActive = false
     @Published var sessionStartTime: Date?
     @Published var countdownRemaining: Int = 0
     @Published private(set) var countdownEndDate: Date?
+    @Published var sessionWaveCount: Int = 0
+    @Published var isSyncing = false
+    @Published var syncFeedback = ""
+    private var waveDurationSeconds: Double = 60.0
     private var maxRecordingMinutes: Double = 60.0
     private var countdownTask: Task<Void, Never>?
     private var extendedRuntimeSession: WKExtendedRuntimeSession?
@@ -47,20 +60,27 @@ class CommandSender: NSObject, ObservableObject {
     private let container = CKContainer(identifier: "iCloud.Micah-Woodring.TidalLabs")
     private var pollingTask: Task<Void, Never>?
     private var lastPolledDate = Date()
-    private var currentWaveStart: Date?
 
-    private var storedTimestamps: [WaveTimestamp] {
+    // Active session (in-memory only, not persisted until finalized)
+    private var activeSessionID: String?
+    private var activeSessionStart: Date?
+    private var activeSessionTimestamps: [WaveTimestamp] = []
+
+    // Completed sessions persisted until phone confirms receipt
+    private var completedSessions: [WatchSurfSession] {
         get {
-            guard let data = UserDefaults.standard.data(forKey: "waveTimestamps"),
-                  let ts = try? JSONDecoder().decode([WaveTimestamp].self, from: data) else { return [] }
-            return ts
+            guard let data = UserDefaults.standard.data(forKey: "completedWatchSessions"),
+                  let sessions = try? JSONDecoder().decode([WatchSurfSession].self, from: data) else { return [] }
+            return sessions
         }
         set {
             if let data = try? JSONEncoder().encode(newValue) {
-                UserDefaults.standard.set(data, forKey: "waveTimestamps")
+                UserDefaults.standard.set(data, forKey: "completedWatchSessions")
             }
         }
     }
+
+    var pendingSessionCount: Int { completedSessions.count }
 
     var isCellularMode: Bool {
         WCSession.default.receivedApplicationContext["cellularWatch"] as? Bool ?? false
@@ -125,7 +145,10 @@ class CommandSender: NSObject, ObservableObject {
     func requestHealthKitAuthorization() async {
         guard HKHealthStore.isHealthDataAvailable() else { return }
         let share: Set<HKSampleType> = [HKObjectType.workoutType()]
-        let read: Set<HKObjectType> = [HKObjectType.workoutType()]
+        let read: Set<HKObjectType> = [
+            HKObjectType.workoutType(),
+            HKObjectType.quantityType(forIdentifier: .heartRate)!
+        ]
         try? await healthStore.requestAuthorization(toShare: share, read: read)
     }
 
@@ -139,6 +162,7 @@ class CommandSender: NSObject, ObservableObject {
             let builder = session.associatedWorkoutBuilder()
             builder.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: config)
             session.delegate = self
+            builder.delegate = self
             workoutSession = session
             workoutBuilder = builder
             session.startActivity(with: Date())
@@ -146,10 +170,17 @@ class CommandSender: NSObject, ObservableObject {
         } catch {}
     }
 
-    private func stopWorkoutSession() {
-        workoutSession?.end()
+    private func stopWorkoutSession() async {
+        guard let session = workoutSession, let builder = workoutBuilder else { return }
+        let endDate = Date()
+        session.end()
+        do {
+            try await builder.endCollection(at: endDate)
+            _ = try await builder.finishWorkout()
+        } catch {}
         workoutSession = nil
         workoutBuilder = nil
+        heartRate = nil
     }
 
     private func startExtendedRuntimeSession() {
@@ -168,22 +199,25 @@ class CommandSender: NSObject, ObservableObject {
     private func handleEvent(_ event: String, delaySeconds: Int = 0) {
         switch event {
         case "session_started":
-            if sessionActive && delaySeconds > 0 {
+            if !sessionActive {
+                sessionActive = true
+                sessionStartTime = Date()
+                sessionWaveCount = 0
+                activeSessionID = UUID().uuidString
+                activeSessionStart = sessionStartTime
+                activeSessionTimestamps = []
+                startExtendedRuntimeSession()
+                statusMessage = delaySeconds > 0 ? "\(delaySeconds)s" : "Ready"
+                Task {
+                    await startWorkoutSession()
+                    await playHaptics(count: 1)
+                }
+                if delaySeconds > 0 { startCountdown(delaySeconds) }
+            } else if delaySeconds > 0 {
                 startCountdown(delaySeconds)
             }
         case "session_ended":
-            countdownTask?.cancel()
-            countdownTask = nil
-            countdownRemaining = 0
-            countdownEndDate = nil
-            sessionActive = false
-            sessionStartTime = nil
-            isRecording = false
-            isSending = false
-            stopExtendedRuntimeSession()
-            stopWorkoutSession()
-            statusMessage = "Tidal Labs is waiting for iPhone..."
-            Task { await playHaptics(count: 3) }
+            finalizeCurrentSession()
         default:
             break
         }
@@ -193,6 +227,10 @@ class CommandSender: NSObject, ObservableObject {
         guard !sessionActive else { return }
         sessionActive = true
         sessionStartTime = Date()
+        sessionWaveCount = 0
+        activeSessionID = UUID().uuidString
+        activeSessionStart = sessionStartTime
+        activeSessionTimestamps = []
         startExtendedRuntimeSession()
         statusMessage = "Ready"
         Task {
@@ -212,6 +250,37 @@ class CommandSender: NSObject, ObservableObject {
                 _ = try? await container.privateCloudDatabase.save(record)
             }
         }
+    }
+
+    func endSessionFromWatch() {
+        finalizeCurrentSession()
+    }
+
+    private func finalizeCurrentSession() {
+        if let id = activeSessionID, let start = activeSessionStart, !activeSessionTimestamps.isEmpty {
+            let watchSession = WatchSurfSession(id: id, startDate: start, endDate: Date(), timestamps: activeSessionTimestamps)
+            var sessions = completedSessions
+            sessions.append(watchSession)
+            completedSessions = sessions
+        }
+        activeSessionID = nil
+        activeSessionStart = nil
+        activeSessionTimestamps = []
+        resetSessionState()
+    }
+
+    private func resetSessionState() {
+        countdownTask?.cancel()
+        countdownTask = nil
+        countdownRemaining = 0
+        countdownEndDate = nil
+        sessionActive = false
+        sessionStartTime = nil
+        isSending = false
+        stopExtendedRuntimeSession()
+        Task { await stopWorkoutSession() }
+        statusMessage = "Tidal Labs is waiting for iPhone..."
+        Task { await playHaptics(count: 3) }
     }
 
     private func startCountdown(_ seconds: Int) {
@@ -238,30 +307,31 @@ class CommandSender: NSObject, ObservableObject {
         statusMessage = remaining > 0 ? "\(remaining)s" : "Ready"
     }
 
-    func toggleRecording() {
+    func recordWave() {
         if isCellularMode {
-            toggleCellularRecording()
+            recordWaveCellular()
         } else {
-            toggleNonCellularRecording()
+            recordWaveNonCellular()
         }
     }
 
-    private func toggleCellularRecording() {
+    private func recordWaveCellular() {
         guard !isSending else { return }
-        let command = isRecording ? "stop" : "start"
         isSending = true
-        statusMessage = command == "start" ? "Starting..." : "Stopping..."
-
-        let record = CKRecord(recordType: "RecordingCommand")
-        record["command"] = command as CKRecordValue
-        record["issuedAt"] = Date() as CKRecordValue
-
+        let now = Date()
+        let start = now.addingTimeInterval(-waveDurationSeconds)
+        let record = CKRecord(recordType: "WaveRecord")
+        record["startTime"] = start.timeIntervalSince1970 as CKRecordValue
+        record["endTime"] = now.timeIntervalSince1970 as CKRecordValue
+        record["issuedAt"] = now as CKRecordValue
         Task {
             do {
                 try await container.privateCloudDatabase.save(record)
-                isRecording = !isRecording
-                statusMessage = isRecording ? "Recording" : "Stopped"
-                await playHaptics(count: isRecording ? 2 : 3)
+                sessionWaveCount += 1
+                statusMessage = "Wave \(sessionWaveCount) logged"
+                await playHaptics(count: 2)
+                try? await Task.sleep(nanoseconds: 2_000_000_000)
+                if sessionActive { statusMessage = "Ready" }
             } catch {
                 statusMessage = "Failed — check connection"
             }
@@ -269,74 +339,102 @@ class CommandSender: NSObject, ObservableObject {
         }
     }
 
-    private func toggleNonCellularRecording() {
-        if !isRecording {
-            currentWaveStart = Date()
-            isRecording = true
-            statusMessage = "Recording"
-            Task { await playHaptics(count: 2) }
-        } else {
-            guard let start = currentWaveStart else { return }
-            let ts = WaveTimestamp(start: start, end: Date())
-            var stored = storedTimestamps
-            stored.append(ts)
-            storedTimestamps = stored
-            currentWaveStart = nil
-            isRecording = false
-            statusMessage = "Stopped"
-            Task { await playHaptics(count: 3) }
-            sendPendingTimestamps()
+    private func recordWaveNonCellular() {
+        let now = Date()
+        let start = now.addingTimeInterval(-waveDurationSeconds)
+        let ts = WaveTimestamp(start: start, end: now)
+        activeSessionTimestamps.append(ts)
+        sessionWaveCount += 1
+        statusMessage = "Wave \(sessionWaveCount) logged"
+        Task {
+            await playHaptics(count: 2)
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            if sessionActive { statusMessage = "Ready" }
         }
     }
 
-    private func sendPendingTimestamps() {
-        let timestamps = storedTimestamps
-        guard !timestamps.isEmpty,
-              WCSession.default.activationState == .activated else { return }
-        let payload = timestamps.map { ["id": $0.id, "start": $0.start, "end": $0.end] as [String: Any] }
-        WCSession.default.transferUserInfo(["waveTimestamps": payload])
+    private func buildSessionsPayload() -> [[String: Any]] {
+        completedSessions.map { s in
+            [
+                "id": s.id,
+                "startDate": s.startDate.timeIntervalSince1970,
+                "endDate": s.endDate.timeIntervalSince1970,
+                "timestamps": s.timestamps.map { ts -> [String: Any] in
+                    ["id": ts.id, "start": ts.start, "end": ts.end]
+                }
+            ]
+        }
     }
 
-    var pendingWaveCount: Int { storedTimestamps.count }
+    private func sendPendingSessions() {
+        let sessions = completedSessions
+        guard !sessions.isEmpty,
+              WCSession.default.activationState == .activated else {
+            isSyncing = false
+            return
+        }
+        let payload = buildSessionsPayload()
 
-    var estimatedEndTime: Date? {
-        guard let start = sessionStartTime else { return nil }
-        return start.addingTimeInterval(maxRecordingMinutes * 60.0)
+        if WCSession.default.isReachable {
+            WCSession.default.sendMessage(["watchSessions": payload], replyHandler: { [weak self] _ in
+                Task { @MainActor [weak self] in
+                    self?.isSyncing = false
+                    self?.showSyncFeedback("Sent!")
+                }
+            }, errorHandler: { [weak self] _ in
+                WCSession.default.transferUserInfo(["watchSessions": payload])
+                Task { @MainActor [weak self] in
+                    self?.isSyncing = false
+                    self?.showSyncFeedback("Queued")
+                }
+            })
+        } else {
+            WCSession.default.transferUserInfo(["watchSessions": payload])
+            isSyncing = false
+            showSyncFeedback("Queued — open iPhone app")
+        }
+    }
+
+    private func showSyncFeedback(_ message: String) {
+        syncFeedback = message
+        Task {
+            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            syncFeedback = ""
+        }
     }
 
     func syncToPhone() {
-        guard !storedTimestamps.isEmpty,
+        guard !completedSessions.isEmpty,
               WCSession.default.activationState == .activated else {
-            statusMessage = "Nothing to sync"
+            showSyncFeedback("Nothing to sync")
             return
         }
-        statusMessage = "Syncing \(storedTimestamps.count) waves..."
-        sendPendingTimestamps()
-        statusMessage = "Sync sent!"
+        isSyncing = true
+        syncFeedback = ""
+        sendPendingSessions()
     }
 
-    fileprivate func clearConfirmedTimestamps(ids: [String]) {
-        var stored = storedTimestamps
-        stored.removeAll { ids.contains($0.id) }
-        storedTimestamps = stored
+    fileprivate func clearConfirmedSessions(ids: [String]) {
+        var sessions = completedSessions
+        sessions.removeAll { ids.contains($0.id) }
+        completedSessions = sessions
     }
 }
 
 // MARK: - WCSessionDelegate
 
 extension CommandSender: WCSessionDelegate {
-    nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        if activationState == .activated {
-            Task { @MainActor in self.sendPendingTimestamps() }
-        }
-    }
+    nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {}
 
     nonisolated func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        if let confirmedIDs = applicationContext["confirmedTimestampIDs"] as? [String] {
-            Task { @MainActor in self.clearConfirmedTimestamps(ids: confirmedIDs) }
+        if let confirmedIDs = applicationContext["confirmedSessionIDs"] as? [String] {
+            Task { @MainActor in self.clearConfirmedSessions(ids: confirmedIDs) }
         }
         if let maxMins = applicationContext["maxRecordingMinutes"] as? Double {
             Task { @MainActor in self.maxRecordingMinutes = maxMins }
+        }
+        if let waveDur = applicationContext["waveDurationSeconds"] as? Double {
+            Task { @MainActor in self.waveDurationSeconds = waveDur }
         }
     }
 
@@ -360,9 +458,30 @@ extension CommandSender: WKExtendedRuntimeSessionDelegate {
 
 extension CommandSender: HKWorkoutSessionDelegate {
     nonisolated func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
+        if toState == .running {
+            Task { @MainActor in
+                let device = WKInterfaceDevice.current()
+                if device.waterResistanceRating == .wr50 {
+                    device.enableWaterLock()
+                }
+            }
+        }
     }
 
     nonisolated func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {}
+}
+
+// MARK: - HKLiveWorkoutBuilderDelegate
+
+extension CommandSender: HKLiveWorkoutBuilderDelegate {
+    nonisolated func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) {}
+
+    nonisolated func workoutBuilder(_ workoutBuilder: HKLiveWorkoutBuilder, didCollectDataOf collectedTypes: Set<HKSampleType>) {
+        guard let hrType = HKQuantityType.quantityType(forIdentifier: .heartRate),
+              collectedTypes.contains(hrType) else { return }
+        let bpm = workoutBuilder.statistics(for: hrType)?.mostRecentQuantity()?.doubleValue(for: HKUnit(from: "count/min"))
+        Task { @MainActor in self.heartRate = bpm }
+    }
 }
 
 // MARK: - ContentView
@@ -380,6 +499,7 @@ struct ContentView: View {
     private let crownStep: Double = 0.03
 
     var body: some View {
+        ZStack {
         VStack(spacing: 14) {
             if !sender.sessionActive && !sender.isSending {
                 VStack(spacing: 10) {
@@ -396,72 +516,105 @@ struct ContentView: View {
                             .clipShape(Capsule())
                     }
                     .buttonStyle(.plain)
-                }
-            } else {
-                if let endTime = sender.estimatedEndTime {
-                    Text("Ends \(endTime.formatted(date: .omitted, time: .shortened))")
-                        .font(.system(.caption2, design: .rounded))
-                        .foregroundStyle(.secondary)
-                }
 
-                HStack(spacing: 6) {
-                    if sender.isRecording {
-                        Circle()
-                            .fill(.red)
-                            .frame(width: 7, height: 7)
-                    }
-                    Text(sender.statusMessage)
-                        .font(.system(.caption, design: .rounded))
-                        .foregroundStyle(.secondary)
-                }
-                .animation(.easeInOut(duration: 0.2), value: sender.isRecording)
-
-                if !sender.isCellularMode && sender.pendingWaveCount > 0 && !sender.isRecording && !sender.sessionActive {
-                    Button(action: { sender.syncToPhone() }) {
-                        Text("Sync \(sender.pendingWaveCount) Wave\(sender.pendingWaveCount == 1 ? "" : "s")")
-                            .font(.system(.caption, design: .rounded, weight: .semibold))
-                            .foregroundStyle(.black)
+                    if sender.pendingSessionCount > 0 {
+                        Button(action: { sender.syncToPhone() }) {
+                            HStack(spacing: 6) {
+                                if sender.isSyncing {
+                                    ProgressView()
+                                        .tint(.black)
+                                        .scaleEffect(0.6)
+                                        .frame(width: 12, height: 12)
+                                }
+                                Text(sender.isSyncing ? "Syncing..." : "Sync Waves (\(sender.pendingSessionCount))")
+                                    .font(.system(.caption, design: .rounded, weight: .semibold))
+                                    .foregroundStyle(.black)
+                            }
                             .padding(.horizontal, 14)
                             .padding(.vertical, 8)
-                            .background(.white)
+                            .background(.cyan)
                             .clipShape(Capsule())
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(sender.isSyncing)
                     }
-                    .buttonStyle(.plain)
+
+                    if !sender.syncFeedback.isEmpty {
+                        Text(sender.syncFeedback)
+                            .font(.system(.caption2, design: .rounded))
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
                 }
+            } else {
+                Text(sender.statusMessage)
+                    .font(.system(.caption, design: .rounded))
+                    .foregroundStyle(.secondary)
 
                 if sender.isSending {
                     ProgressView()
                         .tint(.white)
                 } else {
                     VStack(spacing: 10) {
-                        Image(systemName: sender.isRecording ? "chevron.up" : "chevron.down")
+                        Image(systemName: "chevron.up")
                             .font(.system(size: 22, weight: .semibold))
-                            .foregroundStyle(sender.isRecording ? .red : .green)
+                            .foregroundStyle(.green)
 
-                        Text(sender.isRecording ? "Scroll Up to Stop" : "Scroll Down to Start")
+                        Text("Scroll Up to Record")
                             .font(.system(.caption2, design: .rounded))
                             .foregroundStyle(.tertiary)
                             .multilineTextAlignment(.center)
-
-                        let barColor: Color = sender.isRecording ? .red : .green
 
                         GeometryReader { geo in
                             ZStack(alignment: .leading) {
                                 Capsule()
                                     .fill(.white.opacity(0.15))
                                 Capsule()
-                                    .fill(barColor)
+                                    .fill(.green)
                                     .frame(width: geo.size.width * barProgress)
                                     .animation(.linear(duration: 0.05), value: barProgress)
                             }
                         }
                         .frame(height: 6)
                         .padding(.horizontal, 4)
+
+                        Button(action: { sender.endSessionFromWatch() }) {
+                            Text("End Session")
+                                .font(.system(.caption2, design: .rounded, weight: .semibold))
+                                .foregroundStyle(.red.opacity(0.9))
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 6)
+                                .background(.red.opacity(0.15))
+                                .clipShape(Capsule())
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }
         }
         .padding()
+
+        if sender.sessionActive, let bpm = sender.heartRate {
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    HStack(spacing: 3) {
+                        Image(systemName: "heart.fill")
+                            .font(.system(size: 12))
+                            .foregroundStyle(.red)
+                        Text("\(Int(bpm))")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.leading, 10)
+                    .padding(.top, 10)
+                    Spacer()
+                }
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea()
+        }
+        } // ZStack
         .focusable()
         .focused($crownFocused)
         .digitalCrownRotation($crownValue)
@@ -482,8 +635,7 @@ struct ContentView: View {
 
             guard !sender.isSending, !isTriggering else { return }
 
-            // Flip delta so "correct direction" is always positive
-            let effectiveDelta = sender.isRecording ? -rawDelta : rawDelta
+            let effectiveDelta = -rawDelta
 
             guard effectiveDelta > deadZone else { return }
 
@@ -505,7 +657,7 @@ struct ContentView: View {
                 crownValue = 0
                 lastCrownValue = 0
                 idleTask?.cancel()
-                sender.toggleRecording()
+                sender.recordWave()
                 // Lockout period so rapid crown events can't re-trigger before state flips
                 Task {
                     try? await Task.sleep(nanoseconds: 1_000_000_000)

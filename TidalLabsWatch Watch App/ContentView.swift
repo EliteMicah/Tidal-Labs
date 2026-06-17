@@ -208,6 +208,10 @@ class CommandSender: NSObject, ObservableObject {
                 activeSessionTimestamps = []
                 startExtendedRuntimeSession()
                 statusMessage = delaySeconds > 0 ? "\(delaySeconds)s" : "Ready"
+                let device = WKInterfaceDevice.current()
+                if device.waterResistanceRating == .wr50 {
+                    device.enableWaterLock()
+                }
                 Task {
                     await startWorkoutSession()
                     await playHaptics(count: 1)
@@ -233,6 +237,10 @@ class CommandSender: NSObject, ObservableObject {
         activeSessionTimestamps = []
         startExtendedRuntimeSession()
         statusMessage = "Ready"
+        let device = WKInterfaceDevice.current()
+        if device.waterResistanceRating == .wr50 {
+            device.enableWaterLock()
+        }
         Task {
             await startWorkoutSession()
             await playHaptics(count: 1)

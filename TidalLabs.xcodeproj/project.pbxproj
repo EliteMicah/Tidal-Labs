@@ -643,8 +643,11 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Tidal Labs";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSCameraUsageDescription = "TidalLabs records surf sessions via your watch. Your camera stays on while you're in the water.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "TidalLabs uses your location to tag sessions with the nearest surf spot.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "TidalLabs records audio with your surf session videos.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "TidalLabs saves your surf session recordings to your photo library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "TidalLabs reads your video directly to extract wave clips without copying the full file to your device.";
+				INFOPLIST_KEY_UIAppFonts = "BricolageGrotesque.ttf HankenGrotesk.ttf";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -694,8 +697,11 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Tidal Labs";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSCameraUsageDescription = "TidalLabs records surf sessions via your watch. Your camera stays on while you're in the water.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "TidalLabs uses your location to tag sessions with the nearest surf spot.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "TidalLabs records audio with your surf session videos.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "TidalLabs saves your surf session recordings to your photo library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "TidalLabs reads your video directly to extract wave clips without copying the full file to your device.";
+				INFOPLIST_KEY_UIAppFonts = "BricolageGrotesque.ttf HankenGrotesk.ttf";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

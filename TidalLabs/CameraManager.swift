@@ -1,5 +1,6 @@
 import Foundation
 import AVFoundation
+import CoreLocation
 import WatchConnectivity
 internal import Combine
 
@@ -12,8 +13,10 @@ class CameraManager: NSObject, ObservableObject {
     @Published var isProcessingImport = false
     @Published var isLoadingVideo = false
     @Published var clipGenerationCompleted: Int = 0
+    @Published var iCloudDownloadProgress: Double? = nil
 
     private let pendingWatchSessionsKey = "pendingWatchSessions"
+    private let locationManager = LocationManager()
 
     override init() {
         super.init()
@@ -80,6 +83,37 @@ class CameraManager: NSObject, ObservableObject {
         try? FileManager.default.removeItem(at: sessionsFileURL)
     }
 
+    var favoritedClips: [(clip: WaveClip, sessionID: UUID)] {
+        waveSessions.flatMap { session in
+            session.clips.filter(\.isFavorite).map { (clip: $0, sessionID: session.id) }
+        }
+    }
+
+    func toggleFavorite(clipID: UUID, sessionID: UUID) {
+        guard let si = waveSessions.firstIndex(where: { $0.id == sessionID }),
+              let ci = waveSessions[si].clips.firstIndex(where: { $0.id == clipID }) else { return }
+        waveSessions[si].clips[ci].isFavorite.toggle()
+        if let data = try? JSONEncoder().encode(waveSessions) {
+            try? data.write(to: sessionsFileURL)
+        }
+    }
+
+    func renameSession(_ sessionID: UUID, name: String) {
+        guard let si = waveSessions.firstIndex(where: { $0.id == sessionID }) else { return }
+        waveSessions[si].name = name.trimmingCharacters(in: .whitespaces).isEmpty ? nil : name.trimmingCharacters(in: .whitespaces)
+        if let data = try? JSONEncoder().encode(waveSessions) {
+            try? data.write(to: sessionsFileURL)
+        }
+    }
+
+    func updateSessionSpot(_ sessionID: UUID, spotName: String) {
+        guard let si = waveSessions.firstIndex(where: { $0.id == sessionID }) else { return }
+        waveSessions[si].spotName = spotName
+        if let data = try? JSONEncoder().encode(waveSessions) {
+            try? data.write(to: sessionsFileURL)
+        }
+    }
+
     func deleteClip(_ clipID: UUID, fromSession sessionID: UUID) {
         guard let si = waveSessions.firstIndex(where: { $0.id == sessionID }),
               let ci = waveSessions[si].clips.firstIndex(where: { $0.id == clipID }) else { return }
@@ -115,32 +149,29 @@ class CameraManager: NSObject, ObservableObject {
 
     // MARK: - Video Import
 
-    func storeImportedVideo(from url: URL) async -> Bool {
-        let asset = AVURLAsset(url: url)
-
+    func storeImportedVideo(asset: AVAsset, tempURL: URL? = nil) async -> Bool {
+        print("[VideoImport] storeImportedVideo: asset=\(type(of: asset)) tempURL=\(tempURL?.lastPathComponent ?? "nil")")
         guard let videoStart = await getVideoCreationDate(from: asset) else {
-            try? FileManager.default.removeItem(at: url)
+            print("[VideoImport] storeImportedVideo: getVideoCreationDate returned nil — cannot determine timestamp")
+            if let tempURL { try? FileManager.default.removeItem(at: tempURL) }
             return false
         }
-
+        print("[VideoImport] storeImportedVideo: videoStart=\(videoStart)")
         let durationTime: CMTime
         do {
             durationTime = try await asset.load(.duration)
+            print("[VideoImport] storeImportedVideo: duration=\(durationTime.seconds)s")
         } catch {
-            try? FileManager.default.removeItem(at: url)
+            print("[VideoImport] storeImportedVideo: failed to load duration: \(error)")
+            if let tempURL { try? FileManager.default.removeItem(at: tempURL) }
             return false
         }
-
-        if let existing = pendingImportVideo {
-            try? FileManager.default.removeItem(at: existing.url)
-        }
-
         pendingImportVideo = PendingImportVideo(
-            url: url,
+            asset: asset,
             creationDate: videoStart,
-            durationSeconds: durationTime.seconds
+            durationSeconds: durationTime.seconds,
+            tempURL: tempURL
         )
-
         await tryMatchPendingImport()
         return true
     }
@@ -151,8 +182,8 @@ class CameraManager: NSObject, ObservableObject {
     }
 
     func cancelPendingImport() {
-        if let pending = pendingImportVideo {
-            try? FileManager.default.removeItem(at: pending.url)
+        if let tempURL = pendingImportVideo?.tempURL {
+            try? FileManager.default.removeItem(at: tempURL)
         }
         pendingImportVideo = nil
     }
@@ -175,7 +206,7 @@ class CameraManager: NSObject, ObservableObject {
 
         isProcessingImport = true
         let tuples = validTimestamps.map { (id: $0.id, start: $0.start, end: $0.end) }
-        let clipsGenerated = await processWaveClips(from: pending.url, sessionStart: pending.creationDate, sessionEnd: videoEnd, timestamps: tuples)
+        let clipsGenerated = await processWaveClips(asset: pending.asset, sessionStart: pending.creationDate, sessionEnd: videoEnd, timestamps: tuples)
 
         pendingWatchSessions.removeAll { $0.id == matchedSession.id }
         savePendingWatchSessions()
@@ -184,68 +215,118 @@ class CameraManager: NSObject, ObservableObject {
             try? WCSession.default.updateApplicationContext(["confirmedSessionIDs": [matchedSession.id]])
         }
 
+        let tempURL = pending.tempURL
         pendingImportVideo = nil
         isProcessingImport = false
+        if let tempURL { try? FileManager.default.removeItem(at: tempURL) }
         if clipsGenerated { clipGenerationCompleted += 1 }
     }
 
-    private func getVideoCreationDate(from asset: AVURLAsset) async -> Date? {
+    private func getVideoCreationDate(from asset: AVAsset) async -> Date? {
+        print("[VideoImport] getVideoCreationDate: loading metadata")
         if let metadata = try? await asset.load(.metadata) {
+            print("[VideoImport] getVideoCreationDate: metadata count=\(metadata.count)")
             let commonItems = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierCreationDate)
+            print("[VideoImport] getVideoCreationDate: common creation date items=\(commonItems.count)")
             if let item = commonItems.first {
-                if let date = try? await item.load(.dateValue) { return date }
+                if let date = try? await item.load(.dateValue) {
+                    print("[VideoImport] getVideoCreationDate: common dateValue=\(date)")
+                    return date
+                }
                 if let str = try? await item.load(.stringValue) {
+                    print("[VideoImport] getVideoCreationDate: common stringValue=\(str)")
                     let f1 = ISO8601DateFormatter()
                     f1.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
                     if let d = f1.date(from: str) { return d }
                     if let d = ISO8601DateFormatter().date(from: str) { return d }
+                    print("[VideoImport] getVideoCreationDate: common string could not be parsed")
                 }
             }
             let qtItems = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .quickTimeMetadataCreationDate)
+            print("[VideoImport] getVideoCreationDate: QT creation date items=\(qtItems.count)")
             if let item = qtItems.first {
-                if let date = try? await item.load(.dateValue) { return date }
+                if let date = try? await item.load(.dateValue) {
+                    print("[VideoImport] getVideoCreationDate: QT dateValue=\(date)")
+                    return date
+                }
                 if let str = try? await item.load(.stringValue) {
+                    print("[VideoImport] getVideoCreationDate: QT stringValue=\(str)")
                     let f = ISO8601DateFormatter()
                     f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
                     if let d = f.date(from: str) { return d }
                     if let d = ISO8601DateFormatter().date(from: str) { return d }
+                    print("[VideoImport] getVideoCreationDate: QT string could not be parsed")
                 }
             }
+        } else {
+            print("[VideoImport] getVideoCreationDate: failed to load metadata")
         }
-        let attrs = try? FileManager.default.attributesOfItem(atPath: asset.url.path)
-        return attrs?[.creationDate] as? Date
+        if let urlAsset = asset as? AVURLAsset {
+            print("[VideoImport] getVideoCreationDate: trying file attributes for \(urlAsset.url.lastPathComponent)")
+            let attrs = try? FileManager.default.attributesOfItem(atPath: urlAsset.url.path)
+            let date = attrs?[.creationDate] as? Date
+            print("[VideoImport] getVideoCreationDate: file creationDate=\(String(describing: date))")
+            return date
+        }
+        print("[VideoImport] getVideoCreationDate: all paths exhausted, returning nil")
+        return nil
     }
 }
 
 // MARK: - Clip Processing
 
 extension CameraManager {
+    // Scans backward up to 10s to find the nearest keyframe at or before `time`.
+    // Passthrough export requires the start to land on a keyframe boundary.
+    nonisolated private func nearestKeyframeBefore(_ time: CMTime, in asset: AVAsset) async -> CMTime {
+        guard let track = try? await asset.loadTracks(withMediaType: .video).first else { return time }
+        let scanStart = CMTimeMaximum(.zero, time - CMTime(seconds: 10, preferredTimescale: 600))
+        let scanRange = CMTimeRange(start: scanStart, end: time)
+        guard scanRange.duration.seconds > 0,
+              let reader = try? AVAssetReader(asset: asset) else { return time }
+        reader.timeRange = scanRange
+        let output = AVAssetReaderTrackOutput(track: track, outputSettings: nil)
+        output.alwaysCopiesSampleData = false
+        reader.add(output)
+        guard reader.startReading() else { return time }
+        var lastKeyframe = scanStart
+        while let sample = output.copyNextSampleBuffer() {
+            let pts = CMSampleBufferGetPresentationTimeStamp(sample)
+            if let rawAttachments = CMSampleBufferGetSampleAttachmentsArray(sample, createIfNecessary: false) as? [[String: Any]],
+               let first = rawAttachments.first {
+                let dependsOnOthers = first[kCMSampleAttachmentKey_DependsOnOthers as String] as? Bool ?? false
+                if !dependsOnOthers { lastKeyframe = pts }
+            }
+        }
+        reader.cancelReading()
+        return lastKeyframe
+    }
+
     nonisolated private func exportClip(
-        asset: AVURLAsset,
+        asset: AVAsset,
         timeRange: CMTimeRange,
         destURL: URL
     ) async -> Bool {
-        for preset in [AVAssetExportPresetPassthrough, AVAssetExportPresetHighestQuality] {
-            guard let exporter = AVAssetExportSession(asset: asset, presetName: preset) else { continue }
-            exporter.outputURL = destURL
-            exporter.outputFileType = .mov
-            exporter.timeRange = timeRange
-            await exporter.export()
-            if exporter.status == .completed { return true }
-            try? FileManager.default.removeItem(at: destURL)
-        }
+        let snappedStart = await nearestKeyframeBefore(timeRange.start, in: asset)
+        let snappedRange = CMTimeRange(start: snappedStart, end: timeRange.end)
+        guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetPassthrough) else { return false }
+        exporter.outputURL = destURL
+        exporter.outputFileType = .mov
+        exporter.timeRange = snappedRange
+        await exporter.export()
+        if exporter.status == .completed { return true }
+        try? FileManager.default.removeItem(at: destURL)
         return false
     }
 
     @discardableResult
     private func processWaveClips(
-        from url: URL,
+        asset: AVAsset,
         sessionStart: Date,
         sessionEnd: Date,
         timestamps: [(id: String, start: Date, end: Date)]
     ) async -> Bool {
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let asset = AVURLAsset(url: url)
         let confirmedIDs = timestamps.map { $0.id }
 
         struct ClipJob {
@@ -282,8 +363,6 @@ extension CameraManager {
             return results.sorted { $0.date < $1.date }
         }
 
-        try? FileManager.default.removeItem(at: url)
-
         if WCSession.default.activationState == .activated {
             try? WCSession.default.updateApplicationContext(["confirmedTimestampIDs": confirmedIDs])
         }
@@ -294,11 +373,18 @@ extension CameraManager {
         }
 
         let waveSession = WaveSession(id: UUID(), startDate: sessionStart, endDate: sessionEnd, clips: savedClips)
+        let sessionID = waveSession.id
 
         await MainActor.run {
             self.saveSession(waveSession)
             self.loadRecordings()
         }
+
+        if let loc = await locationManager.requestLocation(),
+           let spot = await SurflineService.nearestSpotName(lat: loc.coordinate.latitude, lon: loc.coordinate.longitude) {
+            updateSessionSpot(sessionID, spotName: spot)
+        }
+
         return true
     }
 }

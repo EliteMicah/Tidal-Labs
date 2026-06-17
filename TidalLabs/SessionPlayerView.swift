@@ -10,14 +10,12 @@ struct ThumbnailView: View {
     var body: some View {
         Group {
             if let img = thumbnail {
-                Image(uiImage: img)
-                    .resizable()
-                    .scaledToFill()
+                Image(uiImage: img).resizable().scaledToFill()
             } else {
-                Color.white.opacity(0.1)
+                OceanThumbnail(index: 0)
                     .overlay(
                         Image(systemName: "video.fill")
-                            .foregroundStyle(.white.opacity(0.4))
+                            .foregroundStyle(.white.opacity(0.5))
                     )
             }
         }
@@ -33,62 +31,55 @@ struct ThumbnailView: View {
     }
 }
 
-struct RecordingRow: View {
-    let recording: SessionRecording
-
-    var body: some View {
-        HStack(spacing: 12) {
-            ThumbnailView(url: recording.url)
-                .frame(width: 80, height: 56)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(recording.date.formatted(date: .abbreviated, time: .shortened))
-                    .font(.system(.body, design: .rounded, weight: .semibold))
-                    .foregroundStyle(.white)
-                Text("Session Recording")
-                    .font(.system(.caption, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.5))
-            }
-            Spacer()
-            Image(systemName: "chevron.right")
-                .foregroundStyle(.white.opacity(0.4))
-                .font(.system(.caption))
-        }
-        .padding(12)
-        .background(.white.opacity(0.08))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-    }
-}
-
 struct SessionPlayerView: View {
     let recording: SessionRecording
+    var isFavorite: Bool = false
     let onDismiss: () -> Void
     let onDelete: () -> Void
+    var onToggleFavorite: (() -> Void)? = nil
     @State private var showDeleteAlert = false
     @State private var isSaving = false
     @State private var saveStatus: String?
     @State private var player: AVPlayer?
+    @State private var localFavorite: Bool = false
+    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
+
             VStack(spacing: 0) {
+                // Header
                 HStack {
                     Button(action: onDismiss) {
                         Image(systemName: "xmark")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.system(size: 17, weight: .semibold))
                             .foregroundStyle(.white)
-                            .padding(10)
-                            .background(.white.opacity(0.15))
+                            .frame(width: 40, height: 40)
+                            .background(Color.white.opacity(0.15))
                             .clipShape(Circle())
                     }
                     Spacer()
                     Text(recording.date.formatted(date: .abbreviated, time: .shortened))
-                        .font(.system(.subheadline, design: .rounded, weight: .semibold))
+                        .font(.bricolage(15))
                         .foregroundStyle(.white)
+                        .kerning(-0.3)
                     Spacer()
-                    Color.clear.frame(width: 38, height: 38)
+                    if onToggleFavorite != nil {
+                        Button {
+                            localFavorite.toggle()
+                            onToggleFavorite?()
+                        } label: {
+                            Image(systemName: localFavorite ? "heart.fill" : "heart")
+                                .font(.system(size: 17, weight: .semibold))
+                                .foregroundStyle(localFavorite ? Color.tlCoral : .white)
+                                .frame(width: 40, height: 40)
+                                .background(Color.white.opacity(0.15))
+                                .clipShape(Circle())
+                        }
+                    } else {
+                        Color.clear.frame(width: 40, height: 40)
+                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
@@ -99,41 +90,38 @@ struct SessionPlayerView: View {
                         .ignoresSafeArea(edges: .horizontal)
                 }
 
+                Spacer(minLength: 0)
+
                 VStack(spacing: 12) {
                     if let status = saveStatus {
                         Text(status)
-                            .font(.system(.caption, design: .rounded))
+                            .font(.hanken(13, weight: .semibold))
                             .foregroundStyle(.white.opacity(0.7))
                     }
-                    HStack(spacing: 16) {
-                        Button {
-                            showDeleteAlert = true
-                        } label: {
+                    HStack(spacing: 14) {
+                        Button { showDeleteAlert = true } label: {
                             Text("Delete")
-                                .font(.system(.body, design: .rounded, weight: .semibold))
+                                .font(.hanken(15, weight: .bold))
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .background(.red.opacity(0.85))
-                                .clipShape(RoundedRectangle(cornerRadius: 14))
+                                .padding(.vertical, 15)
+                                .background(Color(red: 0.898, green: 0.282, blue: 0.302))
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
                         }
-
-                        Button {
-                            saveToCameraRoll()
-                        } label: {
+                        Button { saveToCameraRoll() } label: {
                             Group {
                                 if isSaving {
                                     ProgressView().tint(.black)
                                 } else {
-                                    Text("Save to Camera Roll")
-                                        .font(.system(.body, design: .rounded, weight: .semibold))
+                                    Text("Save to Roll")
+                                        .font(.hanken(15, weight: .bold))
                                         .foregroundStyle(.black)
                                 }
                             }
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                            .padding(.vertical, 15)
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
                         }
                         .disabled(isSaving)
                     }
@@ -142,18 +130,12 @@ struct SessionPlayerView: View {
                 .padding(.vertical, 20)
             }
         }
-        .onAppear { player = AVPlayer(url: recording.url) }
-        .onDisappear {
-            player?.pause()
-            player?.replaceCurrentItem(with: nil)
-            player = nil
-        }
+        .onAppear { player = AVPlayer(url: recording.url); localFavorite = isFavorite }
+        .onDisappear { player?.pause(); player?.replaceCurrentItem(with: nil); player = nil }
         .alert("Delete Recording?", isPresented: $showDeleteAlert) {
             Button("Delete", role: .destructive, action: onDelete)
             Button("Cancel", role: .cancel) {}
-        } message: {
-            Text("This recording will be permanently deleted.")
-        }
+        } message: { Text("This recording will be permanently deleted.") }
     }
 
     private func saveToCameraRoll() {

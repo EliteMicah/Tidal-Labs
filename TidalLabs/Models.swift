@@ -91,7 +91,7 @@ struct PendingImportVideo {
 #if canImport(UIKit)
 struct VideoPicker: UIViewControllerRepresentable {
     let onProgress: (Double?) -> Void
-    let onResult: (Result<(AVAsset, URL?), Error>) -> Void
+    let onResult: (Result<(AVAsset, URL?, String?), Error>) -> Void
 
     func makeCoordinator() -> Coordinator { Coordinator(onProgress: onProgress, onResult: onResult) }
 
@@ -108,9 +108,9 @@ struct VideoPicker: UIViewControllerRepresentable {
 
     class Coordinator: NSObject, PHPickerViewControllerDelegate {
         let onProgress: (Double?) -> Void
-        let onResult: (Result<(AVAsset, URL?), Error>) -> Void
+        let onResult: (Result<(AVAsset, URL?, String?), Error>) -> Void
 
-        init(onProgress: @escaping (Double?) -> Void, onResult: @escaping (Result<(AVAsset, URL?), Error>) -> Void) {
+        init(onProgress: @escaping (Double?) -> Void, onResult: @escaping (Result<(AVAsset, URL?, String?), Error>) -> Void) {
             self.onProgress = onProgress
             self.onResult = onResult
         }
@@ -135,7 +135,7 @@ struct VideoPicker: UIViewControllerRepresentable {
                         DispatchQueue.main.async { self?.onProgress(nil) }
                         if let avAsset = asset {
                             print("[VideoImport] PHPicker: AVAsset=\(type(of: avAsset)), no copy needed")
-                            self?.onResult(.success((avAsset, nil)))
+                            self?.onResult(.success((avAsset, nil, assetID)))
                         } else {
                             print("[VideoImport] PHPicker: requestAVAsset nil, trying item provider")
                             self?.loadFromItemProvider(result.itemProvider)
@@ -165,7 +165,7 @@ struct VideoPicker: UIViewControllerRepresentable {
                 do {
                     try FileManager.default.copyItem(at: url, to: dest)
                     print("[VideoImport] PHPicker: item provider copy to \(dest.lastPathComponent)")
-                    self?.onResult(.success((AVURLAsset(url: dest), dest)))
+                    self?.onResult(.success((AVURLAsset(url: dest), dest, nil)))
                 } catch {
                     self?.onResult(.failure(error))
                 }

@@ -20,7 +20,7 @@ struct ThumbnailView: View {
             }
         }
         .task {
-            let asset = AVAsset(url: url)
+            let asset = AVURLAsset(url: url)
             let gen = AVAssetImageGenerator(asset: asset)
             gen.appliesPreferredTrackTransform = true
             gen.maximumSize = CGSize(width: 200, height: 200)

@@ -15,8 +15,6 @@ struct SessionsView: View {
     @State private var isImporting = false
     @State private var importError: String?
     @State private var showSettingsRedirect = false
-    @State private var pendingDeletePhotoID: String?
-    @State private var showDeletePhotoAlert = false
     @Environment(\.colorScheme) private var scheme
     @Environment(\.dismiss) private var dismiss
 
@@ -90,7 +88,8 @@ struct SessionsView: View {
                     camera.isLoadingVideo = true
                     Task {
                         switch result {
-                        case .success(let (asset, tempURL)):
+                        case .success(let (asset, tempURL, assetID)):
+                            camera.lastImportedOriginalAssetID = assetID
                             let success = await camera.storeImportedVideo(asset: asset, tempURL: tempURL)
                             camera.isLoadingVideo = false
                             if !success { importError = "Could not read video timestamp." }
@@ -124,7 +123,17 @@ struct SessionsView: View {
             Text("TidalLabs needs Photos access to import videos. Enable it in Settings > TidalLabs > Photos.")
         }
         .fullScreenCover(item: $selectedSession) { session in
-            SessionDetailView(sessionID: session.id, camera: camera, onDismiss: { selectedSession = nil })
+            SessionDetailView(
+                sessionID: session.id,
+                camera: camera,
+                onDismiss: { selectedSession = nil },
+                shouldPromptDelete: camera.lastImportedOriginalAssetID != nil,
+                onDeleteConfirm: {
+                    if let id = camera.lastImportedOriginalAssetID { deletePhotoAsset(id) }
+                    camera.lastImportedOriginalAssetID = nil
+                },
+                onDeleteDecline: { camera.lastImportedOriginalAssetID = nil }
+            )
         }
         .confirmationDialog("Delete Session?", isPresented: Binding(get: { sessionToDelete != nil }, set: { if !$0 { sessionToDelete = nil } }), titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
@@ -165,15 +174,8 @@ struct SessionsView: View {
         } message: {
             Text("Enter a name for this session.")
         }
-        .confirmationDialog("Delete Original Video?", isPresented: $showDeletePhotoAlert, titleVisibility: .visible) {
-            Button("Delete from Photos", role: .destructive) {
-                if let id = pendingDeletePhotoID { deletePhotoAsset(id) }
-                pendingDeletePhotoID = nil
-            }
-            Button("Keep", role: .cancel) { pendingDeletePhotoID = nil }
-        } message: { Text("Wave clips saved. Remove the original video from your photo library?") }
         .onChange(of: camera.clipGenerationCompleted) { _, _ in
-            if pendingDeletePhotoID != nil { showDeletePhotoAlert = true }
+            selectedSession = camera.waveSessions.first
         }
     }
 
@@ -229,7 +231,7 @@ struct SessionsView: View {
     private var sessionList: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(totalWaves) waves · \(camera.waveSessions.count) sessions")
+                Text("\(totalWaves) \(totalWaves == 1 ? "wave" : "waves") · \(camera.waveSessions.count) \(camera.waveSessions.count == 1 ? "session" : "sessions")")
                     .font(.hanken(12.5, weight: .bold))
                     .foregroundStyle(Color.tlDynamicInkFaint(scheme))
                     .kerning(0.6)
@@ -363,7 +365,11 @@ struct SessionDetailView: View {
     let sessionID: UUID
     @ObservedObject var camera: CameraManager
     let onDismiss: () -> Void
+    var shouldPromptDelete: Bool = false
+    var onDeleteConfirm: (() -> Void)? = nil
+    var onDeleteDecline: (() -> Void)? = nil
     @State private var selectedClip: SessionRecording?
+    @State private var showDeletePhotoAlert = false
     @Environment(\.colorScheme) private var scheme
 
     private var session: WaveSession? { camera.waveSessions.first { $0.id == sessionID } }
@@ -403,7 +409,7 @@ struct SessionDetailView: View {
                             HStack(spacing: 10) {
                                 DetailStatTile(value: "\(s.clips.count)", label: "Waves", color: Color.tlAccent)
                                 DetailStatTile(value: durationLabel(s), label: "Session", color: Color.tlCyan)
-                                DetailStatTile(value: "\(s.clips.count)", label: "Clips", color: Color.tlCoral)
+                                DetailStatTile(value: "\(s.clips.filter { $0.isFavorite }.count)", label: "Favorites", color: Color.tlCoral)
                             }
                             .padding(.horizontal, 22)
 
@@ -446,6 +452,22 @@ struct SessionDetailView: View {
                 onDelete: { camera.deleteClip(recording.id, fromSession: sessionID); selectedClip = nil },
                 onToggleFavorite: { camera.toggleFavorite(clipID: recording.id, sessionID: sessionID) }
             )
+        }
+        .confirmationDialog("Delete Original Video?", isPresented: $showDeletePhotoAlert, titleVisibility: .visible) {
+            Button("Delete from Photos", role: .destructive) {
+                onDeleteConfirm?()
+            }
+            Button("Keep", role: .cancel) {
+                onDeleteDecline?()
+            }
+        } message: {
+            Text("Wave clips saved. Remove the original video from your photo library?")
+        }
+        .task {
+            if shouldPromptDelete {
+                try? await Task.sleep(for: .milliseconds(600))
+                showDeletePhotoAlert = true
+            }
         }
     }
 
@@ -574,7 +596,7 @@ private struct ClipCard: View {
         .shadow(color: .black.opacity(scheme == .dark ? 0.35 : 0.12), radius: 14, x: 0, y: 6)
         .task {
             guard thumbnail == nil else { return }
-            let asset = AVAsset(url: recording.url)
+            let asset = AVURLAsset(url: recording.url)
             let gen = AVAssetImageGenerator(asset: asset)
             gen.appliesPreferredTrackTransform = true
             gen.maximumSize = CGSize(width: 300, height: 300)

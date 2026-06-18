@@ -14,6 +14,8 @@ class CameraManager: NSObject, ObservableObject {
     @Published var isLoadingVideo = false
     @Published var clipGenerationCompleted: Int = 0
     @Published var iCloudDownloadProgress: Double? = nil
+    @Published var lastImportedOriginalAssetID: String? = nil
+    @Published var latestImportedSessionID: UUID? = nil
 
     private let pendingWatchSessionsKey = "pendingWatchSessions"
     private let locationManager = LocationManager()
@@ -69,6 +71,21 @@ class CameraManager: NSObject, ObservableObject {
         if let data = try? JSONEncoder().encode(waveSessions) {
             try? data.write(to: sessionsFileURL)
         }
+    }
+
+    func clearPendingWatchSessions() {
+        let ids = pendingWatchSessions.map { $0.id }
+        pendingWatchSessions = []
+        savePendingWatchSessions()
+        if WCSession.default.activationState == .activated {
+            try? WCSession.default.updateApplicationContext(["confirmedSessionIDs": ids])
+        }
+    }
+
+    func requestWatchSync() {
+        guard WCSession.default.activationState == .activated,
+              WCSession.default.isReachable else { return }
+        WCSession.default.sendMessage(["requestSync": true], replyHandler: nil, errorHandler: nil)
     }
 
     func deleteAllSessions() {
@@ -199,8 +216,11 @@ class CameraManager: NSObject, ObservableObject {
             return overlapEnd > overlapStart
         }) else { return }
 
-        let validTimestamps = matchedSession.timestamps.filter { ts in
-            ts.start >= pending.creationDate && ts.end <= videoEnd
+        let validTimestamps = matchedSession.timestamps.compactMap { ts -> PendingWatchTimestamp? in
+            let clampedStart = max(ts.start, pending.creationDate)
+            let clampedEnd = min(ts.end, videoEnd)
+            guard clampedEnd > clampedStart else { return nil }
+            return PendingWatchTimestamp(id: ts.id, start: clampedStart, end: clampedEnd)
         }
         guard !validTimestamps.isEmpty else { return }
 
@@ -219,7 +239,10 @@ class CameraManager: NSObject, ObservableObject {
         pendingImportVideo = nil
         isProcessingImport = false
         if let tempURL { try? FileManager.default.removeItem(at: tempURL) }
-        if clipsGenerated { clipGenerationCompleted += 1 }
+        if clipsGenerated {
+            latestImportedSessionID = waveSessions.first?.id
+            clipGenerationCompleted += 1
+        }
     }
 
     private func getVideoCreationDate(from asset: AVAsset) async -> Date? {
@@ -310,13 +333,14 @@ extension CameraManager {
         let snappedStart = await nearestKeyframeBefore(timeRange.start, in: asset)
         let snappedRange = CMTimeRange(start: snappedStart, end: timeRange.end)
         guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetPassthrough) else { return false }
-        exporter.outputURL = destURL
-        exporter.outputFileType = .mov
         exporter.timeRange = snappedRange
-        await exporter.export()
-        if exporter.status == .completed { return true }
-        try? FileManager.default.removeItem(at: destURL)
-        return false
+        do {
+            try await exporter.export(to: destURL, as: .mov)
+            return true
+        } catch {
+            try? FileManager.default.removeItem(at: destURL)
+            return false
+        }
     }
 
     @discardableResult

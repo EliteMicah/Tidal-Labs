@@ -8,9 +8,6 @@ struct SessionStartView: View {
     @State private var isImporting = false
     @State private var showVideoPicker = false
     @State private var importError: String?
-    @State private var pendingDeletePhotoID: String?
-    @State private var showDeletePhotoAlert = false
-    @State private var clipsWereGenerated = false
     @Environment(\.colorScheme) private var scheme
 
     private let steps: [(icon: String, title: String, detail: String)] = [
@@ -41,8 +38,7 @@ struct SessionStartView: View {
                 .padding(.horizontal, 22)
                 .padding(.top, 16)
 
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 0) {
+                VStack(spacing: 0) {
                         // Shield icon
                         ZStack {
                             RoundedRectangle(cornerRadius: 24)
@@ -87,8 +83,7 @@ struct SessionStartView: View {
                         }
                         .padding(.top, 28)
                         .padding(.horizontal, 28)
-                    }
-                    .padding(.bottom, 120)
+                        .padding(.bottom, 28)
                 }
 
                 // CTA
@@ -142,7 +137,8 @@ struct SessionStartView: View {
                     camera.isLoadingVideo = true
                     Task {
                         switch result {
-                        case .success(let (asset, tempURL)):
+                        case .success(let (asset, tempURL, assetID)):
+                            camera.lastImportedOriginalAssetID = assetID
                             let success = await camera.storeImportedVideo(asset: asset, tempURL: tempURL)
                             camera.isLoadingVideo = false
                             if !success { importError = "Could not read video timestamp." }
@@ -160,13 +156,7 @@ struct SessionStartView: View {
             isPresented: Binding(
                 get: { camera.pendingImportVideo != nil || camera.isLoadingVideo },
                 set: { if !$0 { camera.cancelPendingImport(); camera.isLoadingVideo = false } }
-            ),
-            onDismiss: {
-                if clipsWereGenerated && pendingDeletePhotoID != nil {
-                    showDeletePhotoAlert = true
-                }
-                clipsWereGenerated = false
-            }
+            )
         ) {
             PendingImportView(camera: camera)
         }
@@ -175,24 +165,9 @@ struct SessionStartView: View {
         } message: {
             if let err = importError { Text(err) }
         }
-        .confirmationDialog("Delete Original Video?", isPresented: $showDeletePhotoAlert, titleVisibility: .visible) {
-            Button("Delete from Photos", role: .destructive) {
-                if let id = pendingDeletePhotoID { deletePhotoAsset(id) }
-                pendingDeletePhotoID = nil
-            }
-            Button("Keep", role: .cancel) { pendingDeletePhotoID = nil }
-        } message: {
-            Text("Wave clips saved. Remove the original video from your photo library?")
-        }
         .onChange(of: camera.clipGenerationCompleted) { _, _ in
-            clipsWereGenerated = true
+            onDismiss()
         }
-    }
-
-    private func deletePhotoAsset(_ identifier: String) {
-        let assets = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: nil)
-        guard assets.count > 0 else { return }
-        PHPhotoLibrary.shared().performChanges { PHAssetChangeRequest.deleteAssets(assets) }
     }
 
 }

@@ -18,6 +18,7 @@ struct SettingsView: View {
     @State private var deviceTotalStorage: Int64 = 0
     @State private var showDeleteAllAlert = false
     @State private var confirmDelete = false
+    @State private var confirmClearSyncs = false
     @State private var tipProducts: [Product] = []
     @State private var tipPurchasing: String? = nil
     @State private var tipSuccess = false
@@ -150,6 +151,7 @@ struct SettingsView: View {
             if !supportedFPSOptions.contains(fpsLocal) { fpsLocal = supportedFPSOptions.first ?? 30; fps = fpsLocal }
             refreshStorage()
             DispatchQueue.main.async { storagePulse = true }
+            camera.requestWatchSync()
         }
     }
 
@@ -340,6 +342,51 @@ struct SettingsView: View {
                     }
                 }
                 .padding(.top, 4)
+            }
+
+            if !camera.pendingWatchSessions.isEmpty {
+                if !confirmClearSyncs {
+                    Button { withAnimation { confirmClearSyncs = true } } label: {
+                        let count = camera.pendingWatchSessions.count
+                        HStack(spacing: 8) {
+                            Image(systemName: "applewatch.slash")
+                            Text("Clear \(count) pending watch sync\(count == 1 ? "" : "s")")
+                        }
+                        .font(.hanken(15.5, weight: .bold))
+                        .foregroundStyle(Color.tlDanger)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(Color.tlDanger.opacity(scheme == .dark ? 0.14 : 0.08))
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.tlDanger.opacity(0.3), lineWidth: 1))
+                    }
+                    .padding(.top, 4)
+                } else {
+                    HStack(spacing: 10) {
+                        Button { withAnimation { confirmClearSyncs = false } } label: {
+                            Text("Keep them")
+                                .font(.hanken(15, weight: .bold))
+                                .foregroundStyle(Color.tlDynamicInk(scheme))
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(scheme == .dark ? Color.white.opacity(0.08) : Color.tlInk.opacity(0.06))
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                        }
+                        Button {
+                            confirmClearSyncs = false
+                            camera.clearPendingWatchSessions()
+                        } label: {
+                            Text("Clear syncs")
+                                .font(.hanken(15, weight: .bold))
+                                .foregroundStyle(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(Color.tlDanger)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                        }
+                    }
+                    .padding(.top, 4)
+                }
             }
         }
     }

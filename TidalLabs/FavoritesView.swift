@@ -212,7 +212,7 @@ private struct FavoriteClipCard: View {
         .shadow(color: .black.opacity(scheme == .dark ? 0.35 : 0.12), radius: 14, x: 0, y: 6)
         .task {
             guard thumbnail == nil else { return }
-            let asset = AVAsset(url: item.url)
+            let asset = AVURLAsset(url: item.url)
             let gen = AVAssetImageGenerator(asset: asset)
             gen.appliesPreferredTrackTransform = true
             gen.maximumSize = CGSize(width: 300, height: 300)

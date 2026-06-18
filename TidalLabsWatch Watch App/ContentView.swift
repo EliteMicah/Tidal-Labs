@@ -451,6 +451,9 @@ extension CommandSender: WCSessionDelegate {
             let delay = message["delaySeconds"] as? Int ?? 0
             Task { @MainActor in self.handleEvent(event, delaySeconds: delay) }
         }
+        if message["requestSync"] as? Bool == true {
+            Task { @MainActor in self.sendPendingSessions() }
+        }
     }
 }
 

@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var sessionActive = false
     @State private var navPath: [AppScreen] = []
     @State private var importedSession: WaveSession?
+    @State private var homeDetailSession: WaveSession?
     @AppStorage("appColorScheme") private var appColorScheme = "light"
 
     var body: some View {
@@ -21,6 +22,7 @@ struct ContentView: View {
                 sessions: camera.waveSessions,
                 onStart: { sessionActive = true },
                 onSessions: { navPath.append(.sessions) },
+                onLatestSession: { homeDetailSession = camera.waveSessions.first },
                 onSettings: { navPath.append(.settings) },
                 onFavorites: { navPath.append(.favorites) }
             )
@@ -35,6 +37,13 @@ struct ContentView: View {
         .preferredColorScheme(appColorScheme == "dark" ? .dark : .light)
         .fullScreenCover(isPresented: $sessionActive) {
             SessionStartView(camera: camera, onDismiss: { sessionActive = false })
+        }
+        .fullScreenCover(item: $homeDetailSession) { session in
+            SessionDetailView(
+                sessionID: session.id,
+                camera: camera,
+                onDismiss: { homeDetailSession = nil }
+            )
         }
         .fullScreenCover(item: $importedSession) { session in
             SessionDetailView(

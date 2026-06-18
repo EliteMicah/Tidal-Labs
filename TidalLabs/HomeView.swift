@@ -4,6 +4,7 @@ struct HomeView: View {
     let sessions: [WaveSession]
     let onStart: () -> Void
     let onSessions: () -> Void
+    let onLatestSession: () -> Void
     let onSettings: () -> Void
     let onFavorites: () -> Void
 
@@ -114,7 +115,7 @@ struct HomeView: View {
                                 .kerning(0.6)
                                 .textCase(.uppercase)
 
-                            Button(action: onSessions) {
+                            Button(action: onLatestSession) {
                                 HStack(spacing: 13) {
                                     RoundedRectangle(cornerRadius: 15)
                                         .fill(Color.clear)

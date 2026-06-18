@@ -174,9 +174,6 @@ struct SessionsView: View {
         } message: {
             Text("Enter a name for this session.")
         }
-        .onChange(of: camera.clipGenerationCompleted) { _, _ in
-            selectedSession = camera.waveSessions.first
-        }
     }
 
     private var emptyState: some View {

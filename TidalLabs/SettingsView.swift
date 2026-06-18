@@ -54,6 +54,37 @@ struct SettingsView: View {
                             )
                         }
 
+                        // Wave recording duration
+                        TLSettingsCard(icon: "clock.arrow.circlepath", title: "Wave recording duration",
+                                       subtitle: "How far back the watch reaches when you tag a wave. Timestamps recorded by Apple Watch.") {
+                            HStack {
+                                Text(formatWaveDuration(waveDurationSeconds))
+                                    .font(.bricolage(28))
+                                    .foregroundStyle(Color.tlDynamicInk(scheme))
+                                    .kerning(-0.6)
+                                Spacer()
+                                Text("per clip, looking back")
+                                    .font(.hanken(12.5, weight: .semibold))
+                                    .foregroundStyle(Color.tlDynamicInkFaint(scheme))
+                            }
+                            .padding(.bottom, 2)
+
+                            TLSlider(value: Binding(
+                                get: { Double(waveDurationSeconds) },
+                                set: { waveDurationSeconds = Int($0) }
+                            ), range: 30...180, step: 5, pulse: storagePulse)
+                            .onChange(of: waveDurationSeconds) { _, val in camera.pushWaveDurationToWatch(val) }
+
+                            HStack {
+                                Text("30 sec")
+                                Spacer()
+                                Text("3 min")
+                            }
+                            .font(.hanken(11.5, weight: .semibold))
+                            .foregroundStyle(Color.tlDynamicInkFaint(scheme))
+                            .padding(.top, 2)
+                        }
+
                         // Resolution
                         TLSettingsCard(icon: "slider.horizontal.3", title: "Resolution",
                                        subtitle: "For estimates only. These settings don't change your camera. Match them to what you set in the Camera app.") {
@@ -86,37 +117,6 @@ struct SettingsView: View {
 
                         // Recording estimates
                         recordingEstimatesCard
-
-                        // Wave recording duration
-                        TLSettingsCard(icon: "clock.arrow.circlepath", title: "Wave recording duration",
-                                       subtitle: "How far back the watch reaches when you tag a wave. Timestamps recorded by Apple Watch.") {
-                            HStack {
-                                Text(formatWaveDuration(waveDurationSeconds))
-                                    .font(.bricolage(28))
-                                    .foregroundStyle(Color.tlDynamicInk(scheme))
-                                    .kerning(-0.6)
-                                Spacer()
-                                Text("per clip, looking back")
-                                    .font(.hanken(12.5, weight: .semibold))
-                                    .foregroundStyle(Color.tlDynamicInkFaint(scheme))
-                            }
-                            .padding(.bottom, 2)
-
-                            TLSlider(value: Binding(
-                                get: { Double(waveDurationSeconds) },
-                                set: { waveDurationSeconds = Int($0) }
-                            ), range: 30...180, step: 5, pulse: storagePulse)
-                            .onChange(of: waveDurationSeconds) { _, val in camera.pushWaveDurationToWatch(val) }
-
-                            HStack {
-                                Text("30 sec")
-                                Spacer()
-                                Text("3 min")
-                            }
-                            .font(.hanken(11.5, weight: .semibold))
-                            .foregroundStyle(Color.tlDynamicInkFaint(scheme))
-                            .padding(.top, 2)
-                        }
 
                         // Storage
                         storageCard

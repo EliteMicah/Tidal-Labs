@@ -138,8 +138,13 @@ struct SettingsView: View {
         .enableSwipeBack()
         .task {
             do {
-                tipProducts = try await Product.products(for: tipProductIDs).sorted { $0.price < $1.price }
-            } catch { tipError = error.localizedDescription }
+                let fetched = try await Product.products(for: tipProductIDs)
+                print("[StoreKit] fetched \(fetched.count) products: \(fetched.map(\.id))")
+                tipProducts = fetched.sorted { $0.price < $1.price }
+            } catch {
+                print("[StoreKit] error: \(error)")
+                tipError = error.localizedDescription
+            }
             tipLoading = false
         }
         .onAppear {
@@ -287,7 +292,7 @@ struct SettingsView: View {
                 Spacer()
                 HStack(spacing: 6) {
                     Circle().fill(Color.tlDynamicInkFaint(scheme)).frame(width: 8, height: 8)
-                    Text("Other · \(formatBytes(deviceTotalStorage - deviceFreeStorage - appStorageUsed))")
+                    Text("Free · \(formatBytes(deviceFreeStorage))")
                         .font(.hanken(13.5, weight: .bold))
                         .foregroundStyle(Color.tlDynamicInkSoft(scheme))
                 }
@@ -437,7 +442,7 @@ struct SettingsView: View {
                                     Text(tipLabel(for: product.id))
                                         .font(.hanken(12, weight: .semibold))
                                         .foregroundStyle(Color.tlDynamicInkSoft(scheme))
-                                    Text(product.displayPrice)
+                                    Text(tipDisplayPrice(for: product.id))
                                         .font(.bricolage(16))
                                         .foregroundStyle(Color.tlDynamicInk(scheme))
                                 }
@@ -516,6 +521,15 @@ struct SettingsView: View {
         case "com.tidallabs.app.tip.15": return "Overhead"
         case "com.tidallabs.app.tip.30": return "Double overhead"
         default: return "Tip"
+        }
+    }
+
+    private func tipDisplayPrice(for id: String) -> String {
+        switch id {
+        case "com.tidallabs.app.tip.5": return "$5"
+        case "com.tidallabs.app.tip.15": return "$15"
+        case "com.tidallabs.app.tip.30": return "$30"
+        default: return ""
         }
     }
 

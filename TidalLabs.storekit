@@ -1,0 +1,87 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "2B9786E4",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "14.99",
+      "familyShareable" : false,
+      "internalID" : "6780034739",
+      "localizations" : [
+        {
+          "description" : "$15 tip.",
+          "displayName" : "Overhead tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.tidallabs.app.tip.15",
+      "referenceName" : " Overhead Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "29.99",
+      "familyShareable" : false,
+      "internalID" : "6780034771",
+      "localizations" : [
+        {
+          "description" : "$30 tip.",
+          "displayName" : "Double Overhead tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.tidallabs.app.tip.30",
+      "referenceName" : "Double Overhead Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "6780034494",
+      "localizations" : [
+        {
+          "description" : "$5 tip.",
+          "displayName" : "Small Wave Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.tidallabs.app.tip.5",
+      "referenceName" : "Small Wave Tip",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6762887601",
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
+    "_developerTeamID" : "475T56N7DY",
+    "_disableDialogs" : false,
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 803848237.90008402,
+    "_locale" : "en_US",
+    "_renewalBillingIssuesEnabled" : false,
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+
+    ],
+    "_timeRate" : 0
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

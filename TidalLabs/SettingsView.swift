@@ -299,10 +299,6 @@ struct SettingsView: View {
             }
             .padding(.top, 4)
 
-            Text("\(formatBytes(deviceFreeStorage)) free of \(formatBytes(deviceTotalStorage))")
-                .font(.hanken(12.5, weight: .semibold))
-                .foregroundStyle(Color.tlDynamicInkFaint(scheme))
-
             if !confirmDelete {
                 Button { withAnimation { confirmDelete = true } } label: {
                     HStack(spacing: 8) {

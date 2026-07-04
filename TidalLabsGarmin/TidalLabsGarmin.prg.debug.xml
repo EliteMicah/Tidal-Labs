@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<debugInfo>
+    <manifest filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/manifest.xml"/>
+    <pcToLineNum>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="1" lineNum="4" parent="globals/TidalLabsDelegate" pc="268435460" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="2" lineNum="19" parent="globals/TidalLabsView" pc="268435472" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="2" lineNum="28" parent="globals/TidalLabsView" pc="268435483" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" id="3" lineNum="7" parent="globals/Rez" pc="268435493" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsApp.mc" id="4" lineNum="5" parent="globals/TidalLabsApp" pc="268435513" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="5" lineNum="34" parent="globals/TidalLabsDelegate" pc="268435525" symbol="onBack"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="5" lineNum="35" parent="globals/TidalLabsDelegate" pc="268435527" symbol="onBack"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="5" lineNum="36" parent="globals/TidalLabsDelegate" pc="268435540" symbol="onBack"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="5" lineNum="37" parent="globals/TidalLabsDelegate" pc="268435552" symbol="onBack"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="5" lineNum="39" parent="globals/TidalLabsDelegate" pc="268435557" symbol="onBack"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="6" lineNum="8" parent="globals/TidalLabsDelegate" pc="268435559" symbol="initialize"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="6" lineNum="9" parent="globals/TidalLabsDelegate" pc="268435561" symbol="initialize"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="6" lineNum="10" parent="globals/TidalLabsDelegate" pc="268435573" symbol="initialize"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="7" lineNum="14" parent="globals/TidalLabsDelegate" pc="268435583" symbol="onSelect"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="7" lineNum="15" parent="globals/TidalLabsDelegate" pc="268435585" symbol="onSelect"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="7" lineNum="16" parent="globals/TidalLabsDelegate" pc="268435599" symbol="onSelect"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="7" lineNum="18" parent="globals/TidalLabsDelegate" pc="268435614" symbol="onSelect"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="7" lineNum="20" parent="globals/TidalLabsDelegate" pc="268435626" symbol="onSelect"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="8" lineNum="24" parent="globals/TidalLabsDelegate" pc="268435628" symbol="onNextPage"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="8" lineNum="25" parent="globals/TidalLabsDelegate" pc="268435630" symbol="onNextPage"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="8" lineNum="26" parent="globals/TidalLabsDelegate" pc="268435643" symbol="onNextPage"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="8" lineNum="28" parent="globals/TidalLabsDelegate" pc="268435658" symbol="onNextPage"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsDelegate.mc" id="8" lineNum="30" parent="globals/TidalLabsDelegate" pc="268435670" symbol="onNextPage"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="76" parent="globals/TidalLabsView" pc="268435672" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="78" parent="globals/TidalLabsView" pc="268435675" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="79" parent="globals/TidalLabsView" pc="268435692" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="83" parent="globals/TidalLabsView" pc="268435718" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="84" parent="globals/TidalLabsView" pc="268435734" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="85" parent="globals/TidalLabsView" pc="268435738" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="86" parent="globals/TidalLabsView" pc="268435748" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="87" parent="globals/TidalLabsView" pc="268435755" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="88" parent="globals/TidalLabsView" pc="268435772" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="89" parent="globals/TidalLabsView" pc="268435792" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="90" parent="globals/TidalLabsView" pc="268435805" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="94" parent="globals/TidalLabsView" pc="268435834" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="95" parent="globals/TidalLabsView" pc="268435848" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="96" parent="globals/TidalLabsView" pc="268435855" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="9" lineNum="97" parent="globals/TidalLabsView" pc="268435871" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="10" lineNum="289" parent="globals/TidalLabsView" pc="268435907" symbol="getPendingSessionCount"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="10" lineNum="290" parent="globals/TidalLabsView" pc="268435909" symbol="getPendingSessionCount"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="11" lineNum="222" parent="globals/TidalLabsView" pc="268435922" symbol="_clearFlash"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="11" lineNum="223" parent="globals/TidalLabsView" pc="268435924" symbol="_clearFlash"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="11" lineNum="224" parent="globals/TidalLabsView" pc="268435932" symbol="_clearFlash"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="11" lineNum="225" parent="globals/TidalLabsView" pc="268435944" symbol="_clearFlash"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="12" lineNum="293" parent="globals/TidalLabsView" pc="268435956" symbol="clearConfirmedSessions"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="12" lineNum="294" parent="globals/TidalLabsView" pc="268435959" symbol="clearConfirmedSessions"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="12" lineNum="295" parent="globals/TidalLabsView" pc="268435967" symbol="clearConfirmedSessions"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="12" lineNum="296" parent="globals/TidalLabsView" pc="268435971" symbol="clearConfirmedSessions"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="12" lineNum="297" parent="globals/TidalLabsView" pc="268435987" symbol="clearConfirmedSessions"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="12" lineNum="298" parent="globals/TidalLabsView" pc="268435994" symbol="clearConfirmedSessions"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="12" lineNum="299" parent="globals/TidalLabsView" pc="268436004" symbol="clearConfirmedSessions"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="12" lineNum="300" parent="globals/TidalLabsView" pc="268436020" symbol="clearConfirmedSessions"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="12" lineNum="303" parent="globals/TidalLabsView" pc="268436045" symbol="clearConfirmedSessions"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="13" lineNum="257" parent="globals/TidalLabsView" pc="268436066" symbol="_pollHr"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="13" lineNum="259" parent="globals/TidalLabsView" pc="268436069" symbol="_pollHr"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="13" lineNum="260" parent="globals/TidalLabsView" pc="268436081" symbol="_pollHr"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="13" lineNum="261" parent="globals/TidalLabsView" pc="268436098" symbol="_pollHr"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="13" lineNum="262" parent="globals/TidalLabsView" pc="268436112" symbol="_pollHr"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="13" lineNum="262" parent="globals/TidalLabsView" pc="268436120" symbol="_pollHr"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="13" lineNum="264" parent="globals/TidalLabsView" pc="268436143" symbol="_pollHr"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="14" lineNum="252" parent="globals/TidalLabsView" pc="268436175" symbol="&lt;globals/TidalLabsView/&lt;&gt;_startHrPolling&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="14" lineNum="253" parent="globals/TidalLabsView" pc="268436177" symbol="&lt;globals/TidalLabsView/&lt;&gt;_startHrPolling&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="14" lineNum="254" parent="globals/TidalLabsView" pc="268436206" symbol="&lt;globals/TidalLabsView/&lt;&gt;_startHrPolling&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="15" lineNum="173" parent="globals/TidalLabsView" pc="268436238" symbol="startSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="15" lineNum="174" parent="globals/TidalLabsView" pc="268436240" symbol="startSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="15" lineNum="174" parent="globals/TidalLabsView" pc="268436248" symbol="startSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="15" lineNum="175" parent="globals/TidalLabsView" pc="268436252" symbol="startSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="15" lineNum="176" parent="globals/TidalLabsView" pc="268436260" symbol="startSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="15" lineNum="177" parent="globals/TidalLabsView" pc="268436273" symbol="startSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="15" lineNum="178" parent="globals/TidalLabsView" pc="268436290" symbol="startSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="15" lineNum="179" parent="globals/TidalLabsView" pc="268436298" symbol="startSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="15" lineNum="180" parent="globals/TidalLabsView" pc="268436307" symbol="startSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="15" lineNum="181" parent="globals/TidalLabsView" pc="268436314" symbol="startSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="15" lineNum="182" parent="globals/TidalLabsView" pc="268436325" symbol="startSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="16" lineNum="337" parent="globals/TidalLabsView" pc="268436337" symbol="&lt;globals/TidalLabsView/&lt;&gt;_generateId&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="16" lineNum="338" parent="globals/TidalLabsView" pc="268436339" symbol="&lt;globals/TidalLabsView/&lt;&gt;_generateId&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="18" lineNum="212" parent="globals/TidalLabsView" pc="268436379" symbol="&lt;globals/TidalLabsView/&lt;&gt;_showFlash&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="18" lineNum="213" parent="globals/TidalLabsView" pc="268436381" symbol="&lt;globals/TidalLabsView/&lt;&gt;_showFlash&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="18" lineNum="214" parent="globals/TidalLabsView" pc="268436390" symbol="&lt;globals/TidalLabsView/&lt;&gt;_showFlash&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="18" lineNum="215" parent="globals/TidalLabsView" pc="268436398" symbol="&lt;globals/TidalLabsView/&lt;&gt;_showFlash&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="18" lineNum="216" parent="globals/TidalLabsView" pc="268436407" symbol="&lt;globals/TidalLabsView/&lt;&gt;_showFlash&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="18" lineNum="218" parent="globals/TidalLabsView" pc="268436422" symbol="&lt;globals/TidalLabsView/&lt;&gt;_showFlash&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="18" lineNum="219" parent="globals/TidalLabsView" pc="268436451" symbol="&lt;globals/TidalLabsView/&lt;&gt;_showFlash&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="269" parent="globals/TidalLabsView" pc="268436483" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="270" parent="globals/TidalLabsView" pc="268436486" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="271" parent="globals/TidalLabsView" pc="268436511" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="277" parent="globals/TidalLabsView" pc="268436591" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="278" parent="globals/TidalLabsView" pc="268436599" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="279" parent="globals/TidalLabsView" pc="268436611" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="281" parent="globals/TidalLabsView" pc="268436634" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="282" parent="globals/TidalLabsView" pc="268436642" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="283" parent="globals/TidalLabsView" pc="268436654" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="284" parent="globals/TidalLabsView" pc="268436662" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="285" parent="globals/TidalLabsView" pc="268436670" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="19" lineNum="286" parent="globals/TidalLabsView" pc="268436679" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="21" lineNum="185" parent="globals/TidalLabsView" pc="268436688" symbol="endSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="21" lineNum="186" parent="globals/TidalLabsView" pc="268436690" symbol="endSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="21" lineNum="186" parent="globals/TidalLabsView" pc="268436699" symbol="endSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="21" lineNum="187" parent="globals/TidalLabsView" pc="268436703" symbol="endSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="21" lineNum="188" parent="globals/TidalLabsView" pc="268436710" symbol="endSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="21" lineNum="189" parent="globals/TidalLabsView" pc="268436717" symbol="endSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="21" lineNum="190" parent="globals/TidalLabsView" pc="268436728" symbol="endSession"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="22" lineNum="193" parent="globals/TidalLabsView" pc="268436740" symbol="recordWave"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="22" lineNum="194" parent="globals/TidalLabsView" pc="268436743" symbol="recordWave"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="22" lineNum="194" parent="globals/TidalLabsView" pc="268436752" symbol="recordWave"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="22" lineNum="196" parent="globals/TidalLabsView" pc="268436756" symbol="recordWave"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="22" lineNum="197" parent="globals/TidalLabsView" pc="268436768" symbol="recordWave"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="22" lineNum="198" parent="globals/TidalLabsView" pc="268436806" symbol="recordWave"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="22" lineNum="203" parent="globals/TidalLabsView" pc="268436875" symbol="recordWave"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="22" lineNum="205" parent="globals/TidalLabsView" pc="268436890" symbol="recordWave"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="22" lineNum="206" parent="globals/TidalLabsView" pc="268436916" symbol="recordWave"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="22" lineNum="207" parent="globals/TidalLabsView" pc="268436927" symbol="recordWave"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="23" lineNum="48" parent="globals/TidalLabsView" pc="268436939" symbol="onLayout"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="24" lineNum="323" parent="globals/TidalLabsView" pc="268436942" symbol="&lt;globals/TidalLabsView/&lt;&gt;_pulse&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="24" lineNum="324" parent="globals/TidalLabsView" pc="268436945" symbol="&lt;globals/TidalLabsView/&lt;&gt;_pulse&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="24" lineNum="324" parent="globals/TidalLabsView" pc="268436961" symbol="&lt;globals/TidalLabsView/&lt;&gt;_pulse&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="24" lineNum="325" parent="globals/TidalLabsView" pc="268436965" symbol="&lt;globals/TidalLabsView/&lt;&gt;_pulse&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="24" lineNum="326" parent="globals/TidalLabsView" pc="268436969" symbol="&lt;globals/TidalLabsView/&lt;&gt;_pulse&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="24" lineNum="327" parent="globals/TidalLabsView" pc="268436980" symbol="&lt;globals/TidalLabsView/&lt;&gt;_pulse&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="24" lineNum="328" parent="globals/TidalLabsView" pc="268437017" symbol="&lt;globals/TidalLabsView/&lt;&gt;_pulse&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="24" lineNum="329" parent="globals/TidalLabsView" pc="268437028" symbol="&lt;globals/TidalLabsView/&lt;&gt;_pulse&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="24" lineNum="332" parent="globals/TidalLabsView" pc="268437077" symbol="&lt;globals/TidalLabsView/&lt;&gt;_pulse&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="25" lineNum="314" parent="globals/TidalLabsView" pc="268437093" symbol="&lt;globals/TidalLabsView/&lt;&gt;_loadSettings&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="25" lineNum="315" parent="globals/TidalLabsView" pc="268437096" symbol="&lt;globals/TidalLabsView/&lt;&gt;_loadSettings&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="25" lineNum="316" parent="globals/TidalLabsView" pc="268437115" symbol="&lt;globals/TidalLabsView/&lt;&gt;_loadSettings&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="25" lineNum="317" parent="globals/TidalLabsView" pc="268437130" symbol="&lt;globals/TidalLabsView/&lt;&gt;_loadSettings&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="26" lineNum="306" parent="globals/TidalLabsView" pc="268437143" symbol="&lt;globals/TidalLabsView/&lt;&gt;_getPendingSessions&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="26" lineNum="307" parent="globals/TidalLabsView" pc="268437146" symbol="&lt;globals/TidalLabsView/&lt;&gt;_getPendingSessions&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="26" lineNum="308" parent="globals/TidalLabsView" pc="268437165" symbol="&lt;globals/TidalLabsView/&lt;&gt;_getPendingSessions&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="26" lineNum="309" parent="globals/TidalLabsView" pc="268437180" symbol="&lt;globals/TidalLabsView/&lt;&gt;_getPendingSessions&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="26" lineNum="311" parent="globals/TidalLabsView" pc="268437186" symbol="&lt;globals/TidalLabsView/&lt;&gt;_getPendingSessions&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="104" parent="globals/TidalLabsView" pc="268437189" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="106" parent="globals/TidalLabsView" pc="268437192" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="107" parent="globals/TidalLabsView" pc="268437202" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="108" parent="globals/TidalLabsView" pc="268437219" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="114" parent="globals/TidalLabsView" pc="268437287" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="115" parent="globals/TidalLabsView" pc="268437299" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="116" parent="globals/TidalLabsView" pc="268437307" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="117" parent="globals/TidalLabsView" pc="268437340" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="118" parent="globals/TidalLabsView" pc="268437363" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="119" parent="globals/TidalLabsView" pc="268437380" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="124" parent="globals/TidalLabsView" pc="268437430" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="125" parent="globals/TidalLabsView" pc="268437437" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="126" parent="globals/TidalLabsView" pc="268437445" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="127" parent="globals/TidalLabsView" pc="268437461" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="129" parent="globals/TidalLabsView" pc="268437487" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="130" parent="globals/TidalLabsView" pc="268437497" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="131" parent="globals/TidalLabsView" pc="268437514" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="134" parent="globals/TidalLabsView" pc="268437540" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="135" parent="globals/TidalLabsView" pc="268437557" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="137" parent="globals/TidalLabsView" pc="268437589" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="138" parent="globals/TidalLabsView" pc="268437606" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="143" parent="globals/TidalLabsView" pc="268437632" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="144" parent="globals/TidalLabsView" pc="268437648" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="148" parent="globals/TidalLabsView" pc="268437674" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="149" parent="globals/TidalLabsView" pc="268437691" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="153" parent="globals/TidalLabsView" pc="268437717" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="154" parent="globals/TidalLabsView" pc="268437734" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="155" parent="globals/TidalLabsView" pc="268437746" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="156" parent="globals/TidalLabsView" pc="268437753" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="157" parent="globals/TidalLabsView" pc="268437769" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="160" parent="globals/TidalLabsView" pc="268437793" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="161" parent="globals/TidalLabsView" pc="268437809" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="162" parent="globals/TidalLabsView" pc="268437813" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="163" parent="globals/TidalLabsView" pc="268437823" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="164" parent="globals/TidalLabsView" pc="268437830" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="165" parent="globals/TidalLabsView" pc="268437846" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="166" parent="globals/TidalLabsView" pc="268437866" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="27" lineNum="167" parent="globals/TidalLabsView" pc="268437883" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="28" lineNum="42" parent="globals/TidalLabsView" pc="268437913" symbol="initialize"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="28" lineNum="43" parent="globals/TidalLabsView" pc="268437915" symbol="initialize"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="28" lineNum="44" parent="globals/TidalLabsView" pc="268437927" symbol="initialize"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="28" lineNum="45" parent="globals/TidalLabsView" pc="268437934" symbol="initialize"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="29" lineNum="242" parent="globals/TidalLabsView" pc="268437942" symbol="&lt;globals/TidalLabsView/&lt;&gt;_stopWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="29" lineNum="243" parent="globals/TidalLabsView" pc="268437945" symbol="&lt;globals/TidalLabsView/&lt;&gt;_stopWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="29" lineNum="243" parent="globals/TidalLabsView" pc="268437954" symbol="&lt;globals/TidalLabsView/&lt;&gt;_stopWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="29" lineNum="244" parent="globals/TidalLabsView" pc="268437958" symbol="&lt;globals/TidalLabsView/&lt;&gt;_stopWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="29" lineNum="245" parent="globals/TidalLabsView" pc="268437965" symbol="&lt;globals/TidalLabsView/&lt;&gt;_stopWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="29" lineNum="246" parent="globals/TidalLabsView" pc="268437973" symbol="&lt;globals/TidalLabsView/&lt;&gt;_stopWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="29" lineNum="247" parent="globals/TidalLabsView" pc="268437981" symbol="&lt;globals/TidalLabsView/&lt;&gt;_stopWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="30" lineNum="57" parent="globals/TidalLabsView" pc="268437990" symbol="onUpdate"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="30" lineNum="58" parent="globals/TidalLabsView" pc="268437993" symbol="onUpdate"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="30" lineNum="59" parent="globals/TidalLabsView" pc="268438002" symbol="onUpdate"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="30" lineNum="60" parent="globals/TidalLabsView" pc="268438011" symbol="onUpdate"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="30" lineNum="61" parent="globals/TidalLabsView" pc="268438018" symbol="onUpdate"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="30" lineNum="62" parent="globals/TidalLabsView" pc="268438025" symbol="onUpdate"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="30" lineNum="64" parent="globals/TidalLabsView" pc="268438042" symbol="onUpdate"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="30" lineNum="65" parent="globals/TidalLabsView" pc="268438054" symbol="onUpdate"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="30" lineNum="67" parent="globals/TidalLabsView" pc="268438062" symbol="onUpdate"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="30" lineNum="68" parent="globals/TidalLabsView" pc="268438070" symbol="onUpdate"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="30" lineNum="70" parent="globals/TidalLabsView" pc="268438090" symbol="onUpdate"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="31" lineNum="230" parent="globals/TidalLabsView" pc="268438108" symbol="&lt;globals/TidalLabsView/&lt;&gt;_startWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="31" lineNum="232" parent="globals/TidalLabsView" pc="268438111" symbol="&lt;globals/TidalLabsView/&lt;&gt;_startWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="31" lineNum="237" parent="globals/TidalLabsView" pc="268438144" symbol="&lt;globals/TidalLabsView/&lt;&gt;_startWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="31" lineNum="238" parent="globals/TidalLabsView" pc="268438165" symbol="&lt;globals/TidalLabsView/&lt;&gt;_startWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" id="31" lineNum="239" parent="globals/TidalLabsView" pc="268438183" symbol="&lt;globals/TidalLabsView/&lt;&gt;_startWorkout&gt;"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsApp.mc" id="32" lineNum="11" parent="globals/TidalLabsApp" pc="268438215" symbol="onStart"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsApp.mc" id="33" lineNum="17" parent="globals/TidalLabsApp" pc="268438218" symbol="getInitialView"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsApp.mc" id="33" lineNum="18" parent="globals/TidalLabsApp" pc="268438221" symbol="getInitialView"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsApp.mc" id="33" lineNum="19" parent="globals/TidalLabsApp" pc="268438241" symbol="getInitialView"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsApp.mc" id="33" lineNum="20" parent="globals/TidalLabsApp" pc="268438263" symbol="getInitialView"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsApp.mc" id="34" lineNum="7" parent="globals/TidalLabsApp" pc="268438278" symbol="initialize"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsApp.mc" id="34" lineNum="8" parent="globals/TidalLabsApp" pc="268438280" symbol="initialize"/>
+        <entry filename="/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsApp.mc" id="35" lineNum="14" parent="globals/TidalLabsApp" pc="268438293" symbol="onStop"/>
+    </pcToLineNum>
+    <symbolTable>
+        <entry id="8388639" module="true" symbol="Graphics"/>
+        <entry id="8388632" method="true" symbol="&lt;init&gt;"/>
+        <entry id="24" method="true" symbol="&lt;globals/TidalLabsView/&lt;&gt;_startWorkout&gt;"/>
+        <entry id="31" method="true" symbol="recordWave"/>
+        <entry id="8388638" module="true" symbol="ActivityRecording"/>
+        <entry id="7" object="true" symbol="TidalLabsView"/>
+        <entry id="30" method="true" symbol="getPendingSessionCount"/>
+        <entry field="true" id="8388890" symbol="sport"/>
+        <entry id="35" method="true" symbol="startSession"/>
+        <entry id="28" method="true" symbol="clearConfirmedSessions"/>
+        <entry field="true" id="8388611" module="true" symbol="Toybox"/>
+        <entry id="10" method="true" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;"/>
+        <entry id="22" method="true" symbol="&lt;globals/TidalLabsView/&lt;&gt;_showFlash&gt;"/>
+        <entry field="true" id="39" symbol="AppName"/>
+        <entry id="4" module="true" symbol="globals/Rez/Strings"/>
+        <entry id="8388631" module="true" symbol="Activity"/>
+        <entry id="8388648" module="true" symbol="WatchUi"/>
+        <entry id="8389081" method="true" symbol="onBack"/>
+        <entry id="2" module="true" symbol="globals/Rez"/>
+        <entry id="8389124" method="true" symbol="onUpdate"/>
+        <entry id="29" method="true" symbol="endSession"/>
+        <entry id="8388771" module="true" object="true" symbol="Drawables"/>
+        <entry id="16" method="true" symbol="&lt;globals/TidalLabsView/&lt;&gt;_generateId&gt;"/>
+        <entry id="8389122" method="true" symbol="onLayout"/>
+        <entry field="true" id="8" symbol="&lt;globals/TidalLabsDelegate/&lt;&gt;_view&gt;"/>
+        <entry field="true" id="18" symbol="&lt;globals/TidalLabsView/&lt;&gt;_hrTimer&gt;"/>
+        <entry id="5" object="true" symbol="TidalLabsApp"/>
+        <entry id="8388987" method="true" symbol="vibrate"/>
+        <entry id="23" method="true" symbol="&lt;globals/TidalLabsView/&lt;&gt;_startHrPolling&gt;"/>
+        <entry id="6" object="true" symbol="TidalLabsDelegate"/>
+        <entry field="true" id="15" symbol="&lt;globals/TidalLabsView/&lt;&gt;_flashTimer&gt;"/>
+        <entry id="21" method="true" symbol="&lt;globals/TidalLabsView/&lt;&gt;_pulse&gt;"/>
+        <entry id="3" module="true" symbol="globals/Rez/Drawables"/>
+        <entry id="19" method="true" symbol="&lt;globals/TidalLabsView/&lt;&gt;_loadSettings&gt;"/>
+        <entry id="17" method="true" symbol="&lt;globals/TidalLabsView/&lt;&gt;_getPendingSessions&gt;"/>
+        <entry id="25" method="true" symbol="&lt;globals/TidalLabsView/&lt;&gt;_stopWorkout&gt;"/>
+        <entry id="8388644" module="true" symbol="System"/>
+        <entry field="true" id="33" symbol="sessionId"/>
+        <entry id="8389619" method="true" symbol="onSelect"/>
+        <entry id="8388645" module="true" symbol="Time"/>
+        <entry id="8388769" module="true" object="true" symbol="Rez"/>
+        <entry id="11" method="true" symbol="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;"/>
+        <entry id="8388640" module="true" symbol="Lang"/>
+        <entry field="true" id="38" symbol="LauncherIcon"/>
+        <entry field="true" id="36" symbol="waveCount"/>
+        <entry id="8388610" symbol="statics"/>
+        <entry id="8389123" method="true" symbol="onShow"/>
+        <entry field="true" id="26" symbol="&lt;globals/TidalLabsView/&lt;&gt;_timestamps&gt;"/>
+        <entry field="true" id="32" symbol="sessionActive"/>
+        <entry id="8389350" module="true" symbol="globals"/>
+        <entry id="8388770" module="true" object="true" symbol="Strings"/>
+        <entry field="true" id="8388960" symbol="heartRate"/>
+        <entry id="8388702" method="true" symbol="initialize"/>
+        <entry id="8389279" method="true" symbol="onStart"/>
+        <entry field="true" id="8388891" symbol="subSport"/>
+        <entry field="true" id="8388892" symbol="name"/>
+        <entry id="8388641" module="true" symbol="Math"/>
+        <entry id="8389280" method="true" symbol="getInitialView"/>
+        <entry id="8389281" method="true" symbol="onStop"/>
+        <entry field="true" id="27" symbol="&lt;globals/TidalLabsView/&lt;&gt;_workout&gt;"/>
+        <entry id="20" method="true" symbol="_pollHr"/>
+        <entry field="true" id="8389165" symbol="COLOR_GREEN"/>
+        <entry field="true" id="13" symbol="&lt;globals/TidalLabsView/&lt;&gt;_flashActive&gt;"/>
+        <entry id="8388646" module="true" object="true" symbol="Timer"/>
+        <entry id="9" method="true" symbol="_clearFlash"/>
+        <entry id="8388636" module="true" symbol="Attention"/>
+        <entry field="true" id="34" symbol="sessionStart"/>
+        <entry id="8389125" method="true" symbol="onHide"/>
+        <entry id="12" method="true" symbol="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;"/>
+        <entry id="8389078" method="true" symbol="onNextPage"/>
+        <entry id="8388635" module="true" symbol="Application"/>
+        <entry field="true" id="14" symbol="&lt;globals/TidalLabsView/&lt;&gt;_flashMsg&gt;"/>
+        <entry field="true" id="37" symbol="waveDurSecs"/>
+    </symbolTable>
+    <localVars>
+        <entry arg="true" endPc="268435582" name="view" stackId="1" startPc="268435559"/>
+        <entry arg="true" endPc="268435906" name="dc" stackId="1" startPc="268435672"/>
+        <entry arg="true" endPc="268435906" name="cx" stackId="2" startPc="268435672"/>
+        <entry arg="true" endPc="268435906" name="cy" stackId="3" startPc="268435672"/>
+        <entry arg="true" endPc="268435906" name="r" stackId="4" startPc="268435672"/>
+        <entry endPc="268435905" name="btnW" stackId="5" startPc="268435675"/>
+        <entry endPc="268435905" name="btnH" stackId="6" startPc="268435675"/>
+        <entry endPc="268435905" name="btnX" stackId="7" startPc="268435675"/>
+        <entry endPc="268435905" name="btnY" stackId="8" startPc="268435675"/>
+        <entry endPc="268435905" name="pendingCount" stackId="9" startPc="268435675"/>
+        <entry arg="true" endPc="268436065" name="ids" stackId="1" startPc="268435956"/>
+        <entry endPc="268436064" name="sessions" stackId="2" startPc="268435959"/>
+        <entry endPc="268436064" name="kept" stackId="3" startPc="268435959"/>
+        <entry endPc="268436044" name="i" stackId="4" startPc="268435987"/>
+        <entry endPc="268436034" name="s" stackId="5" startPc="268435987"/>
+        <entry endPc="268436034" name="id" stackId="6" startPc="268435987"/>
+        <entry endPc="268436136" name="info" stackId="1" startPc="268436069"/>
+        <entry endPc="268436168" name="ex" stackId="2" startPc="268436143"/>
+        <entry arg="true" endPc="268436482" name="msg" stackId="1" startPc="268436379"/>
+        <entry endPc="268436630" name="session" stackId="1" startPc="268436511"/>
+        <entry endPc="268436630" name="existing" stackId="2" startPc="268436511"/>
+        <entry endPc="268436937" name="now" stackId="1" startPc="268436743"/>
+        <entry endPc="268436937" name="start" stackId="2" startPc="268436743"/>
+        <entry arg="true" endPc="268437092" name="count" stackId="1" startPc="268436942"/>
+        <entry endPc="268437091" name="pattern" stackId="2" startPc="268436945"/>
+        <entry endPc="268437076" name="i" stackId="3" startPc="268436980"/>
+        <entry endPc="268437141" name="dur" stackId="1" startPc="268437096"/>
+        <entry endPc="268437188" name="stored" stackId="1" startPc="268437146"/>
+        <entry arg="true" endPc="268437912" name="dc" stackId="1" startPc="268437189"/>
+        <entry arg="true" endPc="268437912" name="cx" stackId="2" startPc="268437189"/>
+        <entry arg="true" endPc="268437912" name="cy" stackId="3" startPc="268437189"/>
+        <entry arg="true" endPc="268437912" name="r" stackId="4" startPc="268437189"/>
+        <entry endPc="268437911" name="ct" stackId="5" startPc="268437192"/>
+        <entry endPc="268437911" name="mn" stackId="6" startPc="268437192"/>
+        <entry endPc="268437911" name="mnStr" stackId="7" startPc="268437192"/>
+        <entry endPc="268437911" name="timeStr" stackId="8" startPc="268437192"/>
+        <entry endPc="268437911" name="statusY" stackId="9" startPc="268437192"/>
+        <entry endPc="268437911" name="divY" stackId="10" startPc="268437192"/>
+        <entry endPc="268437911" name="divHalf" stackId="11" startPc="268437192"/>
+        <entry endPc="268437911" name="btnW" stackId="12" startPc="268437192"/>
+        <entry endPc="268437911" name="btnH" stackId="13" startPc="268437192"/>
+        <entry endPc="268437911" name="btnX" stackId="14" startPc="268437192"/>
+        <entry endPc="268437911" name="btnY" stackId="15" startPc="268437192"/>
+        <entry endPc="268437988" name="ws" stackId="1" startPc="268437945"/>
+        <entry arg="true" endPc="268438107" name="dc" stackId="1" startPc="268437990"/>
+        <entry endPc="268438106" name="w" stackId="2" startPc="268437993"/>
+        <entry endPc="268438106" name="h" stackId="3" startPc="268437993"/>
+        <entry endPc="268438106" name="cx" stackId="4" startPc="268437993"/>
+        <entry endPc="268438106" name="cy" stackId="5" startPc="268437993"/>
+        <entry endPc="268438106" name="r" stackId="6" startPc="268437993"/>
+        <entry endPc="268438176" name="opts" stackId="1" startPc="268438111"/>
+        <entry endPc="268438208" name="ex" stackId="2" startPc="268438183"/>
+        <entry endPc="268438277" name="view" stackId="1" startPc="268438221"/>
+        <entry endPc="268438277" name="delegate" stackId="2" startPc="268438221"/>
+    </localVars>
+    <deviceInfo deviceVersion="e6263c2a80ff43933f83afa71f1f6645dc2cb4a3" partNumber="006-B4534-00"/>
+    <annotations>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="LauncherIcon"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="AppName"/>
+    </annotations>
+    <dataEntryOffsetMappings>
+        <dataEntry label="globals" offset="49" parentId="" symbolId="globals" type="module"/>
+        <dataEntry label="globals/TidalLabsDelegate" offset="116" parentId="globals" symbolId="TidalLabsDelegate" type="class"/>
+        <dataEntry label="globals/TidalLabsView" offset="196" parentId="globals" symbolId="TidalLabsView" type="class"/>
+        <dataEntry label="globals/Rez" offset="546" parentId="globals" symbolId="Rez" type="module"/>
+        <dataEntry label="globals/TidalLabsApp" offset="590" parentId="globals" symbolId="TidalLabsApp" type="class"/>
+        <dataEntry label="globals/Rez/Drawables" offset="661" parentId="Rez" symbolId="Drawables" type="module"/>
+        <dataEntry label="globals/Rez/Strings" offset="696" parentId="Rez" symbolId="Strings" type="module"/>
+    </dataEntryOffsetMappings>
+    <functions>
+        <functionEntry accessMode="public" endPc="268435471" name="&lt;init&gt;" parent="TidalLabsDelegate" startPc="268435460">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435492" name="&lt;init&gt;" parent="TidalLabsView" startPc="268435472">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435512" name="&lt;init&gt;" parent="Rez" startPc="268435493">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435524" name="&lt;init&gt;" parent="TidalLabsApp" startPc="268435513">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435558" name="onBack" parent="TidalLabsDelegate" startPc="268435525">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435582" name="initialize" parent="TidalLabsDelegate" startPc="268435559">
+            <param id="view"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435627" name="onSelect" parent="TidalLabsDelegate" startPc="268435583">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435671" name="onNextPage" parent="TidalLabsDelegate" startPc="268435628">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="private" endPc="268435906" name="&lt;globals/TidalLabsView/&lt;&gt;_drawIdle&gt;" parent="TidalLabsView" startPc="268435672">
+            <param id="dc"/>
+            <param id="cx"/>
+            <param id="cy"/>
+            <param id="r"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435921" name="getPendingSessionCount" parent="TidalLabsView" startPc="268435907">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435955" name="_clearFlash" parent="TidalLabsView" startPc="268435922">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436065" name="clearConfirmedSessions" parent="TidalLabsView" startPc="268435956">
+            <param id="ids"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436174" name="_pollHr" parent="TidalLabsView" startPc="268436066">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="private" endPc="268436237" name="&lt;globals/TidalLabsView/&lt;&gt;_startHrPolling&gt;" parent="TidalLabsView" startPc="268436175">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436336" name="startSession" parent="TidalLabsView" startPc="268436238">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="private" endPc="268436378" name="&lt;globals/TidalLabsView/&lt;&gt;_generateId&gt;" parent="TidalLabsView" startPc="268436337">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="onHide" parent="TidalLabsView">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="private" endPc="268436482" name="&lt;globals/TidalLabsView/&lt;&gt;_showFlash&gt;" parent="TidalLabsView" startPc="268436379">
+            <param id="msg"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="private" endPc="268436687" name="&lt;globals/TidalLabsView/&lt;&gt;_finalizeSession&gt;" parent="TidalLabsView" startPc="268436483">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="onShow" parent="TidalLabsView">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436739" name="endSession" parent="TidalLabsView" startPc="268436688">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436938" name="recordWave" parent="TidalLabsView" startPc="268436740">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436941" name="onLayout" parent="TidalLabsView" startPc="268436939">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="private" endPc="268437092" name="&lt;globals/TidalLabsView/&lt;&gt;_pulse&gt;" parent="TidalLabsView" startPc="268436942">
+            <param id="count"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="private" endPc="268437142" name="&lt;globals/TidalLabsView/&lt;&gt;_loadSettings&gt;" parent="TidalLabsView" startPc="268437093">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="private" endPc="268437188" name="&lt;globals/TidalLabsView/&lt;&gt;_getPendingSessions&gt;" parent="TidalLabsView" startPc="268437143">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="private" endPc="268437912" name="&lt;globals/TidalLabsView/&lt;&gt;_drawActive&gt;" parent="TidalLabsView" startPc="268437189">
+            <param id="dc"/>
+            <param id="cx"/>
+            <param id="cy"/>
+            <param id="r"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268437941" name="initialize" parent="TidalLabsView" startPc="268437913">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="private" endPc="268437989" name="&lt;globals/TidalLabsView/&lt;&gt;_stopWorkout&gt;" parent="TidalLabsView" startPc="268437942">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268438107" name="onUpdate" parent="TidalLabsView" startPc="268437990">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="private" endPc="268438214" name="&lt;globals/TidalLabsView/&lt;&gt;_startWorkout&gt;" parent="TidalLabsView" startPc="268438108">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="&lt;init&gt;" parent="Drawables">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="&lt;init&gt;" parent="Strings">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268438217" name="onStart" parent="TidalLabsApp" startPc="268438215">
+            <param id="state"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268438277" name="getInitialView" parent="TidalLabsApp" startPc="268438218">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268438292" name="initialize" parent="TidalLabsApp" startPc="268438278">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268438295" name="onStop" parent="TidalLabsApp" startPc="268438293">
+            <param id="state"/>
+            <documentation/>
+        </functionEntry>
+    </functions>
+</debugInfo>

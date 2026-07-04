@@ -16,6 +16,7 @@ class CameraManager: NSObject, ObservableObject {
     @Published var iCloudDownloadProgress: Double? = nil
     @Published var lastImportedOriginalAssetID: String? = nil
     @Published var latestImportedSessionID: UUID? = nil
+    @Published var detectedWatchType: WatchType = .unknown
 
     private let pendingWatchSessionsKey = "pendingWatchSessions"
     private let locationManager = LocationManager()
@@ -421,6 +422,8 @@ extension CameraManager: WCSessionDelegate {
         let saved = UserDefaults.standard.integer(forKey: "waveDurationSeconds")
         let dur = saved == 0 ? 60.0 : Double(saved)
         try? WCSession.default.updateApplicationContext(["waveDurationSeconds": dur])
+        let watchType: WatchType = WCSession.default.isPaired ? .appleWatch : .garmin
+        Task { @MainActor in self.detectedWatchType = watchType }
     }
     nonisolated func sessionDidBecomeInactive(_ session: WCSession) {}
     nonisolated func sessionDidDeactivate(_ session: WCSession) {

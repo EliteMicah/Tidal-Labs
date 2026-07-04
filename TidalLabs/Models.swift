@@ -54,6 +54,14 @@ enum VideoResolution: String, CaseIterable {
     case k4 = "4K"
 }
 
+// MARK: - Watch Type
+
+enum WatchType {
+    case appleWatch
+    case garmin
+    case unknown
+}
+
 // MARK: - App Screen
 
 enum AppScreen: Hashable {

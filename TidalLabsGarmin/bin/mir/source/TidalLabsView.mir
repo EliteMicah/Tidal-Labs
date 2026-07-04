@@ -1,0 +1,2156 @@
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Activity,1,14,22]; ]
+import Toybox.Activity;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [ActivityRecording,2,14,31]; ]
+import Toybox.ActivityRecording;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 3; @symbol_importdef<0> = [Toybox,3,7,13]; @symbol_importdef<1> = [Application,3,14,25]; ]
+import Toybox.Application;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 4; @symbol_importdef<0> = [Toybox,4,7,13]; @symbol_importdef<1> = [Attention,4,14,23]; ]
+import Toybox.Attention;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 5; @symbol_importdef<0> = [Toybox,5,7,13]; @symbol_importdef<1> = [Graphics,5,14,22]; ]
+import Toybox.Graphics;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 6; @symbol_importdef<0> = [Toybox,6,7,13]; @symbol_importdef<1> = [Lang,6,14,18]; ]
+import Toybox.Lang;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 7; @symbol_importdef<0> = [Toybox,7,7,13]; @symbol_importdef<1> = [Math,7,14,18]; ]
+import Toybox.Math;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 8; @symbol_importdef<0> = [Toybox,8,7,13]; @symbol_importdef<1> = [System,8,14,20]; ]
+import Toybox.System;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 9; @symbol_importdef<0> = [Toybox,9,7,13]; @symbol_importdef<1> = [Time,9,14,18]; ]
+import Toybox.Time;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 10; @symbol_importdef<0> = [Toybox,10,7,13]; @symbol_importdef<1> = [Timer,10,14,19]; ]
+import Toybox.Timer;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 11; @symbol_importdef<0> = [Toybox,11,7,13]; @symbol_importdef<1> = [WatchUi,11,14,21]; ]
+import Toybox.WatchUi;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 13; @position = 6; @symbol_constdef = [COLOR_ACCENT,13,6,18]; ]
+const COLOR_ACCENT = 0x2F62F4;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 14; @position = 6; @symbol_constdef = [COLOR_CYAN,14,6,16]; ]
+const COLOR_CYAN = 0x16A6CE;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 15; @position = 6; @symbol_constdef = [COLOR_DANGER,15,6,18]; ]
+const COLOR_DANGER = 0xE5484D;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 16; @position = 6; @symbol_constdef = [COLOR_MUTED,16,6,17]; ]
+const COLOR_MUTED = 0x9FB6CE;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 17; @position = 6; @symbol_constdef = [COLOR_GREEN,17,6,17]; ]
+const COLOR_GREEN = 0x30D158;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 19; @symbol_classdef = [TidalLabsView,19,6,19]; @symbol_extends<0> = [WatchUi,19,28,35]; @symbol_extends<1> = [View,19,36,40]; ]
+class TidalLabsView extends WatchUi.View {
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 19; ]
+    <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 28 16 ]
+        %tmp.1 = newa 0 Lang.Array;
+        symbol [ Lang %tmp.1 28 50 54 ];
+        symbol [ Array %tmp.1 28 55 60 ];
+        putv self :_timestamps %tmp.1;
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 19; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 22; @position = 8; @symbol_vardef = [sessionActive,22,8,21]; @symbol_type<0> = [Boolean,22,27,34]; ]
+    var sessionActive as Boolean = false;
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 23; @position = 8; @symbol_vardef = [sessionId,23,8,17]; @symbol_type<0> = [String,23,27,33]; ]
+    var sessionId as String = "";
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 24; @position = 8; @symbol_vardef = [sessionStart,24,8,20]; @symbol_type<0> = [Time,24,27,31]; @symbol_type<1> = [Moment,24,32,38]; ]
+    var sessionStart as Time.Moment or Null = null;
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 25; @position = 8; @symbol_vardef = [waveCount,25,8,17]; @symbol_type<0> = [Number,25,27,33]; ]
+    var waveCount as Number = 0;
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 26; @position = 8; @symbol_vardef = [waveDurSecs,26,8,19]; @symbol_type<0> = [Number,26,27,33]; ]
+    var waveDurSecs as Number = 60;
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 28; @position = 16; @symbol_vardef = [_timestamps,28,16,27]; @symbol_type<0> = [Lang,28,31,35]; @symbol_type<1> = [Array,28,36,41]; ]
+    private
+    var _timestamps as Lang.Array;
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 31; @position = 16; @symbol_vardef = [_flashMsg,31,16,25]; @symbol_type<0> = [String,31,35,41]; ]
+    private
+    var _flashMsg as String = "";
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 32; @position = 16; @symbol_vardef = [_flashActive,32,16,28]; @symbol_type<0> = [Boolean,32,35,42]; ]
+    private
+    var _flashActive as Boolean = false;
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 33; @position = 16; @symbol_vardef = [_flashTimer,33,16,27]; @symbol_type<0> = [Timer,33,35,40]; @symbol_type<1> = [Timer,33,41,46]; ]
+    private
+    var _flashTimer as Timer.Timer or Null;
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 36; @position = 8; @symbol_vardef = [heartRate,36,8,17]; @symbol_type<0> = [Number,36,21,27]; ]
+    var heartRate as Number = 0;
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 37; @position = 16; @symbol_vardef = [_hrTimer,37,16,24]; @symbol_type<0> = [Timer,37,28,33]; @symbol_type<1> = [Timer,37,34,39]; ]
+    private
+    var _hrTimer as Timer.Timer or Null;
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 40; @position = 16; @symbol_vardef = [_workout,40,16,24]; @symbol_type<0> = [ActivityRecording,40,28,45]; @symbol_type<1> = [Session,40,46,53]; ]
+    private
+    var _workout as ActivityRecording.Session or Null;
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 42; @symbol_functiondef = [initialize,42,13,23]; ]
+    function initialize() as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_42_26_46_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 43 8 ]
+        symbol [ View %tmp.2 43 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ initialize %tmp.3 43 13 23 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 44 8 ]
+        %tmp.4 = self;
+        symbol [ _loadSettings %tmp.5 44 8 21 ];
+        %tmp.5 = getv function %tmp.4 :_loadSettings;
+        invoke %tmp.4 %tmp.5();
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 45 8 ]
+        %tmp.6 = self;
+        symbol [ _startHrPolling %tmp.7 45 8 23 ];
+        %tmp.7 = getv function %tmp.6 :_startHrPolling;
+        invoke %tmp.6 %tmp.7();
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_42_26_46_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 48; @symbol_functiondef = [onLayout,48,13,21]; @symbol_param<0> = [dc,48,22,24]; @symbol_param<0>_type<0> = [Graphics,48,28,36]; @symbol_param<0>_type<1> = [Dc,48,37,39]; ]
+    function onLayout(dc as Graphics.Dc) as Void {
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 51; @symbol_functiondef = [onShow,51,13,19]; ]
+    function onShow() as Void {
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 54; @symbol_functiondef = [onHide,54,13,19]; ]
+    function onHide() as Void {
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 57; @symbol_functiondef = [onUpdate,57,13,21]; @symbol_param<0> = [dc,57,22,24]; @symbol_param<0>_type<0> = [Graphics,57,28,36]; @symbol_param<0>_type<1> = [Dc,57,37,39]; ]
+    function onUpdate(dc as Graphics.Dc) as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 58 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_stop" ]
+        %w.1 = local;
+        symbol [ w %w.1 58 12 13 ];
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 58 17 19 ];
+        symbol [ getWidth %tmp.2 58 20 28 ];
+        %tmp.2 = getv function %tmp.1 :getWidth;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %w.1 %tmp.3;
+        symbol [ w %w.1 58 12 13 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 59 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_stop" ]
+        %h.2 = local;
+        symbol [ h %h.2 59 12 13 ];
+        %tmp.4 = lgetv %dc;
+        symbol [ dc %tmp.4 59 17 19 ];
+        symbol [ getHeight %tmp.5 59 20 29 ];
+        %tmp.5 = getv function %tmp.4 :getHeight;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        lputv %h.2 %tmp.6;
+        symbol [ h %h.2 59 12 13 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 60 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_stop" ]
+        %cx.3 = local;
+        symbol [ cx %cx.3 60 12 14 ];
+        %tmp.7 = lgetv %w.1;
+        symbol [ w %tmp.7 60 17 18 ];
+        %tmp.8 = 2;
+        %tmp.9 = div %tmp.7 %tmp.8;
+        lputv %cx.3 %tmp.9;
+        symbol [ cx %cx.3 60 12 14 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 61 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_stop" ]
+        %cy.4 = local;
+        symbol [ cy %cy.4 61 12 14 ];
+        %tmp.10 = lgetv %h.2;
+        symbol [ h %tmp.10 61 17 18 ];
+        %tmp.11 = 2;
+        %tmp.12 = div %tmp.10 %tmp.11;
+        lputv %cy.4 %tmp.12;
+        symbol [ cy %cy.4 61 12 14 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 62 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_stop" ]
+        %r.5 = local;
+        symbol [ r %r.5 62 12 13 ];
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_62_17_62_32_begin:
+        %tmp.13 = lgetv %cx.3;
+        symbol [ cx %tmp.13 62 17 19 ];
+        %tmp.14 = lgetv %cy.4;
+        symbol [ cy %tmp.14 62 22 24 ];
+        %tmp.15 = lt %tmp.13 %tmp.14;
+        bf %tmp.15 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_62_17_62_32_else_false;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_62_17_62_32_true:
+        %tmp.16 = lgetv %cx.3;
+        symbol [ cx %tmp.16 62 27 29 ];
+        push %tmp.16;
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_62_17_62_32_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_62_17_62_32_else_false:
+        %tmp.17 = lgetv %cy.4;
+        symbol [ cy %tmp.17 62 32 34 ];
+        push %tmp.17;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_62_17_62_32_end:
+        %tmp.18 = phi [%tmp.15 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_62_17_62_32_begin] [%tmp.16 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_62_17_62_32_true] [%tmp.17 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_62_17_62_32_else_false] [%tmp.18 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_62_17_62_32_end];
+        lputv %r.5 %tmp.18;
+        symbol [ r %r.5 62 12 13 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 64 8 ]
+        %tmp.19 = lgetv %dc;
+        symbol [ dc %tmp.19 64 8 10 ];
+        symbol [ setColor %tmp.20 64 11 19 ];
+        %tmp.20 = getv function %tmp.19 :setColor;
+        symbol [ Graphics %tmp.21 64 20 28 ];
+        %tmp.21 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.22 64 29 40 ];
+        %tmp.22 = getv %tmp.21 :COLOR_BLACK;
+        symbol [ Graphics %tmp.23 64 42 50 ];
+        %tmp.23 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.24 64 51 62 ];
+        %tmp.24 = getv %tmp.23 :COLOR_BLACK;
+        invoke %tmp.19 %tmp.20(%tmp.22, %tmp.24);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 65 8 ]
+        %tmp.25 = lgetv %dc;
+        symbol [ dc %tmp.25 65 8 10 ];
+        symbol [ clear %tmp.26 65 11 16 ];
+        %tmp.26 = getv function %tmp.25 :clear;
+        invoke %tmp.25 %tmp.26();
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 67 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_67_8_71_8_if_stmt:
+        symbol [ sessionActive %tmp.28 67 12 25 ];
+        %tmp.28 = getv ? :sessionActive;
+        bf %tmp.28 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_67_8_71_8_if_else_false;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_67_8_71_8_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_67_27_69_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 68 12 ]
+        %tmp.29 = self;
+        symbol [ _drawActive %tmp.30 68 12 23 ];
+        %tmp.30 = getv function %tmp.29 :_drawActive;
+        %tmp.31 = lgetv %dc;
+        symbol [ dc %tmp.31 68 24 26 ];
+        %tmp.32 = lgetv %cx.3;
+        symbol [ cx %tmp.32 68 28 30 ];
+        %tmp.33 = lgetv %cy.4;
+        symbol [ cy %tmp.33 68 32 34 ];
+        %tmp.34 = lgetv %r.5;
+        symbol [ r %tmp.34 68 36 37 ];
+        invoke %tmp.29 %tmp.30(%tmp.31, %tmp.32, %tmp.33, %tmp.34);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_67_27_69_8_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_67_8_71_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_67_8_71_8_if_else_false:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_69_15_71_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 70 12 ]
+        %tmp.35 = self;
+        symbol [ _drawIdle %tmp.36 70 12 21 ];
+        %tmp.36 = getv function %tmp.35 :_drawIdle;
+        %tmp.37 = lgetv %dc;
+        symbol [ dc %tmp.37 70 22 24 ];
+        %tmp.38 = lgetv %cx.3;
+        symbol [ cx %tmp.38 70 26 28 ];
+        %tmp.39 = lgetv %cy.4;
+        symbol [ cy %tmp.39 70 30 32 ];
+        %tmp.40 = lgetv %r.5;
+        symbol [ r %tmp.40 70 34 35 ];
+        invoke %tmp.35 %tmp.36(%tmp.37, %tmp.38, %tmp.39, %tmp.40);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_69_15_71_8_stop:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_67_8_71_8_if_end:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_57_49_72_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 76; @symbol_functiondef = [_drawIdle,76,21,30]; @symbol_param<0> = [dc,76,31,33]; @symbol_param<0>_type<0> = [Graphics,76,37,45]; @symbol_param<0>_type<1> = [Dc,76,46,48]; @symbol_param<1> = [cx,76,50,52]; @symbol_param<1>_type<0> = [Number,76,56,62]; @symbol_param<2> = [cy,76,64,66]; @symbol_param<2>_type<0> = [Number,76,70,76]; @symbol_param<3> = [r,76,78,79]; @symbol_param<3>_type<0> = [Number,76,83,89]; ]
+    private
+    function _drawIdle(dc as Graphics.Dc, cx as Number, cy as Number, r as Number) as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 78 8 ]
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 78 8 10 ];
+        symbol [ setColor %tmp.2 78 11 19 ];
+        %tmp.2 = getv function %tmp.1 :setColor;
+        symbol [ Graphics %tmp.3 78 20 28 ];
+        %tmp.3 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.4 78 29 40 ];
+        %tmp.4 = getv %tmp.3 :COLOR_WHITE;
+        symbol [ Graphics %tmp.5 78 42 50 ];
+        %tmp.5 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.6 78 51 68 ];
+        %tmp.6 = getv %tmp.5 :COLOR_TRANSPARENT;
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.6);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 79 8 ]
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 79 8 10 ];
+        symbol [ drawText %tmp.8 79 11 19 ];
+        %tmp.8 = getv function %tmp.7 :drawText;
+        %tmp.9 = lgetv %cx;
+        symbol [ cx %tmp.9 79 20 22 ];
+        %tmp.10 = lgetv %cy;
+        symbol [ cy %tmp.10 79 24 26 ];
+        %tmp.11 = 38;
+        %tmp.12 = sub %tmp.10 %tmp.11;
+        symbol [ Graphics %tmp.13 79 33 41 ];
+        %tmp.13 = getm $.Toybox.Graphics;
+        symbol [ FONT_MEDIUM %tmp.14 79 42 53 ];
+        %tmp.14 = getv %tmp.13 :FONT_MEDIUM;
+        %tmp.15 = "Tidal Labs";
+        symbol [ Graphics %tmp.16 80 12 20 ];
+        %tmp.16 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.17 80 21 40 ];
+        %tmp.17 = getv %tmp.16 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.18 80 43 51 ];
+        %tmp.18 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.19 80 52 72 ];
+        %tmp.19 = getv %tmp.18 :TEXT_JUSTIFY_VCENTER;
+        %tmp.20 = bitor %tmp.17 %tmp.19;
+        invoke %tmp.7 %tmp.8(%tmp.9, %tmp.12, %tmp.14, %tmp.15, %tmp.20);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 83 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_stop" ]
+        %btnW.1 = local;
+        symbol [ btnW %btnW.1 83 12 16 ];
+        %tmp.21 = lgetv %r;
+        symbol [ r %tmp.21 83 20 21 ];
+        %tmp.22 = 1.1;
+        %tmp.23 = mul %tmp.21 %tmp.22;
+        symbol [ toNumber %tmp.24 83 29 37 ];
+        %tmp.24 = getv function %tmp.23 :toNumber;
+        %tmp.25 = invoke %tmp.23 %tmp.24();
+        lputv %btnW.1 %tmp.25;
+        symbol [ btnW %btnW.1 83 12 16 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 84 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_stop" ]
+        %btnH.2 = local;
+        symbol [ btnH %btnH.2 84 12 16 ];
+        %tmp.26 = 38;
+        lputv %btnH.2 %tmp.26;
+        symbol [ btnH %btnH.2 84 12 16 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 85 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_stop" ]
+        %btnX.3 = local;
+        symbol [ btnX %btnX.3 85 12 16 ];
+        %tmp.27 = lgetv %cx;
+        symbol [ cx %tmp.27 85 19 21 ];
+        %tmp.28 = lgetv %btnW.1;
+        symbol [ btnW %tmp.28 85 24 28 ];
+        %tmp.29 = 2;
+        %tmp.30 = div %tmp.28 %tmp.29;
+        %tmp.31 = sub %tmp.27 %tmp.30;
+        lputv %btnX.3 %tmp.31;
+        symbol [ btnX %btnX.3 85 12 16 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 86 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_stop" ]
+        %btnY.4 = local;
+        symbol [ btnY %btnY.4 86 12 16 ];
+        %tmp.32 = lgetv %cy;
+        symbol [ cy %tmp.32 86 19 21 ];
+        %tmp.33 = 10;
+        %tmp.34 = add %tmp.32 %tmp.33;
+        lputv %btnY.4 %tmp.34;
+        symbol [ btnY %btnY.4 86 12 16 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 87 8 ]
+        %tmp.35 = lgetv %dc;
+        symbol [ dc %tmp.35 87 8 10 ];
+        symbol [ setColor %tmp.36 87 11 19 ];
+        %tmp.36 = getv function %tmp.35 :setColor;
+        symbol [ Graphics %tmp.37 87 20 28 ];
+        %tmp.37 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.38 87 29 40 ];
+        %tmp.38 = getv %tmp.37 :COLOR_WHITE;
+        symbol [ Graphics %tmp.39 87 42 50 ];
+        %tmp.39 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.40 87 51 68 ];
+        %tmp.40 = getv %tmp.39 :COLOR_TRANSPARENT;
+        invoke %tmp.35 %tmp.36(%tmp.38, %tmp.40);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 88 8 ]
+        %tmp.41 = lgetv %dc;
+        symbol [ dc %tmp.41 88 8 10 ];
+        symbol [ fillRoundedRectangle %tmp.42 88 11 31 ];
+        %tmp.42 = getv function %tmp.41 :fillRoundedRectangle;
+        %tmp.43 = lgetv %btnX.3;
+        symbol [ btnX %tmp.43 88 32 36 ];
+        %tmp.44 = lgetv %btnY.4;
+        symbol [ btnY %tmp.44 88 38 42 ];
+        %tmp.45 = lgetv %btnW.1;
+        symbol [ btnW %tmp.45 88 44 48 ];
+        %tmp.46 = lgetv %btnH.2;
+        symbol [ btnH %tmp.46 88 50 54 ];
+        %tmp.47 = 19;
+        invoke %tmp.41 %tmp.42(%tmp.43, %tmp.44, %tmp.45, %tmp.46, %tmp.47);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 89 8 ]
+        %tmp.48 = lgetv %dc;
+        symbol [ dc %tmp.48 89 8 10 ];
+        symbol [ setColor %tmp.49 89 11 19 ];
+        %tmp.49 = getv function %tmp.48 :setColor;
+        symbol [ Graphics %tmp.50 89 20 28 ];
+        %tmp.50 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.51 89 29 40 ];
+        %tmp.51 = getv %tmp.50 :COLOR_BLACK;
+        symbol [ Graphics %tmp.52 89 42 50 ];
+        %tmp.52 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.53 89 51 68 ];
+        %tmp.53 = getv %tmp.52 :COLOR_TRANSPARENT;
+        invoke %tmp.48 %tmp.49(%tmp.51, %tmp.53);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 90 8 ]
+        %tmp.54 = lgetv %dc;
+        symbol [ dc %tmp.54 90 8 10 ];
+        symbol [ drawText %tmp.55 90 11 19 ];
+        %tmp.55 = getv function %tmp.54 :drawText;
+        %tmp.56 = lgetv %cx;
+        symbol [ cx %tmp.56 90 20 22 ];
+        %tmp.57 = lgetv %btnY.4;
+        symbol [ btnY %tmp.57 90 24 28 ];
+        %tmp.58 = lgetv %btnH.2;
+        symbol [ btnH %tmp.58 90 31 35 ];
+        %tmp.59 = 2;
+        %tmp.60 = div %tmp.58 %tmp.59;
+        %tmp.61 = add %tmp.57 %tmp.60;
+        symbol [ Graphics %tmp.62 90 41 49 ];
+        %tmp.62 = getm $.Toybox.Graphics;
+        symbol [ FONT_SMALL %tmp.63 90 50 60 ];
+        %tmp.63 = getv %tmp.62 :FONT_SMALL;
+        %tmp.64 = "Start Session";
+        symbol [ Graphics %tmp.65 91 12 20 ];
+        %tmp.65 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.66 91 21 40 ];
+        %tmp.66 = getv %tmp.65 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.67 91 43 51 ];
+        %tmp.67 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.68 91 52 72 ];
+        %tmp.68 = getv %tmp.67 :TEXT_JUSTIFY_VCENTER;
+        %tmp.69 = bitor %tmp.66 %tmp.68;
+        invoke %tmp.54 %tmp.55(%tmp.56, %tmp.61, %tmp.63, %tmp.64, %tmp.69);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 94 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_stop" ]
+        %pendingCount.5 = local;
+        symbol [ pendingCount %pendingCount.5 94 12 24 ];
+        %tmp.70 = self;
+        symbol [ _getPendingSessions %tmp.71 94 27 46 ];
+        %tmp.71 = getv function %tmp.70 :_getPendingSessions;
+        %tmp.72 = invoke %tmp.70 %tmp.71();
+        symbol [ size %tmp.73 94 49 53 ];
+        %tmp.73 = getv function %tmp.72 :size;
+        %tmp.74 = invoke %tmp.72 %tmp.73();
+        lputv %pendingCount.5 %tmp.74;
+        symbol [ pendingCount %pendingCount.5 94 12 24 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 95 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_95_8_99_8_if_stmt:
+        %tmp.75 = lgetv %pendingCount.5;
+        symbol [ pendingCount %tmp.75 95 12 24 ];
+        %tmp.76 = 0;
+        %tmp.77 = gt %tmp.75 %tmp.76;
+        bf %tmp.77 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_95_8_99_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_95_8_99_8_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_95_30_99_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 96 12 ]
+        %tmp.78 = lgetv %dc;
+        symbol [ dc %tmp.78 96 12 14 ];
+        symbol [ setColor %tmp.79 96 15 23 ];
+        %tmp.79 = getv function %tmp.78 :setColor;
+        symbol [ COLOR_CYAN %tmp.81 96 24 34 ];
+        %tmp.81 = getv ? :COLOR_CYAN;
+        symbol [ Graphics %tmp.82 96 36 44 ];
+        %tmp.82 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.83 96 45 62 ];
+        %tmp.83 = getv %tmp.82 :COLOR_TRANSPARENT;
+        invoke %tmp.78 %tmp.79(%tmp.81, %tmp.83);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 97 12 ]
+        %tmp.84 = lgetv %dc;
+        symbol [ dc %tmp.84 97 12 14 ];
+        symbol [ drawText %tmp.85 97 15 23 ];
+        %tmp.85 = getv function %tmp.84 :drawText;
+        %tmp.86 = lgetv %cx;
+        symbol [ cx %tmp.86 97 24 26 ];
+        %tmp.87 = lgetv %btnY.4;
+        symbol [ btnY %tmp.87 97 28 32 ];
+        %tmp.88 = lgetv %btnH.2;
+        symbol [ btnH %tmp.88 97 35 39 ];
+        %tmp.89 = add %tmp.87 %tmp.88;
+        %tmp.90 = 14;
+        %tmp.91 = add %tmp.89 %tmp.90;
+        symbol [ Graphics %tmp.92 97 46 54 ];
+        %tmp.92 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.93 97 55 64 ];
+        %tmp.93 = getv %tmp.92 :FONT_TINY;
+        %tmp.94 = lgetv %pendingCount.5;
+        symbol [ pendingCount %tmp.94 98 16 28 ];
+        %tmp.95 = " unsynced";
+        %tmp.96 = add %tmp.94 %tmp.95;
+        symbol [ Graphics %tmp.97 98 44 52 ];
+        %tmp.97 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.98 98 53 72 ];
+        %tmp.98 = getv %tmp.97 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.84 %tmp.85(%tmp.86, %tmp.91, %tmp.93, %tmp.96, %tmp.98);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_95_30_99_8_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_95_8_99_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_95_8_99_8_if_end:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_76_99_100_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 104; @symbol_functiondef = [_drawActive,104,21,32]; @symbol_param<0> = [dc,104,33,35]; @symbol_param<0>_type<0> = [Graphics,104,39,47]; @symbol_param<0>_type<1> = [Dc,104,48,50]; @symbol_param<1> = [cx,104,52,54]; @symbol_param<1>_type<0> = [Number,104,58,64]; @symbol_param<2> = [cy,104,66,68]; @symbol_param<2>_type<0> = [Number,104,72,78]; @symbol_param<3> = [r,104,80,81]; @symbol_param<3>_type<0> = [Number,104,85,91]; ]
+    private
+    function _drawActive(dc as Graphics.Dc, cx as Number, cy as Number, r as Number) as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 106 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_106_8_111_8_if_stmt:
+        symbol [ heartRate %tmp.2 106 12 21 ];
+        %tmp.2 = getv ? :heartRate;
+        %tmp.3 = 0;
+        %tmp.4 = gt %tmp.2 %tmp.3;
+        bf %tmp.4 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_106_8_111_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_106_8_111_8_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_106_27_111_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 107 12 ]
+        %tmp.5 = lgetv %dc;
+        symbol [ dc %tmp.5 107 12 14 ];
+        symbol [ setColor %tmp.6 107 15 23 ];
+        %tmp.6 = getv function %tmp.5 :setColor;
+        symbol [ COLOR_DANGER %tmp.8 107 24 36 ];
+        %tmp.8 = getv ? :COLOR_DANGER;
+        symbol [ Graphics %tmp.9 107 38 46 ];
+        %tmp.9 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.10 107 47 64 ];
+        %tmp.10 = getv %tmp.9 :COLOR_TRANSPARENT;
+        invoke %tmp.5 %tmp.6(%tmp.8, %tmp.10);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 108 12 ]
+        %tmp.11 = lgetv %dc;
+        symbol [ dc %tmp.11 108 12 14 ];
+        symbol [ drawText %tmp.12 108 15 23 ];
+        %tmp.12 = getv function %tmp.11 :drawText;
+        %tmp.13 = lgetv %cx;
+        symbol [ cx %tmp.13 108 25 27 ];
+        %tmp.14 = lgetv %r;
+        symbol [ r %tmp.14 108 30 31 ];
+        %tmp.15 = 0.66;
+        %tmp.16 = mul %tmp.14 %tmp.15;
+        %tmp.17 = sub %tmp.13 %tmp.16;
+        symbol [ toNumber %tmp.18 108 40 48 ];
+        %tmp.18 = getv function %tmp.17 :toNumber;
+        %tmp.19 = invoke %tmp.17 %tmp.18();
+        %tmp.20 = lgetv %cy;
+        symbol [ cy %tmp.20 108 53 55 ];
+        %tmp.21 = lgetv %r;
+        symbol [ r %tmp.21 108 58 59 ];
+        %tmp.22 = 0.58;
+        %tmp.23 = mul %tmp.21 %tmp.22;
+        %tmp.24 = sub %tmp.20 %tmp.23;
+        symbol [ toNumber %tmp.25 108 68 76 ];
+        %tmp.25 = getv function %tmp.24 :toNumber;
+        %tmp.26 = invoke %tmp.24 %tmp.25();
+        symbol [ Graphics %tmp.27 108 80 88 ];
+        %tmp.27 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.28 108 89 98 ];
+        %tmp.28 = getv %tmp.27 :FONT_TINY;
+        symbol [ heartRate %tmp.30 109 16 25 ];
+        %tmp.30 = getv ? :heartRate;
+        symbol [ toString %tmp.31 109 26 34 ];
+        %tmp.31 = getv function %tmp.30 :toString;
+        %tmp.32 = invoke %tmp.30 %tmp.31();
+        %tmp.33 = " bpm";
+        %tmp.34 = add %tmp.32 %tmp.33;
+        symbol [ Graphics %tmp.35 110 16 24 ];
+        %tmp.35 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_LEFT %tmp.36 110 25 42 ];
+        %tmp.36 = getv %tmp.35 :TEXT_JUSTIFY_LEFT;
+        symbol [ Graphics %tmp.37 110 45 53 ];
+        %tmp.37 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.38 110 54 74 ];
+        %tmp.38 = getv %tmp.37 :TEXT_JUSTIFY_VCENTER;
+        %tmp.39 = bitor %tmp.36 %tmp.38;
+        invoke %tmp.11 %tmp.12(%tmp.19, %tmp.26, %tmp.28, %tmp.34, %tmp.39);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_106_27_111_8_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_106_8_111_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_106_8_111_8_if_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 114 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop" ]
+        %ct.1 = local;
+        symbol [ ct %ct.1 114 12 14 ];
+        symbol [ System %tmp.40 114 18 24 ];
+        %tmp.40 = getm $.Toybox.System;
+        symbol [ getClockTime %tmp.41 114 25 37 ];
+        %tmp.41 = getv function %tmp.40 :getClockTime;
+        %tmp.42 = invoke %tmp.40 %tmp.41();
+        lputv %ct.1 %tmp.42;
+        symbol [ ct %ct.1 114 12 14 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 115 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop" ]
+        %mn.2 = local;
+        symbol [ mn %mn.2 115 12 14 ];
+        %tmp.43 = lgetv %ct.1;
+        symbol [ ct %tmp.43 115 18 20 ];
+        symbol [ min %tmp.44 115 21 24 ];
+        %tmp.44 = getv %tmp.43 :min;
+        lputv %mn.2 %tmp.44;
+        symbol [ mn %mn.2 115 12 14 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 116 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop" ]
+        %mnStr.3 = local;
+        symbol [ mnStr %mnStr.3 116 12 17 ];
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_116_20_116_64_begin:
+        %tmp.45 = lgetv %mn.2;
+        symbol [ mn %tmp.45 116 20 22 ];
+        %tmp.46 = 10;
+        %tmp.47 = lt %tmp.45 %tmp.46;
+        bf %tmp.47 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_116_20_116_64_else_false;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_116_20_116_64_true:
+        %tmp.48 = "0";
+        %tmp.49 = lgetv %mn.2;
+        symbol [ mn %tmp.49 116 36 38 ];
+        symbol [ toString %tmp.50 116 39 47 ];
+        %tmp.50 = getv function %tmp.49 :toString;
+        %tmp.51 = invoke %tmp.49 %tmp.50();
+        %tmp.52 = add %tmp.48 %tmp.51;
+        push %tmp.52;
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_116_20_116_64_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_116_20_116_64_else_false:
+        %tmp.53 = lgetv %mn.2;
+        symbol [ mn %tmp.53 116 52 54 ];
+        symbol [ toString %tmp.54 116 55 63 ];
+        %tmp.54 = getv function %tmp.53 :toString;
+        %tmp.55 = invoke %tmp.53 %tmp.54();
+        push %tmp.55;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_116_20_116_64_end:
+        %tmp.56 = phi [%tmp.47 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_116_20_116_64_begin] [%tmp.52 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_116_20_116_64_true] [%tmp.55 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_116_20_116_64_else_false] [%tmp.56 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_116_20_116_64_end];
+        lputv %mnStr.3 %tmp.56;
+        symbol [ mnStr %mnStr.3 116 12 17 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 117 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop" ]
+        %timeStr.4 = local;
+        symbol [ timeStr %timeStr.4 117 12 19 ];
+        %tmp.57 = lgetv %ct.1;
+        symbol [ ct %tmp.57 117 22 24 ];
+        symbol [ hour %tmp.58 117 25 29 ];
+        %tmp.58 = getv %tmp.57 :hour;
+        symbol [ toString %tmp.59 117 30 38 ];
+        %tmp.59 = getv function %tmp.58 :toString;
+        %tmp.60 = invoke %tmp.58 %tmp.59();
+        %tmp.61 = ":";
+        %tmp.62 = add %tmp.60 %tmp.61;
+        %tmp.63 = lgetv %mnStr.3;
+        symbol [ mnStr %tmp.63 117 49 54 ];
+        %tmp.64 = add %tmp.62 %tmp.63;
+        lputv %timeStr.4 %tmp.64;
+        symbol [ timeStr %timeStr.4 117 12 19 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 118 8 ]
+        %tmp.65 = lgetv %dc;
+        symbol [ dc %tmp.65 118 8 10 ];
+        symbol [ setColor %tmp.66 118 11 19 ];
+        %tmp.66 = getv function %tmp.65 :setColor;
+        symbol [ Graphics %tmp.67 118 20 28 ];
+        %tmp.67 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.68 118 29 40 ];
+        %tmp.68 = getv %tmp.67 :COLOR_WHITE;
+        symbol [ Graphics %tmp.69 118 42 50 ];
+        %tmp.69 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.70 118 51 68 ];
+        %tmp.70 = getv %tmp.69 :COLOR_TRANSPARENT;
+        invoke %tmp.65 %tmp.66(%tmp.68, %tmp.70);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 119 8 ]
+        %tmp.71 = lgetv %dc;
+        symbol [ dc %tmp.71 119 8 10 ];
+        symbol [ drawText %tmp.72 119 11 19 ];
+        %tmp.72 = getv function %tmp.71 :drawText;
+        %tmp.73 = lgetv %cx;
+        symbol [ cx %tmp.73 119 21 23 ];
+        %tmp.74 = lgetv %r;
+        symbol [ r %tmp.74 119 26 27 ];
+        %tmp.75 = 0.66;
+        %tmp.76 = mul %tmp.74 %tmp.75;
+        %tmp.77 = add %tmp.73 %tmp.76;
+        symbol [ toNumber %tmp.78 119 36 44 ];
+        %tmp.78 = getv function %tmp.77 :toNumber;
+        %tmp.79 = invoke %tmp.77 %tmp.78();
+        %tmp.80 = lgetv %cy;
+        symbol [ cy %tmp.80 119 49 51 ];
+        %tmp.81 = lgetv %r;
+        symbol [ r %tmp.81 119 54 55 ];
+        %tmp.82 = 0.58;
+        %tmp.83 = mul %tmp.81 %tmp.82;
+        %tmp.84 = sub %tmp.80 %tmp.83;
+        symbol [ toNumber %tmp.85 119 64 72 ];
+        %tmp.85 = getv function %tmp.84 :toNumber;
+        %tmp.86 = invoke %tmp.84 %tmp.85();
+        symbol [ Graphics %tmp.87 119 76 84 ];
+        %tmp.87 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.88 119 85 94 ];
+        %tmp.88 = getv %tmp.87 :FONT_TINY;
+        %tmp.89 = lgetv %timeStr.4;
+        symbol [ timeStr %tmp.89 120 12 19 ];
+        symbol [ Graphics %tmp.90 121 12 20 ];
+        %tmp.90 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_RIGHT %tmp.91 121 21 39 ];
+        %tmp.91 = getv %tmp.90 :TEXT_JUSTIFY_RIGHT;
+        symbol [ Graphics %tmp.92 121 42 50 ];
+        %tmp.92 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.93 121 51 71 ];
+        %tmp.93 = getv %tmp.92 :TEXT_JUSTIFY_VCENTER;
+        %tmp.94 = bitor %tmp.91 %tmp.93;
+        invoke %tmp.71 %tmp.72(%tmp.79, %tmp.86, %tmp.88, %tmp.89, %tmp.94);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 124 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop" ]
+        %statusY.5 = local;
+        symbol [ statusY %statusY.5 124 12 19 ];
+        %tmp.95 = lgetv %cy;
+        symbol [ cy %tmp.95 124 22 24 ];
+        %tmp.96 = 24;
+        %tmp.97 = sub %tmp.95 %tmp.96;
+        lputv %statusY.5 %tmp.97;
+        symbol [ statusY %statusY.5 124 12 19 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 125 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_125_8_140_8_if_stmt:
+        symbol [ _flashActive %tmp.99 125 12 24 ];
+        %tmp.99 = getv ? :_flashActive;
+        bf %tmp.99 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_125_8_140_8_if_false;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_125_8_140_8_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_125_26_129_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 126 12 ]
+        %tmp.100 = lgetv %dc;
+        symbol [ dc %tmp.100 126 12 14 ];
+        symbol [ setColor %tmp.101 126 15 23 ];
+        %tmp.101 = getv function %tmp.100 :setColor;
+        symbol [ COLOR_CYAN %tmp.103 126 24 34 ];
+        %tmp.103 = getv ? :COLOR_CYAN;
+        symbol [ Graphics %tmp.104 126 36 44 ];
+        %tmp.104 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.105 126 45 62 ];
+        %tmp.105 = getv %tmp.104 :COLOR_TRANSPARENT;
+        invoke %tmp.100 %tmp.101(%tmp.103, %tmp.105);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 127 12 ]
+        %tmp.106 = lgetv %dc;
+        symbol [ dc %tmp.106 127 12 14 ];
+        symbol [ drawText %tmp.107 127 15 23 ];
+        %tmp.107 = getv function %tmp.106 :drawText;
+        %tmp.108 = lgetv %cx;
+        symbol [ cx %tmp.108 127 24 26 ];
+        %tmp.109 = lgetv %statusY.5;
+        symbol [ statusY %tmp.109 127 28 35 ];
+        symbol [ Graphics %tmp.110 127 37 45 ];
+        %tmp.110 = getm $.Toybox.Graphics;
+        symbol [ FONT_MEDIUM %tmp.111 127 46 57 ];
+        %tmp.111 = getv %tmp.110 :FONT_MEDIUM;
+        symbol [ _flashMsg %tmp.113 127 59 68 ];
+        %tmp.113 = getv ? :_flashMsg;
+        symbol [ Graphics %tmp.114 128 16 24 ];
+        %tmp.114 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.115 128 25 44 ];
+        %tmp.115 = getv %tmp.114 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.116 128 47 55 ];
+        %tmp.116 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.117 128 56 76 ];
+        %tmp.117 = getv %tmp.116 :TEXT_JUSTIFY_VCENTER;
+        %tmp.118 = bitor %tmp.115 %tmp.117;
+        invoke %tmp.106 %tmp.107(%tmp.108, %tmp.109, %tmp.111, %tmp.113, %tmp.118);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_125_26_129_8_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_125_8_140_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_125_8_140_8_if_false:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 129 15 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_129_15_140_8_if_stmt:
+        symbol [ waveCount %tmp.120 129 19 28 ];
+        %tmp.120 = getv ? :waveCount;
+        %tmp.121 = 0;
+        %tmp.122 = eq %tmp.120 %tmp.121;
+        bf %tmp.122 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_129_15_140_8_if_else_false;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_129_15_140_8_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_129_35_133_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 130 12 ]
+        %tmp.123 = lgetv %dc;
+        symbol [ dc %tmp.123 130 12 14 ];
+        symbol [ setColor %tmp.124 130 15 23 ];
+        %tmp.124 = getv function %tmp.123 :setColor;
+        symbol [ COLOR_MUTED %tmp.126 130 24 35 ];
+        %tmp.126 = getv ? :COLOR_MUTED;
+        symbol [ Graphics %tmp.127 130 37 45 ];
+        %tmp.127 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.128 130 46 63 ];
+        %tmp.128 = getv %tmp.127 :COLOR_TRANSPARENT;
+        invoke %tmp.123 %tmp.124(%tmp.126, %tmp.128);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 131 12 ]
+        %tmp.129 = lgetv %dc;
+        symbol [ dc %tmp.129 131 12 14 ];
+        symbol [ drawText %tmp.130 131 15 23 ];
+        %tmp.130 = getv function %tmp.129 :drawText;
+        %tmp.131 = lgetv %cx;
+        symbol [ cx %tmp.131 131 24 26 ];
+        %tmp.132 = lgetv %statusY.5;
+        symbol [ statusY %tmp.132 131 28 35 ];
+        symbol [ Graphics %tmp.133 131 37 45 ];
+        %tmp.133 = getm $.Toybox.Graphics;
+        symbol [ FONT_MEDIUM %tmp.134 131 46 57 ];
+        %tmp.134 = getv %tmp.133 :FONT_MEDIUM;
+        %tmp.135 = "Ready";
+        symbol [ Graphics %tmp.136 132 16 24 ];
+        %tmp.136 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.137 132 25 44 ];
+        %tmp.137 = getv %tmp.136 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.138 132 47 55 ];
+        %tmp.138 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.139 132 56 76 ];
+        %tmp.139 = getv %tmp.138 :TEXT_JUSTIFY_VCENTER;
+        %tmp.140 = bitor %tmp.137 %tmp.139;
+        invoke %tmp.129 %tmp.130(%tmp.131, %tmp.132, %tmp.134, %tmp.135, %tmp.140);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_129_35_133_8_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_129_15_140_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_129_15_140_8_if_else_false:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_133_15_140_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 134 12 ]
+        %tmp.141 = lgetv %dc;
+        symbol [ dc %tmp.141 134 12 14 ];
+        symbol [ setColor %tmp.142 134 15 23 ];
+        %tmp.142 = getv function %tmp.141 :setColor;
+        symbol [ Graphics %tmp.143 134 24 32 ];
+        %tmp.143 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.144 134 33 44 ];
+        %tmp.144 = getv %tmp.143 :COLOR_WHITE;
+        symbol [ Graphics %tmp.145 134 46 54 ];
+        %tmp.145 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.146 134 55 72 ];
+        %tmp.146 = getv %tmp.145 :COLOR_TRANSPARENT;
+        invoke %tmp.141 %tmp.142(%tmp.144, %tmp.146);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 135 12 ]
+        %tmp.147 = lgetv %dc;
+        symbol [ dc %tmp.147 135 12 14 ];
+        symbol [ drawText %tmp.148 135 15 23 ];
+        %tmp.148 = getv function %tmp.147 :drawText;
+        %tmp.149 = lgetv %cx;
+        symbol [ cx %tmp.149 135 24 26 ];
+        %tmp.150 = lgetv %statusY.5;
+        symbol [ statusY %tmp.150 135 28 35 ];
+        %tmp.151 = 16;
+        %tmp.152 = sub %tmp.150 %tmp.151;
+        symbol [ Graphics %tmp.153 135 42 50 ];
+        %tmp.153 = getm $.Toybox.Graphics;
+        symbol [ FONT_NUMBER_MEDIUM %tmp.154 135 51 69 ];
+        %tmp.154 = getv %tmp.153 :FONT_NUMBER_MEDIUM;
+        symbol [ waveCount %tmp.156 135 71 80 ];
+        %tmp.156 = getv ? :waveCount;
+        symbol [ toString %tmp.157 135 81 89 ];
+        %tmp.157 = getv function %tmp.156 :toString;
+        %tmp.158 = invoke %tmp.156 %tmp.157();
+        symbol [ Graphics %tmp.159 136 16 24 ];
+        %tmp.159 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.160 136 25 44 ];
+        %tmp.160 = getv %tmp.159 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.161 136 47 55 ];
+        %tmp.161 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.162 136 56 76 ];
+        %tmp.162 = getv %tmp.161 :TEXT_JUSTIFY_VCENTER;
+        %tmp.163 = bitor %tmp.160 %tmp.162;
+        invoke %tmp.147 %tmp.148(%tmp.149, %tmp.152, %tmp.154, %tmp.158, %tmp.163);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 137 12 ]
+        %tmp.164 = lgetv %dc;
+        symbol [ dc %tmp.164 137 12 14 ];
+        symbol [ setColor %tmp.165 137 15 23 ];
+        %tmp.165 = getv function %tmp.164 :setColor;
+        symbol [ COLOR_MUTED %tmp.167 137 24 35 ];
+        %tmp.167 = getv ? :COLOR_MUTED;
+        symbol [ Graphics %tmp.168 137 37 45 ];
+        %tmp.168 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.169 137 46 63 ];
+        %tmp.169 = getv %tmp.168 :COLOR_TRANSPARENT;
+        invoke %tmp.164 %tmp.165(%tmp.167, %tmp.169);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 138 12 ]
+        %tmp.170 = lgetv %dc;
+        symbol [ dc %tmp.170 138 12 14 ];
+        symbol [ drawText %tmp.171 138 15 23 ];
+        %tmp.171 = getv function %tmp.170 :drawText;
+        %tmp.172 = lgetv %cx;
+        symbol [ cx %tmp.172 138 24 26 ];
+        %tmp.173 = lgetv %statusY.5;
+        symbol [ statusY %tmp.173 138 28 35 ];
+        %tmp.174 = 22;
+        %tmp.175 = add %tmp.173 %tmp.174;
+        symbol [ Graphics %tmp.176 138 42 50 ];
+        %tmp.176 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.177 138 51 60 ];
+        %tmp.177 = getv %tmp.176 :FONT_TINY;
+        %tmp.178 = "waves logged";
+        symbol [ Graphics %tmp.179 139 16 24 ];
+        %tmp.179 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.180 139 25 44 ];
+        %tmp.180 = getv %tmp.179 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.181 139 47 55 ];
+        %tmp.181 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.182 139 56 76 ];
+        %tmp.182 = getv %tmp.181 :TEXT_JUSTIFY_VCENTER;
+        %tmp.183 = bitor %tmp.180 %tmp.182;
+        invoke %tmp.170 %tmp.171(%tmp.172, %tmp.175, %tmp.177, %tmp.178, %tmp.183);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_133_15_140_8_stop:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_129_15_140_8_if_end:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_125_8_140_8_if_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 143 8 ]
+        %tmp.184 = lgetv %dc;
+        symbol [ dc %tmp.184 143 8 10 ];
+        symbol [ setColor %tmp.185 143 11 19 ];
+        %tmp.185 = getv function %tmp.184 :setColor;
+        symbol [ COLOR_GREEN %tmp.187 143 20 31 ];
+        %tmp.187 = getv ? :COLOR_GREEN;
+        symbol [ Graphics %tmp.188 143 33 41 ];
+        %tmp.188 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.189 143 42 59 ];
+        %tmp.189 = getv %tmp.188 :COLOR_TRANSPARENT;
+        invoke %tmp.184 %tmp.185(%tmp.187, %tmp.189);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 144 8 ]
+        %tmp.190 = lgetv %dc;
+        symbol [ dc %tmp.190 144 8 10 ];
+        symbol [ drawText %tmp.191 144 11 19 ];
+        %tmp.191 = getv function %tmp.190 :drawText;
+        %tmp.192 = lgetv %cx;
+        symbol [ cx %tmp.192 144 20 22 ];
+        %tmp.193 = lgetv %cy;
+        symbol [ cy %tmp.193 144 24 26 ];
+        %tmp.194 = 12;
+        %tmp.195 = add %tmp.193 %tmp.194;
+        symbol [ Graphics %tmp.196 144 33 41 ];
+        %tmp.196 = getm $.Toybox.Graphics;
+        symbol [ FONT_SMALL %tmp.197 144 42 52 ];
+        %tmp.197 = getv %tmp.196 :FONT_SMALL;
+        %tmp.198 = "^";
+        symbol [ Graphics %tmp.199 145 12 20 ];
+        %tmp.199 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.200 145 21 40 ];
+        %tmp.200 = getv %tmp.199 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.201 145 43 51 ];
+        %tmp.201 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.202 145 52 72 ];
+        %tmp.202 = getv %tmp.201 :TEXT_JUSTIFY_VCENTER;
+        %tmp.203 = bitor %tmp.200 %tmp.202;
+        invoke %tmp.190 %tmp.191(%tmp.192, %tmp.195, %tmp.197, %tmp.198, %tmp.203);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 148 8 ]
+        %tmp.204 = lgetv %dc;
+        symbol [ dc %tmp.204 148 8 10 ];
+        symbol [ setColor %tmp.205 148 11 19 ];
+        %tmp.205 = getv function %tmp.204 :setColor;
+        symbol [ COLOR_MUTED %tmp.207 148 20 31 ];
+        %tmp.207 = getv ? :COLOR_MUTED;
+        symbol [ Graphics %tmp.208 148 33 41 ];
+        %tmp.208 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.209 148 42 59 ];
+        %tmp.209 = getv %tmp.208 :COLOR_TRANSPARENT;
+        invoke %tmp.204 %tmp.205(%tmp.207, %tmp.209);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 149 8 ]
+        %tmp.210 = lgetv %dc;
+        symbol [ dc %tmp.210 149 8 10 ];
+        symbol [ drawText %tmp.211 149 11 19 ];
+        %tmp.211 = getv function %tmp.210 :drawText;
+        %tmp.212 = lgetv %cx;
+        symbol [ cx %tmp.212 149 20 22 ];
+        %tmp.213 = lgetv %cy;
+        symbol [ cy %tmp.213 149 24 26 ];
+        %tmp.214 = 30;
+        %tmp.215 = add %tmp.213 %tmp.214;
+        symbol [ Graphics %tmp.216 149 33 41 ];
+        %tmp.216 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.217 149 42 51 ];
+        %tmp.217 = getv %tmp.216 :FONT_TINY;
+        %tmp.218 = "UP to Record";
+        symbol [ Graphics %tmp.219 150 12 20 ];
+        %tmp.219 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.220 150 21 40 ];
+        %tmp.220 = getv %tmp.219 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.221 150 43 51 ];
+        %tmp.221 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.222 150 52 72 ];
+        %tmp.222 = getv %tmp.221 :TEXT_JUSTIFY_VCENTER;
+        %tmp.223 = bitor %tmp.220 %tmp.222;
+        invoke %tmp.210 %tmp.211(%tmp.212, %tmp.215, %tmp.217, %tmp.218, %tmp.223);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 153 8 ]
+        %tmp.224 = lgetv %dc;
+        symbol [ dc %tmp.224 153 8 10 ];
+        symbol [ setColor %tmp.225 153 11 19 ];
+        %tmp.225 = getv function %tmp.224 :setColor;
+        symbol [ COLOR_MUTED %tmp.227 153 20 31 ];
+        %tmp.227 = getv ? :COLOR_MUTED;
+        symbol [ Graphics %tmp.228 153 33 41 ];
+        %tmp.228 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.229 153 42 59 ];
+        %tmp.229 = getv %tmp.228 :COLOR_TRANSPARENT;
+        invoke %tmp.224 %tmp.225(%tmp.227, %tmp.229);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 154 8 ]
+        %tmp.230 = lgetv %dc;
+        symbol [ dc %tmp.230 154 8 10 ];
+        symbol [ setPenWidth %tmp.231 154 11 22 ];
+        %tmp.231 = getv function %tmp.230 :setPenWidth;
+        %tmp.232 = 1;
+        invoke %tmp.230 %tmp.231(%tmp.232);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 155 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop" ]
+        %divY.6 = local;
+        symbol [ divY %divY.6 155 12 16 ];
+        %tmp.233 = lgetv %cy;
+        symbol [ cy %tmp.233 155 22 24 ];
+        %tmp.234 = 50;
+        %tmp.235 = add %tmp.233 %tmp.234;
+        lputv %divY.6 %tmp.235;
+        symbol [ divY %divY.6 155 12 16 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 156 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop" ]
+        %divHalf.7 = local;
+        symbol [ divHalf %divHalf.7 156 12 19 ];
+        %tmp.236 = lgetv %r;
+        symbol [ r %tmp.236 156 23 24 ];
+        %tmp.237 = 0.42;
+        %tmp.238 = mul %tmp.236 %tmp.237;
+        symbol [ toNumber %tmp.239 156 33 41 ];
+        %tmp.239 = getv function %tmp.238 :toNumber;
+        %tmp.240 = invoke %tmp.238 %tmp.239();
+        lputv %divHalf.7 %tmp.240;
+        symbol [ divHalf %divHalf.7 156 12 19 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 157 8 ]
+        %tmp.241 = lgetv %dc;
+        symbol [ dc %tmp.241 157 8 10 ];
+        symbol [ drawLine %tmp.242 157 11 19 ];
+        %tmp.242 = getv function %tmp.241 :drawLine;
+        %tmp.243 = lgetv %cx;
+        symbol [ cx %tmp.243 157 20 22 ];
+        %tmp.244 = lgetv %divHalf.7;
+        symbol [ divHalf %tmp.244 157 25 32 ];
+        %tmp.245 = sub %tmp.243 %tmp.244;
+        %tmp.246 = lgetv %divY.6;
+        symbol [ divY %tmp.246 157 34 38 ];
+        %tmp.247 = lgetv %cx;
+        symbol [ cx %tmp.247 157 40 42 ];
+        %tmp.248 = lgetv %divHalf.7;
+        symbol [ divHalf %tmp.248 157 45 52 ];
+        %tmp.249 = add %tmp.247 %tmp.248;
+        %tmp.250 = lgetv %divY.6;
+        symbol [ divY %tmp.250 157 54 58 ];
+        invoke %tmp.241 %tmp.242(%tmp.245, %tmp.246, %tmp.249, %tmp.250);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 160 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop" ]
+        %btnW.8 = local;
+        symbol [ btnW %btnW.8 160 12 16 ];
+        %tmp.251 = lgetv %r;
+        symbol [ r %tmp.251 160 20 21 ];
+        %tmp.252 = 1.05;
+        %tmp.253 = mul %tmp.251 %tmp.252;
+        symbol [ toNumber %tmp.254 160 30 38 ];
+        %tmp.254 = getv function %tmp.253 :toNumber;
+        %tmp.255 = invoke %tmp.253 %tmp.254();
+        lputv %btnW.8 %tmp.255;
+        symbol [ btnW %btnW.8 160 12 16 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 161 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop" ]
+        %btnH.9 = local;
+        symbol [ btnH %btnH.9 161 12 16 ];
+        %tmp.256 = 32;
+        lputv %btnH.9 %tmp.256;
+        symbol [ btnH %btnH.9 161 12 16 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 162 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop" ]
+        %btnX.10 = local;
+        symbol [ btnX %btnX.10 162 12 16 ];
+        %tmp.257 = lgetv %cx;
+        symbol [ cx %tmp.257 162 19 21 ];
+        %tmp.258 = lgetv %btnW.8;
+        symbol [ btnW %tmp.258 162 24 28 ];
+        %tmp.259 = 2;
+        %tmp.260 = div %tmp.258 %tmp.259;
+        %tmp.261 = sub %tmp.257 %tmp.260;
+        lputv %btnX.10 %tmp.261;
+        symbol [ btnX %btnX.10 162 12 16 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 163 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop" ]
+        %btnY.11 = local;
+        symbol [ btnY %btnY.11 163 12 16 ];
+        %tmp.262 = lgetv %divY.6;
+        symbol [ divY %tmp.262 163 19 23 ];
+        %tmp.263 = 8;
+        %tmp.264 = add %tmp.262 %tmp.263;
+        lputv %btnY.11 %tmp.264;
+        symbol [ btnY %btnY.11 163 12 16 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 164 8 ]
+        %tmp.265 = lgetv %dc;
+        symbol [ dc %tmp.265 164 8 10 ];
+        symbol [ setColor %tmp.266 164 11 19 ];
+        %tmp.266 = getv function %tmp.265 :setColor;
+        %tmp.267 = 0x4A0000;
+        symbol [ Graphics %tmp.268 164 30 38 ];
+        %tmp.268 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.269 164 39 56 ];
+        %tmp.269 = getv %tmp.268 :COLOR_TRANSPARENT;
+        invoke %tmp.265 %tmp.266(%tmp.267, %tmp.269);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 165 8 ]
+        %tmp.270 = lgetv %dc;
+        symbol [ dc %tmp.270 165 8 10 ];
+        symbol [ fillRoundedRectangle %tmp.271 165 11 31 ];
+        %tmp.271 = getv function %tmp.270 :fillRoundedRectangle;
+        %tmp.272 = lgetv %btnX.10;
+        symbol [ btnX %tmp.272 165 32 36 ];
+        %tmp.273 = lgetv %btnY.11;
+        symbol [ btnY %tmp.273 165 38 42 ];
+        %tmp.274 = lgetv %btnW.8;
+        symbol [ btnW %tmp.274 165 44 48 ];
+        %tmp.275 = lgetv %btnH.9;
+        symbol [ btnH %tmp.275 165 50 54 ];
+        %tmp.276 = 16;
+        invoke %tmp.270 %tmp.271(%tmp.272, %tmp.273, %tmp.274, %tmp.275, %tmp.276);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 166 8 ]
+        %tmp.277 = lgetv %dc;
+        symbol [ dc %tmp.277 166 8 10 ];
+        symbol [ setColor %tmp.278 166 11 19 ];
+        %tmp.278 = getv function %tmp.277 :setColor;
+        symbol [ COLOR_DANGER %tmp.280 166 20 32 ];
+        %tmp.280 = getv ? :COLOR_DANGER;
+        symbol [ Graphics %tmp.281 166 34 42 ];
+        %tmp.281 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.282 166 43 60 ];
+        %tmp.282 = getv %tmp.281 :COLOR_TRANSPARENT;
+        invoke %tmp.277 %tmp.278(%tmp.280, %tmp.282);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 167 8 ]
+        %tmp.283 = lgetv %dc;
+        symbol [ dc %tmp.283 167 8 10 ];
+        symbol [ drawText %tmp.284 167 11 19 ];
+        %tmp.284 = getv function %tmp.283 :drawText;
+        %tmp.285 = lgetv %cx;
+        symbol [ cx %tmp.285 167 20 22 ];
+        %tmp.286 = lgetv %btnY.11;
+        symbol [ btnY %tmp.286 167 24 28 ];
+        %tmp.287 = lgetv %btnH.9;
+        symbol [ btnH %tmp.287 167 31 35 ];
+        %tmp.288 = 2;
+        %tmp.289 = div %tmp.287 %tmp.288;
+        %tmp.290 = add %tmp.286 %tmp.289;
+        symbol [ Graphics %tmp.291 167 41 49 ];
+        %tmp.291 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.292 167 50 59 ];
+        %tmp.292 = getv %tmp.291 :FONT_TINY;
+        %tmp.293 = "End Session";
+        symbol [ Graphics %tmp.294 168 12 20 ];
+        %tmp.294 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.295 168 21 40 ];
+        %tmp.295 = getv %tmp.294 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.296 168 43 51 ];
+        %tmp.296 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.297 168 52 72 ];
+        %tmp.297 = getv %tmp.296 :TEXT_JUSTIFY_VCENTER;
+        %tmp.298 = bitor %tmp.295 %tmp.297;
+        invoke %tmp.283 %tmp.284(%tmp.285, %tmp.290, %tmp.292, %tmp.293, %tmp.298);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_104_101_169_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 173; @symbol_functiondef = [startSession,173,13,25]; ]
+    function startSession() as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_173_36_183_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 174 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_174_8_174_37_if_stmt:
+        symbol [ sessionActive %tmp.2 174 12 25 ];
+        %tmp.2 = getv ? :sessionActive;
+        bf %tmp.2 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_174_8_174_37_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_174_8_174_37_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_174_27_174_37_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 174 29 ]
+        ret ?;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_174_27_174_37_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_174_8_174_37_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_174_8_174_37_if_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 175 8 ]
+        %tmp.3 = true;
+        symbol [ sessionActive ? 175 8 21 ];
+        putv self :sessionActive %tmp.3;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 176 8 ]
+        %tmp.4 = self;
+        symbol [ _generateId %tmp.5 176 25 36 ];
+        %tmp.5 = getv function %tmp.4 :_generateId;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        symbol [ sessionId ? 176 8 17 ];
+        putv self :sessionId %tmp.6;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 177 8 ]
+        symbol [ Time %tmp.7 177 25 29 ];
+        %tmp.7 = getm $.Toybox.Time;
+        symbol [ now %tmp.8 177 30 33 ];
+        %tmp.8 = getv function %tmp.7 :now;
+        %tmp.9 = invoke %tmp.7 %tmp.8();
+        symbol [ sessionStart ? 177 8 20 ];
+        putv self :sessionStart %tmp.9;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 178 8 ]
+        %tmp.10 = 0;
+        symbol [ waveCount ? 178 8 17 ];
+        putv self :waveCount %tmp.10;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 179 8 ]
+        %tmp.11 = newa 0 Lang.Array;
+        symbol [ Lang %tmp.11 179 31 35 ];
+        symbol [ Array %tmp.11 179 36 41 ];
+        symbol [ _timestamps ? 179 8 19 ];
+        putv self :_timestamps %tmp.11;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 180 8 ]
+        %tmp.12 = self;
+        symbol [ _startWorkout %tmp.13 180 8 21 ];
+        %tmp.13 = getv function %tmp.12 :_startWorkout;
+        invoke %tmp.12 %tmp.13();
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 181 8 ]
+        %tmp.14 = self;
+        symbol [ _pulse %tmp.15 181 8 14 ];
+        %tmp.15 = getv function %tmp.14 :_pulse;
+        %tmp.16 = 1;
+        invoke %tmp.14 %tmp.15(%tmp.16);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 182 8 ]
+        symbol [ WatchUi %tmp.17 182 8 15 ];
+        %tmp.17 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.18 182 16 29 ];
+        %tmp.18 = getv function %tmp.17 :requestUpdate;
+        invoke %tmp.17 %tmp.18();
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_173_36_183_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 185; @symbol_functiondef = [endSession,185,13,23]; ]
+    function endSession() as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_185_34_191_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 186 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_186_8_186_38_if_stmt:
+        symbol [ sessionActive %tmp.2 186 13 26 ];
+        %tmp.2 = getv ? :sessionActive;
+        %tmp.3 = not %tmp.2;
+        bf %tmp.3 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_186_8_186_38_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_186_8_186_38_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_186_28_186_38_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 186 30 ]
+        ret ?;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_186_28_186_38_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_186_8_186_38_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_186_8_186_38_if_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 187 8 ]
+        %tmp.4 = self;
+        symbol [ _finalizeSession %tmp.5 187 8 24 ];
+        %tmp.5 = getv function %tmp.4 :_finalizeSession;
+        invoke %tmp.4 %tmp.5();
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 188 8 ]
+        %tmp.6 = self;
+        symbol [ _stopWorkout %tmp.7 188 8 20 ];
+        %tmp.7 = getv function %tmp.6 :_stopWorkout;
+        invoke %tmp.6 %tmp.7();
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 189 8 ]
+        %tmp.8 = self;
+        symbol [ _pulse %tmp.9 189 8 14 ];
+        %tmp.9 = getv function %tmp.8 :_pulse;
+        %tmp.10 = 3;
+        invoke %tmp.8 %tmp.9(%tmp.10);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 190 8 ]
+        symbol [ WatchUi %tmp.11 190 8 15 ];
+        %tmp.11 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.12 190 16 29 ];
+        %tmp.12 = getv function %tmp.11 :requestUpdate;
+        invoke %tmp.11 %tmp.12();
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_185_34_191_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 193; @symbol_functiondef = [recordWave,193,13,23]; ]
+    function recordWave() as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_193_34_208_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 194 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_194_8_194_38_if_stmt:
+        symbol [ sessionActive %tmp.2 194 13 26 ];
+        %tmp.2 = getv ? :sessionActive;
+        %tmp.3 = not %tmp.2;
+        bf %tmp.3 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_194_8_194_38_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_194_8_194_38_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_194_28_194_38_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 194 30 ]
+        ret ?;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_194_28_194_38_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_194_8_194_38_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_194_8_194_38_if_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 196 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_193_34_208_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_193_34_208_4_stop" ]
+        %now.1 = local;
+        symbol [ now %now.1 196 12 15 ];
+        symbol [ Time %tmp.4 196 20 24 ];
+        %tmp.4 = getm $.Toybox.Time;
+        symbol [ now %tmp.5 196 25 28 ];
+        %tmp.5 = getv function %tmp.4 :now;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        lputv %now.1 %tmp.6;
+        symbol [ now %now.1 196 12 15 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 197 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_193_34_208_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_193_34_208_4_stop" ]
+        %start.2 = local;
+        symbol [ start %start.2 197 12 17 ];
+        %tmp.7 = lgetv %now.1;
+        symbol [ now %tmp.7 197 20 23 ];
+        symbol [ subtract %tmp.8 197 24 32 ];
+        %tmp.8 = getv function %tmp.7 :subtract;
+        symbol [ Time %tmp.11 197 37 41 ];
+        %tmp.11 = getm $.Toybox.Time;
+        symbol [ Duration %tmp.12 197 42 50 ];
+        %tmp.12 = getv function ? %tmp.11 :Duration;
+        symbol [ waveDurSecs %tmp.14 197 51 62 ];
+        %tmp.14 = getv ? :waveDurSecs;
+        %tmp.9 = newc %tmp.12 (%tmp.14);
+        %tmp.15 = invoke %tmp.7 %tmp.8(%tmp.9);
+        lputv %start.2 %tmp.15;
+        symbol [ start %start.2 197 12 17 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 198 8 ]
+        symbol [ _timestamps %tmp.17 198 8 19 ];
+        %tmp.17 = getv ? :_timestamps;
+        symbol [ add %tmp.18 198 20 23 ];
+        %tmp.18 = getv function %tmp.17 :add;
+        %tmp.19 = newd 3;
+        %tmp.20 = "id";
+        %tmp.21 = self;
+        symbol [ _generateId %tmp.22 199 23 34 ];
+        %tmp.22 = getv function %tmp.21 :_generateId;
+        %tmp.23 = invoke %tmp.21 %tmp.22();
+        %tmp.24 = dup %tmp.19;
+        %tmp.25 = aputv %tmp.24 %tmp.20 %tmp.23;
+        %tmp.26 = "start";
+        %tmp.27 = lgetv %start.2;
+        symbol [ start %tmp.27 200 23 28 ];
+        symbol [ value %tmp.28 200 29 34 ];
+        %tmp.28 = getv function %tmp.27 :value;
+        %tmp.29 = invoke %tmp.27 %tmp.28();
+        symbol [ toFloat %tmp.30 200 37 44 ];
+        %tmp.30 = getv function %tmp.29 :toFloat;
+        %tmp.31 = invoke %tmp.29 %tmp.30();
+        %tmp.32 = dup %tmp.25;
+        %tmp.33 = aputv %tmp.32 %tmp.26 %tmp.31;
+        %tmp.34 = "end";
+        %tmp.35 = lgetv %now.1;
+        symbol [ now %tmp.35 201 23 26 ];
+        symbol [ value %tmp.36 201 27 32 ];
+        %tmp.36 = getv function %tmp.35 :value;
+        %tmp.37 = invoke %tmp.35 %tmp.36();
+        symbol [ toFloat %tmp.38 201 35 42 ];
+        %tmp.38 = getv function %tmp.37 :toFloat;
+        %tmp.39 = invoke %tmp.37 %tmp.38();
+        %tmp.40 = dup %tmp.33;
+        %tmp.41 = aputv %tmp.40 %tmp.34 %tmp.39;
+        invoke %tmp.17 %tmp.18(%tmp.41);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 203 8 ]
+        symbol [ waveCount %tmp.44 203 8 17 ];
+        %tmp.44 = getv ? :waveCount;
+        %tmp.45 = add %tmp.44 1;
+        symbol [ waveCount ? 203 8 17 ];
+        putv self :waveCount dup %tmp.45;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 205 8 ]
+        %tmp.46 = self;
+        symbol [ _showFlash %tmp.47 205 8 18 ];
+        %tmp.47 = getv function %tmp.46 :_showFlash;
+        %tmp.48 = "Wave ";
+        symbol [ waveCount %tmp.50 205 29 38 ];
+        %tmp.50 = getv ? :waveCount;
+        %tmp.51 = add %tmp.48 %tmp.50;
+        %tmp.52 = " logged";
+        %tmp.53 = add %tmp.51 %tmp.52;
+        invoke %tmp.46 %tmp.47(%tmp.53);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 206 8 ]
+        %tmp.54 = self;
+        symbol [ _pulse %tmp.55 206 8 14 ];
+        %tmp.55 = getv function %tmp.54 :_pulse;
+        %tmp.56 = 2;
+        invoke %tmp.54 %tmp.55(%tmp.56);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 207 8 ]
+        symbol [ WatchUi %tmp.57 207 8 15 ];
+        %tmp.57 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.58 207 16 29 ];
+        %tmp.58 = getv function %tmp.57 :requestUpdate;
+        invoke %tmp.57 %tmp.58();
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_193_34_208_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 212; @symbol_functiondef = [_showFlash,212,21,31]; @symbol_param<0> = [msg,212,32,35]; @symbol_param<0>_type<0> = [String,212,39,45]; ]
+    private
+    function _showFlash(msg as String) as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_212_55_220_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 213 8 ]
+        %tmp.1 = lgetv %msg;
+        symbol [ msg %tmp.1 213 23 26 ];
+        symbol [ _flashMsg ? 213 8 17 ];
+        putv self :_flashMsg %tmp.1;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 214 8 ]
+        %tmp.2 = true;
+        symbol [ _flashActive ? 214 8 20 ];
+        putv self :_flashActive %tmp.2;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 215 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_215_8_217_8_if_stmt:
+        symbol [ _flashTimer %tmp.4 215 12 23 ];
+        %tmp.4 = getv ? :_flashTimer;
+        %tmp.5 = null;
+        %tmp.6 = ne %tmp.4 %tmp.5;
+        bf %tmp.6 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_215_8_217_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_215_8_217_8_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_215_33_217_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 216 12 ]
+        symbol [ _flashTimer %tmp.8 216 13 24 ];
+        %tmp.8 = getv ? :_flashTimer;
+        %tmp.9 = as %tmp.8 { (!Null) };
+        %tmp.10 = as %tmp.9 Timer.Timer;
+        symbol [ Timer %tmp.10 216 28 33 ];
+        symbol [ Timer %tmp.10 216 34 39 ];
+        symbol [ stop %tmp.11 216 41 45 ];
+        %tmp.11 = getv function %tmp.10 :stop;
+        invoke %tmp.10 %tmp.11();
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_215_33_217_8_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_215_8_217_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_215_8_217_8_if_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 218 8 ]
+        symbol [ Timer %tmp.14 218 26 31 ];
+        %tmp.14 = getm $.Toybox.Timer;
+        symbol [ Timer %tmp.15 218 32 37 ];
+        %tmp.15 = getv function ? %tmp.14 :Timer;
+        %tmp.12 = newc %tmp.15 ();
+        symbol [ _flashTimer ? 218 8 19 ];
+        putv self :_flashTimer %tmp.12;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 219 8 ]
+        symbol [ _flashTimer %tmp.17 219 9 20 ];
+        %tmp.17 = getv ? :_flashTimer;
+        %tmp.18 = as %tmp.17 Timer.Timer;
+        symbol [ Timer %tmp.18 219 24 29 ];
+        symbol [ Timer %tmp.18 219 30 35 ];
+        symbol [ start %tmp.19 219 37 42 ];
+        %tmp.19 = getv function %tmp.18 :start;
+        %tmp.20 = self;
+        symbol [ method %tmp.21 219 43 49 ];
+        %tmp.21 = getv function %tmp.20 :method;
+        %tmp.23 = const :_clearFlash;
+        symbol [ _clearFlash %tmp.23 219 51 62 const ];
+        %tmp.24 = invoke %tmp.20 %tmp.21(%tmp.23);
+        %tmp.25 = 2000;
+        %tmp.26 = false;
+        invoke %tmp.18 %tmp.19(%tmp.24, %tmp.25, %tmp.26);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_212_55_220_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 222; @symbol_functiondef = [_clearFlash,222,13,24]; ]
+    function _clearFlash() as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_222_35_226_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 223 8 ]
+        %tmp.1 = false;
+        symbol [ _flashActive ? 223 8 20 ];
+        putv self :_flashActive %tmp.1;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 224 8 ]
+        %tmp.2 = "";
+        symbol [ _flashMsg ? 224 8 17 ];
+        putv self :_flashMsg %tmp.2;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 225 8 ]
+        symbol [ WatchUi %tmp.3 225 8 15 ];
+        %tmp.3 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.4 225 16 29 ];
+        %tmp.4 = getv function %tmp.3 :requestUpdate;
+        invoke %tmp.3 %tmp.4();
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_222_35_226_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 230; @symbol_functiondef = [_startWorkout,230,21,34]; ]
+    private
+    function _startWorkout() as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_230_45_240_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 231 8 ]
+        try @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_beginTry @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_endTry @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_catch @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_finally;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_beginTry:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_12_239_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 232 12 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_12_239_8_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_12_239_8_stop" ]
+        %opts.1 = local;
+        symbol [ opts %opts.1 232 16 20 ];
+        %tmp.1 = newd 3;
+        %tmp.3 = const :name;
+        symbol [ name %tmp.3 233 17 21 const ];
+        %tmp.4 = "Surfing";
+        %tmp.5 = dup %tmp.1;
+        %tmp.6 = aputv %tmp.5 %tmp.3 %tmp.4;
+        %tmp.8 = const :sport;
+        symbol [ sport %tmp.8 234 17 22 const ];
+        symbol [ ActivityRecording %tmp.9 234 29 46 ];
+        %tmp.9 = getm $.Toybox.ActivityRecording;
+        symbol [ SPORT_SURFING %tmp.10 234 47 60 ];
+        %tmp.10 = getv %tmp.9 :SPORT_SURFING;
+        %tmp.11 = dup %tmp.6;
+        %tmp.12 = aputv %tmp.11 %tmp.8 %tmp.10;
+        %tmp.14 = const :subSport;
+        symbol [ subSport %tmp.14 235 17 25 const ];
+        symbol [ ActivityRecording %tmp.15 235 29 46 ];
+        %tmp.15 = getm $.Toybox.ActivityRecording;
+        symbol [ SUB_SPORT_GENERIC %tmp.16 235 47 64 ];
+        %tmp.16 = getv %tmp.15 :SUB_SPORT_GENERIC;
+        %tmp.17 = dup %tmp.12;
+        %tmp.18 = aputv %tmp.17 %tmp.14 %tmp.16;
+        lputv %opts.1 %tmp.18;
+        symbol [ opts %opts.1 232 16 20 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 237 12 ]
+        symbol [ ActivityRecording %tmp.19 237 23 40 ];
+        %tmp.19 = getm $.Toybox.ActivityRecording;
+        symbol [ createSession %tmp.20 237 41 54 ];
+        %tmp.20 = getv function %tmp.19 :createSession;
+        %tmp.21 = lgetv %opts.1;
+        symbol [ opts %tmp.21 237 55 59 ];
+        %tmp.22 = invoke %tmp.19 %tmp.20(%tmp.21);
+        symbol [ _workout ? 237 12 20 ];
+        putv self :_workout %tmp.22;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 238 12 ]
+        symbol [ _workout %tmp.24 238 13 21 ];
+        %tmp.24 = getv ? :_workout;
+        %tmp.25 = as %tmp.24 ActivityRecording.Session;
+        symbol [ ActivityRecording %tmp.25 238 25 42 ];
+        symbol [ Session %tmp.25 238 43 50 ];
+        symbol [ start %tmp.26 238 52 57 ];
+        %tmp.26 = getv function %tmp.25 :start;
+        invoke %tmp.25 %tmp.26();
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_12_239_8_stop:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_endTry:
+        jsr @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_finally;
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_catch:
+        %tmp.27 = exception;
+        push %tmp.27;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 239 10 ]
+        %tmp.28 = dup %tmp.27;
+        symbol [ Lang %tmp.29 239 31 35 ];
+        %tmp.29 = getm $.Toybox.Lang;
+        symbol [ Exception %tmp.30 239 36 45 ];
+        %tmp.30 = getv %tmp.29 :Exception;
+        %tmp.31 = isa %tmp.28 %tmp.30;
+        bf %tmp.31 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_239_10_239_48_next;
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_catch" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_239_10_239_48_next" ]
+        %ex.2 = local;
+        symbol [ ex %ex.2 239 17 19 ];
+        %tmp.32 = dup %tmp.27;
+        %tmp.33 = as %tmp.32 Lang.Exception;
+        lputv %ex.2 %tmp.33;
+        symbol [ ex %ex.2 239 17 19 ];
+        jsr @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_finally;
+        pop;
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_239_10_239_48_next:
+        try @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_catch @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_239_10_239_48_next @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_239_10_239_48_next @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_finally;
+        jsr @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_finally;
+        throw %tmp.27;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_finally:
+        jsrret;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_231_8_239_48_end:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_230_45_240_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 242; @symbol_functiondef = [_stopWorkout,242,21,33]; ]
+    private
+    function _stopWorkout() as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_242_44_248_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 243 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_243_8_243_40_if_stmt:
+        symbol [ _workout %tmp.2 243 12 20 ];
+        %tmp.2 = getv ? :_workout;
+        %tmp.3 = null;
+        %tmp.4 = eq %tmp.2 %tmp.3;
+        bf %tmp.4 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_243_8_243_40_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_243_8_243_40_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_243_30_243_40_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 243 32 ]
+        ret ?;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_243_30_243_40_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_243_8_243_40_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_243_8_243_40_if_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 244 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_242_44_248_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_242_44_248_4_stop" ]
+        %ws.1 = local;
+        symbol [ ws %ws.1 244 12 14 ];
+        symbol [ _workout %tmp.6 244 17 25 ];
+        %tmp.6 = getv ? :_workout;
+        %tmp.7 = as %tmp.6 ActivityRecording.Session;
+        symbol [ ActivityRecording %tmp.7 244 29 46 ];
+        symbol [ Session %tmp.7 244 47 54 ];
+        lputv %ws.1 %tmp.7;
+        symbol [ ws %ws.1 244 12 14 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 245 8 ]
+        %tmp.8 = lgetv %ws.1;
+        symbol [ ws %tmp.8 245 8 10 ];
+        symbol [ stop %tmp.9 245 11 15 ];
+        %tmp.9 = getv function %tmp.8 :stop;
+        invoke %tmp.8 %tmp.9();
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 246 8 ]
+        %tmp.10 = lgetv %ws.1;
+        symbol [ ws %tmp.10 246 8 10 ];
+        symbol [ save %tmp.11 246 11 15 ];
+        %tmp.11 = getv function %tmp.10 :save;
+        invoke %tmp.10 %tmp.11();
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 247 8 ]
+        %tmp.12 = null;
+        symbol [ _workout ? 247 8 16 ];
+        putv self :_workout %tmp.12;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_242_44_248_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 252; @symbol_functiondef = [_startHrPolling,252,21,36]; ]
+    private
+    function _startHrPolling() as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_252_47_255_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 253 8 ]
+        symbol [ Timer %tmp.3 253 23 28 ];
+        %tmp.3 = getm $.Toybox.Timer;
+        symbol [ Timer %tmp.4 253 29 34 ];
+        %tmp.4 = getv function ? %tmp.3 :Timer;
+        %tmp.1 = newc %tmp.4 ();
+        symbol [ _hrTimer ? 253 8 16 ];
+        putv self :_hrTimer %tmp.1;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 254 8 ]
+        symbol [ _hrTimer %tmp.6 254 9 17 ];
+        %tmp.6 = getv ? :_hrTimer;
+        %tmp.7 = as %tmp.6 Timer.Timer;
+        symbol [ Timer %tmp.7 254 21 26 ];
+        symbol [ Timer %tmp.7 254 27 32 ];
+        symbol [ start %tmp.8 254 34 39 ];
+        %tmp.8 = getv function %tmp.7 :start;
+        %tmp.9 = self;
+        symbol [ method %tmp.10 254 40 46 ];
+        %tmp.10 = getv function %tmp.9 :method;
+        %tmp.12 = const :_pollHr;
+        symbol [ _pollHr %tmp.12 254 48 55 const ];
+        %tmp.13 = invoke %tmp.9 %tmp.10(%tmp.12);
+        %tmp.14 = 3000;
+        %tmp.15 = true;
+        invoke %tmp.7 %tmp.8(%tmp.13, %tmp.14, %tmp.15);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_252_47_255_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 257; @symbol_functiondef = [_pollHr,257,13,20]; ]
+    function _pollHr() as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_257_31_265_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 258 8 ]
+        try @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_beginTry @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_endTry @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_catch @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_finally;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_beginTry:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_12_264_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 259 12 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_12_264_8_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_12_264_8_stop" ]
+        %info.1 = local;
+        symbol [ info %info.1 259 16 20 ];
+        symbol [ Activity %tmp.1 259 23 31 ];
+        %tmp.1 = getm $.Toybox.Activity;
+        symbol [ getActivityInfo %tmp.2 259 32 47 ];
+        %tmp.2 = getv function %tmp.1 :getActivityInfo;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %info.1 %tmp.3;
+        symbol [ info %info.1 259 16 20 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 260 12 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_12_263_12_if_stmt:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_16_260_57_begin:
+        %tmp.4 = lgetv %info.1;
+        symbol [ info %tmp.4 260 16 20 ];
+        %tmp.5 = null;
+        %tmp.6 = ne %tmp.4 %tmp.5;
+        bf %tmp.6 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_12_263_12_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_32_260_57_true:
+        %tmp.7 = lgetv %info.1;
+        symbol [ info %tmp.7 260 32 36 ];
+        %tmp.8 = as %tmp.7 { (!Null) };
+        symbol [ currentHeartRate %tmp.9 260 37 53 ];
+        %tmp.9 = getv %tmp.8 :currentHeartRate;
+        %tmp.10 = null;
+        %tmp.11 = ne %tmp.9 %tmp.10;
+        push %tmp.11;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_32_260_57_end:
+        %tmp.12 = phi [%tmp.6 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_16_260_57_begin] [%tmp.11 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_32_260_57_true] [%tmp.12 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_32_260_57_end];
+        bf %tmp.12 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_12_263_12_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_12_263_12_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_63_263_12_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 261 16 ]
+        %tmp.13 = lgetv %info.1;
+        symbol [ info %tmp.13 261 28 32 ];
+        %tmp.14 = as %tmp.13 { (!Null) };
+        symbol [ currentHeartRate %tmp.15 261 33 49 ];
+        %tmp.15 = getv %tmp.14 :currentHeartRate;
+        symbol [ heartRate ? 261 16 25 ];
+        putv self :heartRate %tmp.15;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 262 16 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_262_16_262_62_if_stmt:
+        symbol [ sessionActive %tmp.17 262 20 33 ];
+        %tmp.17 = getv ? :sessionActive;
+        bf %tmp.17 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_262_16_262_62_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_262_16_262_62_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_262_35_262_62_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 262 37 ]
+        symbol [ WatchUi %tmp.18 262 37 44 ];
+        %tmp.18 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.19 262 45 58 ];
+        %tmp.19 = getv function %tmp.18 :requestUpdate;
+        invoke %tmp.18 %tmp.19();
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_262_35_262_62_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_262_16_262_62_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_262_16_262_62_if_end:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_63_263_12_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_12_263_12_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_260_12_263_12_if_end:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_12_264_8_stop:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_endTry:
+        jsr @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_finally;
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_catch:
+        %tmp.20 = exception;
+        push %tmp.20;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 264 10 ]
+        %tmp.21 = dup %tmp.20;
+        symbol [ Lang %tmp.22 264 31 35 ];
+        %tmp.22 = getm $.Toybox.Lang;
+        symbol [ Exception %tmp.23 264 36 45 ];
+        %tmp.23 = getv %tmp.22 :Exception;
+        %tmp.24 = isa %tmp.21 %tmp.23;
+        bf %tmp.24 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_264_10_264_48_next;
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_catch" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_264_10_264_48_next" ]
+        %ex.2 = local;
+        symbol [ ex %ex.2 264 17 19 ];
+        %tmp.25 = dup %tmp.20;
+        %tmp.26 = as %tmp.25 Lang.Exception;
+        lputv %ex.2 %tmp.26;
+        symbol [ ex %ex.2 264 17 19 ];
+        jsr @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_finally;
+        pop;
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_264_10_264_48_next:
+        try @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_catch @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_264_10_264_48_next @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_264_10_264_48_next @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_finally;
+        jsr @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_finally;
+        throw %tmp.20;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_finally:
+        jsrret;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_258_8_264_48_end:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_257_31_265_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 269; @symbol_functiondef = [_finalizeSession,269,21,37]; ]
+    private
+    function _finalizeSession() as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_269_48_287_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 270 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_8_280_8_if_stmt:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_12_270_57_begin:
+        symbol [ sessionStart %tmp.2 270 12 24 ];
+        %tmp.2 = getv ? :sessionStart;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_8_280_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_36_270_57_true:
+        symbol [ _timestamps %tmp.6 270 36 47 ];
+        %tmp.6 = getv ? :_timestamps;
+        symbol [ size %tmp.7 270 48 52 ];
+        %tmp.7 = getv function %tmp.6 :size;
+        %tmp.8 = invoke %tmp.6 %tmp.7();
+        %tmp.9 = 0;
+        %tmp.10 = gt %tmp.8 %tmp.9;
+        push %tmp.10;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_36_270_57_end:
+        %tmp.11 = phi [%tmp.4 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_12_270_57_begin] [%tmp.10 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_36_270_57_true] [%tmp.11 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_36_270_57_end];
+        bf %tmp.11 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_8_280_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_8_280_8_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_60_280_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 271 12 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_60_280_8_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_60_280_8_stop" ]
+        %session.1 = local;
+        symbol [ session %session.1 271 16 23 ];
+        %tmp.12 = newd 4;
+        %tmp.13 = "id";
+        symbol [ sessionId %tmp.15 272 32 41 ];
+        %tmp.15 = getv ? :sessionId;
+        %tmp.16 = dup %tmp.12;
+        %tmp.17 = aputv %tmp.16 %tmp.13 %tmp.15;
+        %tmp.18 = "startDate";
+        symbol [ sessionStart %tmp.20 273 33 45 ];
+        %tmp.20 = getv ? :sessionStart;
+        %tmp.21 = as %tmp.20 Time.Moment;
+        symbol [ Time %tmp.21 273 49 53 ];
+        symbol [ Moment %tmp.21 273 54 60 ];
+        symbol [ value %tmp.22 273 62 67 ];
+        %tmp.22 = getv function %tmp.21 :value;
+        %tmp.23 = invoke %tmp.21 %tmp.22();
+        symbol [ toFloat %tmp.24 273 70 77 ];
+        %tmp.24 = getv function %tmp.23 :toFloat;
+        %tmp.25 = invoke %tmp.23 %tmp.24();
+        %tmp.26 = dup %tmp.17;
+        %tmp.27 = aputv %tmp.26 %tmp.18 %tmp.25;
+        %tmp.28 = "endDate";
+        symbol [ Time %tmp.29 274 32 36 ];
+        %tmp.29 = getm $.Toybox.Time;
+        symbol [ now %tmp.30 274 37 40 ];
+        %tmp.30 = getv function %tmp.29 :now;
+        %tmp.31 = invoke %tmp.29 %tmp.30();
+        symbol [ value %tmp.32 274 43 48 ];
+        %tmp.32 = getv function %tmp.31 :value;
+        %tmp.33 = invoke %tmp.31 %tmp.32();
+        symbol [ toFloat %tmp.34 274 51 58 ];
+        %tmp.34 = getv function %tmp.33 :toFloat;
+        %tmp.35 = invoke %tmp.33 %tmp.34();
+        %tmp.36 = dup %tmp.27;
+        %tmp.37 = aputv %tmp.36 %tmp.28 %tmp.35;
+        %tmp.38 = "timestamps";
+        symbol [ _timestamps %tmp.40 275 32 43 ];
+        %tmp.40 = getv ? :_timestamps;
+        %tmp.41 = dup %tmp.37;
+        %tmp.42 = aputv %tmp.41 %tmp.38 %tmp.40;
+        lputv %session.1 %tmp.42;
+        symbol [ session %session.1 271 16 23 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 277 12 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_60_280_8_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_60_280_8_stop" ]
+        %existing.2 = local;
+        symbol [ existing %existing.2 277 16 24 ];
+        %tmp.43 = self;
+        symbol [ _getPendingSessions %tmp.44 277 27 46 ];
+        %tmp.44 = getv function %tmp.43 :_getPendingSessions;
+        %tmp.45 = invoke %tmp.43 %tmp.44();
+        lputv %existing.2 %tmp.45;
+        symbol [ existing %existing.2 277 16 24 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 278 12 ]
+        %tmp.46 = lgetv %existing.2;
+        symbol [ existing %tmp.46 278 12 20 ];
+        symbol [ add %tmp.47 278 21 24 ];
+        %tmp.47 = getv function %tmp.46 :add;
+        %tmp.48 = lgetv %session.1;
+        symbol [ session %tmp.48 278 25 32 ];
+        invoke %tmp.46 %tmp.47(%tmp.48);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 279 12 ]
+        symbol [ Application %tmp.49 279 12 23 ];
+        %tmp.49 = getm $.Toybox.Application;
+        symbol [ Storage %tmp.50 279 24 31 ];
+        %tmp.50 = getv %tmp.49 :Storage;
+        symbol [ setValue %tmp.51 279 32 40 ];
+        %tmp.51 = getv function %tmp.50 :setValue;
+        %tmp.52 = "pendingSessions";
+        %tmp.53 = lgetv %existing.2;
+        symbol [ existing %tmp.53 279 60 68 ];
+        invoke %tmp.50 %tmp.51(%tmp.52, %tmp.53);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_60_280_8_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_8_280_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_270_8_280_8_if_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 281 8 ]
+        %tmp.54 = false;
+        symbol [ sessionActive ? 281 8 21 ];
+        putv self :sessionActive %tmp.54;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 282 8 ]
+        %tmp.55 = "";
+        symbol [ sessionId ? 282 8 17 ];
+        putv self :sessionId %tmp.55;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 283 8 ]
+        %tmp.56 = null;
+        symbol [ sessionStart ? 283 8 20 ];
+        putv self :sessionStart %tmp.56;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 284 8 ]
+        %tmp.57 = 0;
+        symbol [ waveCount ? 284 8 17 ];
+        putv self :waveCount %tmp.57;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 285 8 ]
+        %tmp.58 = newa 0 Lang.Array;
+        symbol [ Lang %tmp.58 285 30 34 ];
+        symbol [ Array %tmp.58 285 35 40 ];
+        symbol [ _timestamps ? 285 8 19 ];
+        putv self :_timestamps %tmp.58;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 286 8 ]
+        %tmp.59 = false;
+        symbol [ _flashActive ? 286 8 20 ];
+        putv self :_flashActive %tmp.59;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_269_48_287_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 289; @symbol_functiondef = [getPendingSessionCount,289,13,35]; @symbol_return<0> = [Number,289,41,47]; ]
+    function getPendingSessionCount() as Number {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_289_48_291_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 290 8 ]
+        %tmp.1 = self;
+        symbol [ _getPendingSessions %tmp.2 290 15 34 ];
+        %tmp.2 = getv function %tmp.1 :_getPendingSessions;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        symbol [ size %tmp.4 290 37 41 ];
+        %tmp.4 = getv function %tmp.3 :size;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        ret %tmp.5;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_289_48_291_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 293; @symbol_functiondef = [clearConfirmedSessions,293,13,35]; @symbol_param<0> = [ids,293,36,39]; @symbol_param<0>_type<0> = [Lang,293,43,47]; @symbol_param<0>_type<1> = [Array,293,48,53]; ]
+    function clearConfirmedSessions(ids as Lang.Array) as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_293_63_304_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 294 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_293_63_304_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_293_63_304_4_stop" ]
+        %sessions.1 = local;
+        symbol [ sessions %sessions.1 294 12 20 ];
+        %tmp.1 = self;
+        symbol [ _getPendingSessions %tmp.2 294 23 42 ];
+        %tmp.2 = getv function %tmp.1 :_getPendingSessions;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %sessions.1 %tmp.3;
+        symbol [ sessions %sessions.1 294 12 20 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 295 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_293_63_304_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_293_63_304_4_stop" ]
+        %kept.2 = local;
+        symbol [ kept %kept.2 295 12 16 ];
+        %tmp.4 = newa 0 Lang.Array;
+        symbol [ Lang %tmp.4 295 29 33 ];
+        symbol [ Array %tmp.4 295 34 39 ];
+        lputv %kept.2 %tmp.4;
+        symbol [ kept %kept.2 295 12 16 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 296 8 ]
+        for @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_test @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_incr @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_init:
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_begin" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_end" ]
+        %i.3 = local;
+        symbol [ i %i.3 296 17 18 ];
+        %tmp.5 = 0;
+        lputv %i.3 %tmp.5;
+        symbol [ i %i.3 296 17 18 ];
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_test:
+        %tmp.6 = lgetv %i.3;
+        symbol [ i %tmp.6 296 24 25 ];
+        %tmp.7 = lgetv %sessions.1;
+        symbol [ sessions %tmp.7 296 28 36 ];
+        symbol [ size %tmp.8 296 37 41 ];
+        %tmp.8 = getv function %tmp.7 :size;
+        %tmp.9 = invoke %tmp.7 %tmp.8();
+        %tmp.10 = lt %tmp.6 %tmp.9;
+        bf %tmp.10 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_begin:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_50_302_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 297 12 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_50_302_8_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_50_302_8_stop" ]
+        %s.4 = local;
+        symbol [ s %s.4 297 16 17 ];
+        %tmp.11 = lgetv %sessions.1;
+        symbol [ sessions %tmp.11 297 21 29 ];
+        %tmp.12 = lgetv %i.3;
+        symbol [ i %tmp.12 297 30 31 ];
+        %tmp.13 = agetv %tmp.11 %tmp.12;
+        %tmp.14 = as %tmp.13 Lang.Dictionary;
+        symbol [ Lang %tmp.14 297 36 40 ];
+        symbol [ Dictionary %tmp.14 297 41 51 ];
+        lputv %s.4 %tmp.14;
+        symbol [ s %s.4 297 16 17 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 298 12 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_50_302_8_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_50_302_8_stop" ]
+        %id.5 = local;
+        symbol [ id %id.5 298 16 18 ];
+        %tmp.15 = lgetv %s.4;
+        symbol [ s %tmp.15 298 21 22 ];
+        %tmp.16 = "id";
+        %tmp.17 = agetv %tmp.15 %tmp.16;
+        %tmp.18 = as %tmp.17 String;
+        symbol [ String %tmp.18 298 32 38 ];
+        lputv %id.5 %tmp.18;
+        symbol [ id %id.5 298 16 18 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 299 12 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_299_12_301_12_if_stmt:
+        %tmp.19 = lgetv %ids;
+        symbol [ ids %tmp.19 299 16 19 ];
+        symbol [ indexOf %tmp.20 299 20 27 ];
+        %tmp.20 = getv function %tmp.19 :indexOf;
+        %tmp.21 = lgetv %id.5;
+        symbol [ id %tmp.21 299 28 30 ];
+        %tmp.22 = invoke %tmp.19 %tmp.20(%tmp.21);
+        %tmp.23 = 0;
+        %tmp.24 = lt %tmp.22 %tmp.23;
+        bf %tmp.24 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_299_12_301_12_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_299_12_301_12_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_299_37_301_12_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 300 16 ]
+        %tmp.25 = lgetv %kept.2;
+        symbol [ kept %tmp.25 300 16 20 ];
+        symbol [ add %tmp.26 300 21 24 ];
+        %tmp.26 = getv function %tmp.25 :add;
+        %tmp.27 = lgetv %s.4;
+        symbol [ s %tmp.27 300 25 26 ];
+        invoke %tmp.25 %tmp.26(%tmp.27);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_299_37_301_12_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_299_12_301_12_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_299_12_301_12_if_end:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_50_302_8_stop:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_incr:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 296 ]
+        %tmp.30 = lgetv %i.3;
+        symbol [ i %tmp.30 296 45 46 ];
+        %tmp.31 = add %tmp.30 1;
+        lputv %i.3 %tmp.31;
+        symbol [ i %i.3 296 45 46 ];
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_test;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_296_8_302_8_for_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 303 8 ]
+        symbol [ Application %tmp.32 303 8 19 ];
+        %tmp.32 = getm $.Toybox.Application;
+        symbol [ Storage %tmp.33 303 20 27 ];
+        %tmp.33 = getv %tmp.32 :Storage;
+        symbol [ setValue %tmp.34 303 28 36 ];
+        %tmp.34 = getv function %tmp.33 :setValue;
+        %tmp.35 = "pendingSessions";
+        %tmp.36 = lgetv %kept.2;
+        symbol [ kept %tmp.36 303 56 60 ];
+        invoke %tmp.33 %tmp.34(%tmp.35, %tmp.36);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_293_63_304_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 306; @symbol_functiondef = [_getPendingSessions,306,21,40]; @symbol_return<0> = [Lang,306,46,50]; @symbol_return<1> = [Array,306,51,56]; ]
+    private
+    function _getPendingSessions() as Lang.Array {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_306_57_312_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 307 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_306_57_312_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_306_57_312_4_stop" ]
+        %stored.1 = local;
+        symbol [ stored %stored.1 307 12 18 ];
+        symbol [ Application %tmp.1 307 21 32 ];
+        %tmp.1 = getm $.Toybox.Application;
+        symbol [ Storage %tmp.2 307 33 40 ];
+        %tmp.2 = getv %tmp.1 :Storage;
+        symbol [ getValue %tmp.3 307 41 49 ];
+        %tmp.3 = getv function %tmp.2 :getValue;
+        %tmp.4 = "pendingSessions";
+        %tmp.5 = invoke %tmp.2 %tmp.3(%tmp.4);
+        lputv %stored.1 %tmp.5;
+        symbol [ stored %stored.1 307 12 18 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 308 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_308_8_310_8_if_stmt:
+        %tmp.6 = lgetv %stored.1;
+        symbol [ stored %tmp.6 308 12 18 ];
+        symbol [ Lang %tmp.7 308 30 34 ];
+        %tmp.7 = getm $.Toybox.Lang;
+        symbol [ Array %tmp.8 308 35 40 ];
+        %tmp.8 = getv %tmp.7 :Array;
+        %tmp.9 = isa %tmp.6 %tmp.8;
+        bf %tmp.9 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_308_8_310_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_308_8_310_8_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_308_42_310_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 309 12 ]
+        %tmp.10 = lgetv %stored.1;
+        symbol [ stored %tmp.10 309 19 25 ];
+        %tmp.11 = as %tmp.10 { (Lang.Array) };
+        %tmp.12 = as %tmp.11 Lang.Array;
+        symbol [ Lang %tmp.12 309 29 33 ];
+        symbol [ Array %tmp.12 309 34 39 ];
+        ret %tmp.12;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_308_42_310_8_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_308_8_310_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_308_8_310_8_if_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 311 8 ]
+        %tmp.13 = newa 0 Lang.Array;
+        symbol [ Lang %tmp.13 311 21 25 ];
+        symbol [ Array %tmp.13 311 26 31 ];
+        ret %tmp.13;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_306_57_312_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 314; @symbol_functiondef = [_loadSettings,314,21,34]; ]
+    private
+    function _loadSettings() as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_314_45_319_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 315 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_314_45_319_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_314_45_319_4_stop" ]
+        %dur.1 = local;
+        symbol [ dur %dur.1 315 12 15 ];
+        symbol [ Application %tmp.1 315 18 29 ];
+        %tmp.1 = getm $.Toybox.Application;
+        symbol [ Storage %tmp.2 315 30 37 ];
+        %tmp.2 = getv %tmp.1 :Storage;
+        symbol [ getValue %tmp.3 315 38 46 ];
+        %tmp.3 = getv function %tmp.2 :getValue;
+        %tmp.4 = "waveDurationSeconds";
+        %tmp.5 = invoke %tmp.2 %tmp.3(%tmp.4);
+        lputv %dur.1 %tmp.5;
+        symbol [ dur %dur.1 315 12 15 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 316 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_316_8_318_8_if_stmt:
+        %tmp.6 = lgetv %dur.1;
+        symbol [ dur %tmp.6 316 12 15 ];
+        symbol [ Number %tmp.8 316 27 33 ];
+        %tmp.8 = getv ? :Number;
+        %tmp.9 = isa %tmp.6 %tmp.8;
+        bf %tmp.9 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_316_8_318_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_316_8_318_8_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_316_35_318_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 317 12 ]
+        %tmp.10 = lgetv %dur.1;
+        symbol [ dur %tmp.10 317 26 29 ];
+        %tmp.11 = as %tmp.10 { (Number) };
+        %tmp.12 = as %tmp.11 Number;
+        symbol [ Number %tmp.12 317 33 39 ];
+        symbol [ waveDurSecs ? 317 12 23 ];
+        putv self :waveDurSecs %tmp.12;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_316_35_318_8_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_316_8_318_8_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_316_8_318_8_if_end:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_314_45_319_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 323; @symbol_functiondef = [_pulse,323,21,27]; @symbol_param<0> = [count,323,28,33]; @symbol_param<0>_type<0> = [Number,323,37,43]; ]
+    private
+    function _pulse(count as Number) as Void {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_323_53_333_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 324 8 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_324_8_324_49_if_stmt:
+        symbol [ Attention %tmp.1 324 14 23 ];
+        %tmp.1 = getm $.Toybox.Attention;
+        %tmp.3 = const :vibrate;
+        symbol [ vibrate %tmp.3 324 29 36 const ];
+        %tmp.4 = canhazplz %tmp.1 %tmp.3;
+        %tmp.5 = not %tmp.4;
+        bf %tmp.5 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_324_8_324_49_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_324_8_324_49_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_324_39_324_49_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 324 41 ]
+        ret ?;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_324_39_324_49_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_324_8_324_49_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_324_8_324_49_if_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 325 8 ]
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_323_53_333_4_start" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_323_53_333_4_stop" ]
+        %pattern.1 = local;
+        symbol [ pattern %pattern.1 325 12 19 ];
+        %tmp.6 = newa 0 Lang.Array;
+        symbol [ Lang %tmp.6 325 28 32 ];
+        symbol [ Array %tmp.6 325 33 38 ];
+        lputv %pattern.1 %tmp.6;
+        symbol [ pattern %pattern.1 325 12 19 ];
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 326 8 ]
+        for @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_test @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_incr @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_init:
+        [ "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_begin" "_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_end" ]
+        %i.2 = local;
+        symbol [ i %i.2 326 17 18 ];
+        %tmp.7 = 0;
+        lputv %i.2 %tmp.7;
+        symbol [ i %i.2 326 17 18 ];
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_test:
+        %tmp.8 = lgetv %i.2;
+        symbol [ i %tmp.8 326 24 25 ];
+        %tmp.9 = lgetv %count;
+        symbol [ count %tmp.9 326 28 33 ];
+        %tmp.10 = lt %tmp.8 %tmp.9;
+        bf %tmp.10 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_begin:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_40_331_8_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 327 12 ]
+        %tmp.11 = lgetv %pattern.1;
+        symbol [ pattern %tmp.11 327 12 19 ];
+        symbol [ add %tmp.12 327 20 23 ];
+        %tmp.12 = getv function %tmp.11 :add;
+        symbol [ Attention %tmp.15 327 28 37 ];
+        %tmp.15 = getm $.Toybox.Attention;
+        symbol [ VibeProfile %tmp.16 327 38 49 ];
+        %tmp.16 = getv function ? %tmp.15 :VibeProfile;
+        %tmp.17 = 100;
+        %tmp.18 = 200;
+        %tmp.13 = newc %tmp.16 (%tmp.17, %tmp.18);
+        invoke %tmp.11 %tmp.12(%tmp.13);
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 328 12 ]
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_328_12_330_12_if_stmt:
+        %tmp.19 = lgetv %i.2;
+        symbol [ i %tmp.19 328 16 17 ];
+        %tmp.20 = lgetv %count;
+        symbol [ count %tmp.20 328 20 25 ];
+        %tmp.21 = 1;
+        %tmp.22 = sub %tmp.20 %tmp.21;
+        %tmp.23 = lt %tmp.19 %tmp.22;
+        bf %tmp.23 @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_328_12_330_12_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_328_12_330_12_if_true:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_328_31_330_12_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 329 16 ]
+        %tmp.24 = lgetv %pattern.1;
+        symbol [ pattern %tmp.24 329 16 23 ];
+        symbol [ add %tmp.25 329 24 27 ];
+        %tmp.25 = getv function %tmp.24 :add;
+        symbol [ Attention %tmp.28 329 32 41 ];
+        %tmp.28 = getm $.Toybox.Attention;
+        symbol [ VibeProfile %tmp.29 329 42 53 ];
+        %tmp.29 = getv function ? %tmp.28 :VibeProfile;
+        %tmp.30 = 0;
+        %tmp.31 = 175;
+        %tmp.26 = newc %tmp.29 (%tmp.30, %tmp.31);
+        invoke %tmp.24 %tmp.25(%tmp.26);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_328_31_330_12_stop:
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_328_12_330_12_if_end;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_328_12_330_12_if_end:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_40_331_8_stop:
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_incr:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 326 ]
+        %tmp.34 = lgetv %i.2;
+        symbol [ i %tmp.34 326 35 36 ];
+        %tmp.35 = add %tmp.34 1;
+        lputv %i.2 %tmp.35;
+        symbol [ i %i.2 326 35 36 ];
+        goto @_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_test;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_326_8_331_8_for_end:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 332 8 ]
+        symbol [ Attention %tmp.36 332 8 17 ];
+        %tmp.36 = getm $.Toybox.Attention;
+        symbol [ vibrate %tmp.37 332 18 25 ];
+        %tmp.37 = getv function %tmp.36 :vibrate;
+        %tmp.38 = lgetv %pattern.1;
+        symbol [ pattern %tmp.38 332 26 33 ];
+        invoke %tmp.36 %tmp.37(%tmp.38);
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_323_53_333_4_stop:
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 337; @symbol_functiondef = [_generateId,337,21,32]; @symbol_return<0> = [String,337,38,44]; ]
+    private
+    function _generateId() as String {
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_337_45_339_4_start:
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc" 338 8 ]
+        symbol [ Time %tmp.1 338 15 19 ];
+        %tmp.1 = getm $.Toybox.Time;
+        symbol [ now %tmp.2 338 20 23 ];
+        %tmp.2 = getv function %tmp.1 :now;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        symbol [ value %tmp.4 338 26 31 ];
+        %tmp.4 = getv function %tmp.3 :value;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        symbol [ toString %tmp.6 338 34 42 ];
+        %tmp.6 = getv function %tmp.5 :toString;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        symbol [ Math %tmp.8 338 47 51 ];
+        %tmp.8 = getm $.Toybox.Math;
+        symbol [ rand %tmp.9 338 52 56 ];
+        %tmp.9 = getv function %tmp.8 :rand;
+        %tmp.10 = invoke %tmp.8 %tmp.9();
+        symbol [ toString %tmp.11 338 59 67 ];
+        %tmp.11 = getv function %tmp.10 :toString;
+        %tmp.12 = invoke %tmp.10 %tmp.11();
+        %tmp.13 = add %tmp.7 %tmp.12;
+        ret %tmp.13;
+_Users_elite_src_TidalLabs_TidalLabsGarmin_source_TidalLabsView_mc_337_45_339_4_stop:
+    }
+}
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/source/TidalLabsView.mc"; @line = 1; ]
+<init> {
+}

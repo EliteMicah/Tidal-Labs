@@ -350,7 +350,7 @@ struct SettingsView: View {
                     Button { withAnimation { confirmClearSyncs = true } } label: {
                         let count = camera.pendingWatchSessions.count
                         HStack(spacing: 8) {
-                            Image(systemName: "applewatch.slash")
+                            Image(systemName: camera.detectedWatchType == .appleWatch ? "applewatch.slash" : "waveform.badge.minus")
                             Text("Clear \(count) pending watch sync\(count == 1 ? "" : "s")")
                         }
                         .font(.hanken(15.5, weight: .bold))

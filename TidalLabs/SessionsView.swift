@@ -686,14 +686,16 @@ struct PendingImportView: View {
                         }
                     } else {
                         VStack(spacing: 10) {
-                            Image(systemName: "applewatch")
+                            Image(systemName: camera.detectedWatchType == .appleWatch ? "applewatch" : "waveform")
                                 .font(.system(size: 44))
                                 .foregroundStyle(Color.tlAccent)
-                            Text("Sync your Apple Watch")
+                            Text(camera.detectedWatchType == .appleWatch ? "Sync your Apple Watch" : "Sync your Garmin")
                                 .font(.bricolage(20))
                                 .foregroundStyle(Color.tlDynamicInk(scheme))
                                 .kerning(-0.4)
-                            Text("Press \"Sync Waves\" on your watch.\nThe app will auto-trim based on your timestamps.")
+                            Text(camera.detectedWatchType == .appleWatch
+                                 ? "Press \"Sync Waves\" on your watch.\nThe app will auto-trim based on your timestamps."
+                                 : "Open the Tidal Labs app on your Garmin and sync.\nThe app will auto-trim based on your timestamps.")
                                 .font(.hanken(14, weight: .medium))
                                 .foregroundStyle(Color.tlDynamicInkSoft(scheme))
                                 .multilineTextAlignment(.center)

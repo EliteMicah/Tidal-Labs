@@ -1,0 +1,1586 @@
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
+import Toybox.Lang;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [WatchUi,2,13,20]; ]
+using Toybox.WatchUi;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 3; @symbol_usingdef<0> = [Toybox,3,6,12]; @symbol_usingdef<1> = [WatchUi,3,13,20]; @symbol_usingAlias = [Ui,3,24,26]; ]
+using Toybox.WatchUi as :Ui;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 4; @symbol_usingdef<0> = [Toybox,4,6,12]; @symbol_usingdef<1> = [Graphics,4,13,21]; ]
+using Toybox.Graphics;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 5; @symbol_usingdef<0> = [Toybox,5,6,12]; @symbol_usingdef<1> = [Graphics,5,13,21]; @symbol_usingAlias = [Gfx,5,25,28]; ]
+using Toybox.Graphics as :Gfx;
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 7; @symbol_moduledef = [Rez,7,7,10]; ]
+module Rez {
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 7; ]
+    <init> {
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 8; @symbol_moduledef = [Drawables,8,11,20]; ]
+    module Drawables {
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 8; ]
+        <init> {
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 9; @position = 27; initialized = true; @symbol_vardef = [LauncherIcon,9,27,39]; @symbol_type<0> = [ResourceId,9,43,53]; ]
+        var LauncherIcon as ResourceId;
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 12; @symbol_moduledef = [Strings,12,11,18]; ]
+    module Strings {
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 12; ]
+        <init> {
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 13; @position = 27; initialized = true; @symbol_vardef = [AppName,13,27,34]; @symbol_type<0> = [ResourceId,13,38,48]; ]
+        var AppName as ResourceId;
+    }
+    [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 16; @symbol_moduledef = [Styles,16,11,17]; ]
+    module Styles {
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 16; ]
+        <init> {
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 17; @symbol_moduledef = [prompt_font_enhanced_readability__body_with_title,17,15,64]; ]
+        module prompt_font_enhanced_readability__body_with_title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 17; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 18; @position = 18; @symbol_constdef = [exclude,18,18,25]; @symbol_type<0> = [Boolean,18,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 21; @symbol_moduledef = [system_size__menu_header,21,15,39]; ]
+        module system_size__menu_header {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 21; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 22; @position = 18; @symbol_constdef = [width,22,18,23]; @symbol_type<0> = [Number,22,27,33]; ]
+            const width as Number = 416;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 23; @position = 18; @symbol_constdef = [height,23,18,24]; @symbol_type<0> = [Number,23,28,34]; ]
+            const height as Number = 154;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 26; @symbol_moduledef = [system_loc__hint_button_left_bottom,26,15,50]; ]
+        module system_loc__hint_button_left_bottom {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 26; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 27; @position = 18; @symbol_constdef = [x,27,18,19]; @symbol_type<0> = [Number,27,23,29]; ]
+            const x as Number = 14;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 28; @position = 18; @symbol_constdef = [y,28,18,19]; @symbol_type<0> = [Number,28,23,29]; ]
+            const y as Number = 266;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 31; @symbol_moduledef = [prompt_font_enhanced_readability__body_no_title,31,15,62]; ]
+        module prompt_font_enhanced_readability__body_no_title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 31; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 32; @position = 18; @symbol_constdef = [exclude,32,18,25]; @symbol_type<0> = [Boolean,32,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 35; @symbol_moduledef = [prompt_loc__body_no_title,35,15,40]; ]
+        module prompt_loc__body_no_title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 35; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 36; @position = 18; @symbol_constdef = [x,36,18,19]; @symbol_type<0> = [Number,36,23,29]; ]
+            const x as Number = 65;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 37; @position = 18; @symbol_constdef = [y,37,18,19]; @symbol_type<0> = [Number,37,23,29]; ]
+            const y as Number = 65;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 40; @symbol_moduledef = [system_icon_dark__about,40,15,38]; ]
+        module system_icon_dark__about {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 40; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 41; @position = 18; @symbol_constdef = [filename,41,18,26]; @symbol_type<0> = [String,41,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__about.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 42; @position = 18; @symbol_constdef = [compress,42,18,26]; @symbol_type<0> = [String,42,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 43; @position = 18; @symbol_constdef = [dithering,43,18,27]; @symbol_type<0> = [String,43,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 44; @position = 18; @symbol_constdef = [automaticPalette,44,18,34]; @symbol_type<0> = [String,44,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 45; @position = 18; @symbol_constdef = [packingFormat,45,18,31]; @symbol_type<0> = [String,45,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 48; @symbol_moduledef = [system_icon_light__question,48,15,42]; ]
+        module system_icon_light__question {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 48; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 49; @position = 18; @symbol_constdef = [filename,49,18,26]; @symbol_type<0> = [String,49,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__question.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 50; @position = 18; @symbol_constdef = [compress,50,18,26]; @symbol_type<0> = [String,50,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 51; @position = 18; @symbol_constdef = [dithering,51,18,27]; @symbol_type<0> = [String,51,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 52; @position = 18; @symbol_constdef = [automaticPalette,52,18,34]; @symbol_type<0> = [String,52,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 53; @position = 18; @symbol_constdef = [packingFormat,53,18,31]; @symbol_type<0> = [String,53,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 56; @symbol_moduledef = [system_loc__hint_button_left_top,56,15,47]; ]
+        module system_loc__hint_button_left_top {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 56; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 57; @position = 18; @symbol_constdef = [exclude,57,18,25]; @symbol_type<0> = [Boolean,57,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 60; @symbol_moduledef = [prompt_font__title,60,15,33]; ]
+        module prompt_font__title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 60; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 61 18 ]
+                symbol [ Graphics %tmp.1 61 34 42 ];
+                %tmp.1 = getm $.Toybox.Graphics;
+                symbol [ TEXT_JUSTIFY_CENTER %tmp.2 61 43 62 ];
+                %tmp.2 = getv %tmp.1 :TEXT_JUSTIFY_CENTER;
+                symbol [ Graphics %tmp.3 61 63 71 ];
+                %tmp.3 = getm $.Toybox.Graphics;
+                symbol [ TEXT_JUSTIFY_VCENTER %tmp.4 61 72 92 ];
+                %tmp.4 = getv %tmp.3 :TEXT_JUSTIFY_VCENTER;
+                %tmp.5 = bitor %tmp.2 %tmp.4;
+                putv self :justification %tmp.5;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 62 18 ]
+                symbol [ Graphics %tmp.6 62 25 33 ];
+                %tmp.6 = getm $.Toybox.Graphics;
+                symbol [ FONT_GLANCE_NUMBER %tmp.7 62 34 52 ];
+                %tmp.7 = getv %tmp.6 :FONT_GLANCE_NUMBER;
+                putv self :font %tmp.7;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 61; @position = 18; @symbol_constdef = [justification,61,18,31]; ]
+            const justification;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 62; @position = 18; @symbol_constdef = [font,62,18,22]; ]
+            const font;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 65; @symbol_moduledef = [system_icon_dark__discard,65,15,40]; ]
+        module system_icon_dark__discard {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 65; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 66; @position = 18; @symbol_constdef = [filename,66,18,26]; @symbol_type<0> = [String,66,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__discard.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 67; @position = 18; @symbol_constdef = [compress,67,18,26]; @symbol_type<0> = [String,67,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 68; @position = 18; @symbol_constdef = [dithering,68,18,27]; @symbol_type<0> = [String,68,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 69; @position = 18; @symbol_constdef = [automaticPalette,69,18,34]; @symbol_type<0> = [String,69,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 70; @position = 18; @symbol_constdef = [packingFormat,70,18,31]; @symbol_type<0> = [String,70,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 73; @symbol_moduledef = [system_size__menu_item,73,15,37]; ]
+        module system_size__menu_item {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 73; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 74; @position = 18; @symbol_constdef = [width,74,18,23]; @symbol_type<0> = [Number,74,27,33]; ]
+            const width as Number = 416;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 75; @position = 18; @symbol_constdef = [height,75,18,24]; @symbol_type<0> = [Number,75,28,34]; ]
+            const height as Number = 100;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 78; @symbol_moduledef = [system_color_dark__text,78,15,38]; ]
+        module system_color_dark__text {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 78; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 80 18 ]
+                symbol [ Graphics %tmp.8 80 31 39 ];
+                %tmp.8 = getm $.Toybox.Graphics;
+                symbol [ COLOR_TRANSPARENT %tmp.9 80 40 57 ];
+                %tmp.9 = getv %tmp.8 :COLOR_TRANSPARENT;
+                putv self :background %tmp.9;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 79; @position = 18; @symbol_constdef = [color,79,18,23]; @symbol_type<0> = [Number,79,27,33]; ]
+            const color as Number = 0xFFFFFF;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 80; @position = 18; @symbol_constdef = [background,80,18,28]; ]
+            const background;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 83; @symbol_moduledef = [system_icon_destructive__discard,83,15,47]; ]
+        module system_icon_destructive__discard {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 83; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 84; @position = 18; @symbol_constdef = [filename,84,18,26]; @symbol_type<0> = [String,84,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_destructive__discard.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 85; @position = 18; @symbol_constdef = [dithering,85,18,27]; @symbol_type<0> = [String,85,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 86; @position = 18; @symbol_constdef = [packingFormat,86,18,31]; @symbol_type<0> = [String,86,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 89; @symbol_moduledef = [system_icon_dark__hint_action_menu,89,15,49]; ]
+        module system_icon_dark__hint_action_menu {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 89; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 90; @position = 18; @symbol_constdef = [filename,90,18,26]; @symbol_type<0> = [String,90,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__hint_button_right_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 91; @position = 18; @symbol_constdef = [dithering,91,18,27]; @symbol_type<0> = [String,91,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 92; @position = 18; @symbol_constdef = [packingFormat,92,18,31]; @symbol_type<0> = [String,92,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 95; @symbol_moduledef = [prompt_size__title,95,15,33]; ]
+        module prompt_size__title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 95; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 96; @position = 18; @symbol_constdef = [width,96,18,23]; @symbol_type<0> = [Number,96,27,33]; ]
+            const width as Number = 340;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 97; @position = 18; @symbol_constdef = [height,97,18,24]; @symbol_type<0> = [Number,97,28,34]; ]
+            const height as Number = 50;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 100; @symbol_moduledef = [confirmation_font__body,100,15,38]; ]
+        module confirmation_font__body {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 100; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 101 18 ]
+                symbol [ Graphics %tmp.10 101 34 42 ];
+                %tmp.10 = getm $.Toybox.Graphics;
+                symbol [ TEXT_JUSTIFY_CENTER %tmp.11 101 43 62 ];
+                %tmp.11 = getv %tmp.10 :TEXT_JUSTIFY_CENTER;
+                symbol [ Graphics %tmp.12 101 63 71 ];
+                %tmp.12 = getm $.Toybox.Graphics;
+                symbol [ TEXT_JUSTIFY_VCENTER %tmp.13 101 72 92 ];
+                %tmp.13 = getv %tmp.12 :TEXT_JUSTIFY_VCENTER;
+                %tmp.14 = bitor %tmp.11 %tmp.13;
+                putv self :justification %tmp.14;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 102 18 ]
+                symbol [ Graphics %tmp.15 102 25 33 ];
+                %tmp.15 = getm $.Toybox.Graphics;
+                symbol [ FONT_TINY %tmp.16 102 34 43 ];
+                %tmp.16 = getv %tmp.15 :FONT_TINY;
+                putv self :font %tmp.16;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 101; @position = 18; @symbol_constdef = [justification,101,18,31]; ]
+            const justification;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 102; @position = 18; @symbol_constdef = [font,102,18,22]; ]
+            const font;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 105; @symbol_moduledef = [system_color_dark__background,105,15,44]; ]
+        module system_color_dark__background {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 105; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 106; @position = 18; @symbol_constdef = [color,106,18,23]; @symbol_type<0> = [Number,106,27,33]; ]
+            const color as Number = 0x000000;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 107; @position = 18; @symbol_constdef = [background,107,18,28]; @symbol_type<0> = [Number,107,32,38]; ]
+            const background as Number = 0x000000;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 110; @symbol_moduledef = [system_icon_destructive__hint_button_left_top,110,15,60]; ]
+        module system_icon_destructive__hint_button_left_top {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 110; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 111; @position = 18; @symbol_constdef = [filename,111,18,26]; @symbol_type<0> = [String,111,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_destructive__hint_button_left_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 112; @position = 18; @symbol_constdef = [dithering,112,18,27]; @symbol_type<0> = [String,112,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 113; @position = 18; @symbol_constdef = [packingFormat,113,18,31]; @symbol_type<0> = [String,113,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 116; @symbol_moduledef = [system_size__launch_icon,116,15,39]; ]
+        module system_size__launch_icon {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 116; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 117; @position = 18; @symbol_constdef = [scaleX,117,18,24]; @symbol_type<0> = [Number,117,28,34]; ]
+            const scaleX as Number = 60;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 118; @position = 18; @symbol_constdef = [scaleY,118,18,24]; @symbol_type<0> = [Number,118,28,34]; ]
+            const scaleY as Number = 60;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 119; @position = 18; @symbol_constdef = [scaleRelativeTo,119,18,33]; @symbol_type<0> = [String,119,37,43]; ]
+            const scaleRelativeTo as String = "screen";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 122; @symbol_moduledef = [confirmation_input__confirm,122,15,42]; ]
+        module confirmation_input__confirm {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 122; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 123 18 ]
+                symbol [ WatchUi %tmp.17 123 27 34 ];
+                %tmp.17 = getm $.Toybox.WatchUi;
+                symbol [ KEY_ENTER %tmp.18 123 35 44 ];
+                %tmp.18 = getv %tmp.17 :KEY_ENTER;
+                putv self :button %tmp.18;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 123; @position = 18; @symbol_constdef = [button,123,18,24]; ]
+            const button;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 126; @symbol_moduledef = [prompt_font__body_with_title,126,15,43]; ]
+        module prompt_font__body_with_title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 126; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 127 18 ]
+                symbol [ Graphics %tmp.19 127 34 42 ];
+                %tmp.19 = getm $.Toybox.Graphics;
+                symbol [ TEXT_JUSTIFY_CENTER %tmp.20 127 43 62 ];
+                %tmp.20 = getv %tmp.19 :TEXT_JUSTIFY_CENTER;
+                putv self :justification %tmp.20;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 128 18 ]
+                symbol [ Graphics %tmp.21 128 25 33 ];
+                %tmp.21 = getm $.Toybox.Graphics;
+                symbol [ FONT_XTINY %tmp.22 128 34 44 ];
+                %tmp.22 = getv %tmp.21 :FONT_XTINY;
+                putv self :font %tmp.22;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 127; @position = 18; @symbol_constdef = [justification,127,18,31]; ]
+            const justification;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 128; @position = 18; @symbol_constdef = [font,128,18,22]; ]
+            const font;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 131; @symbol_moduledef = [confirmation_loc__body,131,15,37]; ]
+        module confirmation_loc__body {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 131; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 132; @position = 18; @symbol_constdef = [x,132,18,19]; @symbol_type<0> = [Number,132,23,29]; ]
+            const x as Number = 90;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 133; @position = 18; @symbol_constdef = [y,133,18,19]; @symbol_type<0> = [Number,133,23,29]; ]
+            const y as Number = 71;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 136; @symbol_moduledef = [system_icon_destructive__hint_button_left_bottom,136,15,63]; ]
+        module system_icon_destructive__hint_button_left_bottom {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 136; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 137; @position = 18; @symbol_constdef = [filename,137,18,26]; @symbol_type<0> = [String,137,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_destructive__hint_button_left_bottom.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 138; @position = 18; @symbol_constdef = [dithering,138,18,27]; @symbol_type<0> = [String,138,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 139; @position = 18; @symbol_constdef = [packingFormat,139,18,31]; @symbol_type<0> = [String,139,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 142; @symbol_moduledef = [prompt_color_dark__background,142,15,44]; ]
+        module prompt_color_dark__background {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 142; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 143; @position = 18; @symbol_constdef = [color,143,18,23]; @symbol_type<0> = [Number,143,27,33]; ]
+            const color as Number = 0x000000;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 144; @position = 18; @symbol_constdef = [background,144,18,28]; @symbol_type<0> = [Number,144,32,38]; ]
+            const background as Number = 0x000000;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 147; @symbol_moduledef = [system_icon_destructive__hint_action_menu,147,15,56]; ]
+        module system_icon_destructive__hint_action_menu {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 147; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 148; @position = 18; @symbol_constdef = [filename,148,18,26]; @symbol_type<0> = [String,148,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_destructive__hint_button_right_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 149; @position = 18; @symbol_constdef = [dithering,149,18,27]; @symbol_type<0> = [String,149,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 150; @position = 18; @symbol_constdef = [packingFormat,150,18,31]; @symbol_type<0> = [String,150,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 153; @symbol_moduledef = [system_loc__hint_action_menu,153,15,43]; ]
+        module system_loc__hint_action_menu {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 153; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 154; @position = 18; @symbol_constdef = [x,154,18,19]; @symbol_type<0> = [Number,154,23,29]; ]
+            const x as Number = 323;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 155; @position = 18; @symbol_constdef = [y,155,18,19]; @symbol_type<0> = [Number,155,23,29]; ]
+            const y as Number = 71;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 158; @symbol_moduledef = [confirmation_icon__hint_confirm,158,15,46]; ]
+        module confirmation_icon__hint_confirm {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 158; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 159; @position = 18; @symbol_constdef = [filename,159,18,26]; @symbol_type<0> = [String,159,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_completion.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 160; @position = 18; @symbol_constdef = [dithering,160,18,27]; @symbol_type<0> = [String,160,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 161; @position = 18; @symbol_constdef = [packingFormat,161,18,31]; @symbol_type<0> = [String,161,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 164; @symbol_moduledef = [system_loc__hint_button_left_middle,164,15,50]; ]
+        module system_loc__hint_button_left_middle {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 164; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 165; @position = 18; @symbol_constdef = [x,165,18,19]; @symbol_type<0> = [Number,165,23,29]; ]
+            const x as Number = 4;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 166; @position = 18; @symbol_constdef = [y,166,18,19]; @symbol_type<0> = [Number,166,23,29]; ]
+            const y as Number = 166;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 169; @symbol_moduledef = [prompt_size__body_no_title,169,15,41]; ]
+        module prompt_size__body_no_title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 169; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 170; @position = 18; @symbol_constdef = [width,170,18,23]; @symbol_type<0> = [Number,170,27,33]; ]
+            const width as Number = 286;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 171; @position = 18; @symbol_constdef = [height,171,18,24]; @symbol_type<0> = [Number,171,28,34]; ]
+            const height as Number = 286;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 174; @symbol_moduledef = [system_icon_light__hint_button_left_top,174,15,54]; ]
+        module system_icon_light__hint_button_left_top {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 174; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 175; @position = 18; @symbol_constdef = [filename,175,18,26]; @symbol_type<0> = [String,175,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__hint_button_left_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 176; @position = 18; @symbol_constdef = [dithering,176,18,27]; @symbol_type<0> = [String,176,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 177; @position = 18; @symbol_constdef = [packingFormat,177,18,31]; @symbol_type<0> = [String,177,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 180; @symbol_moduledef = [prompt_color_light__background,180,15,45]; ]
+        module prompt_color_light__background {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 180; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 181; @position = 18; @symbol_constdef = [color,181,18,23]; @symbol_type<0> = [Number,181,27,33]; ]
+            const color as Number = 0x000000;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 182; @position = 18; @symbol_constdef = [background,182,18,28]; @symbol_type<0> = [Number,182,32,38]; ]
+            const background as Number = 0x000000;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 185; @symbol_moduledef = [confirmation_input__delete,185,15,41]; ]
+        module confirmation_input__delete {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 185; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 186 18 ]
+                symbol [ WatchUi %tmp.23 186 27 34 ];
+                %tmp.23 = getm $.Toybox.WatchUi;
+                symbol [ KEY_ENTER %tmp.24 186 35 44 ];
+                %tmp.24 = getv %tmp.23 :KEY_ENTER;
+                putv self :button %tmp.24;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 186; @position = 18; @symbol_constdef = [button,186,18,24]; ]
+            const button;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 189; @symbol_moduledef = [system_icon_dark__hint_button_left_top,189,15,53]; ]
+        module system_icon_dark__hint_button_left_top {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 189; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 190; @position = 18; @symbol_constdef = [filename,190,18,26]; @symbol_type<0> = [String,190,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__hint_button_left_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 191; @position = 18; @symbol_constdef = [dithering,191,18,27]; @symbol_type<0> = [String,191,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 192; @position = 18; @symbol_constdef = [packingFormat,192,18,31]; @symbol_type<0> = [String,192,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 195; @symbol_moduledef = [system_input__action_menu,195,15,40]; ]
+        module system_input__action_menu {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 195; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 196 18 ]
+                symbol [ WatchUi %tmp.25 196 27 34 ];
+                %tmp.25 = getm $.Toybox.WatchUi;
+                symbol [ KEY_ENTER %tmp.26 196 35 44 ];
+                %tmp.26 = getv %tmp.25 :KEY_ENTER;
+                putv self :button %tmp.26;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 196; @position = 18; @symbol_constdef = [button,196,18,24]; ]
+            const button;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 199; @symbol_moduledef = [system_icon_light__save,199,15,38]; ]
+        module system_icon_light__save {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 199; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 200; @position = 18; @symbol_constdef = [filename,200,18,26]; @symbol_type<0> = [String,200,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__save.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 201; @position = 18; @symbol_constdef = [compress,201,18,26]; @symbol_type<0> = [String,201,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 202; @position = 18; @symbol_constdef = [dithering,202,18,27]; @symbol_type<0> = [String,202,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 203; @position = 18; @symbol_constdef = [automaticPalette,203,18,34]; @symbol_type<0> = [String,203,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 204; @position = 18; @symbol_constdef = [packingFormat,204,18,31]; @symbol_type<0> = [String,204,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 207; @symbol_moduledef = [prompt_color_light__body,207,15,39]; ]
+        module prompt_color_light__body {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 207; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 209 18 ]
+                symbol [ Graphics %tmp.27 209 31 39 ];
+                %tmp.27 = getm $.Toybox.Graphics;
+                symbol [ COLOR_TRANSPARENT %tmp.28 209 40 57 ];
+                %tmp.28 = getv %tmp.27 :COLOR_TRANSPARENT;
+                putv self :background %tmp.28;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 208; @position = 18; @symbol_constdef = [color,208,18,23]; @symbol_type<0> = [Number,208,27,33]; ]
+            const color as Number = 0xFFFFFF;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 209; @position = 18; @symbol_constdef = [background,209,18,28]; ]
+            const background;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 212; @symbol_moduledef = [system_loc__subwindow,212,15,36]; ]
+        module system_loc__subwindow {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 212; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 213; @position = 18; @symbol_constdef = [exclude,213,18,25]; @symbol_type<0> = [Boolean,213,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 216; @symbol_moduledef = [system_icon_light__warning,216,15,41]; ]
+        module system_icon_light__warning {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 216; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 217; @position = 18; @symbol_constdef = [filename,217,18,26]; @symbol_type<0> = [String,217,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__warning.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 218; @position = 18; @symbol_constdef = [compress,218,18,26]; @symbol_type<0> = [String,218,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 219; @position = 18; @symbol_constdef = [dithering,219,18,27]; @symbol_type<0> = [String,219,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 220; @position = 18; @symbol_constdef = [automaticPalette,220,18,34]; @symbol_type<0> = [String,220,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 221; @position = 18; @symbol_constdef = [packingFormat,221,18,31]; @symbol_type<0> = [String,221,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 224; @symbol_moduledef = [confirmation_color_light__body,224,15,45]; ]
+        module confirmation_color_light__body {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 224; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 226 18 ]
+                symbol [ Graphics %tmp.29 226 31 39 ];
+                %tmp.29 = getm $.Toybox.Graphics;
+                symbol [ COLOR_TRANSPARENT %tmp.30 226 40 57 ];
+                %tmp.30 = getv %tmp.29 :COLOR_TRANSPARENT;
+                putv self :background %tmp.30;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 225; @position = 18; @symbol_constdef = [color,225,18,23]; @symbol_type<0> = [Number,225,27,33]; ]
+            const color as Number = 0xFFFFFF;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 226; @position = 18; @symbol_constdef = [background,226,18,28]; ]
+            const background;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 229; @symbol_moduledef = [confirmation_icon_light__hint_keep,229,15,49]; ]
+        module confirmation_icon_light__hint_keep {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 229; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 230; @position = 18; @symbol_constdef = [filename,230,18,26]; @symbol_type<0> = [String,230,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_keep.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 231; @position = 18; @symbol_constdef = [dithering,231,18,27]; @symbol_type<0> = [String,231,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 232; @position = 18; @symbol_constdef = [packingFormat,232,18,31]; @symbol_type<0> = [String,232,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 235; @symbol_moduledef = [activity_color_light__background,235,15,47]; ]
+        module activity_color_light__background {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 235; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 236; @position = 18; @symbol_constdef = [color,236,18,23]; @symbol_type<0> = [Number,236,27,33]; ]
+            const color as Number = 0x000000;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 237; @position = 18; @symbol_constdef = [background,237,18,28]; @symbol_type<0> = [Number,237,32,38]; ]
+            const background as Number = 0x000000;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 240; @symbol_moduledef = [system_icon_positive__hint_button_right_top,240,15,58]; ]
+        module system_icon_positive__hint_button_right_top {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 240; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 241; @position = 18; @symbol_constdef = [filename,241,18,26]; @symbol_type<0> = [String,241,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_positive__hint_button_right_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 242; @position = 18; @symbol_constdef = [dithering,242,18,27]; @symbol_type<0> = [String,242,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 243; @position = 18; @symbol_constdef = [packingFormat,243,18,31]; @symbol_type<0> = [String,243,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 246; @symbol_moduledef = [system_size__screen,246,15,34]; ]
+        module system_size__screen {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 246; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 247; @position = 18; @symbol_constdef = [width,247,18,23]; @symbol_type<0> = [Number,247,27,33]; ]
+            const width as Number = 416;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 248; @position = 18; @symbol_constdef = [height,248,18,24]; @symbol_type<0> = [Number,248,28,34]; ]
+            const height as Number = 416;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 251; @symbol_moduledef = [system_icon_destructive__hint_button_right_bottom,251,15,64]; ]
+        module system_icon_destructive__hint_button_right_bottom {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 251; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 252; @position = 18; @symbol_constdef = [filename,252,18,26]; @symbol_type<0> = [String,252,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_destructive__hint_button_right_bottom.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 253; @position = 18; @symbol_constdef = [dithering,253,18,27]; @symbol_type<0> = [String,253,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 254; @position = 18; @symbol_constdef = [packingFormat,254,18,31]; @symbol_type<0> = [String,254,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 257; @symbol_moduledef = [system_color_light__background,257,15,45]; ]
+        module system_color_light__background {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 257; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 258; @position = 18; @symbol_constdef = [color,258,18,23]; @symbol_type<0> = [Number,258,27,33]; ]
+            const color as Number = 0x000000;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 259; @position = 18; @symbol_constdef = [background,259,18,28]; @symbol_type<0> = [Number,259,32,38]; ]
+            const background as Number = 0x000000;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 262; @symbol_moduledef = [system_icon_destructive__hint_button_right_top,262,15,61]; ]
+        module system_icon_destructive__hint_button_right_top {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 262; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 263; @position = 18; @symbol_constdef = [filename,263,18,26]; @symbol_type<0> = [String,263,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_destructive__hint_button_right_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 264; @position = 18; @symbol_constdef = [dithering,264,18,27]; @symbol_type<0> = [String,264,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 265; @position = 18; @symbol_constdef = [packingFormat,265,18,31]; @symbol_type<0> = [String,265,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 268; @symbol_moduledef = [confirmation_loc__hint_confirm,268,15,45]; ]
+        module confirmation_loc__hint_confirm {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 268; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 269; @position = 18; @symbol_constdef = [x,269,18,19]; @symbol_type<0> = [Number,269,23,29]; ]
+            const x as Number = 323;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 270; @position = 18; @symbol_constdef = [y,270,18,19]; @symbol_type<0> = [Number,270,23,29]; ]
+            const y as Number = 72;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 273; @symbol_moduledef = [activity_color_dark__text,273,15,40]; ]
+        module activity_color_dark__text {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 273; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 275 18 ]
+                symbol [ Graphics %tmp.31 275 31 39 ];
+                %tmp.31 = getm $.Toybox.Graphics;
+                symbol [ COLOR_TRANSPARENT %tmp.32 275 40 57 ];
+                %tmp.32 = getv %tmp.31 :COLOR_TRANSPARENT;
+                putv self :background %tmp.32;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 274; @position = 18; @symbol_constdef = [color,274,18,23]; @symbol_type<0> = [Number,274,27,33]; ]
+            const color as Number = 0xFFFFFF;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 275; @position = 18; @symbol_constdef = [background,275,18,28]; ]
+            const background;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 278; @symbol_moduledef = [confirmation_input__keep,278,15,39]; ]
+        module confirmation_input__keep {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 278; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 279 18 ]
+                symbol [ WatchUi %tmp.33 279 27 34 ];
+                %tmp.33 = getm $.Toybox.WatchUi;
+                symbol [ KEY_DOWN %tmp.34 279 35 43 ];
+                %tmp.34 = getv %tmp.33 :KEY_DOWN;
+                putv self :button %tmp.34;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 279; @position = 18; @symbol_constdef = [button,279,18,24]; ]
+            const button;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 282; @symbol_moduledef = [prompt_loc__body_with_title,282,15,42]; ]
+        module prompt_loc__body_with_title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 282; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 283; @position = 18; @symbol_constdef = [x,283,18,19]; @symbol_type<0> = [Number,283,23,29]; ]
+            const x as Number = 48;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 284; @position = 18; @symbol_constdef = [y,284,18,19]; @symbol_type<0> = [Number,284,23,29]; ]
+            const y as Number = 188;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 287; @symbol_moduledef = [system_icon_dark__search,287,15,39]; ]
+        module system_icon_dark__search {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 287; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 288; @position = 18; @symbol_constdef = [filename,288,18,26]; @symbol_type<0> = [String,288,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__search.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 289; @position = 18; @symbol_constdef = [compress,289,18,26]; @symbol_type<0> = [String,289,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 290; @position = 18; @symbol_constdef = [dithering,290,18,27]; @symbol_type<0> = [String,290,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 291; @position = 18; @symbol_constdef = [automaticPalette,291,18,34]; @symbol_type<0> = [String,291,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 292; @position = 18; @symbol_constdef = [packingFormat,292,18,31]; @symbol_type<0> = [String,292,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 295; @symbol_moduledef = [activity_color_light__text,295,15,41]; ]
+        module activity_color_light__text {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 295; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 297 18 ]
+                symbol [ Graphics %tmp.35 297 31 39 ];
+                %tmp.35 = getm $.Toybox.Graphics;
+                symbol [ COLOR_TRANSPARENT %tmp.36 297 40 57 ];
+                %tmp.36 = getv %tmp.35 :COLOR_TRANSPARENT;
+                putv self :background %tmp.36;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 296; @position = 18; @symbol_constdef = [color,296,18,23]; @symbol_type<0> = [Number,296,27,33]; ]
+            const color as Number = 0xFFFFFF;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 297; @position = 18; @symbol_constdef = [background,297,18,28]; ]
+            const background;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 300; @symbol_moduledef = [confirmation_icon__hint_keep,300,15,43]; ]
+        module confirmation_icon__hint_keep {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 300; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 301; @position = 18; @symbol_constdef = [filename,301,18,26]; @symbol_type<0> = [String,301,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_keep.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 302; @position = 18; @symbol_constdef = [dithering,302,18,27]; @symbol_type<0> = [String,302,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 303; @position = 18; @symbol_constdef = [packingFormat,303,18,31]; @symbol_type<0> = [String,303,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 306; @symbol_moduledef = [system_icon_dark__save,306,15,37]; ]
+        module system_icon_dark__save {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 306; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 307; @position = 18; @symbol_constdef = [filename,307,18,26]; @symbol_type<0> = [String,307,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__save.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 308; @position = 18; @symbol_constdef = [compress,308,18,26]; @symbol_type<0> = [String,308,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 309; @position = 18; @symbol_constdef = [dithering,309,18,27]; @symbol_type<0> = [String,309,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 310; @position = 18; @symbol_constdef = [automaticPalette,310,18,34]; @symbol_type<0> = [String,310,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 311; @position = 18; @symbol_constdef = [packingFormat,311,18,31]; @symbol_type<0> = [String,311,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 314; @symbol_moduledef = [system_icon_destructive__hint_button_left_middle,314,15,63]; ]
+        module system_icon_destructive__hint_button_left_middle {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 314; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 315; @position = 18; @symbol_constdef = [filename,315,18,26]; @symbol_type<0> = [String,315,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_destructive__hint_button_left_middle.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 316; @position = 18; @symbol_constdef = [dithering,316,18,27]; @symbol_type<0> = [String,316,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 317; @position = 18; @symbol_constdef = [packingFormat,317,18,31]; @symbol_type<0> = [String,317,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 320; @symbol_moduledef = [system_icon_light__search,320,15,40]; ]
+        module system_icon_light__search {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 320; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 321; @position = 18; @symbol_constdef = [filename,321,18,26]; @symbol_type<0> = [String,321,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__search.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 322; @position = 18; @symbol_constdef = [compress,322,18,26]; @symbol_type<0> = [String,322,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 323; @position = 18; @symbol_constdef = [dithering,323,18,27]; @symbol_type<0> = [String,323,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 324; @position = 18; @symbol_constdef = [automaticPalette,324,18,34]; @symbol_type<0> = [String,324,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 325; @position = 18; @symbol_constdef = [packingFormat,325,18,31]; @symbol_type<0> = [String,325,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 328; @symbol_moduledef = [system_icon_dark__hint_button_left_bottom,328,15,56]; ]
+        module system_icon_dark__hint_button_left_bottom {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 328; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 329; @position = 18; @symbol_constdef = [filename,329,18,26]; @symbol_type<0> = [String,329,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__hint_button_left_bottom.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 330; @position = 18; @symbol_constdef = [dithering,330,18,27]; @symbol_type<0> = [String,330,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 331; @position = 18; @symbol_constdef = [packingFormat,331,18,31]; @symbol_type<0> = [String,331,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 334; @symbol_moduledef = [system_icon_positive__hint_button_left_top,334,15,57]; ]
+        module system_icon_positive__hint_button_left_top {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 334; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 335; @position = 18; @symbol_constdef = [filename,335,18,26]; @symbol_type<0> = [String,335,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_positive__hint_button_left_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 336; @position = 18; @symbol_constdef = [dithering,336,18,27]; @symbol_type<0> = [String,336,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 337; @position = 18; @symbol_constdef = [packingFormat,337,18,31]; @symbol_type<0> = [String,337,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 340; @symbol_moduledef = [system_loc__hint_button_right_bottom,340,15,51]; ]
+        module system_loc__hint_button_right_bottom {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 340; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 341; @position = 18; @symbol_constdef = [x,341,18,19]; @symbol_type<0> = [Number,341,23,29]; ]
+            const x as Number = 323;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 342; @position = 18; @symbol_constdef = [y,342,18,19]; @symbol_type<0> = [Number,342,23,29]; ]
+            const y as Number = 266;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 345; @symbol_moduledef = [confirmation_icon_dark__hint_reject,345,15,50]; ]
+        module confirmation_icon_dark__hint_reject {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 345; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 346; @position = 18; @symbol_constdef = [filename,346,18,26]; @symbol_type<0> = [String,346,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_reject.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 347; @position = 18; @symbol_constdef = [dithering,347,18,27]; @symbol_type<0> = [String,347,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 348; @position = 18; @symbol_constdef = [packingFormat,348,18,31]; @symbol_type<0> = [String,348,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 351; @symbol_moduledef = [confirmation_color_dark__body,351,15,44]; ]
+        module confirmation_color_dark__body {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 351; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 353 18 ]
+                symbol [ Graphics %tmp.37 353 31 39 ];
+                %tmp.37 = getm $.Toybox.Graphics;
+                symbol [ COLOR_TRANSPARENT %tmp.38 353 40 57 ];
+                %tmp.38 = getv %tmp.37 :COLOR_TRANSPARENT;
+                putv self :background %tmp.38;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 352; @position = 18; @symbol_constdef = [color,352,18,23]; @symbol_type<0> = [Number,352,27,33]; ]
+            const color as Number = 0xFFFFFF;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 353; @position = 18; @symbol_constdef = [background,353,18,28]; ]
+            const background;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 356; @symbol_moduledef = [confirmation_icon_light__hint_confirm,356,15,52]; ]
+        module confirmation_icon_light__hint_confirm {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 356; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 357; @position = 18; @symbol_constdef = [filename,357,18,26]; @symbol_type<0> = [String,357,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_completion.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 358; @position = 18; @symbol_constdef = [dithering,358,18,27]; @symbol_type<0> = [String,358,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 359; @position = 18; @symbol_constdef = [packingFormat,359,18,31]; @symbol_type<0> = [String,359,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 362; @symbol_moduledef = [prompt_color_dark__title,362,15,39]; ]
+        module prompt_color_dark__title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 362; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 364 18 ]
+                symbol [ Graphics %tmp.39 364 31 39 ];
+                %tmp.39 = getm $.Toybox.Graphics;
+                symbol [ COLOR_TRANSPARENT %tmp.40 364 40 57 ];
+                %tmp.40 = getv %tmp.39 :COLOR_TRANSPARENT;
+                putv self :background %tmp.40;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 363; @position = 18; @symbol_constdef = [color,363,18,23]; @symbol_type<0> = [Number,363,27,33]; ]
+            const color as Number = 0xFFFFFF;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 364; @position = 18; @symbol_constdef = [background,364,18,28]; ]
+            const background;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 367; @symbol_moduledef = [system_icon_destructive__cancel,367,15,46]; ]
+        module system_icon_destructive__cancel {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 367; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 368; @position = 18; @symbol_constdef = [filename,368,18,26]; @symbol_type<0> = [String,368,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_destructive__cancel.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 369; @position = 18; @symbol_constdef = [dithering,369,18,27]; @symbol_type<0> = [String,369,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 370; @position = 18; @symbol_constdef = [packingFormat,370,18,31]; @symbol_type<0> = [String,370,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 373; @symbol_moduledef = [system_icon_light__hint_button_right_bottom,373,15,58]; ]
+        module system_icon_light__hint_button_right_bottom {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 373; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 374; @position = 18; @symbol_constdef = [filename,374,18,26]; @symbol_type<0> = [String,374,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__hint_button_right_bottom.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 375; @position = 18; @symbol_constdef = [dithering,375,18,27]; @symbol_type<0> = [String,375,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 376; @position = 18; @symbol_constdef = [packingFormat,376,18,31]; @symbol_type<0> = [String,376,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 379; @symbol_moduledef = [prompt_loc__title,379,15,32]; ]
+        module prompt_loc__title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 379; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 380; @position = 18; @symbol_constdef = [x,380,18,19]; @symbol_type<0> = [Number,380,23,29]; ]
+            const x as Number = 42;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 381; @position = 18; @symbol_constdef = [y,381,18,19]; @symbol_type<0> = [Number,381,23,29]; ]
+            const y as Number = 65;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 384; @symbol_moduledef = [confirmation_font_enhanced_readability__body,384,15,59]; ]
+        module confirmation_font_enhanced_readability__body {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 384; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 385; @position = 18; @symbol_constdef = [exclude,385,18,25]; @symbol_type<0> = [Boolean,385,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 388; @symbol_moduledef = [prompt_color_light__title,388,15,40]; ]
+        module prompt_color_light__title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 388; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 390 18 ]
+                symbol [ Graphics %tmp.41 390 31 39 ];
+                %tmp.41 = getm $.Toybox.Graphics;
+                symbol [ COLOR_TRANSPARENT %tmp.42 390 40 57 ];
+                %tmp.42 = getv %tmp.41 :COLOR_TRANSPARENT;
+                putv self :background %tmp.42;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 389; @position = 18; @symbol_constdef = [color,389,18,23]; @symbol_type<0> = [Number,389,27,33]; ]
+            const color as Number = 0xFFFFFF;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 390; @position = 18; @symbol_constdef = [background,390,18,28]; ]
+            const background;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 393; @symbol_moduledef = [system_icon_dark__hint_button_right_top,393,15,54]; ]
+        module system_icon_dark__hint_button_right_top {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 393; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 394; @position = 18; @symbol_constdef = [filename,394,18,26]; @symbol_type<0> = [String,394,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__hint_button_right_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 395; @position = 18; @symbol_constdef = [dithering,395,18,27]; @symbol_type<0> = [String,395,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 396; @position = 18; @symbol_constdef = [packingFormat,396,18,31]; @symbol_type<0> = [String,396,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 399; @symbol_moduledef = [system_icon_dark__hint_button_left_middle,399,15,56]; ]
+        module system_icon_dark__hint_button_left_middle {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 399; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 400; @position = 18; @symbol_constdef = [filename,400,18,26]; @symbol_type<0> = [String,400,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__hint_button_left_middle.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 401; @position = 18; @symbol_constdef = [dithering,401,18,27]; @symbol_type<0> = [String,401,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 402; @position = 18; @symbol_constdef = [packingFormat,402,18,31]; @symbol_type<0> = [String,402,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 405; @symbol_moduledef = [confirmation_icon_dark__hint_keep,405,15,48]; ]
+        module confirmation_icon_dark__hint_keep {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 405; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 406; @position = 18; @symbol_constdef = [filename,406,18,26]; @symbol_type<0> = [String,406,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_keep.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 407; @position = 18; @symbol_constdef = [dithering,407,18,27]; @symbol_type<0> = [String,407,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 408; @position = 18; @symbol_constdef = [packingFormat,408,18,31]; @symbol_type<0> = [String,408,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 411; @symbol_moduledef = [system_icon_light__cancel,411,15,40]; ]
+        module system_icon_light__cancel {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 411; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 412; @position = 18; @symbol_constdef = [filename,412,18,26]; @symbol_type<0> = [String,412,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__cancel.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 413; @position = 18; @symbol_constdef = [compress,413,18,26]; @symbol_type<0> = [String,413,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 414; @position = 18; @symbol_constdef = [dithering,414,18,27]; @symbol_type<0> = [String,414,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 415; @position = 18; @symbol_constdef = [automaticPalette,415,18,34]; @symbol_type<0> = [String,415,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 416; @position = 18; @symbol_constdef = [packingFormat,416,18,31]; @symbol_type<0> = [String,416,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 419; @symbol_moduledef = [confirmation_icon_light__hint_reject,419,15,51]; ]
+        module confirmation_icon_light__hint_reject {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 419; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 420; @position = 18; @symbol_constdef = [filename,420,18,26]; @symbol_type<0> = [String,420,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_reject.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 421; @position = 18; @symbol_constdef = [dithering,421,18,27]; @symbol_type<0> = [String,421,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 422; @position = 18; @symbol_constdef = [packingFormat,422,18,31]; @symbol_type<0> = [String,422,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 425; @symbol_moduledef = [system_icon_light__about,425,15,39]; ]
+        module system_icon_light__about {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 425; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 426; @position = 18; @symbol_constdef = [filename,426,18,26]; @symbol_type<0> = [String,426,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__about.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 427; @position = 18; @symbol_constdef = [compress,427,18,26]; @symbol_type<0> = [String,427,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 428; @position = 18; @symbol_constdef = [dithering,428,18,27]; @symbol_type<0> = [String,428,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 429; @position = 18; @symbol_constdef = [automaticPalette,429,18,34]; @symbol_type<0> = [String,429,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 430; @position = 18; @symbol_constdef = [packingFormat,430,18,31]; @symbol_type<0> = [String,430,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 433; @symbol_moduledef = [system_size__toast_icon,433,15,38]; ]
+        module system_size__toast_icon {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 433; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 434; @position = 18; @symbol_constdef = [scaleX,434,18,24]; @symbol_type<0> = [Number,434,28,34]; ]
+            const scaleX as Number = 53;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 435; @position = 18; @symbol_constdef = [scaleY,435,18,24]; @symbol_type<0> = [Number,435,28,34]; ]
+            const scaleY as Number = 53;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 436; @position = 18; @symbol_constdef = [scaleRelativeTo,436,18,33]; @symbol_type<0> = [String,436,37,43]; ]
+            const scaleRelativeTo as String = "screen";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 439; @symbol_moduledef = [system_icon_dark__hint_button_right_middle,439,15,57]; ]
+        module system_icon_dark__hint_button_right_middle {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 439; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 440; @position = 18; @symbol_constdef = [exclude,440,18,25]; @symbol_type<0> = [Boolean,440,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 443; @symbol_moduledef = [confirmation_icon__hint_reject,443,15,45]; ]
+        module confirmation_icon__hint_reject {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 443; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 444; @position = 18; @symbol_constdef = [filename,444,18,26]; @symbol_type<0> = [String,444,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_reject.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 445; @position = 18; @symbol_constdef = [dithering,445,18,27]; @symbol_type<0> = [String,445,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 446; @position = 18; @symbol_constdef = [packingFormat,446,18,31]; @symbol_type<0> = [String,446,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 449; @symbol_moduledef = [system_icon_light__hint_action_menu,449,15,50]; ]
+        module system_icon_light__hint_action_menu {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 449; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 450; @position = 18; @symbol_constdef = [filename,450,18,26]; @symbol_type<0> = [String,450,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__hint_button_right_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 451; @position = 18; @symbol_constdef = [dithering,451,18,27]; @symbol_type<0> = [String,451,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 452; @position = 18; @symbol_constdef = [packingFormat,452,18,31]; @symbol_type<0> = [String,452,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 455; @symbol_moduledef = [system_icon_light__hint_button_right_middle,455,15,58]; ]
+        module system_icon_light__hint_button_right_middle {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 455; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 456; @position = 18; @symbol_constdef = [exclude,456,18,25]; @symbol_type<0> = [Boolean,456,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 459; @symbol_moduledef = [system_icon_destructive__hint_button_right_middle,459,15,64]; ]
+        module system_icon_destructive__hint_button_right_middle {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 459; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 460; @position = 18; @symbol_constdef = [exclude,460,18,25]; @symbol_type<0> = [Boolean,460,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 463; @symbol_moduledef = [confirmation_loc__hint_reject,463,15,44]; ]
+        module confirmation_loc__hint_reject {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 463; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 464; @position = 18; @symbol_constdef = [x,464,18,19]; @symbol_type<0> = [Number,464,23,29]; ]
+            const x as Number = 14;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 465; @position = 18; @symbol_constdef = [y,465,18,19]; @symbol_type<0> = [Number,465,23,29]; ]
+            const y as Number = 266;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 468; @symbol_moduledef = [confirmation_icon_dark__hint_delete,468,15,50]; ]
+        module confirmation_icon_dark__hint_delete {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 468; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 469; @position = 18; @symbol_constdef = [filename,469,18,26]; @symbol_type<0> = [String,469,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_delete.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 470; @position = 18; @symbol_constdef = [dithering,470,18,27]; @symbol_type<0> = [String,470,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 471; @position = 18; @symbol_constdef = [packingFormat,471,18,31]; @symbol_type<0> = [String,471,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 474; @symbol_moduledef = [activity_color_dark__background,474,15,46]; ]
+        module activity_color_dark__background {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 474; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 475; @position = 18; @symbol_constdef = [color,475,18,23]; @symbol_type<0> = [Number,475,27,33]; ]
+            const color as Number = 0x000000;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 476; @position = 18; @symbol_constdef = [background,476,18,28]; @symbol_type<0> = [Number,476,32,38]; ]
+            const background as Number = 0x000000;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 479; @symbol_moduledef = [system_icon_light__hint_button_left_bottom,479,15,57]; ]
+        module system_icon_light__hint_button_left_bottom {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 479; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 480; @position = 18; @symbol_constdef = [filename,480,18,26]; @symbol_type<0> = [String,480,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__hint_button_left_bottom.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 481; @position = 18; @symbol_constdef = [dithering,481,18,27]; @symbol_type<0> = [String,481,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 482; @position = 18; @symbol_constdef = [packingFormat,482,18,31]; @symbol_type<0> = [String,482,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 485; @symbol_moduledef = [system_icon_positive__hint_button_left_middle,485,15,60]; ]
+        module system_icon_positive__hint_button_left_middle {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 485; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 486; @position = 18; @symbol_constdef = [filename,486,18,26]; @symbol_type<0> = [String,486,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_positive__hint_button_left_middle.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 487; @position = 18; @symbol_constdef = [dithering,487,18,27]; @symbol_type<0> = [String,487,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 488; @position = 18; @symbol_constdef = [packingFormat,488,18,31]; @symbol_type<0> = [String,488,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 491; @symbol_moduledef = [system_size__menu_icon,491,15,37]; ]
+        module system_size__menu_icon {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 491; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 492; @position = 18; @symbol_constdef = [scaleX,492,18,24]; @symbol_type<0> = [Number,492,28,34]; ]
+            const scaleX as Number = 68;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 493; @position = 18; @symbol_constdef = [scaleY,493,18,24]; @symbol_type<0> = [Number,493,28,34]; ]
+            const scaleY as Number = 98;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 494; @position = 18; @symbol_constdef = [scaleRelativeTo,494,18,33]; @symbol_type<0> = [String,494,37,43]; ]
+            const scaleRelativeTo as String = "screen";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 497; @symbol_moduledef = [system_icon_destructive__warning,497,15,47]; ]
+        module system_icon_destructive__warning {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 497; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 498; @position = 18; @symbol_constdef = [filename,498,18,26]; @symbol_type<0> = [String,498,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_destructive__warning.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 499; @position = 18; @symbol_constdef = [dithering,499,18,27]; @symbol_type<0> = [String,499,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 500; @position = 18; @symbol_constdef = [packingFormat,500,18,31]; @symbol_type<0> = [String,500,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 503; @symbol_moduledef = [system_loc__hint_button_right_middle,503,15,51]; ]
+        module system_loc__hint_button_right_middle {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 503; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 504; @position = 18; @symbol_constdef = [exclude,504,18,25]; @symbol_type<0> = [Boolean,504,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 507; @symbol_moduledef = [system_icon_dark__cancel,507,15,39]; ]
+        module system_icon_dark__cancel {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 507; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 508; @position = 18; @symbol_constdef = [filename,508,18,26]; @symbol_type<0> = [String,508,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__cancel.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 509; @position = 18; @symbol_constdef = [compress,509,18,26]; @symbol_type<0> = [String,509,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 510; @position = 18; @symbol_constdef = [dithering,510,18,27]; @symbol_type<0> = [String,510,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 511; @position = 18; @symbol_constdef = [automaticPalette,511,18,34]; @symbol_type<0> = [String,511,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 512; @position = 18; @symbol_constdef = [packingFormat,512,18,31]; @symbol_type<0> = [String,512,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 515; @symbol_moduledef = [prompt_size__body_with_title,515,15,43]; ]
+        module prompt_size__body_with_title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 515; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 516; @position = 18; @symbol_constdef = [width,516,18,23]; @symbol_type<0> = [Number,516,27,33]; ]
+            const width as Number = 321;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 517; @position = 18; @symbol_constdef = [height,517,18,24]; @symbol_type<0> = [Number,517,28,34]; ]
+            const height as Number = 145;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 520; @symbol_moduledef = [system_loc__hint_button_right_top,520,15,48]; ]
+        module system_loc__hint_button_right_top {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 520; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 521; @position = 18; @symbol_constdef = [x,521,18,19]; @symbol_type<0> = [Number,521,23,29]; ]
+            const x as Number = 323;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 522; @position = 18; @symbol_constdef = [y,522,18,19]; @symbol_type<0> = [Number,522,23,29]; ]
+            const y as Number = 71;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 525; @symbol_moduledef = [system_color_light__text,525,15,39]; ]
+        module system_color_light__text {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 525; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 527 18 ]
+                symbol [ Graphics %tmp.43 527 31 39 ];
+                %tmp.43 = getm $.Toybox.Graphics;
+                symbol [ COLOR_TRANSPARENT %tmp.44 527 40 57 ];
+                %tmp.44 = getv %tmp.43 :COLOR_TRANSPARENT;
+                putv self :background %tmp.44;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 526; @position = 18; @symbol_constdef = [color,526,18,23]; @symbol_type<0> = [Number,526,27,33]; ]
+            const color as Number = 0xFFFFFF;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 527; @position = 18; @symbol_constdef = [background,527,18,28]; ]
+            const background;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 530; @symbol_moduledef = [system_icon_light__check,530,15,39]; ]
+        module system_icon_light__check {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 530; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 531; @position = 18; @symbol_constdef = [filename,531,18,26]; @symbol_type<0> = [String,531,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__check.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 532; @position = 18; @symbol_constdef = [compress,532,18,26]; @symbol_type<0> = [String,532,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 533; @position = 18; @symbol_constdef = [dithering,533,18,27]; @symbol_type<0> = [String,533,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 534; @position = 18; @symbol_constdef = [automaticPalette,534,18,34]; @symbol_type<0> = [String,534,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 535; @position = 18; @symbol_constdef = [packingFormat,535,18,31]; @symbol_type<0> = [String,535,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 538; @symbol_moduledef = [confirmation_input__reject,538,15,41]; ]
+        module confirmation_input__reject {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 538; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 539 18 ]
+                symbol [ WatchUi %tmp.45 539 27 34 ];
+                %tmp.45 = getm $.Toybox.WatchUi;
+                symbol [ KEY_DOWN %tmp.46 539 35 43 ];
+                %tmp.46 = getv %tmp.45 :KEY_DOWN;
+                putv self :button %tmp.46;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 539; @position = 18; @symbol_constdef = [button,539,18,24]; ]
+            const button;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 542; @symbol_moduledef = [system_icon_light__revert,542,15,40]; ]
+        module system_icon_light__revert {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 542; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 543; @position = 18; @symbol_constdef = [filename,543,18,26]; @symbol_type<0> = [String,543,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__revert.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 544; @position = 18; @symbol_constdef = [compress,544,18,26]; @symbol_type<0> = [String,544,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 545; @position = 18; @symbol_constdef = [dithering,545,18,27]; @symbol_type<0> = [String,545,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 546; @position = 18; @symbol_constdef = [automaticPalette,546,18,34]; @symbol_type<0> = [String,546,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 547; @position = 18; @symbol_constdef = [packingFormat,547,18,31]; @symbol_type<0> = [String,547,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 550; @symbol_moduledef = [system_size__subwindow,550,15,37]; ]
+        module system_size__subwindow {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 550; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 551; @position = 18; @symbol_constdef = [exclude,551,18,25]; @symbol_type<0> = [Boolean,551,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 554; @symbol_moduledef = [system_icon_positive__hint_button_left_bottom,554,15,60]; ]
+        module system_icon_positive__hint_button_left_bottom {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 554; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 555; @position = 18; @symbol_constdef = [filename,555,18,26]; @symbol_type<0> = [String,555,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_positive__hint_button_left_bottom.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 556; @position = 18; @symbol_constdef = [dithering,556,18,27]; @symbol_type<0> = [String,556,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 557; @position = 18; @symbol_constdef = [packingFormat,557,18,31]; @symbol_type<0> = [String,557,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 560; @symbol_moduledef = [system_icon_dark__check,560,15,38]; ]
+        module system_icon_dark__check {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 560; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 561; @position = 18; @symbol_constdef = [filename,561,18,26]; @symbol_type<0> = [String,561,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__check.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 562; @position = 18; @symbol_constdef = [compress,562,18,26]; @symbol_type<0> = [String,562,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 563; @position = 18; @symbol_constdef = [dithering,563,18,27]; @symbol_type<0> = [String,563,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 564; @position = 18; @symbol_constdef = [automaticPalette,564,18,34]; @symbol_type<0> = [String,564,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 565; @position = 18; @symbol_constdef = [packingFormat,565,18,31]; @symbol_type<0> = [String,565,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 568; @symbol_moduledef = [confirmation_loc__hint_keep,568,15,42]; ]
+        module confirmation_loc__hint_keep {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 568; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 569; @position = 18; @symbol_constdef = [x,569,18,19]; @symbol_type<0> = [Number,569,23,29]; ]
+            const x as Number = 14;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 570; @position = 18; @symbol_constdef = [y,570,18,19]; @symbol_type<0> = [Number,570,23,29]; ]
+            const y as Number = 266;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 573; @symbol_moduledef = [confirmation_loc__hint_delete,573,15,44]; ]
+        module confirmation_loc__hint_delete {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 573; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 574; @position = 18; @symbol_constdef = [x,574,18,19]; @symbol_type<0> = [Number,574,23,29]; ]
+            const x as Number = 323;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 575; @position = 18; @symbol_constdef = [y,575,18,19]; @symbol_type<0> = [Number,575,23,29]; ]
+            const y as Number = 72;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 578; @symbol_moduledef = [system_icon_positive__hint_action_menu,578,15,53]; ]
+        module system_icon_positive__hint_action_menu {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 578; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 579; @position = 18; @symbol_constdef = [filename,579,18,26]; @symbol_type<0> = [String,579,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_positive__hint_button_right_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 580; @position = 18; @symbol_constdef = [dithering,580,18,27]; @symbol_type<0> = [String,580,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 581; @position = 18; @symbol_constdef = [packingFormat,581,18,31]; @symbol_type<0> = [String,581,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 584; @symbol_moduledef = [system_icon_positive__hint_button_right_middle,584,15,61]; ]
+        module system_icon_positive__hint_button_right_middle {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 584; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 585; @position = 18; @symbol_constdef = [exclude,585,18,25]; @symbol_type<0> = [Boolean,585,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 588; @symbol_moduledef = [system_icon_light__hint_button_left_middle,588,15,57]; ]
+        module system_icon_light__hint_button_left_middle {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 588; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 589; @position = 18; @symbol_constdef = [filename,589,18,26]; @symbol_type<0> = [String,589,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__hint_button_left_middle.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 590; @position = 18; @symbol_constdef = [dithering,590,18,27]; @symbol_type<0> = [String,590,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 591; @position = 18; @symbol_constdef = [packingFormat,591,18,31]; @symbol_type<0> = [String,591,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 594; @symbol_moduledef = [system_icon_dark__hint_button_right_bottom,594,15,57]; ]
+        module system_icon_dark__hint_button_right_bottom {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 594; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 595; @position = 18; @symbol_constdef = [filename,595,18,26]; @symbol_type<0> = [String,595,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__hint_button_right_bottom.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 596; @position = 18; @symbol_constdef = [dithering,596,18,27]; @symbol_type<0> = [String,596,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 597; @position = 18; @symbol_constdef = [packingFormat,597,18,31]; @symbol_type<0> = [String,597,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 600; @symbol_moduledef = [system_icon_positive__hint_button_right_bottom,600,15,61]; ]
+        module system_icon_positive__hint_button_right_bottom {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 600; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 601; @position = 18; @symbol_constdef = [filename,601,18,26]; @symbol_type<0> = [String,601,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_positive__hint_button_right_bottom.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 602; @position = 18; @symbol_constdef = [dithering,602,18,27]; @symbol_type<0> = [String,602,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 603; @position = 18; @symbol_constdef = [packingFormat,603,18,31]; @symbol_type<0> = [String,603,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 606; @symbol_moduledef = [system_icon_dark__revert,606,15,39]; ]
+        module system_icon_dark__revert {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 606; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 607; @position = 18; @symbol_constdef = [filename,607,18,26]; @symbol_type<0> = [String,607,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__revert.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 608; @position = 18; @symbol_constdef = [compress,608,18,26]; @symbol_type<0> = [String,608,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 609; @position = 18; @symbol_constdef = [dithering,609,18,27]; @symbol_type<0> = [String,609,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 610; @position = 18; @symbol_constdef = [automaticPalette,610,18,34]; @symbol_type<0> = [String,610,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 611; @position = 18; @symbol_constdef = [packingFormat,611,18,31]; @symbol_type<0> = [String,611,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 614; @symbol_moduledef = [confirmation_icon_light__hint_delete,614,15,51]; ]
+        module confirmation_icon_light__hint_delete {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 614; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 615; @position = 18; @symbol_constdef = [filename,615,18,26]; @symbol_type<0> = [String,615,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_delete.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 616; @position = 18; @symbol_constdef = [dithering,616,18,27]; @symbol_type<0> = [String,616,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 617; @position = 18; @symbol_constdef = [packingFormat,617,18,31]; @symbol_type<0> = [String,617,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 620; @symbol_moduledef = [system_icon_dark__question,620,15,41]; ]
+        module system_icon_dark__question {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 620; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 621; @position = 18; @symbol_constdef = [filename,621,18,26]; @symbol_type<0> = [String,621,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__question.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 622; @position = 18; @symbol_constdef = [compress,622,18,26]; @symbol_type<0> = [String,622,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 623; @position = 18; @symbol_constdef = [dithering,623,18,27]; @symbol_type<0> = [String,623,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 624; @position = 18; @symbol_constdef = [automaticPalette,624,18,34]; @symbol_type<0> = [String,624,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 625; @position = 18; @symbol_constdef = [packingFormat,625,18,31]; @symbol_type<0> = [String,625,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 628; @symbol_moduledef = [system_icon_light__discard,628,15,41]; ]
+        module system_icon_light__discard {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 628; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 629; @position = 18; @symbol_constdef = [filename,629,18,26]; @symbol_type<0> = [String,629,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__discard.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 630; @position = 18; @symbol_constdef = [compress,630,18,26]; @symbol_type<0> = [String,630,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 631; @position = 18; @symbol_constdef = [dithering,631,18,27]; @symbol_type<0> = [String,631,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 632; @position = 18; @symbol_constdef = [automaticPalette,632,18,34]; @symbol_type<0> = [String,632,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 633; @position = 18; @symbol_constdef = [packingFormat,633,18,31]; @symbol_type<0> = [String,633,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 636; @symbol_moduledef = [device_info,636,15,26]; ]
+        module device_info {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 636; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 638 18 ]
+                symbol [ Toybox %tmp.48 638 32 38 ];
+                %tmp.48 = getv ? :Toybox;
+                symbol [ System %tmp.49 638 39 45 ];
+                %tmp.49 = getv %tmp.48 :System;
+                symbol [ SCREEN_SHAPE_ROUND %tmp.50 638 46 64 ];
+                %tmp.50 = getv %tmp.49 :SCREEN_SHAPE_ROUND;
+                putv self :screenShape %tmp.50;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 637; @position = 18; @symbol_constdef = [screenWidth,637,18,29]; @symbol_type<0> = [Number,637,33,39]; ]
+            const screenWidth as Number = 416;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 638; @position = 18; @symbol_constdef = [screenShape,638,18,29]; ]
+            const screenShape;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 639; @position = 18; @symbol_constdef = [hasNightMode,639,18,30]; @symbol_type<0> = [Boolean,639,34,41]; ]
+            const hasNightMode as Boolean = false;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 640; @position = 18; @symbol_constdef = [hasGpu,640,18,24]; @symbol_type<0> = [Boolean,640,28,35]; ]
+            const hasGpu as Boolean = true;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 641; @position = 18; @symbol_constdef = [screenHeight,641,18,30]; @symbol_type<0> = [Number,641,34,40]; ]
+            const screenHeight as Number = 416;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 642; @position = 18; @symbol_constdef = [hasTouchScreen,642,18,32]; @symbol_type<0> = [Boolean,642,36,43]; ]
+            const hasTouchScreen as Boolean = true;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 643; @position = 18; @symbol_constdef = [hasEnhancedReadabilityMode,643,18,44]; @symbol_type<0> = [Boolean,643,48,55]; ]
+            const hasEnhancedReadabilityMode as Boolean = false;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 646; @symbol_moduledef = [confirmation_icon_dark__hint_confirm,646,15,51]; ]
+        module confirmation_icon_dark__hint_confirm {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 646; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 647; @position = 18; @symbol_constdef = [filename,647,18,26]; @symbol_type<0> = [String,647,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_completion.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 648; @position = 18; @symbol_constdef = [dithering,648,18,27]; @symbol_type<0> = [String,648,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 649; @position = 18; @symbol_constdef = [packingFormat,649,18,31]; @symbol_type<0> = [String,649,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 652; @symbol_moduledef = [prompt_font__body_no_title,652,15,41]; ]
+        module prompt_font__body_no_title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 652; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 653 18 ]
+                symbol [ Graphics %tmp.51 653 34 42 ];
+                %tmp.51 = getm $.Toybox.Graphics;
+                symbol [ TEXT_JUSTIFY_CENTER %tmp.52 653 43 62 ];
+                %tmp.52 = getv %tmp.51 :TEXT_JUSTIFY_CENTER;
+                symbol [ Graphics %tmp.53 653 63 71 ];
+                %tmp.53 = getm $.Toybox.Graphics;
+                symbol [ TEXT_JUSTIFY_VCENTER %tmp.54 653 72 92 ];
+                %tmp.54 = getv %tmp.53 :TEXT_JUSTIFY_VCENTER;
+                %tmp.55 = bitor %tmp.52 %tmp.54;
+                putv self :justification %tmp.55;
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 654 18 ]
+                symbol [ Graphics %tmp.56 654 25 33 ];
+                %tmp.56 = getm $.Toybox.Graphics;
+                symbol [ FONT_XTINY %tmp.57 654 34 44 ];
+                %tmp.57 = getv %tmp.56 :FONT_XTINY;
+                putv self :font %tmp.57;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 653; @position = 18; @symbol_constdef = [justification,653,18,31]; ]
+            const justification;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 654; @position = 18; @symbol_constdef = [font,654,18,22]; ]
+            const font;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 657; @symbol_moduledef = [prompt_size__title_icon,657,15,38]; ]
+        module prompt_size__title_icon {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 657; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 658; @position = 18; @symbol_constdef = [scaleX,658,18,24]; @symbol_type<0> = [Float,658,28,33]; ]
+            const scaleX as Float = 0.18;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 659; @position = 18; @symbol_constdef = [scaleRelativeTo,659,18,33]; @symbol_type<0> = [String,659,37,43]; ]
+            const scaleRelativeTo as String = "screen";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 662; @symbol_moduledef = [system_icon_dark__warning,662,15,40]; ]
+        module system_icon_dark__warning {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 662; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 663; @position = 18; @symbol_constdef = [filename,663,18,26]; @symbol_type<0> = [String,663,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_dark__warning.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 664; @position = 18; @symbol_constdef = [compress,664,18,26]; @symbol_type<0> = [String,664,30,36]; ]
+            const compress as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 665; @position = 18; @symbol_constdef = [dithering,665,18,27]; @symbol_type<0> = [String,665,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 666; @position = 18; @symbol_constdef = [automaticPalette,666,18,34]; @symbol_type<0> = [String,666,38,44]; ]
+            const automaticPalette as String = "true";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 667; @position = 18; @symbol_constdef = [packingFormat,667,18,31]; @symbol_type<0> = [String,667,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 670; @symbol_moduledef = [prompt_loc__title_icon,670,15,37]; ]
+        module prompt_loc__title_icon {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 670; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 671; @position = 18; @symbol_constdef = [x,671,18,19]; @symbol_type<0> = [Number,671,23,29]; ]
+            const x as Number = 208;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 672; @position = 18; @symbol_constdef = [y,672,18,19]; @symbol_type<0> = [Number,672,23,29]; ]
+            const y as Number = 142;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 673; @position = 18; @symbol_constdef = [horizontalJustification,673,18,41]; @symbol_type<0> = [String,673,45,51]; ]
+            const horizontalJustification as String = "center";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 674; @position = 18; @symbol_constdef = [verticalJustification,674,18,39]; @symbol_type<0> = [String,674,43,49]; ]
+            const verticalJustification as String = "center";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 677; @symbol_moduledef = [prompt_font_enhanced_readability__title,677,15,54]; ]
+        module prompt_font_enhanced_readability__title {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 677; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 678; @position = 18; @symbol_constdef = [exclude,678,18,25]; @symbol_type<0> = [Boolean,678,29,36]; ]
+            const exclude as Boolean = true;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 681; @symbol_moduledef = [prompt_color_dark__body,681,15,38]; ]
+        module prompt_color_dark__body {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 681; ]
+            <init> {
+[ "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen" 683 18 ]
+                symbol [ Graphics %tmp.58 683 31 39 ];
+                %tmp.58 = getm $.Toybox.Graphics;
+                symbol [ COLOR_TRANSPARENT %tmp.59 683 40 57 ];
+                %tmp.59 = getv %tmp.58 :COLOR_TRANSPARENT;
+                putv self :background %tmp.59;
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 682; @position = 18; @symbol_constdef = [color,682,18,23]; @symbol_type<0> = [Number,682,27,33]; ]
+            const color as Number = 0xFFFFFF;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 683; @position = 18; @symbol_constdef = [background,683,18,28]; ]
+            const background;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 686; @symbol_moduledef = [confirmation_icon__hint_delete,686,15,45]; ]
+        module confirmation_icon__hint_delete {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 686; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 687; @position = 18; @symbol_constdef = [filename,687,18,26]; @symbol_type<0> = [String,687,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/confirmation_icon__hint_delete.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 688; @position = 18; @symbol_constdef = [dithering,688,18,27]; @symbol_type<0> = [String,688,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 689; @position = 18; @symbol_constdef = [packingFormat,689,18,31]; @symbol_type<0> = [String,689,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 692; @symbol_moduledef = [system_icon_light__hint_button_right_top,692,15,55]; ]
+        module system_icon_light__hint_button_right_top {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 692; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 693; @position = 18; @symbol_constdef = [filename,693,18,26]; @symbol_type<0> = [String,693,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_light__hint_button_right_top.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 694; @position = 18; @symbol_constdef = [dithering,694,18,27]; @symbol_type<0> = [String,694,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 695; @position = 18; @symbol_constdef = [packingFormat,695,18,31]; @symbol_type<0> = [String,695,35,41]; ]
+            const packingFormat as String = "png";
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 698; @symbol_moduledef = [confirmation_size__body,698,15,38]; ]
+        module confirmation_size__body {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 698; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 699; @position = 18; @symbol_constdef = [width,699,18,23]; @symbol_type<0> = [Number,699,27,33]; ]
+            const width as Number = 236;
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 700; @position = 18; @symbol_constdef = [height,700,18,24]; @symbol_type<0> = [Number,700,28,34]; ]
+            const height as Number = 274;
+        }
+        [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 703; @symbol_moduledef = [system_icon_positive__check,703,15,42]; ]
+        module system_icon_positive__check {
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 703; ]
+            <init> {
+            }
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 704; @position = 18; @symbol_constdef = [filename,704,18,26]; @symbol_type<0> = [String,704,30,36]; ]
+            const filename as String = "/Users/elite/Library/Application Support/Garmin/ConnectIQ/Devices/fenix843mm/system_icon_positive__check.svg";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 705; @position = 18; @symbol_constdef = [dithering,705,18,27]; @symbol_type<0> = [String,705,31,37]; ]
+            const dithering as String = "none";
+            [ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 706; @position = 18; @symbol_constdef = [packingFormat,706,18,31]; @symbol_type<0> = [String,706,35,41]; ]
+            const packingFormat as String = "png";
+        }
+    }
+}
+[ @file = "/Users/elite/src/TidalLabs/TidalLabsGarmin/gen/006-B4534-00/source/Rez.mcgen"; @line = 1; ]
+<init> {
+}

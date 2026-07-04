@@ -10,12 +10,15 @@ struct SessionStartView: View {
     @State private var importError: String?
     @Environment(\.colorScheme) private var scheme
 
-    private let steps: [(icon: String, title: String, detail: String)] = [
-        ("camera.fill",            "Hit record",        "Open the native Camera, frame the lineup, and set your phone down facing the break."),
-        ("lock.fill",              "Lock it down",      "Keep the phone locked while it films — safer if a stranger picks it up."),
-        ("applewatch",             "Tag from your wrist","Caught one? Tap your Apple Watch. We remember the moment you rode."),
-        ("square.and.arrow.down",  "Reel it in",        "Back on the sand, import the clip and sync your watch — we slice out every wave."),
-    ]
+    private var steps: [(icon: String, title: String, detail: String)] {
+        let isApple = camera.detectedWatchType == .appleWatch
+        return [
+            ("camera.fill",           "Hit record",         "Open the native Camera, frame the lineup, and set your phone down facing the break."),
+            ("lock.fill",             "Lock it down",       "Keep the phone locked while it films — safer if a stranger picks it up."),
+            (isApple ? "applewatch" : "waveform", "Tag from your wrist", "Caught one? Tap your \(isApple ? "Apple Watch" : "Garmin"). We remember the moment you rode."),
+            ("square.and.arrow.down", "Reel it in",         "Back on the sand, import the clip and sync your \(isApple ? "watch" : "Garmin") — we slice out every wave."),
+        ]
+    }
 
     var body: some View {
         ZStack {

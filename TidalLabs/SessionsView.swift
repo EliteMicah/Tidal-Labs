@@ -240,8 +240,8 @@ struct SessionsView: View {
                 LazyVStack(spacing: 12) {
                     ForEach(Array(camera.waveSessions.enumerated()), id: \.element.id) { idx, session in
                         SessionCard(session: session, index: idx)
-                            .onTapGesture { selectedSession = session }
-                            .onLongPressGesture { sessionForContextMenu = session }
+                            .onTapGesture { if !session.isProcessing { selectedSession = session } }
+                            .onLongPressGesture { if !session.isProcessing { sessionForContextMenu = session } }
                     }
                 }
                 .padding(.horizontal, 18)
@@ -340,6 +340,20 @@ private struct SessionCard: View {
         .background(scheme == .dark ? Color.white.opacity(0.05) : Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 24))
         .overlay(RoundedRectangle(cornerRadius: 24).stroke(Color.tlHairline, lineWidth: 1))
+        .overlay {
+            if session.isProcessing {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 24)
+                        .fill(.black.opacity(scheme == .dark ? 0.55 : 0.35))
+                    HStack(spacing: 10) {
+                        ProgressView().tint(.white)
+                        Text("Cropping clips…")
+                            .font(.hanken(14, weight: .bold))
+                            .foregroundStyle(.white)
+                    }
+                }
+            }
+        }
         .shadow(color: .black.opacity(scheme == .dark ? 0.30 : 0.08), radius: 14, x: 0, y: 6)
     }
 
@@ -414,7 +428,7 @@ struct SessionDetailView: View {
                             TLSectionHeader(title: "The set", systemIcon: "waveform")
                                 .padding(.horizontal, 22)
 
-                            LazyVGrid(columns: [GridItem(.flexible(), spacing: 11), GridItem(.flexible(), spacing: 11)], spacing: 11) {
+                            LazyVStack(spacing: 11) {
                                 ForEach(Array(s.clips.enumerated()), id: \.element.id) { idx, clip in
                                     let recording = SessionRecording(id: clip.id, url: docs.appendingPathComponent(clip.filename), date: clip.date)
                                     ClipCard(
@@ -588,7 +602,7 @@ private struct ClipCard: View {
                 }
             }
         }
-        .aspectRatio(0.89, contentMode: .fit)
+        .aspectRatio(16.0 / 9.0, contentMode: .fit)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(scheme == .dark ? 0.35 : 0.12), radius: 14, x: 0, y: 6)
         .task {

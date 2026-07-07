@@ -207,7 +207,7 @@ private struct FavoriteClipCard: View {
                 )
                 .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 5)
         }
-        .aspectRatio(0.89, contentMode: .fit)
+        .aspectRatio(16.0 / 9.0, contentMode: .fit)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(scheme == .dark ? 0.35 : 0.12), radius: 14, x: 0, y: 6)
         .task {

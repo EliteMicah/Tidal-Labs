@@ -139,7 +139,7 @@ struct SettingsView: View {
         .task {
             do {
                 let fetched = try await Product.products(for: tipProductIDs)
-                print("[StoreKit] fetched \(fetched.count) products: \(fetched.map(\.id))")
+//                print("[StoreKit] fetched \(fetched.count) products: \(fetched.map(\.id))")
                 tipProducts = fetched.sorted { $0.price < $1.price }
             } catch {
                 print("[StoreKit] error: \(error)")

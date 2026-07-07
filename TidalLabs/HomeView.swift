@@ -148,8 +148,23 @@ struct HomeView: View {
                                 .background(scheme == .dark ? Color.white.opacity(0.06) : Color.white.opacity(0.78))
                                 .clipShape(RoundedRectangle(cornerRadius: 22))
                                 .overlay(RoundedRectangle(cornerRadius: 22).stroke(Color.tlDynamicHairline(scheme), lineWidth: 1))
+                                .overlay {
+                                    if latest.isProcessing {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 22)
+                                                .fill(.black.opacity(scheme == .dark ? 0.55 : 0.35))
+                                            HStack(spacing: 8) {
+                                                ProgressView().tint(.white)
+                                                Text("Cropping clips…")
+                                                    .font(.hanken(13, weight: .bold))
+                                                    .foregroundStyle(.white)
+                                            }
+                                        }
+                                    }
+                                }
                                 .shadow(color: .black.opacity(scheme == .dark ? 0.3 : 0.08), radius: 14, x: 0, y: 6)
                             }
+                            .disabled(latest.isProcessing)
                         }
                         .padding(.horizontal, 26)
                         .padding(.top, 18)

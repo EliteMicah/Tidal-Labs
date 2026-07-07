@@ -130,12 +130,31 @@ struct SessionPlayerView: View {
                 .padding(.vertical, 20)
             }
         }
-        .onAppear { player = AVPlayer(url: recording.url); localFavorite = isFavorite }
-        .onDisappear { player?.pause(); player?.replaceCurrentItem(with: nil); player = nil }
+        .onAppear {
+            player = AVPlayer(url: recording.url)
+            localFavorite = isFavorite
+            Task {
+                let landscape = await isLandscapeVideo(recording.url)
+                await MainActor.run { OrientationLock.mask = landscape ? .allButUpsideDown : .portrait }
+            }
+        }
+        .onDisappear {
+            player?.pause(); player?.replaceCurrentItem(with: nil); player = nil
+            OrientationLock.mask = .portrait
+        }
         .alert("Delete Recording?", isPresented: $showDeleteAlert) {
             Button("Delete", role: .destructive, action: onDelete)
             Button("Cancel", role: .cancel) {}
         } message: { Text("This recording will be permanently deleted.") }
+    }
+
+    private func isLandscapeVideo(_ url: URL) async -> Bool {
+        let asset = AVURLAsset(url: url)
+        guard let track = try? await asset.loadTracks(withMediaType: .video).first,
+              let size = try? await track.load(.naturalSize),
+              let transform = try? await track.load(.preferredTransform) else { return true }
+        let t = size.applying(transform)
+        return abs(t.width) >= abs(t.height)
     }
 
     private func saveToCameraRoll() {

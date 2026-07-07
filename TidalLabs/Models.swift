@@ -23,6 +23,22 @@ struct WaveClip: Identifiable, Codable {
     let filename: String
     let date: Date
     var isFavorite: Bool = false
+    var cropRect: CGRect?          // normalized 0–1, origin top-left, nil = full frame
+    var cropApplied: Bool = false
+}
+
+// Custom decode in an extension keeps the synthesized memberwise init + Encodable,
+// while letting old sessions.json (missing the new keys) still decode.
+extension WaveClip {
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(UUID.self, forKey: .id)
+        filename = try c.decode(String.self, forKey: .filename)
+        date = try c.decode(Date.self, forKey: .date)
+        isFavorite = try c.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
+        cropRect = try c.decodeIfPresent(CGRect.self, forKey: .cropRect)
+        cropApplied = try c.decodeIfPresent(Bool.self, forKey: .cropApplied) ?? false
+    }
 }
 
 struct WaveSession: Identifiable, Codable {
@@ -32,6 +48,7 @@ struct WaveSession: Identifiable, Codable {
     var clips: [WaveClip]
     var name: String?
     var spotName: String?
+    var isProcessing: Bool = false
 
     var displayName: String { name ?? WaveSession.timeOfDayName(for: startDate) }
 
@@ -43,6 +60,19 @@ struct WaveSession: Identifiable, Codable {
         case 15..<20: return "Afternoon Session"
         default: return "Overnight Session"
         }
+    }
+}
+
+extension WaveSession {
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(UUID.self, forKey: .id)
+        startDate = try c.decode(Date.self, forKey: .startDate)
+        endDate = try c.decode(Date.self, forKey: .endDate)
+        clips = try c.decode([WaveClip].self, forKey: .clips)
+        name = try c.decodeIfPresent(String.self, forKey: .name)
+        spotName = try c.decodeIfPresent(String.self, forKey: .spotName)
+        isProcessing = try c.decodeIfPresent(Bool.self, forKey: .isProcessing) ?? false
     }
 }
 
@@ -70,11 +100,29 @@ struct PendingWatchTimestamp: Codable {
     let end: Date
 }
 
+struct GPSFix: Codable {
+    let t: Double   // timeIntervalSince1970
+    let lat: Double
+    let lon: Double
+}
+
 struct PendingWatchSession: Codable {
     let id: String
     let startDate: Date
     let endDate: Date
     var timestamps: [PendingWatchTimestamp]
+    var gpsTrack: [GPSFix] = []
+}
+
+extension PendingWatchSession {
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(String.self, forKey: .id)
+        startDate = try c.decode(Date.self, forKey: .startDate)
+        endDate = try c.decode(Date.self, forKey: .endDate)
+        timestamps = try c.decode([PendingWatchTimestamp].self, forKey: .timestamps)
+        gpsTrack = try c.decodeIfPresent([GPSFix].self, forKey: .gpsTrack) ?? []
+    }
 }
 
 // MARK: - Pending Import Video (video held while waiting for watch sync)

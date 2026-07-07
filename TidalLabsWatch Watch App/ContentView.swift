@@ -11,6 +11,7 @@ import Combine
 import WatchKit
 import WatchConnectivity
 import HealthKit
+import CoreLocation
 
 // MARK: - Wave Timestamp
 
@@ -26,6 +27,14 @@ struct WaveTimestamp: Codable {
     }
 }
 
+// MARK: - GPS Fix
+
+struct GPSFix: Codable {
+    let t: Double   // timeIntervalSince1970
+    let lat: Double
+    let lon: Double
+}
+
 // MARK: - Watch Surf Session
 
 struct WatchSurfSession: Codable {
@@ -33,6 +42,7 @@ struct WatchSurfSession: Codable {
     let startDate: Date
     let endDate: Date
     var timestamps: [WaveTimestamp]
+    var gpsTrack: [GPSFix]?   // optional: old persisted sessions decode without it
 }
 
 // MARK: - Command Sender
@@ -61,10 +71,13 @@ class CommandSender: NSObject, ObservableObject {
     private var pollingTask: Task<Void, Never>?
     private var lastPolledDate = Date()
 
+    private let locationManager = CLLocationManager()
+
     // Active session (in-memory only, not persisted until finalized)
     private var activeSessionID: String?
     private var activeSessionStart: Date?
     private var activeSessionTimestamps: [WaveTimestamp] = []
+    private var activeSessionGPS: [GPSFix] = []
 
     // Completed sessions persisted until phone confirms receipt
     private var completedSessions: [WatchSurfSession] {
@@ -90,7 +103,10 @@ class CommandSender: NSObject, ObservableObject {
         super.init()
         setupConnectivity()
         startPolling()
-        Task { await requestHealthKitAuthorization() }
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        // HealthKit auth requested from the view's .task (app active), not here — see ContentView body.
     }
 
     deinit {
@@ -167,10 +183,15 @@ class CommandSender: NSObject, ObservableObject {
             workoutBuilder = builder
             session.startActivity(with: Date())
             try await builder.beginCollection(at: Date())
+            // ponytail: no allowsBackgroundLocationUpdates — it throws an uncatchable NSException on watchOS
+            // and crashes Start. The active HKWorkoutSession keeps the app alive so location keeps flowing.
+            // If true wrist-down background GPS is needed, add CLBackgroundActivitySession (watchOS 9+) and test.
+            locationManager.startUpdatingLocation()
         } catch {}
     }
 
     private func stopWorkoutSession() async {
+        locationManager.stopUpdatingLocation()
         guard let session = workoutSession, let builder = workoutBuilder else { return }
         let endDate = Date()
         session.end()
@@ -206,11 +227,15 @@ class CommandSender: NSObject, ObservableObject {
                 activeSessionID = UUID().uuidString
                 activeSessionStart = sessionStartTime
                 activeSessionTimestamps = []
+                activeSessionGPS = []
                 startExtendedRuntimeSession()
                 statusMessage = delaySeconds > 0 ? "\(delaySeconds)s" : "Ready"
-                let device = WKInterfaceDevice.current()
-                if device.waterResistanceRating == .wr50 {
-                    device.enableWaterLock()
+                // Engage water lock now. Skip only while location auth is still undetermined — that's the one
+                // moment the permission alert is up and water lock would collide with it. Once auth is decided
+                // the alert is gone, so it's safe. The .running delegate is a backstop but can't engage from
+                // background, so relying on it alone left phone-started sessions with no water lock.
+                if locationManager.authorizationStatus != .notDetermined {
+                    WKInterfaceDevice.current().enableWaterLock()
                 }
                 Task {
                     await startWorkoutSession()
@@ -229,18 +254,19 @@ class CommandSender: NSObject, ObservableObject {
 
     func startSessionFromWatch() {
         guard !sessionActive else { return }
+        // Enable water lock synchronously on the Start tap — a direct user gesture while foreground is the
+        // one context enableWaterLock() reliably engages. No gate: safe no-op on non-water-resistant devices.
+        WKInterfaceDevice.current().enableWaterLock()
         sessionActive = true
         sessionStartTime = Date()
         sessionWaveCount = 0
         activeSessionID = UUID().uuidString
         activeSessionStart = sessionStartTime
         activeSessionTimestamps = []
+        activeSessionGPS = []
         startExtendedRuntimeSession()
         statusMessage = "Ready"
-        let device = WKInterfaceDevice.current()
-        if device.waterResistanceRating == .wr50 {
-            device.enableWaterLock()
-        }
+        // Water lock enabled from the workout .running delegate — see startWorkoutSession / the delegate.
         Task {
             await startWorkoutSession()
             await playHaptics(count: 1)
@@ -266,7 +292,7 @@ class CommandSender: NSObject, ObservableObject {
 
     private func finalizeCurrentSession() {
         if let id = activeSessionID, let start = activeSessionStart, !activeSessionTimestamps.isEmpty {
-            let watchSession = WatchSurfSession(id: id, startDate: start, endDate: Date(), timestamps: activeSessionTimestamps)
+            let watchSession = WatchSurfSession(id: id, startDate: start, endDate: Date(), timestamps: activeSessionTimestamps, gpsTrack: activeSessionGPS)
             var sessions = completedSessions
             sessions.append(watchSession)
             completedSessions = sessions
@@ -274,6 +300,7 @@ class CommandSender: NSObject, ObservableObject {
         activeSessionID = nil
         activeSessionStart = nil
         activeSessionTimestamps = []
+        activeSessionGPS = []
         resetSessionState()
     }
 
@@ -369,6 +396,9 @@ class CommandSender: NSObject, ObservableObject {
                 "endDate": s.endDate.timeIntervalSince1970,
                 "timestamps": s.timestamps.map { ts -> [String: Any] in
                     ["id": ts.id, "start": ts.start, "end": ts.end]
+                },
+                "gpsTrack": (s.gpsTrack ?? []).map { fix -> [String: Any] in
+                    ["t": fix.t, "lat": fix.lat, "lon": fix.lon]
                 }
             ]
         }
@@ -457,6 +487,20 @@ extension CommandSender: WCSessionDelegate {
     }
 }
 
+// MARK: - CLLocationManagerDelegate
+
+extension CommandSender: CLLocationManagerDelegate {
+    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let fixes = locations.map { GPSFix(t: $0.timestamp.timeIntervalSince1970, lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) }
+        Task { @MainActor in
+            guard self.sessionActive else { return }
+            self.activeSessionGPS.append(contentsOf: fixes)
+        }
+    }
+
+    nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
+}
+
 // MARK: - WKExtendedRuntimeSessionDelegate
 
 extension CommandSender: WKExtendedRuntimeSessionDelegate {
@@ -470,12 +514,10 @@ extension CommandSender: WKExtendedRuntimeSessionDelegate {
 extension CommandSender: HKWorkoutSessionDelegate {
     nonisolated func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
         if toState == .running {
-            Task { @MainActor in
-                let device = WKInterfaceDevice.current()
-                if device.waterResistanceRating == .wr50 {
-                    device.enableWaterLock()
-                }
-            }
+            // Single reliable water-lock point: workout is running and (for on-watch starts) the app is
+            // foreground, so this is the one moment enableWaterLock() actually engages. No wr50 gate — it's
+            // a safe no-op on devices without water resistance, and the gate silently skipped the Simulator.
+            Task { @MainActor in WKInterfaceDevice.current().enableWaterLock() }
         }
     }
 
@@ -630,6 +672,9 @@ struct ContentView: View {
         .focused($crownFocused)
         .digitalCrownRotation($crownValue)
         .onAppear { crownFocused = true }
+        // HealthKit auth here, not in init(): init runs during view construction before the app is
+        // frontmost-active, and that early request silently drops the prompt (location tolerates it, HK doesn't).
+        .task { await sender.requestHealthKitAuthorization() }
         .onReceive(Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()) { _ in
             if sender.countdownEndDate != nil { sender.refreshCountdown() }
         }

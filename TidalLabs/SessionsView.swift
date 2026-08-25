@@ -123,17 +123,7 @@ struct SessionsView: View {
             Text("TidalLabs needs Photos access to import videos. Enable it in Settings > TidalLabs > Photos.")
         }
         .fullScreenCover(item: $selectedSession) { session in
-            SessionDetailView(
-                sessionID: session.id,
-                camera: camera,
-                onDismiss: { selectedSession = nil },
-                shouldPromptDelete: camera.lastImportedOriginalAssetID != nil,
-                onDeleteConfirm: {
-                    if let id = camera.lastImportedOriginalAssetID { deletePhotoAsset(id) }
-                    camera.lastImportedOriginalAssetID = nil
-                },
-                onDeleteDecline: { camera.lastImportedOriginalAssetID = nil }
-            )
+            SessionClipsPlayer(sessionID: session.id, camera: camera, onDismiss: { selectedSession = nil })
         }
         .confirmationDialog("Delete Session?", isPresented: Binding(get: { sessionToDelete != nil }, set: { if !$0 { sessionToDelete = nil } }), titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
@@ -240,7 +230,7 @@ struct SessionsView: View {
                 LazyVStack(spacing: 12) {
                     ForEach(Array(camera.waveSessions.enumerated()), id: \.element.id) { idx, session in
                         SessionCard(session: session, index: idx)
-                            .onTapGesture { if !session.isProcessing { selectedSession = session } }
+                            .onTapGesture { if !session.isProcessing && !session.clips.isEmpty { selectedSession = session } }
                             .onLongPressGesture { if !session.isProcessing { sessionForContextMenu = session } }
                     }
                 }
@@ -248,12 +238,6 @@ struct SessionsView: View {
                 .padding(.bottom, 44)
             }
         }
-    }
-
-    private func deletePhotoAsset(_ identifier: String) {
-        let assets = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: nil)
-        guard assets.count > 0 else { return }
-        PHPhotoLibrary.shared().performChanges { PHAssetChangeRequest.deleteAssets(assets) }
     }
 
 }
@@ -264,12 +248,24 @@ private struct SessionCard: View {
     @Environment(\.colorScheme) private var scheme
     let session: WaveSession
     let index: Int
+    private var docs: URL { FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] }
 
     var body: some View {
         HStack(spacing: 14) {
             ZStack {
-                OceanThumbnail(index: index)
-                    .clipShape(RoundedRectangle(cornerRadius: 18))
+                ThumbnailView(
+                    url: session.clips.first.map { docs.appendingPathComponent($0.filename) },
+                    fallbackIndex: index,
+                    showsPlaceholderIcon: false
+                )
+                .frame(width: 76, height: 76)
+                .clipShape(RoundedRectangle(cornerRadius: 18))
+                .overlay {
+                    // Scrim keeps the count legible over a bright frame.
+                    LinearGradient(colors: [.black.opacity(0.15), .black.opacity(0.55)],
+                                   startPoint: .top, endPoint: .bottom)
+                        .clipShape(RoundedRectangle(cornerRadius: 18))
+                }
                 VStack(spacing: 1) {
                     Text("\(session.clips.count)")
                         .font(.bricolage(24))
@@ -367,254 +363,6 @@ private struct SessionCard: View {
     private func sessionDuration(_ s: WaveSession) -> String {
         let mins = Int(s.endDate.timeIntervalSince(s.startDate)) / 60
         return "\(mins)m out"
-    }
-}
-
-// MARK: - Session detail
-
-struct SessionDetailView: View {
-    let sessionID: UUID
-    @ObservedObject var camera: CameraManager
-    let onDismiss: () -> Void
-    var shouldPromptDelete: Bool = false
-    var onDeleteConfirm: (() -> Void)? = nil
-    var onDeleteDecline: (() -> Void)? = nil
-    @State private var selectedClip: SessionRecording?
-    @State private var showDeletePhotoAlert = false
-    @Environment(\.colorScheme) private var scheme
-
-    private var session: WaveSession? { camera.waveSessions.first { $0.id == sessionID } }
-    private var docs: URL { FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] }
-
-    var body: some View {
-        ZStack {
-            TLBackground()
-
-            VStack(spacing: 0) {
-                // Header
-                HStack {
-                    TLRoundel(systemName: "xmark", action: onDismiss)
-                    Spacer()
-                    if let s = session {
-                        VStack(spacing: 2) {
-                            Text(s.displayName)
-                                .font(.bricolage(16))
-                                .foregroundStyle(Color.tlDynamicInk(scheme))
-                                .kerning(-0.3)
-                            Text("\(s.startDate.formatted(date: .abbreviated, time: .omitted)) · \(s.startDate.formatted(date: .omitted, time: .shortened)) – \(s.endDate.formatted(date: .omitted, time: .shortened))")
-                                .font(.hanken(12, weight: .semibold))
-                                .foregroundStyle(Color.tlDynamicInkSoft(scheme))
-                        }
-                    }
-                    Spacer()
-                    Color.clear.frame(width: 44, height: 44)
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 16)
-                .padding(.bottom, 10)
-
-                if let s = session, !s.clips.isEmpty {
-                    ScrollView(showsIndicators: false) {
-                        VStack(alignment: .leading, spacing: 16) {
-                            // Stat tiles
-                            HStack(spacing: 10) {
-                                DetailStatTile(value: "\(s.clips.count)", label: "Waves", color: Color.tlAccent)
-                                DetailStatTile(value: durationLabel(s), label: "Session", color: Color.tlCyan)
-                                DetailStatTile(value: "\(s.clips.filter { $0.isFavorite }.count)", label: "Favorites", color: Color.tlCoral)
-                            }
-                            .padding(.horizontal, 22)
-
-                            // Clip grid
-                            TLSectionHeader(title: "The set", systemIcon: "waveform")
-                                .padding(.horizontal, 22)
-
-                            LazyVStack(spacing: 11) {
-                                ForEach(Array(s.clips.enumerated()), id: \.element.id) { idx, clip in
-                                    let recording = SessionRecording(id: clip.id, url: docs.appendingPathComponent(clip.filename), date: clip.date)
-                                    ClipCard(
-                                        recording: recording,
-                                        waveNumber: idx + 1,
-                                        isFavorite: clip.isFavorite,
-                                        onToggleFavorite: { camera.toggleFavorite(clipID: clip.id, sessionID: sessionID) }
-                                    )
-                                    .onTapGesture { selectedClip = recording }
-                                }
-                            }
-                            .padding(.horizontal, 18)
-                            .padding(.bottom, 44)
-                        }
-                        .padding(.top, 8)
-                    }
-                } else {
-                    Spacer()
-                    Text("No clips")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundStyle(Color.tlInkSoft)
-                    Spacer()
-                }
-            }
-        }
-        .fullScreenCover(item: $selectedClip) { recording in
-            let isFav = camera.waveSessions.first(where: { $0.id == sessionID })?.clips.first(where: { $0.id == recording.id })?.isFavorite ?? false
-            SessionPlayerView(
-                recording: recording,
-                isFavorite: isFav,
-                onDismiss: { selectedClip = nil },
-                onDelete: { camera.deleteClip(recording.id, fromSession: sessionID); selectedClip = nil },
-                onToggleFavorite: { camera.toggleFavorite(clipID: recording.id, sessionID: sessionID) }
-            )
-        }
-        .confirmationDialog("Delete Original Video?", isPresented: $showDeletePhotoAlert, titleVisibility: .visible) {
-            Button("Delete from Photos", role: .destructive) {
-                onDeleteConfirm?()
-            }
-            Button("Keep", role: .cancel) {
-                onDeleteDecline?()
-            }
-        } message: {
-            Text("Wave clips saved. Remove the original video from your photo library?")
-        }
-        .task {
-            if shouldPromptDelete {
-                try? await Task.sleep(for: .milliseconds(600))
-                showDeletePhotoAlert = true
-            }
-        }
-    }
-
-    private func durationLabel(_ s: WaveSession) -> String {
-        let mins = Int(s.endDate.timeIntervalSince(s.startDate)) / 60
-        return "\(mins)m"
-    }
-}
-
-// MARK: - Detail stat tile
-
-private struct DetailStatTile: View {
-    @Environment(\.colorScheme) private var scheme
-    let value: String
-    let label: String
-    let color: Color
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(value)
-                .font(.bricolage(21))
-                .foregroundStyle(color)
-                .kerning(-0.4)
-            Text(label)
-                .font(.hanken(11, weight: .bold))
-                .foregroundStyle(Color.tlDynamicInkFaint(scheme))
-                .kerning(0.4)
-                .textCase(.uppercase)
-        }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 11)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(scheme == .dark ? Color.white.opacity(0.05) : Color.tlInk.opacity(0.04))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-    }
-}
-
-// MARK: - Clip card
-
-private struct ClipCard: View {
-    let recording: SessionRecording
-    let waveNumber: Int
-    var isFavorite: Bool = false
-    var onToggleFavorite: (() -> Void)? = nil
-    @State private var thumbnail: UIImage?
-    @Environment(\.colorScheme) private var scheme
-
-    var body: some View {
-        ZStack(alignment: .bottom) {
-            // Thumbnail or ocean gradient fallback
-            if let img = thumbnail {
-                Image(uiImage: img)
-                    .resizable()
-                    .scaledToFill()
-            } else {
-                OceanThumbnail(index: waveNumber, label: "WAVE \(String(format: "%02d", waveNumber))")
-            }
-
-            // Gradient overlay
-            LinearGradient(
-                colors: [.clear, .black.opacity(0.55)],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-
-            // Footer
-            HStack {
-                Text("\(recording.date.formatted(date: .omitted, time: .shortened))")
-                    .font(.system(size: 11.5, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.85))
-                Spacer()
-                Image(systemName: "play.fill")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.9))
-            }
-            .padding(.horizontal, 11)
-            .padding(.bottom, 10)
-
-            // Wave label
-            VStack {
-                HStack {
-                    Text("WAVE \(String(format: "%02d", waveNumber))")
-                        .font(.system(size: 9.5, weight: .bold, design: .monospaced))
-                        .foregroundStyle(.white.opacity(0.85))
-                        .tracking(1)
-                        .padding(.leading, 10)
-                        .padding(.top, 10)
-                    Spacer()
-                }
-                Spacer()
-            }
-
-            // Play overlay
-            Circle()
-                .fill(.white.opacity(0.92))
-                .frame(width: 46, height: 46)
-                .overlay(
-                    Image(systemName: "play.fill")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundStyle(Color.tlInk)
-                        .offset(x: 2)
-                )
-                .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 5)
-
-            // Favorite button
-            if let toggle = onToggleFavorite {
-                VStack {
-                    HStack {
-                        Spacer()
-                        Button(action: toggle) {
-                            Image(systemName: isFavorite ? "heart.fill" : "heart")
-                                .font(.system(size: 13, weight: .bold))
-                                .foregroundStyle(isFavorite ? Color.tlCoral : .white)
-                                .padding(7)
-                                .background(.black.opacity(0.35))
-                                .clipShape(Circle())
-                        }
-                        .padding(8)
-                    }
-                    Spacer()
-                }
-            }
-        }
-        .aspectRatio(16.0 / 9.0, contentMode: .fit)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: .black.opacity(scheme == .dark ? 0.35 : 0.12), radius: 14, x: 0, y: 6)
-        .task {
-            guard thumbnail == nil else { return }
-            let asset = AVURLAsset(url: recording.url)
-            let gen = AVAssetImageGenerator(asset: asset)
-            gen.appliesPreferredTrackTransform = true
-            gen.maximumSize = CGSize(width: 300, height: 300)
-            if let cgImg = try? await gen.image(at: .zero).image {
-                thumbnail = UIImage(cgImage: cgImg)
-            }
-        }
     }
 }
 

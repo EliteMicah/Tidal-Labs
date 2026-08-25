@@ -25,6 +25,10 @@ struct WaveClip: Identifiable, Codable {
     var isFavorite: Bool = false
     var cropRect: CGRect?          // normalized 0–1, origin top-left, nil = full frame
     var cropApplied: Bool = false
+    /// Crop the viewer is showing for this clip, normalized 0–1 over the clip file's own frame.
+    /// Per clip: cropping one wave never reframes another. nil = full frame, and the file on disk
+    /// is never rewritten, so clearing this restores the original.
+    var userCrop: CGRect?
 }
 
 // Custom decode in an extension keeps the synthesized memberwise init + Encodable,
@@ -38,6 +42,7 @@ extension WaveClip {
         isFavorite = try c.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
         cropRect = try c.decodeIfPresent(CGRect.self, forKey: .cropRect)
         cropApplied = try c.decodeIfPresent(Bool.self, forKey: .cropApplied) ?? false
+        userCrop = try c.decodeIfPresent(CGRect.self, forKey: .userCrop)
     }
 }
 

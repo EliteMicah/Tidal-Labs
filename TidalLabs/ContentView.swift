@@ -25,7 +25,7 @@ struct ContentView: View {
                 onSessions: { navPath.append(.sessions) },
                 onLatestSession: {
                     let latest = camera.waveSessions.first
-                    if latest?.isProcessing != true { homeDetailSession = latest }
+                    if let latest, !latest.isProcessing, !latest.clips.isEmpty { homeDetailSession = latest }
                 },
                 onSettings: { navPath.append(.settings) },
                 onFavorites: { navPath.append(.favorites) }
@@ -56,11 +56,7 @@ struct ContentView: View {
             SessionStartView(camera: camera, onDismiss: { sessionActive = false })
         }
         .fullScreenCover(item: $homeDetailSession) { session in
-            SessionDetailView(
-                sessionID: session.id,
-                camera: camera,
-                onDismiss: { homeDetailSession = nil }
-            )
+            SessionClipsPlayer(sessionID: session.id, camera: camera, onDismiss: { homeDetailSession = nil })
         }
         .confirmationDialog("Delete Original Video?", isPresented: $showDeleteImportedPhoto, titleVisibility: .visible) {
             Button("Delete from Photos", role: .destructive) {

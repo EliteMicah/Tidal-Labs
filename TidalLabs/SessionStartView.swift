@@ -13,7 +13,7 @@ struct SessionStartView: View {
     private let steps: [(icon: String, title: String, detail: String)] = [
         ("camera.fill",            "Hit record",        "Open the native Camera, frame the lineup, and set your phone down facing the break."),
         ("lock.fill",              "Lock it down",      "Keep the phone locked while it films — safer if a stranger picks it up."),
-        ("applewatch",             "Tag from your wrist","Caught one? Tap your Apple Watch. We remember the moment you rode."),
+        ("applewatch",             "Tag from your wrist","Caught one? Tag your Apple Watch. We remember the moment you rode."),
         ("square.and.arrow.down",  "Reel it in",        "Back on the sand, import the clip and sync your watch — we slice out every wave."),
     ]
 

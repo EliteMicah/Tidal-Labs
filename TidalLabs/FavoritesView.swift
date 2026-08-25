@@ -53,18 +53,34 @@ struct FavoritesView: View {
         .navigationBarHidden(true)
         .enableSwipeBack()
         .fullScreenCover(item: $selectedFavorite) { item in
-            let recording = SessionRecording(id: item.clip.id, url: item.url, date: item.clip.date)
+            let all = favorites
             SessionPlayerView(
-                recording: recording,
-                isFavorite: true,
+                clips: all.map {
+                    ClipRef(
+                        recording: SessionRecording(id: $0.clip.id, url: $0.url, date: $0.clip.date),
+                        isFavorite: true,
+                        autoCrop: $0.clip.cropApplied ? nil : $0.clip.cropRect,
+                        userCrop: $0.clip.userCrop
+                    )
+                },
+                startID: item.id,
                 onDismiss: { selectedFavorite = nil },
-                onDelete: {
-                    camera.deleteClip(item.clip.id, fromSession: item.sessionID)
+                onDelete: { id in
+                    if let f = all.first(where: { $0.id == id }) {
+                        camera.deleteClip(id, fromSession: f.sessionID)
+                    }
                     selectedFavorite = nil
                 },
-                onToggleFavorite: {
-                    camera.toggleFavorite(clipID: item.clip.id, sessionID: item.sessionID)
+                onToggleFavorite: { id in
+                    if let f = all.first(where: { $0.id == id }) {
+                        camera.toggleFavorite(clipID: id, sessionID: f.sessionID)
+                    }
                     selectedFavorite = nil
+                },
+                onCropChange: { id, rect in
+                    if let f = all.first(where: { $0.id == id }) {
+                        camera.setUserCrop(rect, clipID: id, sessionID: f.sessionID)
+                    }
                 }
             )
         }

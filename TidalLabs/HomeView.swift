@@ -10,6 +10,7 @@ struct HomeView: View {
 
     @Environment(\.colorScheme) private var scheme
 
+    private var docs: URL { FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] }
     private var totalWaves: Int { sessions.reduce(0) { $0 + $1.clips.count } }
     private var latestSession: WaveSession? { sessions.first }
     private var favoritesCount: Int { sessions.flatMap(\.clips).filter(\.isFavorite).count }
@@ -117,11 +118,17 @@ struct HomeView: View {
 
                             Button(action: onLatestSession) {
                                 HStack(spacing: 13) {
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color.clear)
+                                    ThumbnailView(
+                                        url: latest.clips.first.map { docs.appendingPathComponent($0.filename) },
+                                        fallbackIndex: 1,
+                                        showsPlaceholderIcon: false
+                                    )
                                         .frame(width: 58, height: 58)
+                                        .clipShape(RoundedRectangle(cornerRadius: 15))
                                         .overlay(
-                                            OceanThumbnail(index: 1)
+                                            // Scrim keeps the count legible over a bright frame.
+                                            LinearGradient(colors: [.black.opacity(0.15), .black.opacity(0.55)],
+                                                           startPoint: .top, endPoint: .bottom)
                                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                                         )
                                         .overlay(

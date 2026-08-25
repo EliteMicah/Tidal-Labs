@@ -28,6 +28,7 @@ class CameraManager: NSObject, ObservableObject {
     func setup() async {
         #if DEBUG
         cropAnalysisSelfCheck()
+        clipEditorSelfCheck()
         #endif
         setupWatchConnectivity()
         loadRecordings()
@@ -120,6 +121,17 @@ class CameraManager: NSObject, ObservableObject {
         guard let si = waveSessions.firstIndex(where: { $0.id == sessionID }),
               let ci = waveSessions[si].clips.firstIndex(where: { $0.id == clipID }) else { return }
         waveSessions[si].clips[ci].isFavorite.toggle()
+        if let data = try? JSONEncoder().encode(waveSessions) {
+            try? data.write(to: sessionsFileURL)
+        }
+    }
+
+    /// Stores the viewer's crop for one clip. `nil` clears it, restoring the original framing.
+    func setUserCrop(_ rect: CGRect?, clipID: UUID, sessionID: UUID) {
+        guard let si = waveSessions.firstIndex(where: { $0.id == sessionID }),
+              let ci = waveSessions[si].clips.firstIndex(where: { $0.id == clipID }) else { return }
+        guard waveSessions[si].clips[ci].userCrop != rect else { return }
+        waveSessions[si].clips[ci].userCrop = rect
         if let data = try? JSONEncoder().encode(waveSessions) {
             try? data.write(to: sessionsFileURL)
         }
@@ -437,9 +449,11 @@ extension CameraManager {
             return false
         }
 
-        // Crop only if we have both the phone position and a watch GPS track; otherwise clips stay full-frame.
-        let canCrop = phoneCoord != nil && !gpsTrack.isEmpty
-        print("[Crop] canCrop=\(canCrop) phoneCoord=\(phoneCoord != nil) gpsFixes=\(gpsTrack.count) clips=\(exported.count)")
+        // Crop only if the user turned auto-follow on (off by default, beta) AND we have both the phone position and a watch GPS
+        // track; otherwise clips stay full-frame.
+        let autoFollow = UserDefaults.standard.object(forKey: "autoFollowCrop") as? Bool ?? false
+        let canCrop = autoFollow && phoneCoord != nil && !gpsTrack.isEmpty
+        print("[Crop] canCrop=\(canCrop) autoFollow=\(autoFollow) phoneCoord=\(phoneCoord != nil) gpsFixes=\(gpsTrack.count) clips=\(exported.count)")
         let savedClips = exported.map { $0.clip }
         let waveSession = WaveSession(id: UUID(), startDate: sessionStart, endDate: sessionEnd, clips: savedClips, isProcessing: canCrop)
         let sessionID = waveSession.id

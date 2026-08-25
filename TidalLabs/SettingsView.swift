@@ -8,6 +8,7 @@ struct SettingsView: View {
     @AppStorage("resolution") private var resolution = VideoResolution.p720.rawValue
     @AppStorage("fps") private var fps = 30
     @AppStorage("waveDurationSeconds") private var waveDurationSeconds = 60
+    @AppStorage("autoFollowCrop") private var autoFollowCrop = false
 
     @State private var resolutionLocal = VideoResolution.p720.rawValue
     @State private var fpsLocal = 30
@@ -51,6 +52,21 @@ struct SettingsView: View {
                                     (value: "dark", label: "Dawn Patrol")
                                 ],
                                 selection: $appColorScheme
+                            )
+                        }
+
+                        // Auto-follow crop
+                        TLSettingsCard(icon: "viewfinder", title: "Auto-follow crop (Experimental)",
+                                       subtitle: "Still in testing. Uses your watch's GPS track and on-device person detection to pan and zoom each clip onto you. Full frame keeps every clip uncropped.") {
+                            TLSegmented(
+                                options: [
+                                    (value: "off", label: "Full frame"),
+                                    (value: "on", label: "Follow me")
+                                ],
+                                selection: Binding(
+                                    get: { autoFollowCrop ? "on" : "off" },
+                                    set: { autoFollowCrop = ($0 == "on") }
+                                )
                             )
                         }
 
@@ -139,7 +155,7 @@ struct SettingsView: View {
         .task {
             do {
                 let fetched = try await Product.products(for: tipProductIDs)
-                print("[StoreKit] fetched \(fetched.count) products: \(fetched.map(\.id))")
+//                print("[StoreKit] fetched \(fetched.count) products: \(fetched.map(\.id))")
                 tipProducts = fetched.sorted { $0.price < $1.price }
             } catch {
                 print("[StoreKit] error: \(error)")

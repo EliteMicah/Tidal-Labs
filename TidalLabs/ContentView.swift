@@ -12,8 +12,9 @@ struct ContentView: View {
     @StateObject private var camera = CameraManager()
     @State private var sessionActive = false
     @State private var navPath: [AppScreen] = []
-    @State private var importedSession: WaveSession?
     @State private var homeDetailSession: WaveSession?
+    @State private var importToast: String?
+    @State private var showDeleteImportedPhoto = false
     @AppStorage("appColorScheme") private var appColorScheme = "light"
 
     var body: some View {
@@ -22,7 +23,10 @@ struct ContentView: View {
                 sessions: camera.waveSessions,
                 onStart: { sessionActive = true },
                 onSessions: { navPath.append(.sessions) },
-                onLatestSession: { homeDetailSession = camera.waveSessions.first },
+                onLatestSession: {
+                    let latest = camera.waveSessions.first
+                    if let latest, !latest.isProcessing, !latest.clips.isEmpty { homeDetailSession = latest }
+                },
                 onSettings: { navPath.append(.settings) },
                 onFavorites: { navPath.append(.favorites) }
             )
@@ -34,35 +38,47 @@ struct ContentView: View {
                 }
             }
         }
+        .overlay(alignment: .top) {
+            if let toast = importToast {
+                Text(toast)
+                    .font(.hanken(14, weight: .bold))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 12)
+                    .background(Color.tlAccent, in: Capsule())
+                    .shadow(color: Color.tlAccent.opacity(0.4), radius: 12, y: 4)
+                    .padding(.top, 8)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+            }
+        }
         .preferredColorScheme(appColorScheme == "dark" ? .dark : .light)
         .fullScreenCover(isPresented: $sessionActive) {
             SessionStartView(camera: camera, onDismiss: { sessionActive = false })
         }
         .fullScreenCover(item: $homeDetailSession) { session in
-            SessionDetailView(
-                sessionID: session.id,
-                camera: camera,
-                onDismiss: { homeDetailSession = nil }
-            )
+            SessionClipsPlayer(sessionID: session.id, camera: camera, onDismiss: { homeDetailSession = nil })
         }
-        .fullScreenCover(item: $importedSession) { session in
-            SessionDetailView(
-                sessionID: session.id,
-                camera: camera,
-                onDismiss: { importedSession = nil },
-                shouldPromptDelete: camera.lastImportedOriginalAssetID != nil,
-                onDeleteConfirm: {
-                    if let id = camera.lastImportedOriginalAssetID { deletePhotoAsset(id) }
-                    camera.lastImportedOriginalAssetID = nil
-                },
-                onDeleteDecline: { camera.lastImportedOriginalAssetID = nil }
-            )
+        .confirmationDialog("Delete Original Video?", isPresented: $showDeleteImportedPhoto, titleVisibility: .visible) {
+            Button("Delete from Photos", role: .destructive) {
+                if let id = camera.lastImportedOriginalAssetID { deletePhotoAsset(id) }
+                camera.lastImportedOriginalAssetID = nil
+            }
+            Button("Keep", role: .cancel) { camera.lastImportedOriginalAssetID = nil }
+        } message: {
+            Text("Wave clips saved. Remove the original video from your photo library?")
         }
         .onChange(of: camera.latestImportedSessionID) { _, newID in
             guard let id = newID,
                   let session = camera.waveSessions.first(where: { $0.id == id }) else { return }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-                importedSession = session
+            navPath = []   // back to home, not into session detail
+            let count = session.clips.count
+            let msg = session.isProcessing
+                ? "Imported — cropping \(count) clip\(count == 1 ? "" : "s")…"
+                : "Imported — \(count) wave\(count == 1 ? "" : "s") ready"
+            withAnimation { importToast = msg }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { withAnimation { importToast = nil } }
+            if camera.lastImportedOriginalAssetID != nil {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { showDeleteImportedPhoto = true }
             }
         }
         .task { await camera.setup() }

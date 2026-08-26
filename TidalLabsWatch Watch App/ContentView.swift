@@ -229,7 +229,7 @@ class CommandSender: NSObject, ObservableObject {
                 activeSessionTimestamps = []
                 activeSessionGPS = []
                 startExtendedRuntimeSession()
-                statusMessage = delaySeconds > 0 ? "\(delaySeconds)s" : "Ready"
+                statusMessage = delaySeconds > 0 ? "\(delaySeconds)s" : ""
                 // Engage water lock now. Skip only while location auth is still undetermined — that's the one
                 // moment the permission alert is up and water lock would collide with it. Once auth is decided
                 // the alert is gone, so it's safe. The .running delegate is a backstop but can't engage from
@@ -265,7 +265,7 @@ class CommandSender: NSObject, ObservableObject {
         activeSessionTimestamps = []
         activeSessionGPS = []
         startExtendedRuntimeSession()
-        statusMessage = "Ready"
+        statusMessage = ""
         // Water lock enabled from the workout .running delegate — see startWorkoutSession / the delegate.
         Task {
             await startWorkoutSession()
@@ -330,7 +330,7 @@ class CommandSender: NSObject, ObservableObject {
             guard !Task.isCancelled, self.sessionActive else { return }
             self.countdownEndDate = nil
             self.countdownRemaining = 0
-            self.statusMessage = "Ready"
+            self.statusMessage = ""
             await self.playHaptics(count: 2)
         }
     }
@@ -339,7 +339,7 @@ class CommandSender: NSObject, ObservableObject {
         guard let end = countdownEndDate else { return }
         let remaining = max(0, Int(end.timeIntervalSinceNow.rounded(.up)))
         countdownRemaining = remaining
-        statusMessage = remaining > 0 ? "\(remaining)s" : "Ready"
+        statusMessage = remaining > 0 ? "\(remaining)s" : ""
     }
 
     func recordWave() {
@@ -366,7 +366,7 @@ class CommandSender: NSObject, ObservableObject {
                 statusMessage = "Wave \(sessionWaveCount) logged"
                 await playHaptics(count: 2)
                 try? await Task.sleep(nanoseconds: 2_000_000_000)
-                if sessionActive { statusMessage = "Ready" }
+                if sessionActive { statusMessage = "" }
             } catch {
                 statusMessage = "Failed — check connection"
             }
@@ -384,7 +384,7 @@ class CommandSender: NSObject, ObservableObject {
         Task {
             await playHaptics(count: 2)
             try? await Task.sleep(nanoseconds: 2_000_000_000)
-            if sessionActive { statusMessage = "Ready" }
+            if sessionActive { statusMessage = "" }
         }
     }
 
@@ -546,7 +546,13 @@ struct ContentView: View {
     @State private var barProgress: Double = 0.0
     @State private var idleTask: Task<Void, Never>? = nil
     @State private var isTriggering: Bool = false
+    @State private var now = Date()
     @FocusState private var crownFocused: Bool
+
+    private static func elapsed(since start: Date, now: Date) -> String {
+        let t = max(0, Int(now.timeIntervalSince(start)))
+        return String(format: "%02d:%02d:%02d", t / 3600, (t % 3600) / 60, t % 60)
+    }
 
     private let deadZone: Double = 1
     private let crownStep: Double = 0.03
@@ -600,9 +606,18 @@ struct ContentView: View {
                     }
                 }
             } else {
-                Text(sender.statusMessage)
-                    .font(.system(.caption, design: .rounded))
-                    .foregroundStyle(.secondary)
+                if sender.statusMessage.isEmpty, let start = sender.sessionStartTime {
+                    Text(Self.elapsed(since: start, now: now))
+                        .font(.system(size: 32, weight: .bold, design: .rounded))
+                        .monospacedDigit()
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                } else {
+                    Text(sender.statusMessage)
+                        .font(.system(.caption, design: .rounded))
+                        .foregroundStyle(.secondary)
+                }
 
                 if sender.isSending {
                     ProgressView()
@@ -676,6 +691,7 @@ struct ContentView: View {
         // frontmost-active, and that early request silently drops the prompt (location tolerates it, HK doesn't).
         .task { await sender.requestHealthKitAuthorization() }
         .onReceive(Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()) { _ in
+            now = Date()
             if sender.countdownEndDate != nil { sender.refreshCountdown() }
         }
         .onChange(of: crownValue) { _, value in

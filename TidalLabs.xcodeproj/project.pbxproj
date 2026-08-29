@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8CC10A012F9400000000AA01 /* ConnectIQ in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC10A022F9400000000AA02 /* ConnectIQ */; };
 		8C04FB482FE9C02C00E7C2A5 /* TidalLabs.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 8C04FB472FE9C02C00E7C2A5 /* TidalLabs.storekit */; };
 		8C208BEE2F935F77004DC581 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C208BED2F935F77004DC581 /* WatchConnectivity.framework */; };
 		8C208BF02F935FD5004DC581 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C208BEF2F935FD5004DC581 /* WatchConnectivity.framework */; };
@@ -115,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CC10A012F9400000000AA01 /* ConnectIQ in Frameworks */,
 				8C208BEE2F935F77004DC581 /* WatchConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,6 +219,7 @@
 			);
 			name = TidalLabs;
 			packageProductDependencies = (
+				8CC10A022F9400000000AA02 /* ConnectIQ */,
 			);
 			productName = TidalLabs;
 			productReference = 8C87159B2F8B2E690029F8A9 /* TidalLabs.app */;
@@ -379,6 +382,9 @@
 			);
 			mainGroup = 8C8715922F8B2E690029F8A9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8CC10A032F9400000000AA03 /* XCRemoteSwiftPackageReference "connectiq-companion-app-sdk-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8C87159C2F8B2E690029F8A9 /* Products */;
 			projectDirPath = "";
@@ -644,6 +650,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/PhoneInfo.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Tidal Labs";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSCameraUsageDescription = "TidalLabs records surf sessions via your watch. Your camera stays on while you're in the water.";
@@ -667,6 +674,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "Micah-Woodring.TidalLabs";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -698,6 +706,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/PhoneInfo.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Tidal Labs";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSCameraUsageDescription = "TidalLabs records surf sessions via your watch. Your camera stays on while you're in the water.";
@@ -721,6 +730,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "Micah-Woodring.TidalLabs";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -1076,6 +1086,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8CC10A032F9400000000AA03 /* XCRemoteSwiftPackageReference "connectiq-companion-app-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/garmin/connectiq-companion-app-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8CC10A022F9400000000AA02 /* ConnectIQ */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CC10A032F9400000000AA03 /* XCRemoteSwiftPackageReference "connectiq-companion-app-sdk-ios" */;
+			productName = ConnectIQ;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8C8715932F8B2E690029F8A9 /* Project object */;
 }

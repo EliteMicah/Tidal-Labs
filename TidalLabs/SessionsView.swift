@@ -6,6 +6,7 @@ import Photos
 
 struct SessionsView: View {
     @ObservedObject var camera: CameraManager
+    @ObservedObject var garmin: GarminManager
     @State private var selectedSession: WaveSession?
     @State private var sessionToDelete: WaveSession?
     @State private var sessionForContextMenu: WaveSession?
@@ -106,7 +107,7 @@ struct SessionsView: View {
         .fullScreenCover(isPresented: Binding(
             get: { camera.pendingImportVideo != nil || camera.isLoadingVideo },
             set: { if !$0 { camera.cancelPendingImport(); camera.isLoadingVideo = false } }
-        )) { PendingImportView(camera: camera) }
+        )) { PendingImportView(camera: camera, garmin: garmin) }
         .alert("Import Error", isPresented: Binding(get: { importError != nil }, set: { if !$0 { importError = nil } })) {
             Button("OK") { importError = nil }
         } message: {
@@ -370,8 +371,33 @@ private struct SessionCard: View {
 
 struct PendingImportView: View {
     @ObservedObject var camera: CameraManager
+    @ObservedObject var garmin: GarminManager
     @State private var player: AVPlayer?
     @Environment(\.colorScheme) private var scheme
+
+    /// What the "waiting on a sync" panel should say. Both watches can be set up at once, so the
+    /// one that is demonstrably ready wins: a Garmin reports real BLE connection state, whereas an
+    /// Apple Watch only reports that it is paired. Naming the wrong watch here is the difference
+    /// between "press the button again" and "go find out why nothing is listening".
+    private var watchPrompt: (icon: String, title: String, detail: String) {
+        let garminName = garmin.deviceNames.first
+        let press = "Press \"Sync Waves\" on your watch.\nThe app will auto-trim based on your timestamps."
+
+        if garminName != nil, garmin.isConnected {
+            return ("watch.analog", "Sync your Garmin watch", press)
+        }
+        if camera.appleWatchReady {
+            return ("applewatch", "Sync your Apple Watch", press)
+        }
+        if let garminName {
+            // Paired but not in range. The SDK reaches the watch from this app's own process, so
+            // "keep TidalLabs open" is real advice, not boilerplate.
+            return ("watch.analog", "\(garminName) is out of range",
+                    "Bring the watch closer and keep TidalLabs open, then press \"Sync Waves\".")
+        }
+        return ("watch.analog", "No watch connected",
+                "Pair an Apple Watch, or connect a Garmin watch under Settings → Garmin watch.")
+    }
 
     var body: some View {
         ZStack {
@@ -448,25 +474,40 @@ struct PendingImportView: View {
                         }
                     } else {
                         VStack(spacing: 10) {
-                            Image(systemName: "applewatch")
+                            Image(systemName: watchPrompt.icon)
                                 .font(.system(size: 44))
                                 .foregroundStyle(Color.tlAccent)
-                            Text("Sync your Apple Watch")
+                            Text(watchPrompt.title)
                                 .font(.bricolage(20))
                                 .foregroundStyle(Color.tlDynamicInk(scheme))
                                 .kerning(-0.4)
-                            Text("Press \"Sync Waves\" on your watch.\nThe app will auto-trim based on your timestamps.")
+                                .multilineTextAlignment(.center)
+                            Text(watchPrompt.detail)
                                 .font(.hanken(14, weight: .medium))
                                 .foregroundStyle(Color.tlDynamicInkSoft(scheme))
                                 .multilineTextAlignment(.center)
                                 .lineSpacing(3)
+
+                            // A Garmin's link state is knowable, so show it rather than making the
+                            // user go back to Settings to find out why nothing arrived.
+                            if let name = garmin.deviceNames.first {
+                                HStack(spacing: 6) {
+                                    Circle()
+                                        .fill(garmin.isConnected ? Color.tlAccent : Color.tlDynamicInkFaint(scheme))
+                                        .frame(width: 7, height: 7)
+                                    Text("\(name) · \(garmin.isConnected ? "Connected" : "Out of range")")
+                                        .font(.hanken(12.5, weight: .semibold))
+                                        .foregroundStyle(Color.tlDynamicInkFaint(scheme))
+                                }
+                                .padding(.top, 2)
+                            }
                         }
                         .padding(.horizontal, 36)
                     }
 
                     Spacer()
                 }
-                .onAppear { player = AVPlayer(playerItem: AVPlayerItem(asset: pending.asset)) }
+                .onAppear { let p = AVPlayer(playerItem: AVPlayerItem(asset: pending.asset)); p.isMuted = true; player = p }
             }
         }
     }

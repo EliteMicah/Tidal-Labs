@@ -4,6 +4,7 @@ import StoreKit
 
 struct SettingsView: View {
     @ObservedObject var camera: CameraManager
+    @ObservedObject var garmin: GarminManager
     @AppStorage("appColorScheme") private var appColorScheme = "light"
     @AppStorage("resolution") private var resolution = VideoResolution.p720.rawValue
     @AppStorage("fps") private var fps = 30
@@ -68,6 +69,50 @@ struct SettingsView: View {
                                     set: { autoFollowCrop = ($0 == "on") }
                                 )
                             )
+                        }
+
+                        // Garmin watch
+                        TLSettingsCard(icon: "watch.analog", title: "Garmin watch",
+                                       subtitle: "Connect IQ watches talk to TidalLabs over Bluetooth, not Apple's watch pairing. Share the watch once from Garmin Connect, then Sync Waves on the watch lands here.") {
+                            if garmin.deviceNames.isEmpty {
+                                Text("No Garmin watch connected.")
+                                    .font(.hanken(13.5, weight: .semibold))
+                                    .foregroundStyle(Color.tlDynamicInkSoft(scheme))
+                            } else {
+                                ForEach(garmin.deviceNames, id: \.self) { name in
+                                    HStack(spacing: 8) {
+                                        Circle()
+                                            .fill(garmin.isConnected ? Color.tlAccent : Color.tlDynamicInkFaint(scheme))
+                                            .frame(width: 8, height: 8)
+                                        Text(name)
+                                            .font(.hanken(14.5, weight: .bold))
+                                            .foregroundStyle(Color.tlDynamicInk(scheme))
+                                        Spacer()
+                                        Text(garmin.isConnected ? "Connected" : "Out of range")
+                                            .font(.hanken(12.5, weight: .semibold))
+                                            .foregroundStyle(Color.tlDynamicInkFaint(scheme))
+                                    }
+                                }
+                            }
+
+                            if let status = garmin.statusMessage {
+                                Text(status)
+                                    .font(.hanken(12.5, weight: .semibold))
+                                    .foregroundStyle(Color.tlDynamicInkSoft(scheme))
+                            }
+
+                            Button { garmin.pairDevices() } label: {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "antenna.radiowaves.left.and.right")
+                                    Text(garmin.deviceNames.isEmpty ? "Connect watch" : "Change watch")
+                                }
+                                .font(.hanken(15, weight: .bold))
+                                .foregroundStyle(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 13)
+                                .background(Color.tlAccent)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                            }
                         }
 
                         // Wave recording duration
@@ -453,18 +498,15 @@ struct SettingsView: View {
                                 VStack(spacing: 4) {
                                     Text(tipLabel(for: product.id))
                                         .font(.hanken(12, weight: .semibold))
-                                        .foregroundStyle(Color.tlDynamicInkSoft(scheme))
+                                        .foregroundStyle(.white.opacity(0.85))
                                     Text(tipDisplayPrice(for: product.id))
                                         .font(.bricolage(16))
-                                        .foregroundStyle(Color.tlDynamicInk(scheme))
+                                        .foregroundStyle(.white)
                                 }
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 10)
-                                .background(tipPurchasing == product.id
-                                    ? Color.tlHairline
-                                    : (scheme == .dark ? Color.white.opacity(0.08) : Color.tlInk.opacity(0.05)))
+                                .background(Color.tlAccent.opacity(tipPurchasing == product.id ? 0.5 : 1))
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
-                                .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.tlHairline, lineWidth: 1))
                             }
                             .disabled(tipPurchasing != nil)
                         }

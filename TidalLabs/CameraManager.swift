@@ -29,6 +29,7 @@ class CameraManager: NSObject, ObservableObject {
         #if DEBUG
         cropAnalysisSelfCheck()
         clipEditorSelfCheck()
+        garminPayloadSelfCheck()
         #endif
         setupWatchConnectivity()
         loadRecordings()
@@ -91,6 +92,17 @@ class CameraManager: NSObject, ObservableObject {
         if WCSession.default.activationState == .activated {
             try? WCSession.default.updateApplicationContext(["confirmedSessionIDs": ids])
         }
+    }
+
+    /// Whether the Apple Watch half of the sync is even set up. Not @Published: pairing an Apple
+    /// Watch cannot happen while this screen is on top, and WCSession offers no change notification
+    /// for it. `isReachable` is deliberately not used — it only goes true while the watch app is in
+    /// the foreground, so it would read "disconnected" on a wrist that is perfectly fine.
+    var appleWatchReady: Bool {
+        WCSession.isSupported()
+            && WCSession.default.activationState == .activated
+            && WCSession.default.isPaired
+            && WCSession.default.isWatchAppInstalled
     }
 
     func requestWatchSync() {
@@ -380,8 +392,14 @@ extension CameraManager {
     ) async -> Bool {
         let snappedStart = await nearestKeyframeBefore(timeRange.start, in: asset)
         let snappedRange = CMTimeRange(start: snappedStart, end: timeRange.end)
-        guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetPassthrough) else { return false }
-        exporter.timeRange = snappedRange
+        // Video-only composition: the clip is written with no audio track at all. Smaller files, and
+        // playback can never take the audio session away from whatever the user is listening to.
+        guard let videoTrack = try? await asset.loadTracks(withMediaType: .video).first else { return false }
+        let silent = AVMutableComposition()
+        guard let dest = silent.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid),
+              (try? dest.insertTimeRange(snappedRange, of: videoTrack, at: .zero)) != nil else { return false }
+        dest.preferredTransform = (try? await videoTrack.load(.preferredTransform)) ?? .identity
+        guard let exporter = AVAssetExportSession(asset: silent, presetName: AVAssetExportPresetPassthrough) else { return false }
         do {
             try await exporter.export(to: destURL, as: .mov)
             return true
@@ -839,7 +857,7 @@ extension CameraManager: WCSessionDelegate {
         }
     }
 
-    nonisolated private func handleIncomingWatchSessions(_ sessionsPayload: [[String: Any]]) {
+    nonisolated func handleIncomingWatchSessions(_ sessionsPayload: [[String: Any]]) {
         let sessions: [PendingWatchSession] = sessionsPayload.compactMap { dict in
             guard let id = dict["id"] as? String,
                   let startI = dict["startDate"] as? Double,

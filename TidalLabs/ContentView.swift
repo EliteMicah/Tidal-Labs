@@ -10,6 +10,7 @@ import Photos
 
 struct ContentView: View {
     @StateObject private var camera = CameraManager()
+    @StateObject private var garmin = GarminManager.shared
     @State private var sessionActive = false
     @State private var navPath: [AppScreen] = []
     @State private var homeDetailSession: WaveSession?
@@ -32,8 +33,8 @@ struct ContentView: View {
             )
             .navigationDestination(for: AppScreen.self) { screen in
                 switch screen {
-                case .settings: SettingsView(camera: camera)
-                case .sessions: SessionsView(camera: camera)
+                case .settings: SettingsView(camera: camera, garmin: garmin)
+                case .sessions: SessionsView(camera: camera, garmin: garmin)
                 case .favorites: FavoritesView(camera: camera)
                 }
             }
@@ -53,7 +54,7 @@ struct ContentView: View {
         }
         .preferredColorScheme(appColorScheme == "dark" ? .dark : .light)
         .fullScreenCover(isPresented: $sessionActive) {
-            SessionStartView(camera: camera, onDismiss: { sessionActive = false })
+            SessionStartView(camera: camera, garmin: garmin, onDismiss: { sessionActive = false })
         }
         .fullScreenCover(item: $homeDetailSession) { session in
             SessionClipsPlayer(sessionID: session.id, camera: camera, onDismiss: { homeDetailSession = nil })
@@ -81,7 +82,11 @@ struct ContentView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { showDeleteImportedPhoto = true }
             }
         }
-        .task { await camera.setup() }
+        .onOpenURL { url in garmin.handle(url: url) }
+        .task {
+            garmin.attach(camera)
+            await camera.setup()
+        }
     }
 
     private func deletePhotoAsset(_ identifier: String) {

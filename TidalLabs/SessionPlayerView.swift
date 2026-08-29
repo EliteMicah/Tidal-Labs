@@ -184,7 +184,7 @@ struct SessionPlayerView: View {
     private var waveNumber: Int? { clip.waveNumber }
     private var autoCrop: CGRect? { clip.autoCrop }
 
-    @State private var player = AVPlayer()
+    @State private var player: AVPlayer = { let p = AVPlayer(); p.isMuted = true; return p }()
     @State private var timeObserver: Any?
     @State private var duration: Double = 0
     @State private var now: Double = 0
@@ -297,10 +297,10 @@ struct SessionPlayerView: View {
             await load()
         }
         .onDisappear { teardown() }
-        .alert("Delete Recording?", isPresented: $showDeleteAlert) {
+        .alert("Delete Clip?", isPresented: $showDeleteAlert) {
             Button("Delete", role: .destructive) { onDelete(recording.id) }
             Button("Cancel", role: .cancel) { play() }
-        } message: { Text("This recording will be permanently deleted.") }
+        } message: { Text("This clip will be permanently deleted.") }
         .alert("Save Trim?", isPresented: $showTrimAlert) {
             Button("Save Trim", role: .destructive) { Task { await applyTrim() } }
             Button("Cancel", role: .cancel) { play() }

@@ -3,6 +3,7 @@ import Photos
 
 struct SessionStartView: View {
     @ObservedObject var camera: CameraManager
+    @ObservedObject var garmin: GarminManager
     let onDismiss: () -> Void
 
     @State private var isImporting = false
@@ -13,7 +14,7 @@ struct SessionStartView: View {
     private let steps: [(icon: String, title: String, detail: String)] = [
         ("camera.fill",            "Hit record",        "Open the native Camera, frame the lineup, and set your phone down facing the break."),
         ("lock.fill",              "Lock it down",      "Keep the phone locked while it films — safer if a stranger picks it up."),
-        ("applewatch",             "Tag from your wrist","Caught one? Tag your Apple Watch. We remember the moment you rode."),
+        ("applewatch",             "Tag from your wrist","Caught one? Tag your Watch. We remember the moment you rode."),
         ("square.and.arrow.down",  "Reel it in",        "Back on the sand, import the clip and sync your watch — we slice out every wave."),
     ]
 
@@ -158,7 +159,7 @@ struct SessionStartView: View {
                 set: { if !$0 { camera.cancelPendingImport(); camera.isLoadingVideo = false } }
             )
         ) {
-            PendingImportView(camera: camera)
+            PendingImportView(camera: camera, garmin: garmin)
         }
         .alert("Import Error", isPresented: Binding(get: { importError != nil }, set: { if !$0 { importError = nil } })) {
             Button("OK") { importError = nil }

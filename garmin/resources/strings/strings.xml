@@ -1,0 +1,10 @@
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
+    <string id="AppName">Tidal Labs</string>
+
+    <!-- The name Garmin's own manual prints for each key, so the on-screen hints match what
+         the owner reads. Default is the fenix / Forerunner / enduro / D2 wording; the two
+         override folders below carry the families that differ. DOWN and UP are the same word
+         on every five-button product here, so only ENTER and the sync key need overriding. -->
+    <string id="KeyEnter">START</string>
+    <string id="KeySync">UP</string>
+</strings>

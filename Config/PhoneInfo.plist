@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Garmin Connect Mobile hands the paired-device list back by opening this scheme.
+	     Must stay in sync with GarminManager.urlScheme. -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>Micah-Woodring.TidalLabs.connectiq</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tidallabs-ciq</string>
+			</array>
+		</dict>
+	</array>
+	<!-- Lets the Connect IQ SDK check whether Garmin Connect Mobile is installed. -->
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>gcm-ciq</string>
+	</array>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>TidalLabs talks to your Garmin watch over Bluetooth to pull the waves you logged in the water.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>TidalLabs talks to your Garmin watch over Bluetooth to pull the waves you logged in the water.</string>
+	<!-- The Connect IQ SDK reaches the watch directly over BLE, so without this the watch can only
+	     sync while the app is open in the foreground. -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+	</array>
+</dict>
+</plist>

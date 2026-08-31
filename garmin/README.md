@@ -336,9 +336,10 @@ one of:
 
 - The watch was never shared with Tidal Labs from Garmin Connect Mobile (do the pairing above).
 - The iOS app is not running. The SDK reaches the watch from the app's own process, so there is
-  nothing listening when the app is dead. `bluetooth-central` plus a CoreBluetooth state-restoration
-  identifier let iOS wake the app for watch traffic, but that is a best effort, not a guarantee —
-  **sync is reliable with Tidal Labs open on the phone.**
+  nothing listening when the app is dead. There is no background mode to cover this: the
+  `bluetooth-central` declaration was removed after App Review rejected it under guideline 2.5.4
+  (the BLE work lives inside the Connect IQ SDK, so there is no first-party Core Bluetooth code to
+  show). **Sync with Tidal Labs open on the phone.**
 - Bluetooth off, or the watch out of range.
 
 ### App id
@@ -386,5 +387,5 @@ The phone half lives in the Xcode project, not here:
 TidalLabs/GarminManager.swift  Connect IQ Mobile SDK bridge: pairing, device events, message
                                receipt, and the conversion into CameraManager's session inbox
 Config/PhoneInfo.plist         tidallabs-ciq URL scheme, gcm-ciq query scheme, Bluetooth usage
-                               strings, bluetooth-central background mode
+                               strings
 ```

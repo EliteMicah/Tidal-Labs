@@ -13,9 +13,10 @@ internal import Combine
 //! - The SDK talks straight to the watch over BLE. Garmin Connect Mobile is only the broker that
 //!   hands over the devices the user agreed to share, so pairing is a one-time trip out to GCM and
 //!   back in through our URL scheme.
-//! - Delivery needs a live process. `bluetooth-central` plus the state-restoration identifier let
-//!   iOS wake the app for watch traffic; that is the closest the SDK gets to WCSession's background
-//!   delivery, and it is why sync is most reliable with TidalLabs open.
+//! - Delivery needs a live process, and there is no background mode to fall back on: App Review
+//!   rejected `bluetooth-central` under guideline 2.5.4 because the BLE work happens inside the SDK
+//!   with no first-party Core Bluetooth code to demonstrate. The watch reaches us only while
+//!   TidalLabs is open, which is what the sync screens already tell the user.
 @MainActor
 final class GarminManager: NSObject, ObservableObject {
 
@@ -50,8 +51,8 @@ final class GarminManager: NSObject, ObservableObject {
     // MARK: - Lifecycle
 
     /// Call once from the app delegate. The SDK singleton has to exist before any device or app
-    /// registration, and registration has to survive a background relaunch, so both happen here
-    /// rather than when the Settings screen appears.
+    /// registration, and the watch transmits on its own schedule while the app is open, so both
+    /// happen at launch rather than when the Settings or Sessions screen appears.
     func initializeSDK() {
         ConnectIQ.sharedInstance()?.initialize(withUrlScheme: Self.urlScheme,
                                                uiOverrideDelegate: self,

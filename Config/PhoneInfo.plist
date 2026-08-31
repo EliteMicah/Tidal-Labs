@@ -24,11 +24,5 @@
 	<string>TidalLabs talks to your Garmin watch over Bluetooth to pull the waves you logged in the water.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>TidalLabs talks to your Garmin watch over Bluetooth to pull the waves you logged in the water.</string>
-	<!-- The Connect IQ SDK reaches the watch directly over BLE, so without this the watch can only
-	     sync while the app is open in the foreground. -->
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>bluetooth-central</string>
-	</array>
 </dict>
 </plist>

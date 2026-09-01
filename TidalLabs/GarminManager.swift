@@ -54,9 +54,13 @@ final class GarminManager: NSObject, ObservableObject {
     /// registration, and the watch transmits on its own schedule while the app is open, so both
     /// happen at launch rather than when the Settings or Sessions screen appears.
     func initializeSDK() {
+        // No stateRestorationIdentifier: it becomes CBCentralManagerOptionRestoreIdentifierKey on the
+        // SDK's internal CBCentralManager, and CoreBluetooth throws NSInternalInconsistencyException
+        // ("State restoration of CBCentralManager is only allowed for applications that have
+        // specified the \"bluetooth-central\" background mode") when that mode is absent. The mode
+        // came out under guideline 2.5.4, so the identifier has to go with it.
         ConnectIQ.sharedInstance()?.initialize(withUrlScheme: Self.urlScheme,
-                                               uiOverrideDelegate: self,
-                                               stateRestorationIdentifier: Self.urlScheme)
+                                               uiOverrideDelegate: self)
         apply(devices: loadDevices(), persist: false)
     }
 

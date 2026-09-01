@@ -4,36 +4,46 @@ import UIKit
 // MARK: - Custom font helpers
 
 extension Font {
+    // Both files are variable fonts. The only real PostScript names in them are the default
+    // instances ("BricolageGrotesque-96ptExtraBold", "HankenGrotesk-Regular"); every other weight is
+    // an fvar named instance with no PostScript name of its own, so UIFont(name:) can never reach it.
+    // Ask by family plus a weight trait instead and CoreText picks the instance.
+
     // Bricolage Grotesque — display/headlines
     static func bricolage(_ size: CGFloat, weight: Font.Weight = .heavy) -> Font {
-        let name = bricolageName(weight)
-        return UIFont(name: name, size: size).map { Font($0) }
+        variable("Bricolage Grotesque", size, weight)
             ?? .system(size: size, weight: weight, design: .rounded)
     }
 
     // Hanken Grotesk — body
     static func hanken(_ size: CGFloat, weight: Font.Weight = .regular) -> Font {
-        let name = hankenName(weight)
-        return UIFont(name: name, size: size).map { Font($0) }
+        variable("Hanken Grotesk", size, weight)
             ?? .system(size: size, weight: weight)
     }
 
-    private static func bricolageName(_ w: Font.Weight) -> String {
-        switch w {
-        case .bold:     return "BricolageGrotesque-Bold"
-        case .semibold: return "BricolageGrotesque-SemiBold"
-        default:        return "BricolageGrotesque-ExtraBold"
-        }
+    private static func variable(_ family: String, _ size: CGFloat, _ weight: Font.Weight) -> Font? {
+        let descriptor = UIFontDescriptor(fontAttributes: [
+            .family: family,
+            .traits: [UIFontDescriptor.TraitKey.weight: uiWeight(weight)]
+        ])
+        let font = UIFont(descriptor: descriptor, size: size)
+        // An unregistered family resolves to Helvetica rather than failing, so confirm the match
+        // before using it — that is what keeps the .system fallbacks above honest.
+        guard font.familyName == family else { return nil }
+        return Font(font)
     }
 
-    private static func hankenName(_ w: Font.Weight) -> String {
+    private static func uiWeight(_ w: Font.Weight) -> UIFont.Weight {
         switch w {
-        case .heavy, .black:  return "HankenGrotesk-ExtraBold"
-        case .bold:           return "HankenGrotesk-Bold"
-        case .semibold:       return "HankenGrotesk-SemiBold"
-        case .medium:         return "HankenGrotesk-Medium"
-        case .light:          return "HankenGrotesk-Light"
-        default:              return "HankenGrotesk-Regular"
+        case .ultraLight: return .ultraLight
+        case .thin:       return .thin
+        case .light:      return .light
+        case .medium:     return .medium
+        case .semibold:   return .semibold
+        case .bold:       return .bold
+        case .heavy:      return .heavy
+        case .black:      return .black
+        default:          return .regular
         }
     }
 }

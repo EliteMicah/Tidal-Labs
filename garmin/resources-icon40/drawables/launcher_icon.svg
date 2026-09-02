@@ -1,6 +1,9 @@
-<svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <rect width="24" height="24" fill="#000000"/>
-  <path d="M1 15C4 15 4 11 7 11C10 11 10 15 13 15C16 15 16 11 19 11C21 11 22 13 23 13" stroke="#00E0FF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <path d="M1 20C4 20 4 16 7 16C10 16 10 20 13 20C16 20 16 16 19 16C21 16 22 18 23 18" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <circle cx="17" cy="5" r="3" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 100 100">
+  <defs><clipPath id="c"><circle cx="50" cy="50" r="45"></circle></clipPath></defs>
+  <g clip-path="url(#c)">
+    <path d="M-6,56 C14,42 32,42 50,52 C68,62 86,62 106,48 L106,106 L-6,106 Z" fill="#FFFFFF"></path>
+    <path d="M-6,70 C14,56 32,56 50,66 C68,76 86,76 106,62" fill="none" stroke="#000000" stroke-width="5" stroke-linecap="round"></path>
+    <path d="M-6,84 C14,70 32,70 50,80 C68,90 86,90 106,76" fill="none" stroke="#000000" stroke-width="5" stroke-linecap="round"></path>
+  </g>
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#FFFFFF" stroke-width="5"></circle>
 </svg>

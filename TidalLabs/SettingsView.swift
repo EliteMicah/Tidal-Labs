@@ -472,7 +472,7 @@ struct SettingsView: View {
                             .font(.bricolage(18))
                             .foregroundStyle(Color.tlDynamicInk(scheme))
                             .kerning(-0.3)
-                        Text("Built by surfers, on dawn-patrol time.")
+                        Text("Built by Surfers, on Hawaiian Time.")
                             .font(.hanken(13, weight: .medium))
                             .foregroundStyle(Color.tlDynamicInkSoft(scheme))
                     }

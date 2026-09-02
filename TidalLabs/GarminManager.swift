@@ -25,13 +25,14 @@ final class GarminManager: NSObject, ObservableObject {
     /// Must match CFBundleURLSchemes in `Config/PhoneInfo.plist`.
     static let urlScheme = "tidallabs-ciq"
 
-    /// Watch-app ids out of `garmin/manifest.xml`, dashed for NSUUID. Both listings are registered
-    /// because the manifest has been published under two ids and the installed build may carry
-    /// either. A mismatch here fails silently and is only debuggable on hardware, so the second
-    /// registration buys a lot for two lines.
+    /// Watch-app ids out of `garmin/manifest.xml`, dashed for NSUUID. Every listing is registered
+    /// because the manifest has been published under three ids and the installed build may carry
+    /// any of them. A mismatch here fails silently and is only debuggable on hardware, so the extra
+    /// registrations buy a lot for one line each.
     private static let appUUIDs: [UUID] = [
         UUID(uuidString: "B608F363-360C-46F3-AB95-5E4551BF8B67")!,
-        UUID(uuidString: "C80BB06A-039F-41E3-A94E-B4D4DF22BAF2")!
+        UUID(uuidString: "C80BB06A-039F-41E3-A94E-B4D4DF22BAF2")!,
+        UUID(uuidString: "837E33EF-7DA7-45A3-B0FF-02C96840622C")!
     ]
 
     private static let devicesKey = "garminDevices"

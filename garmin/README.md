@@ -344,10 +344,12 @@ one of:
 
 ### App id
 
-The iOS side registers for messages from **both** ids the manifest has been published under
-(`B608F363…` and `C80BB06A…`), because a mismatch between the installed build's id and the
-registered id fails silently and can only be debugged on hardware. If the manifest ever takes a
-third id, add it to `GarminManager.appUUIDs`.
+The iOS side registers for messages from **every** id the manifest has been published under
+(`837E33EF…`, the public listing the manifest builds under now, plus `C80BB06A…` on the personal
+account and `B608F363…` on the test-watch account), because a mismatch between the installed
+build's id and the registered id fails silently and can only be debugged on hardware. Old ids stay
+registered so installs made from the earlier listings keep syncing. If the manifest ever takes a
+fourth id, add it to `GarminManager.appUUIDs` too.
 
 ### What the phone does with a session
 

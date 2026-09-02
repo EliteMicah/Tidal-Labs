@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <iq:manifest version="3" xmlns:iq="http://www.garmin.com/xml/connectiq">
-    <!-- App id identifies the store listing, not the app. C80BB06A039F41E3A94EB4D4DF22BAF2 is the listing on the
-         personal Garmin account (the canonical one to publish publicly). This id is the
-         second listing, uploaded from the account the test watch is paired to, because a
-         given id can only be claimed once. Swap back to publish from the personal account. -->
-    <iq:application id="B608F363360C46F3AB955E4551BF8B67"
+    <!-- App id identifies the store listing, not the app. Three listings exist and an id can only
+         be claimed once: C80BB06A039F41E3A94EB4D4DF22BAF2 on the personal account,
+         B608F363360C46F3AB955E4551BF8B67 on the account the test watch is paired to, and this one,
+         the public listing. Every id the manifest has ever shipped under has to stay registered in
+         GarminManager.appUUIDs or phone sync fails silently on the older installs. -->
+    <iq:application id="837E33EF7DA745A3B0FF02C96840622C"
                     type="watch-app"
                     name="@Strings.AppName"
                     entry="TidalLabsApp"

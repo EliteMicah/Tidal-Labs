@@ -537,6 +537,37 @@ extension CommandSender: HKLiveWorkoutBuilderDelegate {
     }
 }
 
+// MARK: - Palette
+//
+// The 1a "ring" direction, straight off the design canvas. The phone target's DesignSystem.swift
+// is not a member of the watch target (the project uses file-system-synchronized groups, so a file
+// belongs to the folder it lives in) and it depends on UIFontDescriptor for the variable fonts,
+// which the watch does not bundle. These are the handful of tokens the two watch screens use.
+
+private extension Color {
+    init(tl: UInt32) {
+        self.init(
+            red: Double((tl >> 16) & 0xFF) / 255,
+            green: Double((tl >> 8) & 0xFF) / 255,
+            blue: Double(tl & 0xFF) / 255
+        )
+    }
+
+    static let tlNight     = Color(tl: 0x050D18)   // recording backdrop
+    static let tlNightTop  = Color(tl: 0x0B1D33)   // idle gradient, top
+    static let tlNightBot  = Color(tl: 0x071322)   // idle gradient, bottom
+    static let tlCyan      = Color(tl: 0x56CDEC)   // the accent — ring fill, Start, crown hint
+    static let tlOnCyan    = Color(tl: 0x06202F)   // ink on a cyan fill
+    static let tlInk       = Color(tl: 0xEEF5FC)
+    static let tlInkSoft   = Color(tl: 0x9FB6CE)
+    static let tlSyncInk   = Color(tl: 0x9FC0FF)
+    static let tlSyncEdge  = Color(tl: 0x5B86FF)
+    static let tlHeart     = Color(tl: 0xFF3B4E)
+    static let tlHeartInk  = Color(tl: 0xFFB2A0)
+    static let tlDanger    = Color(tl: 0xE5484D)
+    static let tlDangerInk = Color(tl: 0xFF8A8E)
+}
+
 // MARK: - ContentView
 
 struct ContentView: View {
@@ -557,132 +588,17 @@ struct ContentView: View {
     private let deadZone: Double = 1
     private let crownStep: Double = 0.03
 
+    private var isRecording: Bool { sender.sessionActive || sender.isSending }
+
     var body: some View {
         ZStack {
-        VStack(spacing: 14) {
-            if !sender.sessionActive && !sender.isSending {
-                VStack(spacing: 10) {
-                    Text("Tidal Labs")
-                        .font(.system(.headline, design: .rounded, weight: .bold))
-                        .foregroundStyle(.primary)
-                    Button(action: { sender.startSessionFromWatch() }) {
-                        Text("Start Session")
-                            .font(.system(.caption, design: .rounded, weight: .semibold))
-                            .foregroundStyle(.black)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 8)
-                            .background(.white)
-                            .clipShape(Capsule())
-                    }
-                    .buttonStyle(.plain)
-
-                    if sender.pendingSessionCount > 0 {
-                        Button(action: { sender.syncToPhone() }) {
-                            HStack(spacing: 6) {
-                                if sender.isSyncing {
-                                    ProgressView()
-                                        .tint(.black)
-                                        .scaleEffect(0.6)
-                                        .frame(width: 12, height: 12)
-                                }
-                                Text(sender.isSyncing ? "Syncing..." : "Sync Waves (\(sender.pendingSessionCount))")
-                                    .font(.system(.caption, design: .rounded, weight: .semibold))
-                                    .foregroundStyle(.black)
-                            }
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 8)
-                            .background(.cyan)
-                            .clipShape(Capsule())
-                        }
-                        .buttonStyle(.plain)
-                        .disabled(sender.isSyncing)
-                    }
-
-                    if !sender.syncFeedback.isEmpty {
-                        Text(sender.syncFeedback)
-                            .font(.system(.caption2, design: .rounded))
-                            .foregroundStyle(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                }
+            background
+            if isRecording {
+                recordingScreen
             } else {
-                if sender.statusMessage.isEmpty, let start = sender.sessionStartTime {
-                    Text(Self.elapsed(since: start, now: now))
-                        .font(.system(size: 32, weight: .bold, design: .rounded))
-                        .monospacedDigit()
-                        .foregroundStyle(.white)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                } else {
-                    Text(sender.statusMessage)
-                        .font(.system(.caption, design: .rounded))
-                        .foregroundStyle(.secondary)
-                }
-
-                if sender.isSending {
-                    ProgressView()
-                        .tint(.white)
-                } else {
-                    VStack(spacing: 10) {
-                        Image(systemName: "chevron.up")
-                            .font(.system(size: 22, weight: .semibold))
-                            .foregroundStyle(.green)
-
-                        Text("Scroll Up to Record")
-                            .font(.system(.caption2, design: .rounded))
-                            .foregroundStyle(.tertiary)
-                            .multilineTextAlignment(.center)
-
-                        GeometryReader { geo in
-                            ZStack(alignment: .leading) {
-                                Capsule()
-                                    .fill(.white.opacity(0.15))
-                                Capsule()
-                                    .fill(.green)
-                                    .frame(width: geo.size.width * barProgress)
-                                    .animation(.linear(duration: 0.05), value: barProgress)
-                            }
-                        }
-                        .frame(height: 6)
-                        .padding(.horizontal, 4)
-
-                        Button(action: { sender.endSessionFromWatch() }) {
-                            Text("End Session")
-                                .font(.system(.caption2, design: .rounded, weight: .semibold))
-                                .foregroundStyle(.red.opacity(0.9))
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 6)
-                                .background(.red.opacity(0.15))
-                                .clipShape(Capsule())
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
+                idleScreen
             }
         }
-        .padding()
-
-        if sender.sessionActive, let bpm = sender.heartRate {
-            VStack(spacing: 0) {
-                HStack(spacing: 0) {
-                    HStack(spacing: 3) {
-                        Image(systemName: "heart.fill")
-                            .font(.system(size: 12))
-                            .foregroundStyle(.red)
-                        Text("\(Int(bpm))")
-                            .font(.system(size: 14, weight: .semibold, design: .rounded))
-                            .foregroundStyle(.secondary)
-                    }
-                    .padding(.leading, 10)
-                    .padding(.top, 10)
-                    Spacer()
-                }
-                Spacer()
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea()
-        }
-        } // ZStack
         .focusable()
         .focused($crownFocused)
         .digitalCrownRotation($crownValue)
@@ -737,6 +653,181 @@ struct ContentView: View {
                 }
             }
         }
+    }
+
+    // MARK: Backdrop
+
+    @ViewBuilder
+    private var background: some View {
+        if isRecording {
+            Color.tlNight.ignoresSafeArea()
+        } else {
+            ZStack {
+                LinearGradient(
+                    colors: [.tlNightTop, .tlNightBot],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                // The cyan wash the idle screen carries above the wordmark.
+                RadialGradient(
+                    colors: [Color.tlCyan.opacity(0.14), .clear],
+                    center: .top,
+                    startRadius: 0,
+                    endRadius: 170
+                )
+            }
+            .ignoresSafeArea()
+        }
+    }
+
+    // MARK: Idle
+
+    private var idleScreen: some View {
+        VStack(spacing: 10) {
+            Text("Tidal Labs")
+                .font(.system(size: 18, weight: .heavy, design: .rounded))
+                .foregroundStyle(Color.tlInk)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+
+            Button(action: { sender.startSessionFromWatch() }) {
+                HStack(spacing: 6) {
+                    Image(systemName: "play.fill")
+                        .font(.system(size: 12, weight: .black))
+                    Text("Start")
+                        .font(.system(size: 16, weight: .heavy, design: .rounded))
+                }
+                .foregroundStyle(Color.tlOnCyan)
+                .frame(maxWidth: .infinity, minHeight: 34)
+                .background(Color.tlCyan, in: Capsule())
+            }
+            .buttonStyle(.plain)
+
+            if sender.pendingSessionCount > 0 {
+                Button(action: { sender.syncToPhone() }) {
+                    HStack(spacing: 6) {
+                        if sender.isSyncing {
+                            ProgressView()
+                                .tint(Color.tlSyncInk)
+                                .scaleEffect(0.6)
+                                .frame(width: 12, height: 12)
+                        }
+                        Text(sender.isSyncing ? "Syncing" : "Sync \(sender.pendingSessionCount)")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                    }
+                    .foregroundStyle(Color.tlSyncInk)
+                    .frame(maxWidth: .infinity, minHeight: 30)
+                    .background(Color.tlSyncEdge.opacity(0.12), in: Capsule())
+                    .overlay(Capsule().strokeBorder(Color.tlSyncEdge.opacity(0.55), lineWidth: 1))
+                }
+                .buttonStyle(.plain)
+                .disabled(sender.isSyncing)
+            }
+
+            if !sender.syncFeedback.isEmpty {
+                Text(sender.syncFeedback)
+                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    .foregroundStyle(Color.tlInkSoft.opacity(0.8))
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .padding(.horizontal, 8)
+    }
+
+    // MARK: Recording
+
+    private var recordingScreen: some View {
+        VStack(spacing: 6) {
+            statBar
+            crownRing
+            Spacer(minLength: 0)
+            footer
+        }
+        .padding(.horizontal, 6)
+        .padding(.bottom, 2)
+    }
+
+    //! Heart rate left, wave count right, on the one line above the ring.
+    private var statBar: some View {
+        HStack(spacing: 0) {
+            if let bpm = sender.heartRate {
+                HStack(spacing: 3) {
+                    Image(systemName: "heart.fill")
+                        .font(.system(size: 11))
+                        .foregroundStyle(Color.tlHeart)
+                    Text("\(Int(bpm))")
+                        .font(.system(size: 15, weight: .heavy, design: .rounded))
+                        .monospacedDigit()
+                        .foregroundStyle(Color.tlHeartInk)
+                    Text("BPM")
+                        .font(.system(size: 9, weight: .bold, design: .rounded))
+                        .foregroundStyle(Color.tlHeartInk.opacity(0.7))
+                }
+            }
+            Spacer(minLength: 0)
+            HStack(spacing: 3) {
+                Text(String(format: "%02d", sender.sessionWaveCount))
+                    .font(.system(size: 15, weight: .heavy, design: .rounded))
+                    .monospacedDigit()
+                    .foregroundStyle(Color.tlInk)
+                Text("WAVES")
+                    .font(.system(size: 9, weight: .bold, design: .rounded))
+                    .kerning(0.6)
+                    .foregroundStyle(Color.tlInkSoft.opacity(0.8))
+            }
+        }
+        .lineLimit(1)
+        .minimumScaleFactor(0.7)
+    }
+
+    //! The crown fill *is* the face: the progress that used to be a bar under the clock is now
+    //! the ring around it, so the thing you are winding up and the thing you are reading are one
+    //! element. Squares itself to whatever height the stat bar and footer leave over.
+    private var crownRing: some View {
+        ZStack {
+            Circle()
+                .stroke(Color.white.opacity(0.08), lineWidth: 8)
+            Circle()
+                .trim(from: 0, to: barProgress)
+                .stroke(Color.tlCyan, style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                .rotationEffect(.degrees(-90))
+                .animation(.linear(duration: 0.05), value: barProgress)
+
+            if sender.isSending {
+                ProgressView().tint(.white)
+            } else if sender.statusMessage.isEmpty, let start = sender.sessionStartTime {
+                Text(Self.elapsed(since: start, now: now))
+                    .font(.system(size: 24, weight: .heavy, design: .rounded))
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.45)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 6)
+            } else {
+                // Countdown and one-shot status ("Wave 3 logged") take the middle of the ring.
+                Text(sender.statusMessage)
+                    .font(.system(size: 17, weight: .bold, design: .rounded))
+                    .foregroundStyle(Color.tlInkSoft)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.6)
+                    .padding(.horizontal, 16)
+            }
+        }
+        .aspectRatio(1, contentMode: .fit)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var footer: some View {
+        Button(action: { sender.endSessionFromWatch() }) {
+            Text("End Session")
+                .font(.system(size: 13, weight: .bold, design: .rounded))
+                .foregroundStyle(Color.tlDangerInk)
+                .frame(maxWidth: .infinity, minHeight: 28)
+                .background(Color.tlDanger.opacity(0.16), in: Capsule())
+                .overlay(Capsule().strokeBorder(Color.tlDanger.opacity(0.4), lineWidth: 1))
+        }
+        .buttonStyle(.plain)
     }
 }
 

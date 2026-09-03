@@ -27,7 +27,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         // Clips are silent, so the app never needs to own the audio session. .ambient mixes instead of
         // interrupting, which keeps the user's music playing when they tap a clip.
         try? AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
-        GarminManager.shared.initializeSDK()
+        GarminManager.shared.initializeSDKIfPaired()
         return true
     }
 

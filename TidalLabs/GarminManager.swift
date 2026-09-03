@@ -42,6 +42,7 @@ final class GarminManager: NSObject, ObservableObject {
     @Published private(set) var statusMessage: String?
 
     private var devices: [IQDevice] = []
+    private var isSDKInitialized = false
     /// Held only so the registrations outlive the loop that made them — the SDK is not documented
     /// to retain the IQApp it is handed.
     private var apps: [IQApp] = []
@@ -51,10 +52,23 @@ final class GarminManager: NSObject, ObservableObject {
 
     // MARK: - Lifecycle
 
-    /// Call once from the app delegate. The SDK singleton has to exist before any device or app
-    /// registration, and the watch transmits on its own schedule while the app is open, so both
-    /// happen at launch rather than when the Settings or Sessions screen appears.
-    func initializeSDK() {
+    /// Call once from the app delegate. The watch transmits on its own schedule while the app is
+    /// open, so a user who already paired gets the SDK up at launch rather than when the Settings or
+    /// Sessions screen appears.
+    ///
+    /// Nothing happens on a fresh install: `initialize` builds the SDK's own CBCentralManager, which
+    /// is what raises the iOS Bluetooth prompt. Someone who never connects a Garmin should never see
+    /// that prompt, so with no paired device the SDK waits for the tap on Connect watch.
+    func initializeSDKIfPaired() {
+        guard !loadDevices().isEmpty else { return }
+        initializeSDK()
+    }
+
+    /// Idempotent: the SDK singleton has to exist before any device or app registration, and both
+    /// the launch path and the pairing tap can be first through here.
+    private func initializeSDK() {
+        guard !isSDKInitialized else { return }
+        isSDKInitialized = true
         // No stateRestorationIdentifier: it becomes CBCentralManagerOptionRestoreIdentifierKey on the
         // SDK's internal CBCentralManager, and CoreBluetooth throws NSInternalInconsistencyException
         // ("State restoration of CBCentralManager is only allowed for applications that have
@@ -74,13 +88,17 @@ final class GarminManager: NSObject, ObservableObject {
     /// Bounces out to Garmin Connect Mobile. Expect this app to be suspended while the user picks.
     func pairDevices() {
         statusMessage = nil
+        // First point the user has asked for anything Bluetooth, so this is where the prompt belongs.
+        initializeSDK()
         ConnectIQ.sharedInstance()?.showDeviceSelection()
     }
 
     /// GCM returns the chosen devices by opening our URL scheme.
     func handle(url: URL) {
-        guard url.scheme == Self.urlScheme,
-              let picked = ConnectIQ.sharedInstance()?.parseDeviceSelectionResponse(from: url) as? [IQDevice]
+        guard url.scheme == Self.urlScheme else { return }
+        // GCM can hand the selection back into a cold launch, where nothing has initialized yet.
+        initializeSDK()
+        guard let picked = ConnectIQ.sharedInstance()?.parseDeviceSelectionResponse(from: url) as? [IQDevice]
         else { return }
         // Replace wholesale rather than merge: GCM's latest answer is the only authorization that
         // counts, and a device the user just revoked must not linger in our cache.

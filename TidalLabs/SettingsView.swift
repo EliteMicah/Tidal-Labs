@@ -185,7 +185,7 @@ struct SettingsView: View {
                         // Support
                         donationCard
 
-                        Text("TidalLabs · v1.0 · Made on the coast")
+                        Text("TidalLabs · v2.0 · Made on Island Time")
                             .font(.hanken(12, weight: .semibold))
                             .foregroundStyle(Color.tlDynamicInkFaint(scheme))
                             .padding(.top, 4)

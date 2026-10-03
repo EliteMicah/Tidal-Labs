@@ -84,7 +84,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8C8715C82F8B2F9E0029F8A9"
             BuildableName = "TidalLabsWatch Watch App.app"
-            BlueprintName = "TidalLabsWatch Watch App"
             ReferencedContainer = "container:TidalLabs.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -101,7 +100,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8C8715C82F8B2F9E0029F8A9"
             BuildableName = "TidalLabsWatch Watch App.app"
-            BlueprintName = "TidalLabsWatch Watch App"
             ReferencedContainer = "container:TidalLabs.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

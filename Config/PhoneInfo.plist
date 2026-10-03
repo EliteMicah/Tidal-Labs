@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- Garmin Connect Mobile hands the paired-device list back by opening this scheme.
-	     Must stay in sync with GarminManager.urlScheme. -->
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -15,18 +13,10 @@
 			</array>
 		</dict>
 	</array>
-	<!-- Lets the Connect IQ SDK check whether Garmin Connect Mobile is installed. -->
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>gcm-ciq</string>
 	</array>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>TidalLabs talks to your Garmin watch over Bluetooth to pull the waves you logged in the water.</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>TidalLabs talks to your Garmin watch over Bluetooth to pull the waves you logged in the water.</string>
-	<!-- Has to live here, not in INFOPLIST_KEY_UIAppFonts: xcodebuild reads that setting but drops it
-	     on the floor, so the fonts shipped in the bundle were never registered. Filenames only —
-	     the copy phase flattens TidalLabs/Fonts/ into the bundle root. -->
 	<key>UIAppFonts</key>
 	<array>
 		<string>BricolageGrotesque.ttf</string>

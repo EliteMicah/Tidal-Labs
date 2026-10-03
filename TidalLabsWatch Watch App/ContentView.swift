@@ -73,7 +73,8 @@ class CommandSender: NSObject, ObservableObject {
 
     private let locationManager = CLLocationManager()
 
-    // Active session (in-memory only, not persisted until finalized)
+    // Active session. Mirrored to UserDefaults by persistActiveSession() so a process death can't lose it.
+    private static let activeSessionKey = "activeWatchSession"
     private var activeSessionID: String?
     private var activeSessionStart: Date?
     private var activeSessionTimestamps: [WaveTimestamp] = []
@@ -106,6 +107,7 @@ class CommandSender: NSObject, ObservableObject {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
+        restoreActiveSession()
         // HealthKit auth requested from the view's .task (app active), not here — see ContentView body.
     }
 
@@ -168,21 +170,27 @@ class CommandSender: NSObject, ObservableObject {
         try? await healthStore.requestAuthorization(toShare: share, read: read)
     }
 
-    private func startWorkoutSession() async {
+    private func startWorkoutSession(recovering: Bool = false) async {
         guard HKHealthStore.isHealthDataAvailable() else { return }
         let config = HKWorkoutConfiguration()
         config.activityType = .surfingSports
         config.locationType = .outdoor
         do {
-            let session = try HKWorkoutSession(healthStore: healthStore, configuration: config)
+            // After a process death the system may still hold the old workout; reattach to it rather
+            // than start a second one on top.
+            var recovered: HKWorkoutSession?
+            if recovering { recovered = try? await healthStore.recoverActiveWorkoutSession() }
+            let session = try recovered ?? HKWorkoutSession(healthStore: healthStore, configuration: config)
             let builder = session.associatedWorkoutBuilder()
             builder.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: config)
             session.delegate = self
             builder.delegate = self
             workoutSession = session
             workoutBuilder = builder
-            session.startActivity(with: Date())
-            try await builder.beginCollection(at: Date())
+            if recovered == nil {
+                session.startActivity(with: Date())
+                try await builder.beginCollection(at: Date())
+            }
             // ponytail: no allowsBackgroundLocationUpdates — it throws an uncatchable NSException on watchOS
             // and crashes Start. The active HKWorkoutSession keeps the app alive so location keeps flowing.
             // If true wrist-down background GPS is needed, add CLBackgroundActivitySession (watchOS 9+) and test.
@@ -228,6 +236,7 @@ class CommandSender: NSObject, ObservableObject {
                 activeSessionStart = sessionStartTime
                 activeSessionTimestamps = []
                 activeSessionGPS = []
+                persistActiveSession()
                 startExtendedRuntimeSession()
                 statusMessage = delaySeconds > 0 ? "\(delaySeconds)s" : ""
                 // Engage water lock now. Skip only while location auth is still undetermined — that's the one
@@ -264,6 +273,7 @@ class CommandSender: NSObject, ObservableObject {
         activeSessionStart = sessionStartTime
         activeSessionTimestamps = []
         activeSessionGPS = []
+        persistActiveSession()
         startExtendedRuntimeSession()
         statusMessage = ""
         // Water lock enabled from the workout .running delegate — see startWorkoutSession / the delegate.
@@ -290,7 +300,36 @@ class CommandSender: NSObject, ObservableObject {
         finalizeCurrentSession()
     }
 
+    // Rewritten on start and on every wave. The app can be killed mid-session (crash, jetsam, lost
+    // workout runtime) and relaunch at the Start screen; without this every logged wave died with it.
+    private func persistActiveSession() {
+        guard let id = activeSessionID, let start = activeSessionStart else { return }
+        let snapshot = WatchSurfSession(id: id, startDate: start, endDate: Date(), timestamps: activeSessionTimestamps, gpsTrack: activeSessionGPS)
+        if let data = try? JSONEncoder().encode(snapshot) {
+            UserDefaults.standard.set(data, forKey: Self.activeSessionKey)
+        }
+    }
+
+    // Launch with a leftover snapshot = the last run died mid-session. Resume it under the same id so
+    // the phone still sees one session, and the user ends it normally.
+    // ponytail: resumes no matter how old the snapshot is; add an age cutoff that finalizes instead
+    // if stale resumed sessions ever become a nuisance.
+    private func restoreActiveSession() {
+        guard let data = UserDefaults.standard.data(forKey: Self.activeSessionKey),
+              let snapshot = try? JSONDecoder().decode(WatchSurfSession.self, from: data) else { return }
+        activeSessionID = snapshot.id
+        activeSessionStart = snapshot.startDate
+        activeSessionTimestamps = snapshot.timestamps
+        activeSessionGPS = snapshot.gpsTrack ?? []
+        sessionActive = true
+        sessionStartTime = snapshot.startDate
+        sessionWaveCount = snapshot.timestamps.count
+        statusMessage = ""
+        Task { await startWorkoutSession(recovering: true) }
+    }
+
     private func finalizeCurrentSession() {
+        UserDefaults.standard.removeObject(forKey: Self.activeSessionKey)
         if let id = activeSessionID, let start = activeSessionStart, !activeSessionTimestamps.isEmpty {
             let watchSession = WatchSurfSession(id: id, startDate: start, endDate: Date(), timestamps: activeSessionTimestamps, gpsTrack: activeSessionGPS)
             var sessions = completedSessions
@@ -379,6 +418,7 @@ class CommandSender: NSObject, ObservableObject {
         let start = now.addingTimeInterval(-waveDurationSeconds)
         let ts = WaveTimestamp(start: start, end: now)
         activeSessionTimestamps.append(ts)
+        persistActiveSession()
         sessionWaveCount += 1
         statusMessage = "Wave \(sessionWaveCount) logged"
         Task {
